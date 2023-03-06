@@ -52,5 +52,11 @@ namespace SushiProject.Controllers
             repo.InsertMenuItemSQL(menuItemToInsert);
             return RedirectToAction("Index");
         }
+
+        public IActionResult DeleteMenuItem(MenuItem menuItem)
+        {
+            repo.DeleteMenuItemSQL(menuItem);
+            return RedirectToAction("Index");
+        }
     }
 }

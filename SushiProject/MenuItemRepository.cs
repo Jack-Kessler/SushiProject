@@ -45,5 +45,10 @@ namespace SushiProject
             item.MenuItemCategories = menuItemCategoryList;
             return item;
         }
+
+        public void DeleteMenuItemSQL(MenuItem menuItem)
+        {
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMID = @id;", new {id = menuItem.MenuItemID});
+        }
     }
 }
