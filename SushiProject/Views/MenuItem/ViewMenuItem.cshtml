@@ -1,0 +1,23 @@
+﻿@model MenuItem
+
+<h3>@Model.MenuItemName Information</h3>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category ID</th>
+    </tr>
+    <tr>
+        <td>@Model.MenuItemID</td>
+        <td>@Model.MenuItemName</td>
+        <td>@Model.MenuItemPrice</td>
+        <td>@Model.MenuItemCategory</td>
+    </tr>
+</table>
+<br/>
+
+<div style="display: block">
+    <a href="/MenuItem/UpdateMenuItem/@Model.MenuItemID">Update This Product</a>
+</div>

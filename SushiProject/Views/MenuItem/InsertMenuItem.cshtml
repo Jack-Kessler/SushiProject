@@ -1,0 +1,29 @@
+﻿@model MenuItem
+
+<h2>Create New Menu Item</h2>
+
+@using (Html.BeginForm("InsertMenuItemToDatabase", "MenuItem", "Post"))
+{
+    <input asp-for="MenuItemID" type="hidden" value="" />
+
+    <label asp-for="MenuItemName" class="control-label">Name</label>
+    <input type="text" name="Name" class="form-control" value="" />
+    <br />
+
+    <label asp-for="MenuItemPrice" class="control-label">Price</label>
+    <input type="number" step="0.01" name="Price" class="form-control" />
+    <br />
+
+    <div class="form-group">
+        <label for="">Select a Category</label>
+        <select class="form-control" name="CategoryID" value="">
+            @foreach (var cat in Model.MenuItemCategories)
+            {
+                <option value="@cat.MenuCategoryName">@cat.MenuCategoryName</option>
+            }
+        </select>
+    </div>
+    <br/>
+
+    <input type="submit" value="Create Product" class="btn btn-primary" />
+}

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MenuItem>
+
+<h2>Menu Items</h2>
+
+<br/>
+<div style="display: block">
+    <a href="/MenuItem/InsertMenuItem/">Create New Menu Item</a>
+</div>
+<br />
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category Name</th>
+
+    </tr>
+
+    @foreach (var menuItem in @Model)
+    {
+        <tr>
+            <td><a href=/MenuItem/ViewMenuItem/@menuItem.MenuItemID>@menuItem.MenuItemID</a></td>
+            <td>@menuItem.MenuItemName</td>
+            <td>@menuItem.MenuItemPrice</td>
+            <td>@menuItem.MenuItemCategory</td>
+        </tr>
+    }
+
+</table>
