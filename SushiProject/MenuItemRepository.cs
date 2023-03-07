@@ -24,7 +24,7 @@ namespace SushiProject
 
         public void UpdateMenuItemSQL(MenuItem menuItem)
         {
-            _conn.Execute("UPDATE MENU_ITEMS SET MENUITEMNAME = @name, MENUITEMPRICE = @price WHERE MENUITEMID = @id",
+            _conn.Execute("UPDATE MENU_ITEMS SET MENUITEMNAME = @name, MENUITEMPRICE = @price WHERE MENUITEMID = @id;",
                 new { name = menuItem.MenuItemName, price = menuItem.MenuItemPrice, id = menuItem.MenuItemID });
         }
 
@@ -35,7 +35,7 @@ namespace SushiProject
         }
         public IEnumerable<MenuItemCategory> GetMenuItemCategoriesSQL()
         {
-            return _conn.Query<MenuItemCategory>("SELECT * FROM MENU_CATEGORIES");
+            return _conn.Query<MenuItemCategory>("SELECT * FROM MENU_CATEGORIES;");
         }
         public MenuItem AssignMenuItemCategorySQL()
         {

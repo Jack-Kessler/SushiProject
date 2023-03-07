@@ -22,7 +22,7 @@ namespace SushiProject
         }
         public void UpdateFoodBevIngredientSQL(FoodBevIngredient ingredient)
         {
-            _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTNAME = @name, INGREDIENTSTOCKLEVEL = @stocklevel, INGREDIENTCOST = @cost, INGREDIENTSCATEGORYNAME = @categoryname WHERE INGREDIENTID = @id",
+            _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTNAME = @name, INGREDIENTSTOCKLEVEL = @stocklevel, INGREDIENTCOST = @cost, INGREDIENTCATEGORYNAME = @categoryname WHERE INGREDIENTID = @id",
                 new { name = ingredient.IngredientName, stocklevel = ingredient.IngredientStockLevel, cost = ingredient.IngredientCost, categoryname = ingredient.IngredientCategoryName, id = ingredient.IngredientID });
         }
 
