@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FoodBevIngredient>
+
+<h2>Ingredients</h2>
+
+<br />
+<div style="display: block">
+    <a href="/FoodBevIngredient/InsertFoodBevIngredient/">Add a New Ingredient</a>
+</div>
+<br />
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Ingredient Name</th>
+        <th>Ingredient Stock Level</th>
+        <th>Ingredient Cost</th>
+        <th>Ingredient Category</th>
+
+    </tr>
+
+    @foreach (var ingr in @Model)
+    {
+        <tr>
+            <td><a href=/FoodBevIngredient/ViewFoodBevIngredient/@ingr.IngredientID>@ingr.IngredientID</a></td>
+            <td>@ingr.IngredientName</td>
+            <td>@ingr.IngredientStockLevel</td>
+            <td>@ingr.IngredientCost</td>
+            <td>@ingr.IngredientCategoryName</td>
+        </tr>
+    }
+
+</table>

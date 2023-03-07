@@ -10,7 +10,3 @@
         public IEnumerable<MenuItemCategory> MenuItemCategories { get; set; }
     }
 }
-
-//Comment
-
-//COMMEnt

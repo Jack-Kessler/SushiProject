@@ -15,6 +15,7 @@ builder.Services.AddScoped<IDbConnection>((s) =>
 });
 
 builder.Services.AddTransient<IMenuItemRepository, MenuItemRepository>();
+builder.Services.AddTransient<IFoodBevIngredientRepository, FoodBevIngredientRepository>();
 
 var app = builder.Build();
 

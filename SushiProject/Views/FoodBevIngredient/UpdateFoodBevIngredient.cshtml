@@ -1,0 +1,34 @@
+﻿@model FoodBevIngredient
+
+<h2>Update @Model.IngredientName</h2>
+
+@using (Html.BeginForm("UpdateFoodBevIngredientToDatabase", "FoodBevIngredient", "Post"))
+{
+    <input asp-for="IngredientID" type="hidden" value="@Model.IngredientID" />
+
+    <label asp-for="IngredientName" class="control-label">Ingredient Name</label>
+    <input type="text" name="IngredientName" class="form-control" value="@Model.IngredientName" />
+    <br />
+
+    <label asp-for="IngredientStockLevel" class="control-label">Stock Level</label>
+    <input type="number" step="1" name="IngredientStockLevel" class="form-control" value="@Model.IngredientStockLevel" />
+    <br />
+
+    <label asp-for="IngredientCost" class="control-label">Cost (Per Unit)</label>
+    <input type="number" step="0.01" name="IngredientCost" class="form-control" value="@Model.IngredientCost" />
+    <br />
+
+    <div class="form-group">
+        <label for="">Ingredients Category</label>
+        <select class="form-control" name="FoodBevIngredientCategory" value="">
+            @foreach (var cat in Model.IngredientCategories)
+            {
+                <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
+            }
+        </select>
+    </div>
+    <br />
+
+    <input type="submit" value="Update Ingredient" class="btn btn-primary" />
+    //<input type="submit" value="Update Product" class="btn btn-primary" />
+}

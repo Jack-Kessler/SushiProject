@@ -1,0 +1,33 @@
+﻿@model FoodBevIngredient
+
+<h2>Add Ingredient</h2>
+
+@using (Html.BeginForm("InsertFoodBevIngredientToDatabase", "FoodBevIngredient", "Post"))
+{
+    <input asp-for="IngredientID" type="hidden" value="" />
+
+    <label asp-for="IngredientName" class="control-label">New Ingredient Name</label>
+    <input type="text" name="IngredientName" class="form-control" value="" />
+    <br/>
+
+    <label asp-for="IngredientStockLevel" class="control-label">Stock Level</label>
+    <input type="number" step="1" name="IngredientStockLevel" class="form-control" />
+    <br />
+
+    <label asp-for="IngredientCost" class="control-label">Cost (Per Unit)</label>
+    <input type="number" step="0.01" name="IngredientCost" class="form-control" />
+    <br />
+
+    <div class="form-group">
+        <label for="">Ingredient Category</label>
+        <select class="form-control" name="IngredientCategoryName" value="">
+            @foreach (var cat in Model.IngredientCategories)
+            {
+                <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
+            }
+        </select>
+    </div>
+    <br />
+
+    <input type="submit" value="Add Ingredient" class="btn btn-primary" />
+}

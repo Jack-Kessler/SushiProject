@@ -16,6 +16,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\jack_\OneDrive\Desktop\Repos\SushiProject\SushiProject
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevIngredient/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldkluZ3JlZGllbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevIngredient/InsertFoodBevIngredient.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldkluZ3JlZGllbnRcSW5zZXJ0Rm9vZEJldkluZ3JlZGllbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevIngredient/UpdateFoodBevIngredient.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldkluZ3JlZGllbnRcVXBkYXRlRm9vZEJldkluZ3JlZGllbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevIngredient/ViewFoodBevIngredient.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldkluZ3JlZGllbnRcVmlld0Zvb2RCZXZJbmdyZWRpZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
