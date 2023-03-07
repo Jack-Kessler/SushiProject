@@ -53,7 +53,7 @@ namespace SushiProject.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult DeleteProduct(FoodBevIngredient ingredient)
+        public IActionResult DeleteFoodBevIngredient(FoodBevIngredient ingredient)
         {
             repo.DeleteFoodBevIngredientSQL(ingredient);
             return RedirectToAction("Index");
