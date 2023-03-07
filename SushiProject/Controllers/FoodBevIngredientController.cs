@@ -26,11 +26,13 @@ namespace SushiProject.Controllers
 
         public IActionResult UpdateFoodBevIngredient(int id)
         {
+            var categories = repo.AssignFoodBevIngredientCategorySQL();
             FoodBevIngredient ingredient = repo.GetFoodBevIngredientSQL(id);
             if (ingredient == null)
             {
                 return View("ProductNotFound");
             }
+            ingredient.IngredientCategories = categories.IngredientCategories;
             return View(ingredient);
         }
 
