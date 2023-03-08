@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SushiProject.Models;
 
 namespace SushiProject.Controllers
@@ -47,6 +48,19 @@ namespace SushiProject.Controllers
         {
             var ingredient = repo.AssignFoodBevIngredientCategorySQL();
             return View(ingredient);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> InsertFoodBevIngredient([Bind("IngredientID,IngredientName,IngredientStockLevel,IngredientCost,IngredientCategoryName")]
+        FoodBevIngredient foodBevIngredient)
+        {
+            if (ModelState.IsValid)
+            {
+                InsertFoodBevIngredientToDatabase(foodBevIngredient);
+                return RedirectToAction("Index");
+            }
+            return View(foodBevIngredient);
         }
 
         public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
