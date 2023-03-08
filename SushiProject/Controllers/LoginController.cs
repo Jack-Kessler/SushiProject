@@ -13,7 +13,6 @@ namespace SushiProject.Controllers
 
         public IActionResult Login(UserModel userModel)
         {
-            //return $"Results: Username = {userModel.Username} PW = {userModel.Password}";
             SecurityService securityService = new SecurityService();
             bool success = securityService.Authenticate(userModel);
             

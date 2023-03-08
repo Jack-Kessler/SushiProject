@@ -18,7 +18,7 @@ namespace SushiProject.Services.Data
 
             //create and open the connection to the database inside a using block.
 
-            //This ensures that all resources are closded properly when the query is done.
+            //This ensures that all resources are closed properly when the query is done.
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
