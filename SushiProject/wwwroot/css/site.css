@@ -16,3 +16,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*My Own custom stuff*/
+.main-page-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 1 denotes one column and fr is a relative sizing term specific to css grid*/
+    /*grid-template-columns: repeat(2, 1fr); Same as above*/
+    gap: 1rem; /* 1 rem (Root Element) relative unit that refers to the font size on the page - specifically it is the root element font size on the page*/
+    width: 100%;
+    grid-auto-rows: minmax(6rem, auto);
+    /*    justify-content: space-evenly;
+    justify-items:center;
+    align-content: space-evenly;
+    align-items: center;*/
+}
