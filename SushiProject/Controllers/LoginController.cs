@@ -22,7 +22,9 @@ namespace SushiProject.Controllers
             }
             else
             {
-                return View("LoginFailure");
+                ModelState.AddModelError(string.Empty, "Invalid login attempt");
+                return View(userModel);
+                //return View("LoginFailure");
             }
         }
 
