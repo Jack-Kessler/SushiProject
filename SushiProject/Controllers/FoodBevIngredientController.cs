@@ -51,7 +51,7 @@ namespace SushiProject.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
+        public IActionResult InsertFoodBevIngredient(FoodBevIngredient ingredientToInsert)
         {
             if (ModelState.IsValid)
             {
