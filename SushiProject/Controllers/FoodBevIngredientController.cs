@@ -64,12 +64,6 @@ namespace SushiProject.Controllers
             }
         }
 
-        //public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
-        //{
-        //    repo.InsertFoodBevIngredientSQL(ingredientToInsert);
-        //    return RedirectToAction("Index");
-        //}
-
         public IActionResult DeleteFoodBevIngredient(FoodBevIngredient ingredient)
         {
             repo.DeleteFoodBevIngredientSQL(ingredient);
