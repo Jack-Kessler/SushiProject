@@ -6,14 +6,14 @@
     <form asp-controller="FoodBevIngredient" asp-action="InsertFoodBevIngredientToDatabase" method="post">
         @*asp-route-returnurl="@ViewData["ReturnUrl"]" role="form"*@
         <div class="form-group">
-            <label asp-for="IngredientName" class="col-md-2"></label>
+            <label asp-for="IngredientName" class="col-md-2">Ingredient Name</label>
             <input asp-for="IngredientName" class="form-control" />
             <span asp-validation-for="IngredientName" class="text-danger"></span>
         </div>
         <br />
 
         <div class="form-group">
-            <label asp-for="IngredientStockLevel" class="col-md-2"></label>
+            <label asp-for="IngredientStockLevel" class="col-md-2"> Ingredient Stock Level</label>
             <input asp-for="IngredientStockLevel" class="form-control" />
             <span asp-validation-for="IngredientStockLevel" class="text-danger"></span>
         </div>
