@@ -50,26 +50,25 @@ namespace SushiProject.Controllers
         }
 
 
-        //[HttpPost]
-        //public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        repo.InsertFoodBevIngredientSQL(ingredientToInsert);
-        //        return RedirectToAction("Index");
-        //    }
-        //    else
-        //    {
-        //        return View(ingredientToInsert);
-        //    }
-        //}
-
         [HttpPost]
         public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
         {
-            repo.InsertFoodBevIngredientSQL(ingredientToInsert);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                repo.InsertFoodBevIngredientSQL(ingredientToInsert);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(ingredientToInsert);
+            }
         }
+
+        //public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
+        //{
+        //    repo.InsertFoodBevIngredientSQL(ingredientToInsert);
+        //    return RedirectToAction("Index");
+        //}
 
         public IActionResult DeleteFoodBevIngredient(FoodBevIngredient ingredient)
         {
