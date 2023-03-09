@@ -53,8 +53,8 @@ namespace SushiProject.Controllers
         [HttpPost]
         public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
         {
-            //var ingr = repo.AssignFoodBevIngredientCategorySQL();
-            //ingredientToInsert.IngredientCategories = ingr.IngredientCategories;
+            var ingr = repo.AssignFoodBevIngredientCategorySQL();
+            ingredientToInsert.IngredientCategories = ingr.IngredientCategories;
             if (ModelState.IsValid)
             {
                 repo.InsertFoodBevIngredientSQL(ingredientToInsert);
@@ -62,7 +62,7 @@ namespace SushiProject.Controllers
             }
             else
             {
-                return View(ingredientToInsert);
+                return View("InsertFoodBevIngredient", ingredientToInsert);
             }
         }
 
