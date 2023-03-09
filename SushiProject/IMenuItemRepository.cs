@@ -10,6 +10,7 @@ namespace SushiProject
         public void InsertMenuItemSQL (MenuItem menuItemToInsert);
         public IEnumerable<MenuItemCategory> GetMenuItemCategoriesSQL();
         public MenuItem AssignMenuItemCategorySQL();
+        public IEnumerable<FoodBevIngredient> AssignMenuItemIngredientListSQL();
         public void DeleteMenuItemSQL(MenuItem menuItem);
     }
 }

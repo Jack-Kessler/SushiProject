@@ -50,7 +50,7 @@ namespace SushiProject.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost] //Maybe don't need
         public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
         {
             var ingr = repo.AssignFoodBevIngredientCategorySQL();

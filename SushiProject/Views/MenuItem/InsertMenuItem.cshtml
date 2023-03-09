@@ -1,18 +1,78 @@
 ﻿@model MenuItem
 
 <h2>Create New Menu Item</h2>
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="MenuItem" asp-action="InsertMenuItemToDatabase" method="post">
+        <div class="form-group">
+            <label asp-for="MenuItemName" class="col-md-2">Menu Item Name</label>
+            <input asp-for="MenuItemName" class="form-control" />
+            <span asp-validation-for="MenuItemName" class="text-danger"></span>
+        </div>
+        <br />
 
+        <div class="form-group">
+            <label asp-for="MenuItemPrice" class="col-md-2">Menu Item Price</label>
+            <input asp-for="MenuItemPrice" type="number" max="99.99" min="00.01" step="0.01" class="form-control" />
+            <span asp-validation-for="MenuItemPrice" class="text-danger"></span>
+        </div>
+        <br />
+
+@*        <div class="form-group">
+            <label asp-for="MenuItemCategory" class="">Menu Item Category</label>
+            <input asp-for="MenuItemCategory" class="form-control" />
+            <span asp-validation-for="MenuItemCategory" class="text-danger"></span>
+        </div>
+        <br />*@
+
+        <div class="form-group">
+            <label for="">Menu Item Category</label>
+            <select class="form-control" name="MenuItemCategory" value="">
+                @foreach (var cat in Model.MenuItemCategories)
+                {
+                    <option value="@cat.MenuCategoryName">@cat.MenuCategoryName</option>
+                }
+            </select>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label for="">Menu Item Ingredient 1</label>
+            <select class="form-control" name="FoodBevIngredient" value="">
+                @foreach (var cat in Model.MenuItemIngredientList)
+                {
+                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                }
+            </select>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label asp-for="MenuItemIngredientQuantity1" class="col-md-2">Menu Ingredient 1 Quantity</label>
+            <input asp-for="MenuItemIngredientQuantity1" type="number" min="0" step="1" max="2147483646" class="form-control" />
+            <span asp-validation-for="MenuItemIngredientQuantity1" class="text-danger"></span>
+        </div>
+        <br />
+
+        <input type="submit" value="Add Menu Item" class="btn btn-primary" />
+    </form>
+</div>
+
+
+
+
+@*
 @using (Html.BeginForm("InsertMenuItemToDatabase", "MenuItem", "Post"))
 {
     <input asp-for="MenuItemID" type="hidden" value="" />
 
     <label asp-for="MenuItemName" class="control-label">New Menu Item Name</label>
-    @*@Html.ValidationMessageFor(model => model.MenuItemName, "", new {@class = "text-danger"})*@
+    @Html.ValidationMessageFor(model => model.MenuItemName, "", new {@class = "text-danger"})
     <input type="text" name="MenuItemName" class="form-control" value="" />
     <br />
 
     <label asp-for="MenuItemPrice" class="control-label">Price</label>
-    @*@Html.ValidationMessageFor(model => model.MenuItemPrice, "", new {@class = "text-danger"})*@
+    @Html.ValidationMessageFor(model => model.MenuItemPrice, "", new {@class = "text-danger"})
     <input type="number" step="0.01" name="MenuItemPrice" class="form-control" />
     <br />
 
@@ -43,4 +103,4 @@
             style="margin: 16px; padding: 16px; background-color: dimgray; color: antiquewhite; border: none;border-radius: 4px;font-size: 12px">Submit
     </button>
 }
-
+*@

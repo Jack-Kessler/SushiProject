@@ -44,6 +44,10 @@ namespace SushiProject
             item.MenuItemCategories = menuItemCategoryList;
             return item;
         }
+        public IEnumerable<FoodBevIngredient> AssignMenuItemIngredientListSQL()
+        {
+            return _conn.Query<FoodBevIngredient>("SELECT * FROM FOOD_BEV_INGREDIENTS;");
+        }
 
         public void DeleteMenuItemSQL(MenuItem menuItem)
         {

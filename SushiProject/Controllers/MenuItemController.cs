@@ -44,13 +44,28 @@ namespace SushiProject.Controllers
         public IActionResult InsertMenuItem()
         {
             var item = repo.AssignMenuItemCategorySQL();
+            var ingredients = repo.AssignMenuItemIngredientListSQL();
+            item.MenuItemIngredientList = ingredients;
             return View(item);
         }
 
+        [HttpPost]
         public IActionResult InsertMenuItemToDatabase(MenuItem menuItemToInsert)
         {
-            repo.InsertMenuItemSQL(menuItemToInsert);
-            return RedirectToAction("Index");
+            var menuItemCat = repo.AssignMenuItemCategorySQL();
+            menuItemToInsert.MenuItemCategories = menuItemCat.MenuItemCategories;
+            var ingredients = repo.AssignMenuItemIngredientListSQL();
+            menuItemToInsert.MenuItemIngredientList = ingredients;
+
+            if (ModelState.IsValid)
+            {
+                repo.InsertMenuItemSQL(menuItemToInsert);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("InsertMenuItem", menuItemToInsert);
+            }
         }
 
         public IActionResult DeleteMenuItem(MenuItem menuItem)
