@@ -26,7 +26,6 @@ namespace SushiProject.Models
         [StringLength(50)] //Will not allow user to enter more than 50 chars.
         public string? IngredientCategoryName { get; set; }
 
-
         public IEnumerable<FoodBevIngredientCategory>? IngredientCategories { get; set; }
     }
 }
