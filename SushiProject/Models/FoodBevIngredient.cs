@@ -7,6 +7,7 @@ namespace SushiProject.Models
         public int IngredientID { get; set; }
 
         [Required (ErrorMessage = "Please enter a valid ingredient name")]
+        [StringLength (50)] //Will not allow user to enter more than 50 chars.
         public string? IngredientName { get; set; }
 
 
@@ -22,6 +23,7 @@ namespace SushiProject.Models
 
 
         [Required(ErrorMessage = "Please enter a valid category name")]
+        [StringLength(50)] //Will not allow user to enter more than 50 chars.
         public string? IngredientCategoryName { get; set; }
 
 
