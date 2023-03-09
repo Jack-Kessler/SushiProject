@@ -49,10 +49,19 @@ namespace SushiProject.Controllers
             return View(ingredient);
         }
 
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
         public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
         {
-            repo.InsertFoodBevIngredientSQL(ingredientToInsert);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                repo.InsertFoodBevIngredientSQL(ingredientToInsert);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(ingredientToInsert);
+            }
         }
 
         public IActionResult DeleteFoodBevIngredient(FoodBevIngredient ingredient)

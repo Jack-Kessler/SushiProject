@@ -7,10 +7,12 @@
     <input asp-for="MenuItemID" type="hidden" value="" />
 
     <label asp-for="MenuItemName" class="control-label">New Menu Item Name</label>
+    @*@Html.ValidationMessageFor(model => model.MenuItemName, "", new {@class = "text-danger"})*@
     <input type="text" name="MenuItemName" class="form-control" value="" />
     <br />
 
     <label asp-for="MenuItemPrice" class="control-label">Price</label>
+    @*@Html.ValidationMessageFor(model => model.MenuItemPrice, "", new {@class = "text-danger"})*@
     <input type="number" step="0.01" name="MenuItemPrice" class="form-control" />
     <br />
 
