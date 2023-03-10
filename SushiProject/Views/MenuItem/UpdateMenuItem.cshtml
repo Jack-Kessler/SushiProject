@@ -29,6 +29,7 @@
         <div class="form-group">
             <label for="">Menu Item Category</label>
             <select class="form-control" name="MenuItemCategory" value="">
+                <option value="@Model.MenuItemCategory" selected>@Model.MenuItemCategory</option>
                 @foreach (var cat in Model.MenuItemCategories)
                 {
                     <option value="@cat.MenuCategoryName">@cat.MenuCategoryName</option>
