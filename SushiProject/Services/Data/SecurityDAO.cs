@@ -8,7 +8,7 @@ namespace SushiProject.Services.Data
     {
         //Connect to the database (i.e. UsernamesAndPasswords db)
         string connectionString = "Data Source=(localdb)\\ProjectModels;Initial Catalog=UsernamesAndPasswords;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        internal bool FindByUser(UserModel user)
+        internal bool FindByUser(VMLogin user)
         {
             // start by assuming that nothing is found in this query
             bool success = false;
@@ -26,7 +26,7 @@ namespace SushiProject.Services.Data
                 SqlCommand command = new SqlCommand(queryString, connection);
 
                 //associate @Username with user.Username. & @Password with user.Password
-                command.Parameters.Add("@Username", System.Data.SqlDbType.NVarChar, 50).Value = user.Username;
+                command.Parameters.Add("@Username", System.Data.SqlDbType.NVarChar, 50).Value = user.UserName;
 
                 command.Parameters.Add("@Password", System.Data.SqlDbType.NVarChar, 50).Value = user.Password;
 

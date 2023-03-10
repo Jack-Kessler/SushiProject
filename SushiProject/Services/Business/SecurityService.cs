@@ -7,7 +7,7 @@ namespace SushiProject.Services.Business
     {
         SecurityDAO daoService = new SecurityDAO();
 
-        public bool Authenticate(UserModel user)
+        public bool Authenticate(VMLogin user)
         {
             return daoService.FindByUser(user);
         }

@@ -1,6 +1,7 @@
 using MySql.Data.MySqlClient;
 using SushiProject;
 using System.Data;
+using Microsoft.AspNetCore.Authentication.Cookies; //Added
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddScoped<IDbConnection>((s) =>
 builder.Services.AddTransient<IMenuItemRepository, MenuItemRepository>();
 builder.Services.AddTransient<IFoodBevIngredientRepository, FoodBevIngredientRepository>();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => { option.LoginPath = "/Access/Login"; option.ExpireTimeSpan = TimeSpan.FromMinutes(60);});//Automatic Logout after 60 minutes
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,10 +35,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Access}/{action=Login}/{id?}");
+    //pattern: "{controller=Home}/{action=Index}/{id?}"); -- Previous
 
 app.Run();

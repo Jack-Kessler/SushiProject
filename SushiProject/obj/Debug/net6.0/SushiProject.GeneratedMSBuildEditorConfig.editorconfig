@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\jack_\OneDrive\Desktop\Repos\SushiProject\SushiProject
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Access/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzXExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevIngredient/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldkluZ3JlZGllbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,18 +42,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Login/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Login/LoginFailure.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW5GYWlsdXJlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Login/LoginSuccess.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW5TdWNjZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/MenuItem/Index.cshtml]
