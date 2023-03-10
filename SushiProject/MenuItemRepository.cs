@@ -30,8 +30,9 @@ namespace SushiProject
 
         public void InsertMenuItemSQL(MenuItem menuItemToInsert)
         {
-            _conn.Execute("INSERT INTO MENU_ITEMS (MENUITEMNAME, MENUITEMPRICE, MENUITEMCATEGORY) VALUES (@name, @price, @category);",
-                new { name = menuItemToInsert.MenuItemName, price = menuItemToInsert.MenuItemPrice, category = menuItemToInsert.MenuItemCategory });
+            _conn.Execute("INSERT INTO MENU_ITEMS (MENUITEMNAME, MENUITEMPRICE, MENUITEMCATEGORY, MENUITEMINGREDIENTNAME1, MenuItemIngredientQuantity1) VALUES (@name, @price, @category, @i1, @q1);",
+                new { name = menuItemToInsert.MenuItemName, price = menuItemToInsert.MenuItemPrice, 
+                    category = menuItemToInsert.MenuItemCategory, i1 = menuItemToInsert.MenuItemIngredientName1, q1 = menuItemToInsert.MenuItemIngredientQuantity1 });
         }
         public IEnumerable<MenuItemCategory> GetMenuItemCategoriesSQL()
         {

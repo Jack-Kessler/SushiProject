@@ -20,7 +20,7 @@ namespace SushiProject.Models
 
 
 
-        [Required(ErrorMessage = "Please enter a valid menu item category")]
+        //[Required(ErrorMessage = "Please enter a valid menu item category")]
         public string? MenuItemCategory { get; set; }
 
         public IEnumerable<MenuItemCategory>? MenuItemCategories { get; set; } //Note this is null
@@ -29,15 +29,15 @@ namespace SushiProject.Models
 
 
 
-        [Required(ErrorMessage = "Please enter a valid ingredient")]
+        //[Required(ErrorMessage = "Please enter a valid ingredient")]
         public string? MenuItemIngredientName1 { get; set; }
 
-        [Required]
-        [Range(0, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}")]
+        //[Required]
+        //[Range(0, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}")]
         public int? MenuItemIngredientID1 { get; set; }
 
-        [Required]
-        [Range(0, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}")]
+        [Required(ErrorMessage = "Please enter a valid quantity from 1 - 2147483647")]
+        [Range(1, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}")]
         public int? MenuItemIngredientQuantity1 { get; set; }
 
 
