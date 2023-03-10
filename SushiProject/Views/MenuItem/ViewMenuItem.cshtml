@@ -7,16 +7,61 @@
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-        <th>Category ID</th>
+        <th>Category Name</th>
+        <th>Ingredients</th>
+
     </tr>
-    <tr>
-        <td>@Model.MenuItemID</td>
-        <td>@Model.MenuItemName</td>
-        <td>@Model.MenuItemPrice</td>
-        <td>@Model.MenuItemCategory</td>
-    </tr>
+
+    @while (true) //Used while loop in order to write C# below. Could be better way.
+    {
+        var ingredList = new List<string>();
+
+        ingredList.Add(Model.MenuItemIngredientName1);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName2);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName3);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName4);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName5);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName6);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName7);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName8);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName9);
+        ingredList.Add(", ");
+        ingredList.Add(Model.MenuItemIngredientName10);
+
+        var ingredListNoNull = ingredList.Where(x => !String.IsNullOrEmpty(x)).ToList();
+
+        @for (int i = ingredListNoNull.Count - 1; i > 0; i--)
+        {
+            if (ingredListNoNull[i] == ", " && ingredListNoNull[i - 1] == ", ")
+            {
+                ingredListNoNull.RemoveAt(i);
+            }
+        }
+        ingredListNoNull.RemoveAt(ingredListNoNull.Count - 1);
+        <tr>
+            <td>@Model.MenuItemID</td>
+            <td>@Model.MenuItemName</td>
+            <td>@Model.MenuItemPrice</td>
+            <td>@Model.MenuItemCategory</td>
+            <td>
+                @foreach (var element in ingredListNoNull)
+                {
+
+                    @element
+                }
+            </td>
+        </tr>
+        break;
+    }
 </table>
-<br/>
 
 <div style="display: block">
     <a href="/MenuItem/UpdateMenuItem/@Model.MenuItemID">Update This Product</a>
@@ -28,6 +73,6 @@
     @using (Html.BeginForm("DeleteMenuItem", "MenuItem", "Post"))
     {
         <input type="hidden" asp-for="MenuItemID" value="@Model.MenuItemID" />
-        <input type="submit" onclick="return confirm('Are you sure you would like to delete this menu item?')" value="Delete this product" />
+        <input type="submit" onclick="return confirm('Are you sure you would like to delete this menu item?')" value="Delete Menu Item" />
     }
 </div>
