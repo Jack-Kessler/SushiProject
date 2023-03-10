@@ -29,12 +29,17 @@ namespace SushiProject.Controllers
 
         public IActionResult UpdateMenuItem(int id)
         {
-            MenuItem item = repo.GetMenuItemSQL(id);
-            if (item == null)
+            MenuItem updateItem = repo.GetMenuItemSQL(id);//These two lines of code ensure MenuItemCategory is not null
+            var menuItemCat = repo.AssignMenuItemCategorySQL();
+            updateItem.MenuItemCategories = menuItemCat.MenuItemCategories;//These two lines of code ensure MenuItemIngredientList is not null
+            var ingredients = repo.AssignMenuItemIngredientListSQL();
+            updateItem.MenuItemIngredientList = ingredients;
+            //updateItem = repo.IngredientSetNullValues(updateItem);
+            if (updateItem == null)
             {
                 return View("ProductNotFound");
             }
-            return View(item);
+            return View(updateItem);
         }
 
         public IActionResult UpdateMenuItemToDatabase(MenuItem menuItemToUpdate)
