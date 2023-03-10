@@ -231,19 +231,3 @@
         <input type="submit" value="Add Menu Item" class="btn btn-primary" />
     </form>
 </div>
-
-
-@*@using (Html.BeginForm("UpdateMenuItemToDatabase", "MenuItem", "Post"))
-{
-    <input asp-for="MenuItemID" type="hidden" value="@Model.MenuItemID" />
-
-    <label asp-for="MenuItemName" class="control-label">Name</label>
-    <input type="text" name="MenuItemName" class="form-control" value="@Model.MenuItemName" />
-    <br/>
-
-    <label asp-for="MenuItemPrice" class="control-label">Price</label>
-    <input type="number" step="0.01" name="MenuItemPrice" class="form-control" value="@Model.MenuItemPrice" />
-    <br/>
-
-    <input type="submit" value="Update Product" class="btn btn-primary" />
-}*@
