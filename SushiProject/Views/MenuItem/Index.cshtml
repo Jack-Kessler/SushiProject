@@ -43,6 +43,14 @@
         ingredList.Add(menuItem.MenuItemIngredientName10);
 
         var ingredListNoNull = ingredList.Where(x => !String.IsNullOrEmpty(x)).ToList();
+
+        @for (int i = ingredListNoNull.Count - 1; i >0; i--)
+        {
+            if(ingredListNoNull[i-1] == ", ")
+            {
+                ingredListNoNull.RemoveAt(i);
+            }
+        }
         <tr>
             <td><a href=/MenuItem/ViewMenuItem/@menuItem.MenuItemID>@menuItem.MenuItemID</a></td>
             <td>@menuItem.MenuItemName</td>
