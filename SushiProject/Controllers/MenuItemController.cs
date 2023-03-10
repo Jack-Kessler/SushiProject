@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 using SushiProject.Models;
+using static Mysqlx.Notice.Warning.Types;
 
 namespace SushiProject.Controllers
 {
@@ -56,6 +58,8 @@ namespace SushiProject.Controllers
             menuItemToInsert.MenuItemCategories = menuItemCat.MenuItemCategories;
             var ingredients = repo.AssignMenuItemIngredientListSQL();
             menuItemToInsert.MenuItemIngredientList = ingredients;
+            menuItemToInsert = repo.IngredientSetNullValues(menuItemToInsert);
+
 
             if (ModelState.IsValid)
             {
