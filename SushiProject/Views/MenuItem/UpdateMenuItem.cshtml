@@ -6,11 +6,11 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="MenuItem" asp-action="UpdateMenuItemToDatabase" method="post">
         
-        <div class="form-group">
+@*        <div class="form-group">
             <label asp-for="MenuItemID" class="col-md-2">Menu Item ID</label>
             <input asp-for="MenuItemID" type="hidden" value="@Model.MenuItemID" class="form-control" />
         </div>
-        <br />
+        <br />*@
         
         <div class="form-group">
             <label asp-for="MenuItemName" class="col-md-2">Menu Item Name</label>
@@ -50,8 +50,14 @@
             <select class="form-control" name="MenuItemIngredientName1" value="">
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName1)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -69,10 +75,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 2</label>
             <select class="form-control" name="MenuItemIngredientName2" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName2 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName2)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -89,10 +105,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 3</label>
             <select class="form-control" name="MenuItemIngredientName3" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName3 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName3)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -109,10 +135,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 4</label>
             <select class="form-control" name="MenuItemIngredientName4" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName4 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName4)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -129,10 +165,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 5</label>
             <select class="form-control" name="MenuItemIngredientName5" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName5 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName5)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -149,10 +195,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 6</label>
             <select class="form-control" name="MenuItemIngredientName6" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName6 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName6)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -169,10 +225,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 7</label>
             <select class="form-control" name="MenuItemIngredientName7" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName7 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName7)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -189,10 +255,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 8</label>
             <select class="form-control" name="MenuItemIngredientName8" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName8 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName8)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -209,10 +285,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 9</label>
             <select class="form-control" name="MenuItemIngredientName9" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName9 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName9)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -229,10 +315,20 @@
         <div class="form-group">
             <label for="">Menu Item Ingredient 10</label>
             <select class="form-control" name="MenuItemIngredientName10" value="">
-                <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                @if (Model.MenuItemIngredientName10 == null)
+                {
+                    <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                }
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
-                    <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    if (cat.IngredientName == Model.MenuItemIngredientName10)
+                    {
+                        <option value="@cat.IngredientName" selected>@cat.IngredientName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.IngredientName">@cat.IngredientName</option>
+                    }
                 }
             </select>
         </div>
@@ -247,24 +343,4 @@
         <input type="submit" value="Add Menu Item" class="btn btn-primary" />
     </form>
 </div>
-
-
-
-
-
-
-@*@using (Html.BeginForm("UpdateMenuItemToDatabase", "MenuItem", "Post"))
-{
-    <input asp-for="MenuItemID" type="hidden" value="@Model.MenuItemID" />
-
-    <label asp-for="MenuItemName" class="control-label">Name</label>
-    <input type="text" name="MenuItemName" class="form-control" value="@Model.MenuItemName" />
-    <br/>
-
-    <label asp-for="MenuItemPrice" class="control-label">Price</label>
-    <input type="number" step="0.01" name="MenuItemPrice" class="form-control" value="@Model.MenuItemPrice" />
-    <br/>
-
-    <input type="submit" value="Update Product" class="btn btn-primary" />
-}*@
 
