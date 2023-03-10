@@ -37,10 +37,26 @@ namespace SushiProject.Controllers
             return View(item);
         }
 
-        public IActionResult UpdateMenuItemToDatabase(MenuItem item)
+        public IActionResult UpdateMenuItemToDatabase(MenuItem menuItemToUpdate)
         {
-            repo.UpdateMenuItemSQL(item);
-            return RedirectToAction("ViewMenuItem", new { id = item.MenuItemID });
+            
+
+            var menuItemCat = repo.AssignMenuItemCategorySQL();
+            menuItemToUpdate.MenuItemCategories = menuItemCat.MenuItemCategories;
+            var ingredients = repo.AssignMenuItemIngredientListSQL();
+            menuItemToUpdate.MenuItemIngredientList = ingredients;
+            menuItemToUpdate = repo.IngredientSetNullValues(menuItemToUpdate);
+
+
+            if (ModelState.IsValid)
+            {
+                repo.UpdateMenuItemSQL(menuItemToUpdate);
+                return RedirectToAction("ViewMenuItem", new { id = menuItemToUpdate.MenuItemID });
+            }
+            else
+            {
+                return View("UpdateMenuItem", menuItemToUpdate);
+            }
         }
 
         public IActionResult InsertMenuItem()

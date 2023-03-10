@@ -22,10 +22,61 @@ namespace SushiProject
             return _conn.QuerySingle<MenuItem>("SELECT * FROM MENU_ITEMS WHERE MENUITEMID = @id;", new { id = menuItemID });
         }
 
-        public void UpdateMenuItemSQL(MenuItem menuItem)
+        public void UpdateMenuItemSQL(MenuItem menuItemToUpdate)
         {
-            _conn.Execute("UPDATE MENU_ITEMS SET MENUITEMNAME = @name, MENUITEMPRICE = @price WHERE MENUITEMID = @id;",
-                new { name = menuItem.MenuItemName, price = menuItem.MenuItemPrice, id = menuItem.MenuItemID });
+            _conn.Execute("UPDATE MENU_ITEMS " +
+                "SET " +
+                "MENUITEMNAME = @name, " +
+                "MENUITEMPRICE = @price " +
+                "MENUITEMCATEGORY = @cat, " +
+                "MENUITEMINGREDIENTNAME1 = @I1, " +
+                "MenuItemIngredientQuantity1 = @Q1," +
+                "MENUITEMINGREDIENTNAME2 = @I2," +
+                "MenuItemIngredientQuantity2 = @Q2," +
+                "MENUITEMINGREDIENTNAME3 = @I3," +
+                "MenuItemIngredientQuantity3 = @Q3," +
+                "MENUITEMINGREDIENTNAME4 = @I4," +
+                "MenuItemIngredientQuantity4 = @Q4," +
+                "MENUITEMINGREDIENTNAME5 = @I5," +
+                "MenuItemIngredientQuantity5 = @Q5," +
+                "MENUITEMINGREDIENTNAME6 = @I6," +
+                "MenuItemIngredientQuantity6 = @Q6," +
+                "MENUITEMINGREDIENTNAME7 = @I7," +
+                "MenuItemIngredientQuantity7 = @Q7," +
+                "MENUITEMINGREDIENTNAME8 = @I8," +
+                "MenuItemIngredientQuantity8 = @Q8," +
+                "MENUITEMINGREDIENTNAME9 = @I9," +
+                "MenuItemIngredientQuantity9 = @Q9," +
+                "MENUITEMINGREDIENTNAME10 = @I10," +
+                "MenuItemIngredientQuantity10 = @Q10" +
+                "" +
+                "WHERE MENUITEMID = @id;",
+                 new
+                 {
+                     name = menuItemToUpdate.MenuItemName,
+                     price = menuItemToUpdate.MenuItemPrice,
+                     cat = menuItemToUpdate.MenuItemCategory,
+                     i1 = menuItemToUpdate.MenuItemIngredientName1,
+                     q1 = menuItemToUpdate.MenuItemIngredientQuantity1,
+                     i2 = menuItemToUpdate.MenuItemIngredientName2,
+                     q2 = menuItemToUpdate.MenuItemIngredientQuantity2,
+                     i3 = menuItemToUpdate.MenuItemIngredientName3,
+                     q3 = menuItemToUpdate.MenuItemIngredientQuantity3,
+                     i4 = menuItemToUpdate.MenuItemIngredientName4,
+                     q4 = menuItemToUpdate.MenuItemIngredientQuantity4,
+                     i5 = menuItemToUpdate.MenuItemIngredientName5,
+                     q5 = menuItemToUpdate.MenuItemIngredientQuantity5,
+                     i6 = menuItemToUpdate.MenuItemIngredientName6,
+                     q6 = menuItemToUpdate.MenuItemIngredientQuantity6,
+                     i7 = menuItemToUpdate.MenuItemIngredientName7,
+                     q7 = menuItemToUpdate.MenuItemIngredientQuantity7,
+                     i8 = menuItemToUpdate.MenuItemIngredientName8,
+                     q8 = menuItemToUpdate.MenuItemIngredientQuantity8,
+                     i9 = menuItemToUpdate.MenuItemIngredientName9,
+                     q9 = menuItemToUpdate.MenuItemIngredientQuantity9,
+                     i10 = menuItemToUpdate.MenuItemIngredientName10,
+                     q10 = menuItemToUpdate.MenuItemIngredientQuantity10,
+                 });
         }
 
         public void InsertMenuItemSQL(MenuItem menuItemToInsert)
@@ -106,85 +157,6 @@ namespace SushiProject
                     i10 = menuItemToInsert.MenuItemIngredientName10,
                     q10 = menuItemToInsert.MenuItemIngredientQuantity10,
                     });
-
-            /*
-             *  _conn.Execute("INSERT INTO MENU_ITEMS " +
-                "(" +
-                "MENUITEMNAME, " +
-                "MENUITEMPRICE, " +
-                "MENUITEMCATEGORY, " +
-                "MENUITEMINGREDIENTNAME1, " +
-                "MenuItemIngredientQuantity1" +
-                "MENUITEMINGREDIENTNAME2" +
-                "MenuItemIngredientQuantity2" +
-                "MENUITEMINGREDIENTNAME3" +
-                "MenuItemIngredientQuantity3" +
-                "MENUITEMINGREDIENTNAME4" +
-                "MenuItemIngredientQuantity4" +
-                "MENUITEMINGREDIENTNAME5" +
-                "MenuItemIngredientQuantity5" +
-                "MENUITEMINGREDIENTNAME6" +
-                "MenuItemIngredientQuantity6" +
-                "MENUITEMINGREDIENTNAME7" +
-                "MenuItemIngredientQuantity7" +
-                "MENUITEMINGREDIENTNAME8" +
-                "MenuItemIngredientQuantity8" +
-                "MENUITEMINGREDIENTNAME9" +
-                "MenuItemIngredientQuantity9" +
-                "MENUITEMINGREDIENTNAME10" +
-                "MenuItemIngredientQuantity10" +
-                ") " +
-                "VALUES (" +
-                "@name, " +
-                "@price, " +
-                "@category, " +
-                "@i1, " +
-                "@q1, " +
-                "@i2, " +
-                "@q2, " +
-                "@i3, " +
-                "@q3, " +
-                "@i4, " +
-                "@q4, " +
-                "@i5, " +
-                "@q5, " +
-                "@i6, " +
-                "@q6, " +
-                "@i7, " +
-                "@q7, " +
-                "@i8, " +
-                "@q8, " +
-                "@i9, " +
-                "@q9, " +
-                "@i10, " +
-                "@q10, " +
-                ");",
-                new { 
-                    name = menuItemToInsert.MenuItemName, 
-                    price = menuItemToInsert.MenuItemPrice, 
-                    category = menuItemToInsert.MenuItemCategory, 
-                    i1 = menuItemToInsert.MenuItemIngredientName1, 
-                    q1 = menuItemToInsert.MenuItemIngredientQuantity1,
-                    i2 = menuItemToInsert.MenuItemIngredientName2,
-                    q2 = menuItemToInsert.MenuItemIngredientQuantity2,
-                    i3 = menuItemToInsert.MenuItemIngredientName3,
-                    q3 = menuItemToInsert.MenuItemIngredientQuantity3,
-                    i4 = menuItemToInsert.MenuItemIngredientName4,
-                    q4 = menuItemToInsert.MenuItemIngredientQuantity4,
-                    i5 = menuItemToInsert.MenuItemIngredientName5,
-                    q5 = menuItemToInsert.MenuItemIngredientQuantity5,
-                    i6 = menuItemToInsert.MenuItemIngredientName6,
-                    q6 = menuItemToInsert.MenuItemIngredientQuantity6,
-                    i7 = menuItemToInsert.MenuItemIngredientName7,
-                    q7 = menuItemToInsert.MenuItemIngredientQuantity7,
-                    i8 = menuItemToInsert.MenuItemIngredientName8,
-                    q8 = menuItemToInsert.MenuItemIngredientQuantity8,
-                    i9 = menuItemToInsert.MenuItemIngredientName9,
-                    q9 = menuItemToInsert.MenuItemIngredientQuantity9,
-                    i10 = menuItemToInsert.MenuItemIngredientName10,
-                    q10 = menuItemToInsert.MenuItemIngredientQuantity10,
-                    });
-            */
         }
         public IEnumerable<MenuItemCategory> GetMenuItemCategoriesSQL()
         {
