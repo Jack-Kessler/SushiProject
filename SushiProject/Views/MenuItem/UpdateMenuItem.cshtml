@@ -29,10 +29,16 @@
         <div class="form-group">
             <label for="">Menu Item Category</label>
             <select class="form-control" name="MenuItemCategory" value="">
-                <option value="@Model.MenuItemCategory" selected>@Model.MenuItemCategory</option>
                 @foreach (var cat in Model.MenuItemCategories)
                 {
-                    <option value="@cat.MenuCategoryName">@cat.MenuCategoryName</option>
+                    if(cat.MenuCategoryName == Model.MenuItemCategory)
+                    {
+                        <option value="@cat.MenuCategoryName" selected>@cat.MenuCategoryName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.MenuCategoryName">@cat.MenuCategoryName</option>
+                    }
                 }
             </select>
         </div>
@@ -44,6 +50,7 @@
             <select class="form-control" name="MenuItemIngredientName1" value="">
                 @foreach (var cat in Model.MenuItemIngredientList)
                 {
+                    
                     <option value="@cat.IngredientName">@cat.IngredientName</option>
                 }
             </select>
