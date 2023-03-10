@@ -14,17 +14,46 @@
         <th>Name</th>
         <th>Price</th>
         <th>Category Name</th>
+        <th>Ingedients</th>
 
     </tr>
 
     @foreach (var menuItem in @Model)
     {
+        var ingredList = new List<string>();
+ 
+        ingredList.Add(menuItem.MenuItemIngredientName1);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName2);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName3);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName4);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName5);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName6);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName7);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName8);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName9);
+        ingredList.Add(", ");
+        ingredList.Add(menuItem.MenuItemIngredientName10);
+
+        var ingredListNoNull = ingredList.Where(x => !String.IsNullOrEmpty(x)).ToList();
         <tr>
             <td><a href=/MenuItem/ViewMenuItem/@menuItem.MenuItemID>@menuItem.MenuItemID</a></td>
             <td>@menuItem.MenuItemName</td>
             <td>@menuItem.MenuItemPrice</td>
             <td>@menuItem.MenuItemCategory</td>
+            <td>@foreach(var element in ingredListNoNull)
+                {
+                    
+                    @element
+                }
+            </td>
         </tr>
     }
-
 </table>

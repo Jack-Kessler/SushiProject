@@ -39,14 +39,11 @@ namespace SushiProject.Controllers
 
         public IActionResult UpdateMenuItemToDatabase(MenuItem menuItemToUpdate)
         {
-            
-
             var menuItemCat = repo.AssignMenuItemCategorySQL();
             menuItemToUpdate.MenuItemCategories = menuItemCat.MenuItemCategories;
             var ingredients = repo.AssignMenuItemIngredientListSQL();
             menuItemToUpdate.MenuItemIngredientList = ingredients;
             menuItemToUpdate = repo.IngredientSetNullValues(menuItemToUpdate);
-
 
             if (ModelState.IsValid)
             {
