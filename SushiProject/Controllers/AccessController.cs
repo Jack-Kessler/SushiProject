@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication;
 using SushiProject.Models;
-using SushiProject.Services.Business;
+//using SushiProject.Services.Business;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SushiProject.Controllers
@@ -13,7 +11,7 @@ namespace SushiProject.Controllers
     {
         private readonly IAccessRepository repo;
 
-        public AccessController(IAccessRepository repo)
+        public AccessController (IAccessRepository repo)
         {
             this.repo = repo;
         }
@@ -90,7 +88,7 @@ namespace SushiProject.Controllers
             else
             {
                 //ModelState.AddModelError(string.Empty, "Invalid login attempt");
-                ViewData["ValidateMessage"] = "User does not exist or Password is incorrect";
+                ViewData["ValidateMessage"] = "Error: The username you entered does not exist or the password was incorrect. Please try again.";
                 return View(employeeToLogin);
                 //return View("LoginFailure");
             }

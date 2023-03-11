@@ -102,7 +102,7 @@ namespace SushiProject
 
         public bool UserPassAuthenticate(Employee employeeToAuthenticate) //Note: employeeToAuthenticate only contains a userName and password
         {
-            if (employeeToAuthenticate.EmployeeID == null)
+            if (employeeToAuthenticate.EmployeeID == 0)
             {
                 return false;
             }
