@@ -30,7 +30,6 @@ namespace SushiProject
                 "          LastName = @lName, " +
                 "          EmailAddress = @email, " +
                 "          PhoneNumber = @phone, " +
-                "          DateOfBirth = @dob, " +
                 "          UserName = @user, " +
                 "          Password = @pass, " +
                 "          Role = @role" +
@@ -40,10 +39,9 @@ namespace SushiProject
                       lName = employeeToUpdate.LastName, 
                       email = employeeToUpdate.EmailAddress, 
                       phone = employeeToUpdate.PhoneNumber, 
-                      dob = employeeToUpdate.DateOfBirth,
                       user = employeeToUpdate.UserName,
                       pass = employeeToUpdate.Password,
-                      role = employeeToUpdate.Role});
+                      role = employeeToUpdate.Role});;
         }
 
         public void InsertEmployeeInfoSQL(Employee employeeToInsert)
@@ -56,7 +54,6 @@ namespace SushiProject
                    lName = employeeToInsert.LastName,
                    email = employeeToInsert.EmailAddress,
                    phone = employeeToInsert.PhoneNumber,
-                   dob = employeeToInsert.DateOfBirth,
                    user = employeeToInsert.UserName,
                    pass = employeeToInsert.Password,
                    role = employeeToInsert.Role

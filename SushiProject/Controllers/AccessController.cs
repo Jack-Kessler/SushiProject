@@ -41,27 +41,29 @@ namespace SushiProject.Controllers
 
             if (success == true)
             {
+                Employee authenticatedEmployee = repo.GetEmployeeInfoSQL(employeeToLogin.EmployeeID);
+
                 List<Claim> claims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.NameIdentifier, employeeToLogin.UserName),
+                        new Claim(ClaimTypes.NameIdentifier, authenticatedEmployee.UserName),
                     };
 
-                if (employeeToLogin.Role == "Server")
+                if (authenticatedEmployee.Role == "Server")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Server");
                     claims.Add(newClaim);
                 }
-                else if (employeeToLogin.Role == "Chef")
+                else if (authenticatedEmployee.Role == "Chef")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Chef");
                     claims.Add(newClaim);
                 }
-                else if (employeeToLogin.Role == "Manager")
+                else if (authenticatedEmployee.Role == "Manager")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Manager");
                     claims.Add(newClaim);
                 }
-                else if(employeeToLogin.Role == "Owner")
+                else if(authenticatedEmployee.Role == "Owner")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Owner");
                     claims.Add(newClaim);
@@ -77,7 +79,7 @@ namespace SushiProject.Controllers
                 AuthenticationProperties properties = new AuthenticationProperties()
                 {
                     AllowRefresh = true,
-                    IsPersistent = employeeToLogin.KeepLoggedIn
+                    IsPersistent = authenticatedEmployee.KeepLoggedIn
                 };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
