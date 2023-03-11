@@ -14,7 +14,6 @@ namespace SushiProject.Controllers
             this.repo = repo;
         }
 
-
         public IActionResult Index()
         {
             var items = repo.GetAllMenuItemsSQL();

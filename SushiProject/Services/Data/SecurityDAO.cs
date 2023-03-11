@@ -7,11 +7,7 @@ namespace SushiProject.Services.Data
     public class SecurityDAO
     {
 
-
-
-
-
-        //----------------------------------------------------------------------------------------------------------------------------
+        ////----------------------------------------------------------------------------------------------------------------------------
         ////Connect to the database (i.e. UsernamesAndPasswords db)
         //string connectionString = "Data Source=(localdb)\\ProjectModels;Initial Catalog=UsernamesAndPasswords;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         //internal bool FindByUser(VMLogin user)
@@ -37,12 +33,12 @@ namespace SushiProject.Services.Data
         //        command.Parameters.Add("@Password", System.Data.SqlDbType.NVarChar, 50).Value = user.Password;
 
         //        //open the database and run the command.
-        //        try 
-        //        { 
+        //        try
+        //        {
         //            connection.Open();
         //            SqlDataReader reader = command.ExecuteReader();
 
-        //            if(reader.HasRows)
+        //            if (reader.HasRows)
         //            {
         //                success = true;
         //            }
@@ -50,7 +46,7 @@ namespace SushiProject.Services.Data
         //            {
         //                success = false;
         //            }
-        //        } 
+        //        }
         //        catch (Exception e)
         //        {
         //            Console.WriteLine(e.Message);

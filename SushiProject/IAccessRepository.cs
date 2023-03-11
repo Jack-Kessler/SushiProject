@@ -11,5 +11,8 @@ namespace SushiProject
         public IEnumerable<EmployeeCategory> GetEmployeeRoleCategoriesSQL();
         public Employee AssignEmployeeRoleCategorySQL();
         public void DeleteEmployeeInfoSQL(Employee employeeToDelete);
+        public IEnumerable<int> GetRangeOfEmployeeIDs();
+        public bool ValidateEmployeeID(int employeeID);
+        public bool UserPassAuthenticate(Employee employeeToAuthenticate);
     }
 }

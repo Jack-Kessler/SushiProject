@@ -11,7 +11,18 @@ namespace SushiProject.Controllers
 {
     public class AccessController : Controller
     {
-        private readonly IMenuItemRepository repo;
+        private readonly IAccessRepository repo;
+
+        public AccessController(IAccessRepository repo)
+        {
+            this.repo = repo;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Login()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
@@ -23,34 +34,36 @@ namespace SushiProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(Employee modelLogin)
+        public async Task<IActionResult> Login(Employee employeeToLogin)
         {
-            SecurityService securityService = new SecurityService();
-            bool success = securityService.Authenticate(modelLogin); //Authenticates user
+            //SecurityService securityService = new SecurityService();
+            //bool success = securityService.Authenticate(modelLogin); //Authenticates user
+
+            bool success = repo.UserPassAuthenticate(employeeToLogin);
 
             if (success == true)
             {
                 List<Claim> claims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.NameIdentifier, modelLogin.UserName),
+                        new Claim(ClaimTypes.NameIdentifier, employeeToLogin.UserName),
                     };
 
-                if (modelLogin.Role == "Server")
+                if (employeeToLogin.Role == "Server")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Server");
                     claims.Add(newClaim);
                 }
-                else if (modelLogin.Role == "Chef")
+                else if (employeeToLogin.Role == "Chef")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Chef");
                     claims.Add(newClaim);
                 }
-                else if (modelLogin.Role == "Manager")
+                else if (employeeToLogin.Role == "Manager")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Manager");
                     claims.Add(newClaim);
                 }
-                else if(modelLogin.Role == "Owner")
+                else if(employeeToLogin.Role == "Owner")
                 {
                     var newClaim = new Claim(ClaimTypes.Role, "Owner");
                     claims.Add(newClaim);
@@ -58,7 +71,7 @@ namespace SushiProject.Controllers
                 else
                 {
                     ViewData["ValidateMessage"] = "Role Not Found";
-                    return View(modelLogin);
+                    return View(employeeToLogin);
                 }
 
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -66,7 +79,7 @@ namespace SushiProject.Controllers
                 AuthenticationProperties properties = new AuthenticationProperties()
                 {
                     AllowRefresh = true,
-                    IsPersistent = modelLogin.KeepLoggedIn
+                    IsPersistent = employeeToLogin.KeepLoggedIn
                 };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
@@ -78,7 +91,7 @@ namespace SushiProject.Controllers
             {
                 //ModelState.AddModelError(string.Empty, "Invalid login attempt");
                 ViewData["ValidateMessage"] = "User does not exist or Password is incorrect";
-                return View(modelLogin);
+                return View(employeeToLogin);
                 //return View("LoginFailure");
             }
 

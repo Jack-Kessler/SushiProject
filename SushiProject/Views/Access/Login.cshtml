@@ -1,4 +1,4 @@
-﻿@model SushiProject.Models.UserLogin
+﻿@model SushiProject.Models.Employee
 @{
     Layout = null;
 }
@@ -13,6 +13,7 @@
 <body>
     <form asp-controller="Access" asp-action="Login" method="post">
         <h1>Login</h1>
+        <input type="number" placeholder="Your Employee ID" asp-for="EmployeeID" />
         <input type="text" placeholder="Your Username" asp-for="UserName"/>
         <input type="password" placeholder="Password" asp-for="Password" />
 

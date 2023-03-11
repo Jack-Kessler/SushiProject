@@ -79,5 +79,46 @@ namespace SushiProject
         {
             _conn.Execute("DELETE FROM EMPLOYEES WHERE EMPLOYEEID = @id;", new { id = employeeToDelete.EmployeeID });
         }
+
+        public IEnumerable<int> GetRangeOfEmployeeIDs() //Note: employeeToAuthenticate only contains a userName and password
+        {
+            IEnumerable<int> range = (IEnumerable<int>)_conn.Query<Employee>("SELECT (EMPLOYEEID) FROM EMPLOYEES;");
+
+            return range;
+        }
+
+        public bool ValidateEmployeeID(int employeeID)
+        {
+            var range = GetRangeOfEmployeeIDs();
+            foreach (var item in range)
+            {
+                if (employeeID == item) //Checks if 
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool UserPassAuthenticate(Employee employeeToAuthenticate) //Note: employeeToAuthenticate only contains a userName and password
+        {
+            if (employeeToAuthenticate.EmployeeID == null)
+            {
+                return false;
+            }
+
+            bool success = ValidateEmployeeID(employeeToAuthenticate.EmployeeID); //Makes sure employee ID exists.
+            if(success == false)
+            {
+                return false;
+            }
+
+            var employeeInfo = GetEmployeeInfoSQL(employeeToAuthenticate.EmployeeID);
+            if(employeeInfo.UserName == employeeToAuthenticate.UserName && employeeInfo.Password == employeeToAuthenticate.Password)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
