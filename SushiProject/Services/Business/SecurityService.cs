@@ -5,11 +5,11 @@ namespace SushiProject.Services.Business
 {
     public class SecurityService
     {
-        SecurityDAO daoService = new SecurityDAO();
+        SecurityDAO daoService = new SecurityDAO(); //DAO - Data Access Object
 
-        public bool Authenticate(VMLogin user)
+        public bool Authenticate(Employee employee)
         {
-            return daoService.FindByUser(user);
+            return daoService.FindByUser(employee);
         }
     }
 }

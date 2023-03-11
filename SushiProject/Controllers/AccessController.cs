@@ -11,6 +11,7 @@ namespace SushiProject.Controllers
 {
     public class AccessController : Controller
     {
+        private readonly IMenuItemRepository repo;
         public IActionResult Login()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
@@ -22,19 +23,21 @@ namespace SushiProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(VMLogin modelLogin)
+        public async Task<IActionResult> Login(Employee modelLogin)
         {
             SecurityService securityService = new SecurityService();
-            bool success = securityService.Authenticate(modelLogin);
+            bool success = securityService.Authenticate(modelLogin); //Authenticates user
 
             if (success == true)
             {
+                
                 List<Claim> claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.NameIdentifier, modelLogin.UserName),
-                    //new Claim(Claim)
+                    new Claim(ClaimTypes.Role,"Admin")
                 };
 
+                
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 AuthenticationProperties properties = new AuthenticationProperties()
