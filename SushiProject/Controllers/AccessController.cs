@@ -33,6 +33,27 @@ namespace SushiProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Employee employeeToLogin)
         {
+            if (employeeToLogin.Guest == true)
+            {
+                List<Claim> claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, "Guest"),
+                        new Claim(ClaimTypes.Role, "Guest")
+                    };
+
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                AuthenticationProperties properties = new AuthenticationProperties()
+                {
+                    AllowRefresh = true,
+                    IsPersistent = employeeToLogin.KeepLoggedIn
+                };
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+
+                return RedirectToAction("Index", "Home");
+            }
+
             bool success = repo.UserPassAuthenticate(employeeToLogin);
 
             if (success == true)

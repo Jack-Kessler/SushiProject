@@ -17,6 +17,13 @@
         <h1>Login</h1>
 
         <div class="form-group">
+            <label asp-for="Guest" class="col-md-2">Guest Login (Check Box - Disregard Rest of Form)</label>
+            <input asp-for="Guest" type="checkbox" class="form-control" />
+            <span asp-validation-for="Guest" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
             <label asp-for="EmployeeID" class="col-md-2">Employee ID</label>
             <input asp-for="EmployeeID" type="number" placeholder="Your Employee ID" class="form-control" />
             <span asp-validation-for="EmployeeID" class="text-danger"></span>
@@ -53,5 +60,11 @@
             <label>@ViewData["ValidateMessage"]</label>
         }
     </form>
+    <br />
+
+    <div style="display: block">
+        <a href="/home/index">Go To Home</a>
+    </div>
+    <br />
 </body>
 </html>

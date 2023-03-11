@@ -15,6 +15,7 @@ namespace SushiProject.Models
         public string Password { get; set; }
         public string Role { get; set; }
         public bool KeepLoggedIn { get; set; }
+        public bool Guest { get; set; }
         public IEnumerable<EmployeeCategory>? EmployeeCategories { get; set; } //Note this is null
     }
 }
