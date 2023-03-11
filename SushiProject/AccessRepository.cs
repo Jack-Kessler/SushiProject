@@ -82,7 +82,14 @@ namespace SushiProject
 
         public IEnumerable<int> GetRangeOfEmployeeIDs() //Note: employeeToAuthenticate only contains a userName and password
         {
-            IEnumerable<int> range = (IEnumerable<int>)_conn.Query<Employee>("SELECT (EMPLOYEEID) FROM EMPLOYEES;");
+            var employeeIDList = _conn.Query<Employee>("SELECT (EMPLOYEEID) FROM EMPLOYEES;");
+            
+            List<int> range = new List<int>();
+
+            foreach(var id in employeeIDList)
+            {
+                range.Add(id.EmployeeID);
+            }
 
             return range;
         }
