@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using SushiProject.Models;
-//using SushiProject.Services.Business;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SushiProject.Controllers
@@ -34,9 +33,6 @@ namespace SushiProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Employee employeeToLogin)
         {
-            //SecurityService securityService = new SecurityService();
-            //bool success = securityService.Authenticate(modelLogin); //Authenticates user
-
             bool success = repo.UserPassAuthenticate(employeeToLogin);
 
             if (success == true)
@@ -94,9 +90,6 @@ namespace SushiProject.Controllers
                 return View(employeeToLogin);
                 //return View("LoginFailure");
             }
-
-            //if (modelLogin.UserName == null) { }
-            //return View();
         }
     }
 }

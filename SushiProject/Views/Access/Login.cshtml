@@ -11,15 +11,39 @@
     <title>Login</title>
 </head>
 <body>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="Access" asp-action="Login" method="post">
-        <h1>Login</h1>
-        <input type="number" placeholder="Your Employee ID" asp-for="EmployeeID" />
-        <input type="text" placeholder="Your Username" asp-for="UserName"/>
-        <input type="password" placeholder="Password" asp-for="Password" />
 
-        <label>
-            <input type="checkbox" asp-for="KeepLoggedIn"/>Keep Me Logged In
-        </label>
+        <h1>Login</h1>
+
+        <div class="form-group">
+            <label asp-for="EmployeeID" class="col-md-2">Employee ID</label>
+            <input asp-for="EmployeeID" type="number" placeholder="Your Employee ID" class="form-control" />
+            <span asp-validation-for="EmployeeID" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label asp-for="UserName" class="col-md-2">Username</label>
+            <input asp-for="UserName" type="text" placeholder="Your Username" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label asp-for="Password" class="col-md-2">Password</label>
+            <input asp-for="Password" type="password" placeholder="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" asp-for="KeepLoggedIn" />Keep Me Logged In
+            </label>
+        </div>
+        <br />
+
         <button type="submit">Login</button>
 
         @if (ViewData["ValidateMessage"] != null)
