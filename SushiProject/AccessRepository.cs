@@ -28,44 +28,56 @@ namespace SushiProject
             _conn.Execute("UPDATE EMPLOYEES SET FirstName = @fName, " +
                 "          MiddleName = @mName, " +
                 "          LastName = @lName, " +
-                "          EmailAddress = @email" +
-                "          PhoneNumber = @phone" +
-                "          DateOfBirth = @dob" +
+                "          EmailAddress = @email, " +
+                "          PhoneNumber = @phone, " +
+                "          DateOfBirth = @dob, " +
+                "          UserName = @user, " +
+                "          Password = @pass, " +
                 "          Role = @role" +
-                "          WHERE EMPLOYEEID = @id",
+                "          WHERE EMPLOYEEID = @id;",
                 new { fname = employeeToUpdate.FirstName, 
                       mName = employeeToUpdate.MiddleName, 
                       lName = employeeToUpdate.LastName, 
                       email = employeeToUpdate.EmailAddress, 
                       phone = employeeToUpdate.PhoneNumber, 
-                      dob = employeeToUpdate.DateOfBirth, 
+                      dob = employeeToUpdate.DateOfBirth,
+                      user = employeeToUpdate.UserName,
+                      pass = employeeToUpdate.Password,
                       role = employeeToUpdate.Role});
-        }
-
-        public Employee AssignEmployeeRoleCategorySQL()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteEmployeeInfoSQL(Employee employeeToDelete)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
-        public IEnumerable<EmployeeCategory> GetEmployeeRoleCategoriesSQL()
-        {
-            throw new NotImplementedException();
         }
 
         public void InsertEmployeeInfoSQL(Employee employeeToInsert)
         {
-            throw new NotImplementedException();
+            _conn.Execute("INSERT INTO EMPLOYEES " +
+                "         (FirstName, MiddleName, LastName, EmailAddress, PhoneNumber, DateOfBirth, UserName, Password, Role) VALUES (fName, mName, lName, email, phone, dob, user, pass, role);", new
+               {
+                   fname = employeeToInsert.FirstName,
+                   mName = employeeToInsert.MiddleName,
+                   lName = employeeToInsert.LastName,
+                   email = employeeToInsert.EmailAddress,
+                   phone = employeeToInsert.PhoneNumber,
+                   dob = employeeToInsert.DateOfBirth,
+                   user = employeeToInsert.UserName,
+                   pass = employeeToInsert.Password,
+                   role = employeeToInsert.Role
+               });
         }
 
+        public IEnumerable<EmployeeCategory> GetEmployeeRoleCategoriesSQL()
+        {
+            return _conn.Query<EmployeeCategory>("SELECT * FROM EMPLOYEE_CATEGORIES;");
+        }
+        public Employee AssignEmployeeRoleCategorySQL()
+        {
+            var employeeCategoryList = GetEmployeeRoleCategoriesSQL();
+            var employee = new Employee();
+            employee.EmployeeCategories = employeeCategoryList;
+            return employee;
+        }
 
+        public void DeleteEmployeeInfoSQL(Employee employeeToDelete)
+        {
+            _conn.Execute("DELETE FROM EMPLOYEES WHERE EMPLOYEEID = @id;", new { id = employeeToDelete.EmployeeID });
+        }
     }
 }

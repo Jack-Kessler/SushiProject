@@ -13,6 +13,6 @@
         public string Password { get; set; }
         public string Role { get; set; }
         public bool KeepLoggedIn { get; set; }
-        public IEnumerable<EmployeeCategory>? MenuItemCategories { get; set; } //Note this is null
+        public IEnumerable<EmployeeCategory>? EmployeeCategories { get; set; } //Note this is null
     }
 }
