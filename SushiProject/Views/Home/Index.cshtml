@@ -11,14 +11,18 @@
     <br />
     <br />
     <div class="main-page-buttons">
-        <button type="button">Employee</button>
+        @if (User.IsInRole("Owner"))
+        {
+            <button type="button">Employee</button>
+        }
+        
         <button type="button">Customer</button>
 
         @*<button type="button">Chef</button>
         <button type="button">Customer</button>*@
         
         @*How to create a button that will go to a different webpage*@
-       @* <button onclick="openTab()">Educative</button>
+        @* <button onclick="openTab()">Educative</button>
 
         <script>
             function openTab() {
