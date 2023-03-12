@@ -22,15 +22,15 @@
                         @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>*@
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MenuItem" asp-action="Index">Menu Items</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FoodBevIngredient" asp-action="Index">Ingredients</a>
-                        </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="">Login</a>
-                        </li>*@
+                        @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MenuItem" asp-action="Index">Menu Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="FoodBevIngredient" asp-action="Index">Ingredients</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="logOut">Logout </a>
                         </li>

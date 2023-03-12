@@ -38,10 +38,10 @@
         <br />
         <br />
         <div class="main-page-buttons">
-
-            <button type="button">View All Menu Items</button>
-            <button type="button">View All Ingredients</button>
-
+            <button type="button">View Table Assignments</button>
+            <button type="button">View My Tables</button>
+            <button type="button">Clock-In</button>
+            <button type="button">Clock-Off</button>
         </div>
     }
     @if (User.IsInRole("Chef"))
@@ -52,10 +52,10 @@
         <br />
         <br />
         <div class="main-page-buttons">
-
-            <button type="button">View All Menu Items</button>
-            <button type="button">View All Ingredients</button>
-
+            <button type="button">View All Orders</button>
+            <button type="button">View Ingredient Stock Level</button>
+            <button type="button">Clock-In</button>
+            <button type="button">Clock-Off</button>
         </div>
     }
     @if (User.IsInRole("Manager"))
@@ -66,10 +66,11 @@
         <br />
         <br />
         <div class="main-page-buttons">
-
-            <button type="button">View All Menu Items</button>
-            <button type="button">View All Ingredients</button>
-
+            <button type="button">View Tables</button>
+            <button type="button">View Orders</button>
+            <button type="button">View Transactions</button>
+            <button type="button">View Clocked-In Staff</button>
+            <button type="button">Update Inventory</button>
         </div>
     }
     @if (User.IsInRole("Owner"))
@@ -80,10 +81,13 @@
         <br />
         <br />
         <div class="main-page-buttons">
-
-            <button type="button">View All Menu Items</button>
-            <button type="button">View All Ingredients</button>
-
+            <button type="button">View Tables</button>
+            <button type="button">View Orders</button>
+            <button type="button">View Transactions</button>
+            <button type="button">View Clocked-In Staff</button>
+            <button type="button">Update Inventory</button>
+            <button type="button">Edit Employee Info</button>
+            <button type="button">Create New Employee Account</button>
         </div>
     }
 </div>
