@@ -5,14 +5,18 @@
 <table class="table">
     <tr>
         <th>Table Number</th>
-        <th>Assigned Server</th>
         <th>Assigned Server Name</th>
     </tr>
 
     <tr>
         <td>@Model.RestaurantTableID</td>
-        <td>@Model.RestaurantTableAssignedEmployeeID</td>
-        <td>@Model.RestaurantTableAssignedEmployeeFirstName @Model.RestaurantTableAssignedEmployeeLastName</td>
+        <td>
+            @if (Model.RestaurantTableAssignedEmployeeFirstName != null)
+            {
+                @Model.RestaurantTableAssignedEmployeeFirstName @Model.RestaurantTableAssignedEmployeeLastName
+                @*How how add "Unassigned" text otherwise?*@
+            }
+        </td>
     </tr>
 
 </table>

@@ -13,15 +13,24 @@
 
 <table class="table">
     <tr>
-        <th>Table Number</th>
-        <th>Assigned Server</th>
+        <th>RestaurantTableID</th>
+        <th>RestaurantTableAssignedEmployeeID</th>
+        <th>RestaurantTableAssignedEmployeeFirstName</th>
+        <th>RestaurantTableAssignedEmployeeLastName</th>
     </tr>
 
     @foreach (var table in @Model)
     {
         <tr>
-            <td><a href=/FoodBevIngredient/ViewFoodBevIngredient/@table.RestaurantTableID>@table.RestaurantTableID</a></td>
-            <td>@table.RestaurantTableAssignedEmployeeFirstName @table.RestaurantTableAssignedEmployeeLastName</td>
+            <td><a href=/RestaurantTable/ViewRestaurantTable/@table.RestaurantTableID>@table.RestaurantTableID</a></td>
+            @*Does bring me to RestaurantTable Controller and ViewRestaurantTable action as desired. It does not send restaurant table ID (int) for some reason though*@
+            <td>
+                @if(@table.RestaurantTableAssignedEmployeeFirstName == null)
+                {
+                    @table.RestaurantTableAssignedEmployeeFirstName @table.RestaurantTableAssignedEmployeeLastName
+                    @*How how add "Unassigned" text otherwise?*@
+                }
+            </td>
         </tr>
     } 
 </table>

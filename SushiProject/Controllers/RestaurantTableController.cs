@@ -18,10 +18,10 @@ namespace SushiProject.Controllers
             return View(tables);
         }
 
-        public IActionResult ViewRestaurantTable(int tableID)
+        public IActionResult ViewRestaurantTable(int RestaurantTableID)
         {
-            var item = repo.GetRestaurantTableSQL(tableID);
-            return View(item);
+            var table = repo.GetRestaurantTableSQL(RestaurantTableID);
+            return View(table);
         }
 
         public IActionResult UpdateRestaurantTable(int tableID)
