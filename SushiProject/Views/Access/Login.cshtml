@@ -16,51 +16,6 @@
 
         <h1>Login</h1>
 
-        <p>Please use the following login accounts to view the different user layouts 
-            <ul>
-                <li>ID: 1; UserName: AdenZavala, </li>
-                <li>ClaireWatson</li>
-                <li>Milk</li>
-            </ul>
-
-            <ul>
-                <li>
-                    Server
-                    <ul>
-                        <li>ID: 1</li>
-                        <li>Username: AdenZavala</li>
-                        <li>Password: server</li>
-                    </ul>
-                </li>
-                <li>
-                    Chef
-                    <ul>
-                        <li>ID: 6</li>
-                        <li>Username: ClaireWatson</li>
-                        <li>Password: chef</li>
-                    </ul>
-                </li>
-                <li>
-                    Manager
-                    <ul>
-                        <li>ID: 7</li>
-                        <li>Username: HiyoriHayashi</li>
-                        <li>Password: manager</li>
-                    </ul>
-                </li>
-                <li>
-                    Owner
-                    <ul>
-                        <li>ID: 8</li>
-                        <li>Username: TuckJohnson</li>
-                        <li>Password: owner</li>
-                    </ul>
-                </li>
-            </ul>
-
-
-        </p>
-
         <div class="form-group">
             <label asp-for="Guest" class="col-md-2">Guest Login (Check Box - Disregard Rest of Form)</label>
             <input asp-for="Guest" type="checkbox" class="form-control" />
@@ -69,21 +24,21 @@
         <br />
 
         <div class="form-group">
-            <label asp-for="EmployeeID" class="col-md-2">Employee ID</label>
+            <label asp-for="EmployeeID" class="col-md-2">Employee ID:</label>
             <input asp-for="EmployeeID" type="number" placeholder="Your Employee ID" class="form-control" />
             <span asp-validation-for="EmployeeID" class="text-danger"></span>
         </div>
         <br />
 
         <div class="form-group">
-            <label asp-for="UserName" class="col-md-2">Username</label>
+            <label asp-for="UserName" class="col-md-2">Username:</label>
             <input asp-for="UserName" type="text" placeholder="Your Username" class="form-control" />
             <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
         <br />
 
         <div class="form-group">
-            <label asp-for="Password" class="col-md-2">Password</label>
+            <label asp-for="Password" class="col-md-2">Password:</label>
             <input asp-for="Password" type="password" placeholder="Password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
@@ -105,11 +60,46 @@
             <label>@ViewData["ValidateMessage"]</label>
         }
     </form>
-    <br />
 
-    <div style="display: block">
-        <a href="/home/index">Go To Home</a>
-    </div>
-    <br />
+    <p>
+        Please use the following login accounts to view the different user layouts
+        <ul>
+            <li>
+                Server
+                <ul>
+                    <li>ID: 1</li>
+                    <li>Username: AdenZavala</li>
+                    <li>Password: server</li>
+                </ul>
+            </li>
+            <br />
+            <li>
+                Chef
+                <ul>
+                    <li>ID: 6</li>
+                    <li>Username: ClaireWatson</li>
+                    <li>Password: chef</li>
+                </ul>
+            </li>
+            <br />
+            <li>
+                Manager
+                <ul>
+                    <li>ID: 7</li>
+                    <li>Username: HiyoriHayashi</li>
+                    <li>Password: manager</li>
+                </ul>
+            </li>
+            <br />
+            <li>
+                Owner
+                <ul>
+                    <li>ID: 8</li>
+                    <li>Username: TuckJohnson</li>
+                    <li>Password: owner</li>
+                </ul>
+            </li>
+        </ul>
+    </p>
 </body>
 </html>
