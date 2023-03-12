@@ -24,7 +24,7 @@ namespace SushiProject.Controllers
         {
             ClaimsPrincipal claimUser = HttpContext.User;
 
-            if (claimUser.Identity.IsAuthenticated)
+            if (claimUser.Identity.IsAuthenticated && claimUser.Identity.Name == "True")
                 return RedirectToAction("Index", "Home");
 
             return View();
@@ -38,7 +38,8 @@ namespace SushiProject.Controllers
                 List<Claim> claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier, "Guest"),
-                        new Claim(ClaimTypes.Role, "Guest")
+                        new Claim(ClaimTypes.Role, "Guest"),
+                        new Claim(ClaimTypes.Name, employeeToLogin.KeepLoggedIn.ToString())
                     };
 
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -63,6 +64,7 @@ namespace SushiProject.Controllers
                 List<Claim> claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier, authenticatedEmployee.UserName),
+                        new Claim(ClaimTypes.Name, employeeToLogin.KeepLoggedIn.ToString())
                     };
 
                 if (authenticatedEmployee.Role == "Server")
@@ -102,7 +104,6 @@ namespace SushiProject.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 
                 return RedirectToAction("Index", "Home");
-
             }
             else
             {
