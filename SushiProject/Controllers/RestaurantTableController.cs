@@ -14,19 +14,21 @@ namespace SushiProject.Controllers
 
         public IActionResult Index()
         {
-            var items = repo.GetAllRestaurantTablesSQL();
-            return View(items);
+            var tables = repo.GetAllRestaurantTablesSQL();
+            return View(tables);
         }
 
-        public IActionResult ViewRestaurantTable(int id)
+        public IActionResult ViewRestaurantTable(int tableID)
         {
-            var item = repo.GetRestaurantTableSQL(id);
+            var item = repo.GetRestaurantTableSQL(tableID);
             return View(item);
         }
 
-        public IActionResult UpdateRestaurantTable(int id)
+        public IActionResult UpdateRestaurantTable(int tableID)
         {
-            RestaurantTable updateTable = repo.GetMenuItemSQL(id);
+            RestaurantTable updateTable = repo.GetRestaurantTableSQL(tableID);
+            var tableWithServerList = repo.ServerListForTableSQL();
+            updateTable.ServerList = tableWithServerList.ServerList;
            
             if (updateTable == null)
             {
@@ -35,12 +37,15 @@ namespace SushiProject.Controllers
             return View(updateTable);
         }
 
-        public IActionResult UpdateRestaurantTableToDatabase(MenuItem tableToUpdate)
+        public IActionResult UpdateRestaurantTableToDatabase(RestaurantTable tableToUpdate)
         {
+            var tableWithServerList = repo.ServerListForTableSQL(); //needed since it can be null?
+            tableToUpdate.ServerList = tableWithServerList.ServerList; //needed since it can be null?
+
             if (ModelState.IsValid)
             {
                 repo.UpdateRestaurantTableSQL(tableToUpdate);
-                //return RedirectToAction("ViewMenuItem", new { id = menuItemToUpdate.MenuItemID }); Update this row
+                return RedirectToAction("ViewRestaurantTable", new { id = tableToUpdate.RestaurantTableID });
             }
             else
             {
@@ -48,12 +53,10 @@ namespace SushiProject.Controllers
             }
         }
 
-        public IActionResult InsertRestaurantTable() //NEED TO REDO
+        public IActionResult InsertRestaurantTable()
         {
-            var item = repo.AssignMenuItemCategorySQL();
-            var ingredients = repo.AssignMenuItemIngredientListSQL();
-            item.MenuItemIngredientList = ingredients;
-            return View(item);
+            var table = repo.ServerListForTableSQL();
+            return View(table);
         }
 
         [HttpPost]

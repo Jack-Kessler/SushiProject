@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<RestaurantTable>
+
+<h2>Restaurant Tables</h2>
+
+<br/>
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <div style="display: block">
+        <a href="/Restaurant/InsertRestaurantTable/">Add New Table</a>
+    </div>
+    <br />
 }
+
+<table class="table">
+    <tr>
+        <th>Table Number</th>
+        <th>Assigned Server</th>
+    </tr>
+
+    @foreach (var table in @Model)
+    {
+        <tr>
+            <td><a href=/FoodBevIngredient/ViewFoodBevIngredient/@table.RestaurantTableID>@table.RestaurantTableID</a></td>
+            <td>@table.RestaurantTableAssignedEmployeeFirstName @table.RestaurantTableAssignedEmployeeLastName</td>
+        </tr>
+    } 
+</table>

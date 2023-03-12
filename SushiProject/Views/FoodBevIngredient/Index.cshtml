@@ -2,11 +2,14 @@
 
 <h2>Ingredients</h2>
 
-<br />
-<div style="display: block">
-    <a href="/FoodBevIngredient/InsertFoodBevIngredient/">Add a New Ingredient</a>
-</div>
-<br />
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <br />
+    <div style="display: block">
+        <a href="/FoodBevIngredient/InsertFoodBevIngredient/">Add a New Ingredient</a>
+    </div>
+    <br />
+}
 
 <table class="table">
     <tr>

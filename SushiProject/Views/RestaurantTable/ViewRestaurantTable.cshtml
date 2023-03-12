@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model RestaurantTable
+
+<h3>Table @Model.RestaurantTableID</h3>
+
+<table class="table">
+    <tr>
+        <th>Table Number</th>
+        <th>Assigned Server</th>
+        <th>Assigned Server Name</th>
+    </tr>
+
+    <tr>
+        <td>@Model.RestaurantTableID</td>
+        <td>@Model.RestaurantTableAssignedEmployeeID</td>
+        <td>@Model.RestaurantTableAssignedEmployeeFirstName @Model.RestaurantTableAssignedEmployeeLastName</td>
+    </tr>
+
+</table>
+
+<div style="display: block">
+    <a href="/RestaurantTable/UpdateRestaurantTable/@Model.RestaurantTableID">Update Table Assignment</a>
+</div>
+<br />
+
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <div style="display: block">
+
+        @using (Html.BeginForm("DeleteRestaurantTable", "RestaurantTable", "Post"))
+        {
+            <input type="hidden" asp-for="RestaurantTableID" value="@Model.RestaurantTableID" />
+            <input type="submit" onclick="return confirm('Are you sure you would like to delete this table?')" value="Delete Table" />
+        }
+    </div>
 }
+

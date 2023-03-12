@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model RestaurantTable
+
+<h2>Table @Model.RestaurantTableID Assignment</h2>
+
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="RestaurantTable" asp-action="UpdateRestaurantTableToDatabase" method="post">
+
+        <div class="form-group">
+            <label asp-for="RestaurantTableID" class="col-md-2">Table Number</label>
+            <input asp-for="RestaurantTableID" class="form-control" />
+            <span asp-validation-for="RestaurantTableID" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label for="">Assigned Server</label>
+            <select class="form-control" name="Employee" value="">
+                @foreach (var cat in Model.ServerList)
+                {
+                    if (cat.EmployeeID == Model.RestaurantTableAssignedEmployeeID)
+                    {
+                        <option value="@cat.EmployeeID" selected>Employee ID: @cat.EmployeeID; Name: @cat.FirstName @cat.LastName</option> @*Sets default value = existing value*@
+                    }
+                    else
+                    {
+                        <option value="@cat.EmployeeID">Employee ID: @cat.EmployeeID; Name: @cat.FirstName @cat.LastName</option>
+                    }
+                }
+                <option value="Unassign">Unassign - Select if table is open</option>
+            </select>
+        </div>
+        <br />
+
+
+        <input type="submit" value="Update Table Assignment" class="btn btn-primary" />
+    </form>
+</div>
+
