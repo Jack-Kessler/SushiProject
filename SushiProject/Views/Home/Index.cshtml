@@ -4,31 +4,86 @@
 
 <div class="text-center">
     <h1 class="display-4">Jack's Sushi Project</h1>
-    
-    <picture>
-    <img src="/Images/Sushi_Pic.jpg" alt="My logo">
-    </picture>
-    <br />
-    <br />
-    <div class="main-page-buttons">
-        @if (User.IsInRole("Owner"))
-        {
-            <button type="button">Employee</button>
-        }
+    @if (User.IsInRole("Guest"))
+    {
+        <picture>
+        <img src="/Images/SushiGuest.jpg" alt="My logo">
+        </picture>
+        <br />
+        <br />
+        <div class="main-page-buttons">
+
+                <button type="button">View All Menu Items</button>
+                <button type="button">View All Ingredients</button>
         
-        <button type="button">Customer</button>
-
-        @*<button type="button">Chef</button>
-        <button type="button">Customer</button>*@
+            @*<button type="button">Chef</button>
+            <button type="button">Customer</button>*@
         
-        @*How to create a button that will go to a different webpage*@
-        @* <button onclick="openTab()">Educative</button>
+            @*How to create a button that will go to a different webpage*@
+            @* <button onclick="openTab()">Educative</button>
 
-        <script>
-            function openTab() {
-                window.open("https://www.educative.io/", "_blank");
-            }
-        </script>*@
+            <script>
+                function openTab() {
+                    window.open("https://www.educative.io/", "_blank");
+                }
+            </script>*@
 
-    </div>
+        </div>
+    }
+    @if (User.IsInRole("Server"))
+    {
+        <picture>
+            <img src="/Images/SushiServer.jpg" alt="My logo">
+        </picture>
+        <br />
+        <br />
+        <div class="main-page-buttons">
+
+            <button type="button">View All Menu Items</button>
+            <button type="button">View All Ingredients</button>
+
+        </div>
+    }
+    @if (User.IsInRole("Chef"))
+    {
+        <picture>
+            <img src="/Images/SushiChef.jpg" alt="My logo">
+        </picture>
+        <br />
+        <br />
+        <div class="main-page-buttons">
+
+            <button type="button">View All Menu Items</button>
+            <button type="button">View All Ingredients</button>
+
+        </div>
+    }
+    @if (User.IsInRole("Manager"))
+    {
+        <picture>
+            <img src="/Images/SushiManager.jpg" alt="My logo">
+        </picture>
+        <br />
+        <br />
+        <div class="main-page-buttons">
+
+            <button type="button">View All Menu Items</button>
+            <button type="button">View All Ingredients</button>
+
+        </div>
+    }
+    @if (User.IsInRole("Owner"))
+    {
+        <picture>
+            <img src="/Images/SushiOwner.jpg" alt="My logo">
+        </picture>
+        <br />
+        <br />
+        <div class="main-page-buttons">
+
+            <button type="button">View All Menu Items</button>
+            <button type="button">View All Ingredients</button>
+
+        </div>
+    }
 </div>
