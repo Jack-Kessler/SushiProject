@@ -13,11 +13,9 @@
         <br />
         <div class="main-page-buttons">
 
-                <button type="button">View All Menu Items</button>
-                <button type="button">View All Ingredients</button>
-        
-            @*<button type="button">Chef</button>
-            <button type="button">Customer</button>*@
+            <input type="button" value="View All Menu Items" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
+
+            @*<button type="button">Chef</button>*@
         
             @*How to create a button that will go to a different webpage*@
             @* <button onclick="openTab()">Educative</button>
