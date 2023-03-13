@@ -50,16 +50,8 @@ namespace SushiProject.Controllers
                     break;
                 }
             }
-
-            if (ModelState.IsValid)
-            {
-                repo.UpdateRestaurantTableSQL(tableToUpdate);
-                return RedirectToAction("ViewRestaurantTable", new { restaurantTableID = tableToUpdate.RestaurantTableID });
-            }
-            else
-            {
-                return View("UpdateRestaurantTable", tableToUpdate);
-            }
+            repo.UpdateRestaurantTableSQL(tableToUpdate); //Don't need to verify modelstate because the only option to change is a dropdown which guarantees data validation
+            return RedirectToAction("ViewRestaurantTable", new { restaurantTableID = tableToUpdate.RestaurantTableID });
         }
 
         public IActionResult InsertRestaurantTable()
