@@ -16,14 +16,14 @@
         <th>Table Number</th>
         <th>Assigned Server</th>
     </tr>
-
+    
     @foreach (var rtable in @Model)
     {
         <tr>
             <td><a href=@Url.Action("ViewRestaurantTable", "RestaurantTable", new { RestaurantTableID = rtable.RestaurantTableID })>@rtable.RestaurantTableID</a></td>
             @*<td><a href=/RestaurantTable/ViewRestaurantTable/@rtable.RestaurantTableID>@rtable.RestaurantTableID</a></td>*@
             <td>
-                @if(rtable.RestaurantTableAssignedEmployeeFirstName == null)
+                @if(rtable.RestaurantTableAssignedEmployeeFirstName != null)
                 {
                     @rtable.RestaurantTableAssignedEmployeeFirstName @rtable.RestaurantTableAssignedEmployeeLastName
                     @*How how add "Unassigned" text otherwise?*@
