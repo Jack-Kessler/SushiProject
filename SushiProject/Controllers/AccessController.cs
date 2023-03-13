@@ -61,10 +61,12 @@ namespace SushiProject.Controllers
             {
                 Employee authenticatedEmployee = repo.GetEmployeeInfoSQL(employeeToLogin.EmployeeID);
 
+                authenticatedEmployee.KeepLoggedIn = employeeToLogin.KeepLoggedIn;
+
                 List<Claim> claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier, authenticatedEmployee.UserName),
-                        new Claim(ClaimTypes.Name, employeeToLogin.KeepLoggedIn.ToString())
+                        new Claim(ClaimTypes.Name, employeeToLogin.KeepLoggedIn.ToString()),
                     };
 
                 if (authenticatedEmployee.Role == "Server")
