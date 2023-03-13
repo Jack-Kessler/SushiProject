@@ -3,13 +3,6 @@
 <h2>Restaurant Tables</h2>
 
 <br/>
-@*@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
-{
-    <div style="display: block">
-        <a href="/RestaurantTable/InsertRestaurantTable/">Add New Table</a>
-    </div>
-    <br />
-}*@
 
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {

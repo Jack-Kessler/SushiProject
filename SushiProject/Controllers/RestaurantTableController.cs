@@ -54,12 +54,6 @@ namespace SushiProject.Controllers
             return RedirectToAction("ViewRestaurantTable", new { restaurantTableID = tableToUpdate.RestaurantTableID });
         }
 
-        //public IActionResult InsertRestaurantTable()
-        //{
-        //    var table = repo.ServerListForTableSQL();
-        //    return View(table);
-        //}
-
         [HttpPost]
         public IActionResult InsertRestaurantTableToDatabase()
         {
