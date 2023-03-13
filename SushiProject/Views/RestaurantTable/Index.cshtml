@@ -13,24 +13,22 @@
 
 <table class="table">
     <tr>
-        <th>RestaurantTableID</th>
-        <th>RestaurantTableAssignedEmployeeID</th>
-        <th>RestaurantTableAssignedEmployeeFirstName</th>
-        <th>RestaurantTableAssignedEmployeeLastName</th>
+        <th>Table Number</th>
+        <th>Assigned Server</th>
     </tr>
 
-    @foreach (var table in @Model)
+    @foreach (var rtable in @Model)
     {
         <tr>
-            <td><a href=/RestaurantTable/ViewRestaurantTable/@table.RestaurantTableID>@table.RestaurantTableID</a></td>
-            @*Does bring me to RestaurantTable Controller and ViewRestaurantTable action as desired. It does not send restaurant table ID (int) for some reason though*@
+            <td><a href=@Url.Action("ViewRestaurantTable", "RestaurantTable", new { RestaurantTableID = rtable.RestaurantTableID })>@rtable.RestaurantTableID</a></td>
+            @*<td><a href=/RestaurantTable/ViewRestaurantTable/@rtable.RestaurantTableID>@rtable.RestaurantTableID</a></td>*@
             <td>
-                @if(@table.RestaurantTableAssignedEmployeeFirstName == null)
+                @if(rtable.RestaurantTableAssignedEmployeeFirstName == null)
                 {
-                    @table.RestaurantTableAssignedEmployeeFirstName @table.RestaurantTableAssignedEmployeeLastName
+                    @rtable.RestaurantTableAssignedEmployeeFirstName @rtable.RestaurantTableAssignedEmployeeLastName
                     @*How how add "Unassigned" text otherwise?*@
                 }
             </td>
         </tr>
-    } 
+    }
 </table>
