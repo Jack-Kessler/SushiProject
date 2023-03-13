@@ -22,7 +22,8 @@
 </table>
 
 <div style="display: block">
-    <a href="/RestaurantTable/UpdateRestaurantTable/@Model.RestaurantTableID">Update Table Assignment</a>
+    @*<a href="/RestaurantTable/UpdateRestaurantTable/@Model.RestaurantTableID">Update Table Assignment</a>*@
+    <a href=@Url.Action("UpdateRestaurantTable", "RestaurantTable", new { RestaurantTableID = Model.RestaurantTableID })>Update Table Assignment</a>
 </div>
 <br />
 

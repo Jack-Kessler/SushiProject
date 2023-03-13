@@ -18,15 +18,15 @@ namespace SushiProject.Controllers
             return View(tables);
         }
 
-        public IActionResult ViewRestaurantTable(int RestaurantTableID)
+        public IActionResult ViewRestaurantTable(int RestaurantTableID) //IMPORTANT: The variable name here needs to be "RestaurantTableID". If it was simply "id" or soemthing different, it does not work.
         {
             var table = repo.GetRestaurantTableSQL(RestaurantTableID);
             return View(table);
         }
 
-        public IActionResult UpdateRestaurantTable(int tableID)
+        public IActionResult UpdateRestaurantTable(int RestaurantTableID)
         {
-            RestaurantTable updateTable = repo.GetRestaurantTableSQL(tableID);
+            RestaurantTable updateTable = repo.GetRestaurantTableSQL(RestaurantTableID);
             var tableWithServerList = repo.ServerListForTableSQL();
             updateTable.ServerList = tableWithServerList.ServerList;
            
