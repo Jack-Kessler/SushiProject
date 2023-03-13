@@ -21,14 +21,14 @@
                 {
                     if (cat.EmployeeID == Model.RestaurantTableAssignedEmployeeID)
                     {
-                        <option value="@cat.EmployeeID" selected>Employee ID: @cat.EmployeeID; Name: @cat.FirstName @cat.LastName</option> @*Sets default value = existing value*@
+                        <option value="@cat.EmployeeID" selected>Employee ID:<text>&nbsp;</text>@cat.EmployeeID<text>&emsp;&emsp;</text>Name:<text>&nbsp;</text>@cat.FirstName @cat.LastName</option> @*Sets default value = existing value*@
                     }
                     else
                     {
-                        <option value="@cat.EmployeeID">Employee ID: @cat.EmployeeID;       Name: @cat.FirstName @cat.LastName</option>
+                        <option value="@cat.EmployeeID">Employee ID:<text>&nbsp;</text>@cat.EmployeeID<text>&emsp;&emsp;</text>Name:<text>&nbsp;</text>@cat.FirstName @cat.LastName</option>
                     }
                 }
-                <option value="Unassign">Unassign - Select if table is open</option>
+                <option value="Unassign">Unassign - Select if table is now open</option>
             </select>
         </div>
         <br />

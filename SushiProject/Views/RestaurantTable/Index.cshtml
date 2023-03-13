@@ -25,8 +25,11 @@
             <td>
                 @if(rtable.RestaurantTableAssignedEmployeeFirstName != null)
                 {
-                    @rtable.RestaurantTableAssignedEmployeeFirstName @rtable.RestaurantTableAssignedEmployeeLastName
-                    @*How how add "Unassigned" text otherwise?*@
+                    @rtable.RestaurantTableAssignedEmployeeFirstName <text>&nbsp;</text> @rtable.RestaurantTableAssignedEmployeeLastName
+                }
+                else
+                {
+                    <text>Unassigned</text>
                 }
             </td>
         </tr>

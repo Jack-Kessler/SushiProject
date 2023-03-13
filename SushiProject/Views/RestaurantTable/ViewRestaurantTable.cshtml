@@ -13,8 +13,11 @@
         <td>
             @if (Model.RestaurantTableAssignedEmployeeFirstName != null)
             {
-                @Model.RestaurantTableAssignedEmployeeFirstName @Model.RestaurantTableAssignedEmployeeLastName
-                @*How how add "Unassigned" text otherwise?*@
+                @Model.RestaurantTableAssignedEmployeeFirstName <text>&nbsp;</text> @Model.RestaurantTableAssignedEmployeeLastName
+            }
+            else
+            {
+                <text>Unassigned</text>
             }
         </td>
     </tr>
