@@ -25,8 +25,8 @@ namespace SushiProject
 
         public void UpdateRestaurantTableSQL(RestaurantTable restaurantTableToUpdate)
         {
-            _conn.Execute("UPDATE RESTAURANT_TABLES SET RESTAURANTTABLEASSIGNEDEMPLOYEEID = @employeeID WHERE RESTAURANTTABLEID = @tableID;",
-                           new { employeeID = restaurantTableToUpdate.RestaurantTableAssignedEmployeeID, tableID = restaurantTableToUpdate.RestaurantTableID });
+            _conn.Execute("UPDATE RESTAURANT_TABLES SET RESTAURANTTABLEASSIGNEDEMPLOYEEID = @employeeID, RestaurantTableAssignedEmployeeFirstName = @fname, RestaurantTableAssignedEmployeeLastName = @lname WHERE RESTAURANTTABLEID = @tableID;",
+                           new { employeeID = restaurantTableToUpdate.RestaurantTableAssignedEmployeeID, fname = restaurantTableToUpdate.RestaurantTableAssignedEmployeeFirstName, lname = restaurantTableToUpdate.RestaurantTableAssignedEmployeeLastName, tableID = restaurantTableToUpdate.RestaurantTableID });
         }
 
         public void InsertRestaurantTableSQL(RestaurantTable restaurantTableToInsert)

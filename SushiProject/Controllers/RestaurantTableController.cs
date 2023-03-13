@@ -39,13 +39,22 @@ namespace SushiProject.Controllers
 
         public IActionResult UpdateRestaurantTableToDatabase(RestaurantTable tableToUpdate)
         {
-            var tableWithServerList = repo.ServerListForTableSQL(); //needed since it can be null?
-            tableToUpdate.ServerList = tableWithServerList.ServerList; //needed since it can be null?
+            var listOfServers = repo.GetServerListSQL(); //returns a list of objects type Employee
+
+            foreach(var server in listOfServers)
+            {
+                if (tableToUpdate.RestaurantTableAssignedEmployeeID == server.EmployeeID)
+                {
+                    tableToUpdate.RestaurantTableAssignedEmployeeLastName = server.LastName;
+                    tableToUpdate.RestaurantTableAssignedEmployeeFirstName = server.FirstName;
+                    break;
+                }
+            }
 
             if (ModelState.IsValid)
             {
                 repo.UpdateRestaurantTableSQL(tableToUpdate);
-                return RedirectToAction("ViewRestaurantTable", new { id = tableToUpdate.RestaurantTableID });
+                return RedirectToAction("ViewRestaurantTable", new { restaurantTableID = tableToUpdate.RestaurantTableID });
             }
             else
             {
