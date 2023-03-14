@@ -19,6 +19,7 @@ builder.Services.AddTransient<IMenuItemRepository, MenuItemRepository>();
 builder.Services.AddTransient<IFoodBevIngredientRepository, FoodBevIngredientRepository>();
 builder.Services.AddTransient<IAccessRepository, AccessRepository>();
 builder.Services.AddTransient<IRestaurantTableRepository, RestaurantTableRepository>();
+builder.Services.AddTransient<IFoodBevOrderRepository, FoodBevOrderRepository>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => { option.LoginPath = "/Access/Login"; option.ExpireTimeSpan = TimeSpan.FromMinutes(60);});//Automatic Logout after 60 minutes
 

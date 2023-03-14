@@ -19,7 +19,7 @@ namespace SushiProject.Models
         [Required(ErrorMessage = "Please enter a valid ingredient cost per unit between $0.00 - $99.00")]
         [DataType(DataType.Currency)]
         [Range(0, 99.99, ErrorMessage = "Value for {0} must be between {1} and {2}")]
-        public double? IngredientCost { get; set; }
+        public decimal? IngredientCost { get; set; }
 
 
         [Required(ErrorMessage = "Please enter a valid category name")]
