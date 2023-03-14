@@ -1,6 +1,7 @@
 ﻿@model FoodBevOrder
 
 <h3>Order @Model.OrderID Information</h3>
+<br />
 
 <table class="table">
     <tr>
@@ -13,18 +14,6 @@
         <th>Table ID</th>
         <th>Order Placed</th>
         <th>Order Sale Amount</th>
-        <th>Ordered Menu Item 1</th>
-        <th>Item 1 Quantity</th>
-        <th>Item 1 Price / item</th>
-        <th>Ordered Menu Item 2</th>
-        <th>Item 2 Quantity</th>
-        <th>Item 2 Price / item</th>
-        <th>Ordered Menu Item 3</th>
-        <th>Item 3 Quantity</th>
-        <th>Item 3 Price / item</th>
-        <th>Ordered Menu Item 4</th>
-        <th>Item 4 Quantity</th>
-        <th>Item 4 Price / item</th>
     </tr>
     <tr>
         <td>@Model.OrderID</td>
@@ -36,21 +25,40 @@
         <td>@Model.TableID</td>
         <td>@Model.DateAndTime</td>
         <td>@Model.OrderSaleAmount</td>
+    </tr>
+</table>
+<br />
+
+<table class="table">
+    <tr>
+        <th>Menu Item</th>
+        <th>Quantity Ordered</th>
+        <th>Price Per Item</th>
+    </tr>
+    <tr>
         <td>@Model.MenuItemName1</td>
         <td>@Model.QuantityItem1</td>
         <td>@Model.PriceItem1</td>
+    </tr>
+    <tr>
         <td>@Model.MenuItemName2</td>
         <td>@Model.QuantityItem2</td>
         <td>@Model.PriceItem2</td>
+    </tr>
+    <tr>
         <td>@Model.MenuItemName3</td>
         <td>@Model.QuantityItem3</td>
         <td>@Model.PriceItem3</td>
+    </tr>
+    <tr>
         <td>@Model.MenuItemName4</td>
         <td>@Model.QuantityItem4</td>
         <td>@Model.PriceItem4</td>
     </tr>
 </table>
 <br />
+
+
 @if (User.IsInRole("Server") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
@@ -67,7 +75,7 @@
         @using (Html.BeginForm("FulfillFoodBevOrder", "FoodBevOrder", "Post"))
         {
             <input type="hidden" asp-for="OrderID" value="@Model.OrderID" />
-            <input type="submit" onclick="return confirm('Are you sure you would like to mark this order as fulfilled?')" value="Order Fulfilled" />
+            <input type="submit" onclick="return confirm('Are you sure you would like to mark this order as fulfilled?')" value="Mark Order As Fulfilled" />
         }
     </div>
     <br />
@@ -81,7 +89,7 @@
         @using (Html.BeginForm("DeleteFoodBevOrder", "FoodBevOrder", "Post"))
         {
             <input type="hidden" asp-for="OrderID" value="@Model.OrderID" />
-            <input type="submit" onclick="return confirm('Are you sure you would like to delete this order?')" value="Order Deleted" />
+            <input type="submit" onclick="return confirm('Are you sure you would like to delete this order?')" value="Delete Order" />
         }
     </div>
 }
