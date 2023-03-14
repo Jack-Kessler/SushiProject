@@ -10,12 +10,10 @@
 
 <table class="table">
     <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Price</th>
         <th>Category Name</th>
         <th>Ingredients</th>
-
     </tr>
 
     @foreach (var menuItem in @Model)
@@ -53,13 +51,11 @@
         }
         ingredListNoNull.RemoveAt(ingredListNoNull.Count-1);
         <tr>
-            <td><a href=/MenuItem/ViewMenuItem/@menuItem.MenuItemID>@menuItem.MenuItemID</a></td>
-            <td>@menuItem.MenuItemName</td>
+            <td><a href=/MenuItem/ViewMenuItem/@menuItem.MenuItemID>@menuItem.MenuItemName</a></td>
             <td>@menuItem.MenuItemPrice</td>
             <td>@menuItem.MenuItemCategory</td>
             <td>@foreach(var element in ingredListNoNull)
                 {
-                    
                     @element
                 }
             </td>

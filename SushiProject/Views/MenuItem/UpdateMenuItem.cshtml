@@ -6,12 +6,6 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="MenuItem" asp-action="UpdateMenuItemToDatabase" method="post">
         
-@*        <div class="form-group">
-            <label asp-for="MenuItemID" class="col-md-2">Menu Item ID</label>
-            <input asp-for="MenuItemID" type="hidden" value="@Model.MenuItemID" class="form-control" />
-        </div>
-        <br />*@
-        
         <div class="form-group">
             <label asp-for="MenuItemName" class="col-md-2">Menu Item Name</label>
             <input asp-for="MenuItemName" class="form-control" />

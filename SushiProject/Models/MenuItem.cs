@@ -32,10 +32,6 @@ namespace SushiProject.Models
         //[Required(ErrorMessage = "Please enter a valid ingredient")]
         public string? MenuItemIngredientName1 { get; set; }
 
-        //[Required]
-        //[Range(0, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}")]
-        public int? MenuItemIngredientID1 { get; set; }
-
         [Required(ErrorMessage = "Please enter a valid quantity from 1 - 2147483647")]
         [Range(1, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}")]
         public int? MenuItemIngredientQuantity1 { get; set; }
@@ -43,47 +39,38 @@ namespace SushiProject.Models
 
 
         public string? MenuItemIngredientName2 { get; set; }
-        public int? MenuItemIngredientID2 { get; set; }
         public int? MenuItemIngredientQuantity2 { get; set; }
 
 
         public string? MenuItemIngredientName3 { get; set; }
-        public int? MenuItemIngredientID3 { get; set; }
         public int? MenuItemIngredientQuantity3 { get; set; }
 
 
         public string? MenuItemIngredientName4 { get; set; }
-        public int? MenuItemIngredientID4 { get; set; }
         public int? MenuItemIngredientQuantity4 { get; set; }
 
 
         public string? MenuItemIngredientName5 { get; set; }
-        public int? MenuItemIngredientID5 { get; set; }
         public int? MenuItemIngredientQuantity5 { get; set; }
 
 
         public string? MenuItemIngredientName6 { get; set; }
-        public int? MenuItemIngredientID6 { get; set; }
         public int? MenuItemIngredientQuantity6 { get; set; }
 
 
         public string? MenuItemIngredientName7 { get; set; }
-        public int? MenuItemIngredientID7 { get; set; }
         public int? MenuItemIngredientQuantity7 { get; set; }
 
 
         public string? MenuItemIngredientName8 { get; set; }
-        public int? MenuItemIngredientID8 { get; set; }
         public int? MenuItemIngredientQuantity8 { get; set; }
 
 
         public string? MenuItemIngredientName9 { get; set; }
-        public int? MenuItemIngredientID9 { get; set; }
         public int? MenuItemIngredientQuantity9 { get; set; }
 
 
         public string? MenuItemIngredientName10 { get; set; }
-        public int? MenuItemIngredientID10 { get; set; }
         public int? MenuItemIngredientQuantity10 { get; set; }
     }
 }
