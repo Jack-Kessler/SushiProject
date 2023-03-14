@@ -97,7 +97,7 @@ namespace SushiProject.Controllers
 
         public IActionResult FulfillFoodBevOrder (FoodBevOrder foodBevOrder)
         {
-            repo.DeleteFoodBevOrderSQL(foodBevOrder);
+            repo.FulfillFoodBevOrderSQL(foodBevOrder);
             return RedirectToAction("Index");
         }
     }

@@ -33,7 +33,8 @@
     @foreach (var order in @Model)
     {
         <tr>
-            <td><a href=/FoodBevOrder/ViewFoodBevOrder/@order.OrderID>@order.OrderID</a></td>
+            <td><a href=@Url.Action("ViewFoodBevOrder", "FoodBevOrder", new { OrderID = order.OrderID })>@order.OrderID</a></td>
+            @*<td><a href=/FoodBevOrder/ViewFoodBevOrder/@order.OrderID>@order.OrderID</a></td> -- OLD CODE THAT DOESN'T WORK*@
             <td>@order.OrderFulfilled</td>
             <td>@order.EmployeeID</td>
             <td>@order.TableID</td>

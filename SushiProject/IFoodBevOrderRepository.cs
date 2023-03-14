@@ -17,8 +17,7 @@ namespace SushiProject
         public void DeleteFoodBevOrderSQL(FoodBevOrder foodBevOrderToDelete);
         public void FulfillFoodBevOrderSQL(FoodBevOrder foodBevOrderToFulfill);
         public FoodBevOrder CreateShellFoodBevOrder();
-        public decimal CalculateOrderPrice(FoodBevOrder OrderPriceToCalculate);
-
-        //public FoodBevOrder IngredientSetNullValues(FoodBevOrder item);
+        public decimal CalculateOrderPrice(FoodBevOrder orderToCalculate);
+        public decimal GetPerUnitPrice(string menuItem);
     }
 }
