@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Mysqlx.Crud;
 using SushiProject.Models;
 using System.Data;
 
@@ -157,6 +158,7 @@ namespace SushiProject
                     i10 = menuItemToInsert.MenuItemIngredientName10,
                     q10 = menuItemToInsert.MenuItemIngredientQuantity10,
                     });
+            var done = ReorderMenuItemIDNumbersSQL();
         }
         public IEnumerable<MenuItemCategory> GetMenuItemCategoriesSQL()
         {
@@ -176,9 +178,47 @@ namespace SushiProject
 
         public void DeleteMenuItemSQL(MenuItem menuItem)
         {
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMID = @id;", new {id = menuItem.MenuItemID});
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMID = @id;", new { id = menuItem.MenuItemID });
+            var done = ReorderMenuItemIDNumbersSQL();
         }
 
+        public bool ReorderMenuItemIDNumbersSQL()
+        {
+            _conn.Execute("CREATE TABLE table_backup LIKE MENU_ITEMS;");
+            _conn.Execute("INSERT INTO table_backup SELECT * FROM MENU_ITEMS;");
+            _conn.Execute("TRUNCATE TABLE MENU_ITEMS;");
+            _conn.Execute("ALTER TABLE MENU_ITEMS AUTO_INCREMENT = 1;");
+            _conn.Execute("INSERT INTO MENU_ITEMS " +
+                "(" +
+                "MENUITEMNAME, " +
+                "MENUITEMPRICE, " +
+                "MENUITEMCATEGORY, " +
+                "MENUITEMINGREDIENTNAME1, " +
+                "MenuItemIngredientQuantity1," +
+                "MENUITEMINGREDIENTNAME2," +
+                "MenuItemIngredientQuantity2," +
+                "MENUITEMINGREDIENTNAME3," +
+                "MenuItemIngredientQuantity3," +
+                "MENUITEMINGREDIENTNAME4," +
+                "MenuItemIngredientQuantity4," +
+                "MENUITEMINGREDIENTNAME5," +
+                "MenuItemIngredientQuantity5," +
+                "MENUITEMINGREDIENTNAME6," +
+                "MenuItemIngredientQuantity6," +
+                "MENUITEMINGREDIENTNAME7," +
+                "MenuItemIngredientQuantity7," +
+                "MENUITEMINGREDIENTNAME8," +
+                "MenuItemIngredientQuantity8," +
+                "MENUITEMINGREDIENTNAME9," +
+                "MenuItemIngredientQuantity9," +
+                "MENUITEMINGREDIENTNAME10," +
+                "MenuItemIngredientQuantity10" +
+                ") " +
+                "SELECT MenuItemName, MenuItemPrice, MenuItemCategory, MenuItemIngredientName1, MenuItemIngredientQuantity1, MenuItemIngredientName2,  MenuItemIngredientQuantity2, MenuItemIngredientName3, MenuItemIngredientQuantity3, MenuItemIngredientName4, MenuItemIngredientQuantity4, MenuItemIngredientName5, MenuItemIngredientQuantity5, MenuItemIngredientName6, MenuItemIngredientQuantity6, MenuItemIngredientName7, MenuItemIngredientQuantity7, MenuItemIngredientName8, MenuItemIngredientQuantity8, MenuItemIngredientName9, MenuItemIngredientQuantity9, MenuItemIngredientName10, MenuItemIngredientQuantity10 " +
+                "FROM table_backup ORDER BY MenuItemCategory ASC, MenuItemName ASC;");
+            _conn.Execute("DROP TABLE table_backup;");
+            return true;
+        }
         public MenuItem IngredientSetNullValues(MenuItem item)
         {
             if (item.MenuItemIngredientName2 == "Default-NoIngredient" ||
