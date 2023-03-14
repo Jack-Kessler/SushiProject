@@ -31,6 +31,7 @@ namespace SushiProject
 
         public void InsertRestaurantTableSQL(RestaurantTable restaurantTableToInsert)
         {
+            _conn.Execute("ALTER TABLE RESTAURANT_TABLES AUTO_INCREMENT = 1;");
             _conn.Execute("INSERT INTO RESTAURANT_TABLES(RESTAURANTTABLEASSIGNEDEMPLOYEEID) VALUES(null);");
         }
         public IEnumerable<Employee> GetServerListSQL()
@@ -48,6 +49,18 @@ namespace SushiProject
         public void DeleteRestaurantTableSQL(RestaurantTable restaurantTableToDelete)
         {
             _conn.Execute("DELETE FROM RESTAURANT_TABLES WHERE RESTAURANTTABLEID = @id;", new { id = restaurantTableToDelete.RestaurantTableID });
+            var done = ReorderTableIDNumbersSQL();
+        }
+
+        public bool ReorderTableIDNumbersSQL()
+        {
+            _conn.Execute("CREATE TABLE table_backup LIKE RESTAURANT_TABLES;");
+            _conn.Execute("INSERT INTO table_backup SELECT * FROM RESTAURANT_TABLES;");
+            _conn.Execute("TRUNCATE TABLE RESTAURANT_TABLES;");
+            _conn.Execute("ALTER TABLE RESTAURANT_TABLES AUTO_INCREMENT = 1;");
+            _conn.Execute("INSERT INTO RESTAURANT_TABLES (RESTAURANTTABLEASSIGNEDEMPLOYEEID, RESTAURANTTABLEASSIGNEDEMPLOYEEFIRSTNAME, RESTAURANTTABLEASSIGNEDEMPLOYEELASTNAME) SELECT RESTAURANTTABLEASSIGNEDEMPLOYEEID, RESTAURANTTABLEASSIGNEDEMPLOYEEFIRSTNAME, RESTAURANTTABLEASSIGNEDEMPLOYEELASTNAME FROM table_backup;");
+            _conn.Execute("DROP TABLE table_backup;");
+            return true;
         }
     }
 }

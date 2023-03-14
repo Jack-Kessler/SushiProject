@@ -51,16 +51,16 @@ namespace SushiProject
         public void DeleteFoodBevIngredientSQL(FoodBevIngredient ingredient)
         {
             _conn.Execute("DELETE FROM FOOD_BEV_INGREDIENTS WHERE INGREDIENTID = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID1 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID2 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID3 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID4 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID5 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID6 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID7 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID8 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID9 = @id;", new { id = ingredient.IngredientID });
-            _conn.Execute("DELETE FROM MENU_ITEMS WHERE INGREDIENTID10 = @id;", new { id = ingredient.IngredientID });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME1 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME2 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME3 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME4 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME5 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME6 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME7 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME8 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME9 = @id;", new { id = ingredient.IngredientName });
+            _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME10 = @id;", new { id = ingredient.IngredientName });
         }
     }
 }

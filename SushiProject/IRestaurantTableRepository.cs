@@ -11,5 +11,6 @@ namespace SushiProject
         public IEnumerable<Employee> GetServerListSQL();
         public RestaurantTable ServerListForTableSQL();
         public void DeleteRestaurantTableSQL(RestaurantTable restaurantTableToDelete);
+        public bool ReorderTableIDNumbersSQL();
     }
 }
