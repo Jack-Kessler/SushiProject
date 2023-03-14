@@ -49,6 +49,10 @@ namespace SushiProject.Controllers
             foodBevOrderToUpdate.ServerList = order.ServerList;
             foodBevOrderToUpdate.RestaurantTableList = order.RestaurantTableList;
 
+            foodBevOrderToUpdate.DateAndTime = DateTime.Now;
+
+            foodBevOrderToUpdate.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToUpdate);
+
             if (ModelState.IsValid)
             {
                 repo.UpdateFoodBevOrderSQL(foodBevOrderToUpdate);
@@ -76,6 +80,9 @@ namespace SushiProject.Controllers
             foodBevOrderToInsert.ServerList = order.ServerList;
             foodBevOrderToInsert.RestaurantTableList = order.RestaurantTableList;
 
+            foodBevOrderToInsert.DateAndTime = DateTime.Now;
+
+            foodBevOrderToInsert.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToInsert);
 
             if (ModelState.IsValid)
             {

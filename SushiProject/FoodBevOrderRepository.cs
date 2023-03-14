@@ -88,5 +88,16 @@ namespace SushiProject
 
             return order;
         }
+
+        public decimal CalculateOrderPrice(FoodBevOrder OrderPriceToCalculate)
+        {
+            var subTotalPerItemList = new List<decimal>();
+            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem1 * OrderPriceToCalculate.QuantityItem1);
+            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem2 * OrderPriceToCalculate.QuantityItem2);
+            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem3 * OrderPriceToCalculate.QuantityItem3);
+            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem4 * OrderPriceToCalculate.QuantityItem4);
+
+            return subTotalPerItemList.Sum();
+        }
     }
 }
