@@ -14,7 +14,7 @@ namespace SushiProject.Controllers
 
         public IActionResult Index()
         {
-            var orders = repo.GetAllFoodBevOrdersSQL;
+            var orders = repo.GetAllFoodBevOrdersSQL();
             return View(orders);
         }
 
@@ -72,7 +72,7 @@ namespace SushiProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult InsertMenuItemToDatabase(FoodBevOrder foodBevOrderToInsert)
+        public IActionResult InsertFoodBevOrderToDatabase(FoodBevOrder foodBevOrderToInsert)
         {
             var order = repo.CreateShellFoodBevOrder();
 
@@ -83,20 +83,13 @@ namespace SushiProject.Controllers
             foodBevOrderToInsert.DateAndTime = DateTime.Now;
 
             foodBevOrderToInsert.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToInsert);
-
-            if (ModelState.IsValid)
-            {
-                repo.InsertFoodBevOrderSQL(foodBevOrderToInsert);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View("InsertFoodBevOrder", foodBevOrderToInsert);
-            }
+           
+            repo.InsertFoodBevOrderSQL(foodBevOrderToInsert);
+            return RedirectToAction("Index");
         }
 
         
-        public IActionResult DeleteMenuItem(FoodBevOrder foodBevOrder)
+        public IActionResult DeleteFoodBevOrder(FoodBevOrder foodBevOrder)
         {
             repo.DeleteFoodBevOrderSQL(foodBevOrder);
             return RedirectToAction("Index");

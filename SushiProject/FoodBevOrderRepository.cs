@@ -32,7 +32,7 @@ namespace SushiProject
         }   
         public IEnumerable<MenuItem> GetMenuItemListSQL()
         {
-            return _conn.Query<MenuItem>("SELECT * FROM MENU_CATEGORIES;");
+            return _conn.Query<MenuItem>("SELECT * FROM MENU_ITEMS;");
         }
         public FoodBevOrder AssignMenuItemListSQL()
         {
@@ -89,15 +89,31 @@ namespace SushiProject
             return order;
         }
 
-        public decimal CalculateOrderPrice(FoodBevOrder OrderPriceToCalculate)
+        public decimal CalculateOrderPrice(FoodBevOrder orderToCalculate)
         {
             var subTotalPerItemList = new List<decimal>();
-            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem1 * OrderPriceToCalculate.QuantityItem1);
-            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem2 * OrderPriceToCalculate.QuantityItem2);
-            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem3 * OrderPriceToCalculate.QuantityItem3);
-            subTotalPerItemList.Add(OrderPriceToCalculate.PriceItem4 * OrderPriceToCalculate.QuantityItem4);
+            
+            orderToCalculate.PriceItem1 = GetPerUnitPrice(orderToCalculate.MenuItemName1);
+            orderToCalculate.PriceItem2 = GetPerUnitPrice(orderToCalculate.MenuItemName2);
+            orderToCalculate.PriceItem3 = GetPerUnitPrice(orderToCalculate.MenuItemName3);
+            orderToCalculate.PriceItem4 = GetPerUnitPrice(orderToCalculate.MenuItemName4);
+
+            subTotalPerItemList.Add(orderToCalculate.PriceItem1 * orderToCalculate.QuantityItem1);
+            subTotalPerItemList.Add(orderToCalculate.PriceItem2 * orderToCalculate.QuantityItem2);
+            subTotalPerItemList.Add(orderToCalculate.PriceItem3 * orderToCalculate.QuantityItem3);
+            subTotalPerItemList.Add(orderToCalculate.PriceItem4 * orderToCalculate.QuantityItem4);
 
             return subTotalPerItemList.Sum();
+        }
+
+        public decimal GetPerUnitPrice(string menuItem)
+        {
+            if(menuItem != null)
+            {
+                var item = _conn.QuerySingle<MenuItem>("SELECT * FROM MENU_ITEMS WHERE MENUITEMNAME = @name;", new { name = menuItem });
+                return item.MenuItemPrice;
+            }
+            return 0;
         }
     }
 }

@@ -33,6 +33,7 @@
         <div class="form-group">
             <label for="">Menu Item 1</label>
             <select class="form-control" name="MenuItemName1" value="">
+                <option value="" disabled selected>Select Menu Item From List</option>
                 @foreach (var item in Model.MenuItemList)
                 {
                     <option value="@item.MenuItemName">@item.MenuItemName</option>
@@ -53,6 +54,7 @@
         <div class="form-group">
             <label for="">Menu Item 2</label>
             <select class="form-control" name="MenuItemName2" value="">
+                <option value="" selected></option>
                 @foreach (var item in Model.MenuItemList)
                 {
                     <option value="@item.MenuItemName">@item.MenuItemName</option>
@@ -73,6 +75,7 @@
         <div class="form-group">
             <label for="">Menu Item 3</label>
             <select class="form-control" name="MenuItemName3" value="">
+                <option value="" selected></option>
                 @foreach (var item in Model.MenuItemList)
                 {
                     <option value="@item.MenuItemName">@item.MenuItemName</option>
@@ -93,6 +96,7 @@
         <div class="form-group">
             <label for="">Menu Item 4</label>
             <select class="form-control" name="MenuItemName4" value="">
+                <option value="" selected></option>
                 @foreach (var item in Model.MenuItemList)
                 {
                     <option value="@item.MenuItemName">@item.MenuItemName</option>
