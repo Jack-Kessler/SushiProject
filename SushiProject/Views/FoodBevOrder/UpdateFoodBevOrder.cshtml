@@ -1,0 +1,177 @@
+﻿@model FoodBevOrder
+
+<h2>Update Order @Model.OrderID</h2>
+
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="FoodBevOrder" asp-action="UpdateFoodBevOrderToDatabase" method="post">
+
+        @if (User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+        {
+            <div class="form-group">
+                <label asp-for="OrderFulfilled" class="col-md-2">Order Fulfilled</label>
+                <input asp-for="OrderFulfilled" class="form-control" />
+                <span asp-validation-for="OrderFulfilled" class="text-danger"></span>
+            </div>
+            <br />
+        }
+
+        @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+        {
+            <div class="form-group">
+                <label for="">Server ID</label>
+                <select class="form-control" name="EmployeeID" value="">
+                    @foreach (var emp in Model.ServerList)
+                    {
+                        if (emp.EmployeeID == Model.EmployeeID)
+                        {
+                            <option value="@emp.EmployeeID" selected>@emp.EmployeeID<text>&emsp;&emsp;</text>@emp.FirstName<text>&nbsp;</text>@emp.LastName</option>
+                        }
+                        else
+                        {
+                            <option value="@emp.EmployeeID">@emp.EmployeeID<text>&emsp;&emsp;</text>@emp.FirstName<text>&nbsp;</text>@emp.LastName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <br />
+
+
+            <div class="form-group">
+                <label for="">Table</label>
+                <select class="form-control" name="TableID" value="">
+                    @foreach (var table in Model.RestaurantTableList)
+                    {
+                        if (table.RestaurantTableID == Model.TableID)
+                        {
+                            <option value="@table.RestaurantTableID" selected>@table.RestaurantTableID</option>
+                        }
+                        else
+                        {
+                            <option value="@table.RestaurantTableID">@table.RestaurantTableID</option>
+                        }
+                    }
+                </select>
+            </div>
+            <br />
+        }
+
+
+        @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+        {
+            @*Menu Item 1*@
+            <div class="form-group">
+                <label for="">Menu Item 1</label>
+                <select class="form-control" name="MenuItemName1" value="">
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        if (item.MenuItemName == Model.MenuItemName1)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="QuantityItem1" class="col-md-2">Menu Item 1 Quantity</label>
+                <input asp-for="QuantityItem1" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem1" class="text-danger"></span>
+            </div>
+            <br />
+
+
+            @*Menu Item 2*@
+            <div class="form-group">
+                <label for="">Menu Item 2</label>
+                <select class="form-control" name="MenuItemName2" value="">
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        if (item.MenuItemName == Model.MenuItemName2)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="QuantityItem2" class="col-md-2">Menu Item 2 Quantity</label>
+                <input asp-for="QuantityItem2" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem2" class="text-danger"></span>
+            </div>
+            <br />
+
+
+            @*Menu Item 3*@
+            <div class="form-group">
+                <label for="">Menu Item 3</label>
+                <select class="form-control" name="MenuItemName3" value="">
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        if (item.MenuItemName == Model.MenuItemName3)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="QuantityItem3" class="col-md-2">Menu Item 3 Quantity</label>
+                <input asp-for="QuantityItem3" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem3" class="text-danger"></span>
+            </div>
+            <br />
+
+
+            @*Menu Item 4*@
+            <div class="form-group">
+                <label for="">Menu Item 4</label>
+                <select class="form-control" name="MenuItemName4" value="">
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        if (item.MenuItemName == Model.MenuItemName4)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="QuantityItem4" class="col-md-2">Menu Item 4 Quantity</label>
+                <input asp-for="QuantityItem4" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem4" class="text-danger"></span>
+            </div>
+            <br />
+        }
+  
+        <input type="submit" value="Add Menu Item" class="btn btn-primary" />
+    </form>
+</div>
+

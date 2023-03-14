@@ -67,10 +67,26 @@ namespace SushiProject
         {
             _conn.Execute("DELETE FROM FOOD_BEV_ORDERS WHERE ORDERID = @id;", new { id = foodBevOrderToDelete.OrderID });
         }
-        public void FulfillFoodBevOrder(int foodBevOrderID)
+        public void FulfillFoodBevOrderSQL(FoodBevOrder foodBevOrderToFulfill)
         {
             _conn.Execute("UPDATE FOOD_BEV_ORDERS SET ORDERFULFILLED = @fulfilled WHERE ORDERID = @oID;",
-               new { fulfilled = 1, oID = foodBevOrderID });
+               new { fulfilled = 1, oID = foodBevOrderToFulfill.OrderID });
+        }
+
+        public FoodBevOrder CreateShellFoodBevOrder()
+        {
+            FoodBevOrder order = new FoodBevOrder();
+
+            var menuItemList = AssignMenuItemListSQL();
+            order.MenuItemList = menuItemList.MenuItemList;
+
+            var serverList = AssignServerListSQL();
+            order.ServerList = serverList.ServerList;
+
+            var tableList = AssignRestaurantTableListSQL();
+            order.RestaurantTableList = tableList.RestaurantTableList;
+
+            return order;
         }
     }
 }

@@ -15,7 +15,8 @@ namespace SushiProject
         public IEnumerable<RestaurantTable> GetRestaurantTableListSQL();
         public FoodBevOrder AssignRestaurantTableListSQL();
         public void DeleteFoodBevOrderSQL(FoodBevOrder foodBevOrderToDelete);
-        public void FulfillFoodBevOrder(int foodBevOrderID);
+        public void FulfillFoodBevOrderSQL(FoodBevOrder foodBevOrderToFulfill);
+        public FoodBevOrder CreateShellFoodBevOrder();
 
         //public FoodBevOrder IngredientSetNullValues(FoodBevOrder item);
     }

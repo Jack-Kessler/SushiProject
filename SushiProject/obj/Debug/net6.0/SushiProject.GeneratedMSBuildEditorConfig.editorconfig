@@ -36,6 +36,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldkluZ3JlZGllbnRcVmlld0Zvb2RCZXZJbmdyZWRpZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevOrder/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldk9yZGVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevOrder/InsertFoodBevOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldk9yZGVyXEluc2VydEZvb2RCZXZPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevOrder/UpdateFoodBevOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldk9yZGVyXFVwZGF0ZUZvb2RCZXZPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevOrder/ViewFoodBevOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldk9yZGVyXFZpZXdGb29kQmV2T3JkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FoodBevOrder>
+
+<h2>Food and Beverage Orders</h2>
+
+<br />
+<div style="display: block">
+    <a href="/FoodBevOrder/InsertFoodBevOrder/">Create New Order</a>
+</div>
+<br />
+
+<table class="table">
+    <tr>
+        <th>Order ID</th>
+        <th>Order Fulfilled</th>
+        <th>Employee ID</th>
+        <th>Table ID</th>
+        <th>Order Placed</th>
+        <th>Order Sale Amount</th>
+        @*<th>Ordered Menu Item 1</th>
+        <th>Item 1 Quantity</th>
+        <th>Item 1 Price / item</th>
+        <th>Ordered Menu Item 2</th>
+        <th>Item 2 Quantity</th>
+        <th>Item 2 Price / item</th>
+        <th>Ordered Menu Item 3</th>
+        <th>Item 3 Quantity</th>
+        <th>Item 3 Price / item</th>
+        <th>Ordered Menu Item 4</th>
+        <th>Item 4 Quantity</th>
+        <th>Item 4 Price / item</th>*@
+    </tr>
+
+    @foreach (var order in @Model)
+    {
+        <tr>
+            <td><a href=/FoodBevOrder/ViewFoodBevOrder/@order.OrderID>@order.OrderID</a></td>
+            <td>@order.OrderFulfilled</td>
+            <td>@order.EmployeeID</td>
+            <td>@order.TableID</td>
+            <td>@order.DateAndTime</td>
+            <td>@order.OrderSaleAmount</td>
+        </tr>
+    }
+</table>
