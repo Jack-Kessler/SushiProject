@@ -17,9 +17,9 @@ namespace SushiProject
         {
             return _conn.Query<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS;");
         }
-        public FoodBevOrder GetFoodBevOrderSQL(int foodBevOrderID)
+        public FoodBevOrder GetFoodBevOrderSQL(int OrderID)
         {
-            return _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @id;", new { id = foodBevOrderID });
+            return _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @id;", new { id = OrderID });
         }
         public void UpdateFoodBevOrderSQL(FoodBevOrder foodBevOrderToUpdate)
         {

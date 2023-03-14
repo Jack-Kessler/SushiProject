@@ -18,9 +18,9 @@ namespace SushiProject.Controllers
             return View(orders);
         }
 
-        public IActionResult ViewFoodBevOrder(int OrderID) //Matched with index view - can change? -- need to try.
+        public IActionResult ViewFoodBevOrder(int orderID) //Matched with index view - can change? -- need to try.
         {
-            var order = repo.GetFoodBevOrderSQL(OrderID);
+            var order = repo.GetFoodBevOrderSQL(orderID);
             return View(order);
         }
 
@@ -56,7 +56,7 @@ namespace SushiProject.Controllers
             if (ModelState.IsValid)
             {
                 repo.UpdateFoodBevOrderSQL(foodBevOrderToUpdate);
-                return RedirectToAction("ViewFoodBevOrder", new { id = foodBevOrderToUpdate.OrderID});
+                return RedirectToAction("ViewFoodBevOrder", new { orderID = foodBevOrderToUpdate.OrderID });
             }
             else
             {

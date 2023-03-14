@@ -40,21 +40,30 @@
         <td>@Model.QuantityItem1</td>
         <td>@Model.PriceItem1</td>
     </tr>
-    <tr>
-        <td>@Model.MenuItemName2</td>
-        <td>@Model.QuantityItem2</td>
-        <td>@Model.PriceItem2</td>
-    </tr>
-    <tr>
-        <td>@Model.MenuItemName3</td>
-        <td>@Model.QuantityItem3</td>
-        <td>@Model.PriceItem3</td>
-    </tr>
-    <tr>
-        <td>@Model.MenuItemName4</td>
-        <td>@Model.QuantityItem4</td>
-        <td>@Model.PriceItem4</td>
-    </tr>
+    @if(Model.QuantityItem2 != 0)
+    {
+        <tr>
+            <td>@Model.MenuItemName2</td>
+            <td>@Model.QuantityItem2</td>
+            <td>@Model.PriceItem2</td>
+        </tr>
+    }
+    @if (Model.QuantityItem3 != 0)
+    {
+        <tr>
+            <td>@Model.MenuItemName3</td>
+            <td>@Model.QuantityItem3</td>
+            <td>@Model.PriceItem3</td>
+        </tr>
+    }
+    @if (Model.QuantityItem4 != 0)
+    {
+        <tr>
+            <td>@Model.MenuItemName4</td>
+            <td>@Model.QuantityItem4</td>
+            <td>@Model.PriceItem4</td>
+        </tr>
+    }
 </table>
 <br />
 

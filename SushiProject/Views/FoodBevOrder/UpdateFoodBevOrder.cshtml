@@ -6,11 +6,18 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="FoodBevOrder" asp-action="UpdateFoodBevOrderToDatabase" method="post">
 
+        <div class="form-group">
+            @*<label asp-for="OrderID" class="col-md-2"></label>*@
+            <input asp-for="OrderID" type="hidden" class="form-control" />
+            <span asp-validation-for="OrderID" class="text-danger"></span>
+        </div>
+        <br />
+
         @if (User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
         {
             <div class="form-group">
                 <label asp-for="OrderFulfilled" class="col-md-2">Order Fulfilled</label>
-                <input asp-for="OrderFulfilled" class="form-control" />
+                <input asp-for="OrderFulfilled" type="hidden" class="form-control" />
                 <span asp-validation-for="OrderFulfilled" class="text-danger"></span>
             </div>
             <br />
@@ -91,6 +98,10 @@
             <div class="form-group">
                 <label for="">Menu Item 2</label>
                 <select class="form-control" name="MenuItemName2" value="">
+                    @if(Model.MenuItemName2 == null)
+                    {
+                        <option value="" selected></option>
+                    }
                     @foreach (var item in Model.MenuItemList)
                     {
                         if (item.MenuItemName == Model.MenuItemName2)
@@ -119,6 +130,10 @@
             <div class="form-group">
                 <label for="">Menu Item 3</label>
                 <select class="form-control" name="MenuItemName3" value="">
+                    @if (Model.MenuItemName3 == null)
+                    {
+                        <option value="" selected></option>
+                    }
                     @foreach (var item in Model.MenuItemList)
                     {
                         if (item.MenuItemName == Model.MenuItemName3)
@@ -129,7 +144,6 @@
                         {
                             <option value="@item.MenuItemName">@item.MenuItemName</option>
                         }
-
                     }
                 </select>
             </div>
@@ -147,6 +161,10 @@
             <div class="form-group">
                 <label for="">Menu Item 4</label>
                 <select class="form-control" name="MenuItemName4" value="">
+                    @if (Model.MenuItemName4 == null)
+                    {
+                        <option value="" selected></option>
+                    }
                     @foreach (var item in Model.MenuItemList)
                     {
                         if (item.MenuItemName == Model.MenuItemName4)
@@ -171,7 +189,7 @@
             <br />
         }
   
-        <input type="submit" value="Add Menu Item" class="btn btn-primary" />
+        <input type="submit" value="Update Order" class="btn btn-primary" />
     </form>
 </div>
 
