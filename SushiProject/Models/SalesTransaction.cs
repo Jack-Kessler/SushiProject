@@ -3,11 +3,18 @@
     public class SalesTransaction
     {
         public int SalesTransactionID { get; set; }
+        public bool SalesTransactionCompleted { get; set; }
         public decimal FinalTransactionAmount { get; set; }
         public DateTime FinalTransactionDateAndTime { get; set; }
         public int EmployeeID { get; set; }
 
         public int RestaurantTableID { get; set; }
+
+        public IEnumerable<FoodBevOrder>? OrderList { get; set; } //Note this is null
+
+        public IEnumerable<Employee>? ServerList { get; set; } //Note this is null
+
+        public IEnumerable<RestaurantTable>? RestaurantTableList { get; set; } //Note this is null
 
         public int OrderID1 { get; set; }
         public decimal OrderPrice1 { get; set; }
