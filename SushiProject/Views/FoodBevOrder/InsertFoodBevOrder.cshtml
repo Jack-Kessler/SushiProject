@@ -11,28 +11,14 @@
         </div>
 
         <div class="form-group">
-            <label for="">Server ID</label>
-            <select class="form-control" name="EmployeeID" value="">
-                @foreach (var emp in Model.ServerList)
-                {
-                    <option value="@emp.EmployeeID">@emp.FirstName<text>&nbsp;</text>@emp.LastName</option>
-                    @*<text>&emsp;&emsp;</text>*@
-                }
-            </select>
+            <input asp-for="EmployeeID" type="hidden" class="form-control" />
+            <span asp-validation-for="EmployeeID" class="text-danger"></span>
         </div>
-        <br />
 
         <div class="form-group">
-            <label for="">Table</label>
-            <select class="form-control" name="TableID" value="">
-                @foreach (var table in Model.RestaurantTableList)
-                {
-                    <option value="@table.RestaurantTableID">@table.RestaurantTableID</option>
-                }
-            </select>
+            <input asp-for="TableID" type="hidden" class="form-control" />
+            <span asp-validation-for="TableID" class="text-danger"></span>
         </div>
-        <br />
-
 
         @*Menu Item 1*@
         <div class="form-group">
@@ -117,7 +103,7 @@
         </div>
         <br />
 
-        <input type="submit" value="Add Menu Item" class="btn btn-primary" />
+        <input type="submit" onclick="return confirm('Orders can't be changed once they are submitted.<br> Are you sure you would like to submit this order?')" value="Submit Order" class="btn btn-primary" />
     </form>
 </div>
 
