@@ -4,6 +4,7 @@
     {
         public int SalesTransactionID { get; set; }
         public bool SalesTransactionCompleted { get; set; }
+        public bool AllYouCanEat { get; set; }
         public decimal FinalTransactionAmount { get; set; }
         public DateTime FinalTransactionDateAndTime { get; set; }
         public int EmployeeID { get; set; }

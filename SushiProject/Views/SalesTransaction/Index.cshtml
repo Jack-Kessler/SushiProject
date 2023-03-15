@@ -11,6 +11,7 @@
 <table class="table">
     <tr>
         <th>Sales Transaction ID</th>
+        <th>All You Can Eat</th>
         <th>Transaction Completed</th>
         <th>Transaction Total</th>
         <th>Date &amp; Time</th>
@@ -22,6 +23,7 @@
     {
         <tr>
             <td><a href=@Url.Action("ViewSalesTransaction", "SalesTransaction", new { transactionID = tran.SalesTransactionID })>@tran.SalesTransactionID</a></td>
+            <td>@tran.AllYouCanEat</td>
             <td>@tran.SalesTransactionCompleted</td>
             <td>@tran.FinalTransactionAmount</td>
             <td>@tran.FinalTransactionDateAndTime</td>

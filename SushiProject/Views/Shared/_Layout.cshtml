@@ -28,13 +28,16 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="FoodBevIngredient" asp-action="Index">Ingredients</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="RestaurantTable" asp-action="Index">View Tables</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="RestaurantTable" asp-action="Index">Table Assignments</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="FoodBevOrder" asp-action="Index">View Orders</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="FoodBevOrder" asp-action="Index">Orders</a>
                             </li>
+                        }
+                        @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+                        {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="SalesTransaction" asp-action="Index">View Transactions</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SalesTransaction" asp-action="Index">Transactions</a>
                             </li>
                         }
                         <li class="nav-item">
