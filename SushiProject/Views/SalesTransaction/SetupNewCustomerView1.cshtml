@@ -1,0 +1,25 @@
+﻿@model SalesTransaction
+
+<h2>Setup New Customer - Step 1</h2>
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="SalesTransaction" asp-action="SetupNewCustomer2" method="post">
+
+        @if (User.IsInRole("Guest"))
+        {
+            <div class="form-group">
+                <label for="">Server ID</label>
+                <select class="form-control" name="EmployeeID" value="">
+                    @foreach (var emp in Model.ServerList)
+                    {
+                        <option value="@emp.EmployeeID">@emp.EmployeeID<text>&emsp;&emsp;</text>@emp.FirstName<text>&nbsp;</text>@emp.LastName</option>
+                    }
+                </select>
+            </div>
+            <br />
+        }
+
+        <input type="submit" value="Next" class="btn btn-primary" />
+    </form>
+</div>
+

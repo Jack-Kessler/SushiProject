@@ -17,6 +17,10 @@ namespace SushiProject
         {
             return _conn.Query<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS;");
         }
+        public IEnumerable<SalesTransaction> GetInitialSalesTransactionSQL(SalesTransaction transaction)
+        {
+            return _conn.Query<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE EMPLOYEEID = @empID AND RestaurantTableID = @tableID AND SALESTRANSACTIONCOMPLETED = @com;", new { empID = transaction.EmployeeID, tableID = transaction.RestaurantTableID, com = 0 });
+        }
         public SalesTransaction GetSalesTransactionSQL(int salesTransactionID)
         {
             return _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = salesTransactionID });

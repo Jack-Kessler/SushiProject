@@ -1,0 +1,42 @@
+﻿@model SalesTransaction
+
+<h2>Customer Home</h2>
+<br />
+
+<div class="form-group">
+    <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
+    <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
+</div>
+<br />
+
+<div class="text-center">
+    @if (User.IsInRole("Guest"))
+    {
+        <picture>
+            <img src="/Images/SushiGuest.jpg" alt="My logo">
+        </picture>
+        <br />
+        <br />
+        <div class="main-page-guest">
+
+            <input type="button" value="View Menu Items" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
+            <input type="button" value="Place New Order" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
+            <input type="button" value="Pay" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
+
+            @*<button type="button">Chef</button>*@
+
+            @*How to create a button that will go to a different webpage*@
+            @* <button onclick="openTab()">Educative</button>
+
+        <script>
+        function openTab() {
+        window.open("https://www.educative.io/", "_blank");
+        }
+        </script>*@
+
+        </div>
+    }
+  
+</div>
+
+

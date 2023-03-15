@@ -6,6 +6,7 @@ namespace SushiProject
     public interface ISalesTransactionRepository
     {
         public IEnumerable<SalesTransaction> GetAllSalesTransactionsSQL();
+        public IEnumerable<SalesTransaction> GetInitialSalesTransactionSQL(SalesTransaction transaction);
         public SalesTransaction GetSalesTransactionSQL(int salesTransactionID);
         public void UpdateSalesTransactionSQL(SalesTransaction salesTransactionToUpdate);
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert);

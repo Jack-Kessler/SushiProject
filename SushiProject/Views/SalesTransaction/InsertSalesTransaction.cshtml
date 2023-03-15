@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label for="">Order 1</label>
                 <select class="form-control" name="OrderID1" value="">
-                    <option value="" disabled selected>Select Order Number From List</option>
+                    <option value="" selected></option>
                     @foreach (var order in Model.OrderList)
                     {
                         <option value="@order.OrderID">@order.OrderID</option>
