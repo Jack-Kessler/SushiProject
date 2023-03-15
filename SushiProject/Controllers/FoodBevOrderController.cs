@@ -53,15 +53,18 @@ namespace SushiProject.Controllers
 
             foodBevOrderToUpdate.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToUpdate);
 
-            if (ModelState.IsValid)
-            {
-                repo.UpdateFoodBevOrderSQL(foodBevOrderToUpdate);
-                return RedirectToAction("ViewFoodBevOrder", new { orderID = foodBevOrderToUpdate.OrderID });
-            }
-            else
-            {
-                return View("UpdateFoodBevOrder", foodBevOrderToUpdate);
-            }
+            repo.UpdateFoodBevOrderSQL(foodBevOrderToUpdate);
+            return RedirectToAction("ViewFoodBevOrder", new { orderID = foodBevOrderToUpdate.OrderID });
+
+            //if (ModelState.IsValid)
+            //{
+            //    repo.UpdateFoodBevOrderSQL(foodBevOrderToUpdate);
+            //    return RedirectToAction("ViewFoodBevOrder", new { orderID = foodBevOrderToUpdate.OrderID });
+            //}
+            //else
+            //{
+            //    return View("UpdateFoodBevOrder", foodBevOrderToUpdate);
+            //}
         }
 
         public IActionResult InsertFoodBevOrder()
