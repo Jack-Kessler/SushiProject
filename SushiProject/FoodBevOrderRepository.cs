@@ -43,7 +43,7 @@ namespace SushiProject
         }
         public IEnumerable<Employee> GetServerListSQL()
         {
-            return _conn.Query<Employee>("SELECT * FROM EMPLOYEES;");
+            return _conn.Query<Employee>("SELECT * FROM EMPLOYEES WHERE ROLE = 'SERVER';");
         }
         public FoodBevOrder AssignServerListSQL()
         {
