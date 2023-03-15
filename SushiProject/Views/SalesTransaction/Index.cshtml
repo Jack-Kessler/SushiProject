@@ -1,12 +1,15 @@
 ﻿@model IEnumerable<SalesTransaction>
 
 <h2>Sales Transactions</h2>
+<br />
 
-<br />
-<div style="display: block">
-    <a href="/SalesTransaction/InsertSalesTransaction/">Create New Transaction</a>
-</div>
-<br />
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <div style="display: block">
+        <a href="/SalesTransaction/CreateSalesTransaction1/">Create New Transaction</a>
+    </div>
+    <br />
+}
 
 <table class="table">
     <tr>

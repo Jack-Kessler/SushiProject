@@ -134,6 +134,7 @@ namespace SushiProject
         {
             return _conn.Query<Employee>("SELECT * FROM EMPLOYEES WHERE ROLE = 'SERVER';");
         }
+
         public SalesTransaction AssignServerListSQL()
         {
             var serverList = GetServerListSQL();
@@ -141,13 +142,24 @@ namespace SushiProject
             salesTransaction.ServerList = serverList;
             return salesTransaction;
         }
-        public IEnumerable<RestaurantTable> GetRestaurantTableListSQL()
+        public IEnumerable<RestaurantTable> GetAllRestaurantTableListSQL()
         {
             return _conn.Query<RestaurantTable>("SELECT * FROM RESTAURANT_TABLES;");
         }
-        public SalesTransaction AssignRestaurantTableListSQL()
+        public SalesTransaction AssignAllRestaurantTableListSQL()
         {
-            var tableList = GetRestaurantTableListSQL();
+            var tableList = GetAllRestaurantTableListSQL();
+            var salesTransaction = new SalesTransaction();
+            salesTransaction.RestaurantTableList = tableList;
+            return salesTransaction;
+        }
+        public IEnumerable<RestaurantTable> GetRestaurantTableListSQL(int id)
+        {
+            return _conn.Query<RestaurantTable>("SELECT * FROM RESTAURANT_TABLES WHERE RestaurantTableAssignedEmployeeID = @id;", new { id = id });
+        }
+        public SalesTransaction AssignRestaurantTableListSQL(int employeeID)
+        {
+            var tableList = GetRestaurantTableListSQL(employeeID);
             var salesTransaction = new SalesTransaction();
             salesTransaction.RestaurantTableList = tableList;
             return salesTransaction;
@@ -161,6 +173,7 @@ namespace SushiProject
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete WHERE SALESTRANSACTIONID = @id;",
               new { complete = 1, id = salesTransactionToComplete.SalesTransactionID });
         }
+
         public SalesTransaction CreateShellSalesTransaction()
         {
             SalesTransaction sTransaction = new SalesTransaction();
@@ -171,11 +184,12 @@ namespace SushiProject
             var serverList = AssignServerListSQL();
             sTransaction.ServerList = serverList.ServerList;
 
-            var tableList = AssignRestaurantTableListSQL();
+            var tableList = AssignAllRestaurantTableListSQL();
             sTransaction.RestaurantTableList = tableList.RestaurantTableList;
 
             return sTransaction;
         }
+
         public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate)
         {
             var subTotalPerOrderList = new List<decimal>();

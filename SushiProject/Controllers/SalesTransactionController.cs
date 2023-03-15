@@ -59,12 +59,23 @@ namespace SushiProject.Controllers
             return RedirectToAction("ViewSalesTransaction", new { transactionID = transactionToUpdate.SalesTransactionID });
         }
 
-        public IActionResult InsertSalesTransaction()
+        public IActionResult CreateSalesTransaction1()
         {
-            var transaction = repo.CreateShellSalesTransaction();
-
-            return View(transaction);
+            var transaction = repo.AssignServerListSQL();
+            return View("CreateSalesTransaction1View", transaction);
         }
+        public IActionResult CreateSalesTransaction2(SalesTransaction transaction)
+        {
+            var tempTransaction = repo.AssignRestaurantTableListSQL(transaction.EmployeeID);
+            transaction.RestaurantTableList = tempTransaction.RestaurantTableList;
+            return View("CreateSalesTransaction2View", transaction);
+        }
+        //public IActionResult InsertSalesTransaction(SalesTransaction transaction)
+        //{
+        //    var transaction = repo.CreateShellSalesTransaction(id);
+
+        //    return View(transaction);
+        //}
 
         [HttpPost]
         public IActionResult InsertSalesTransactionToDatabase(SalesTransaction transactionToInsert)

@@ -1,0 +1,32 @@
+﻿@model SalesTransaction
+
+<h2>Create New Transaction - Step 2</h2>
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="SalesTransaction" asp-action="InsertSalesTransactionToDatabase" method="post">
+
+        @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+        {
+            <div class="form-group">
+                <label for="">Assign Table</label>
+                <select class="form-control" name="RestaurantTableID" value="">
+                    @foreach (var table in Model.RestaurantTableList)
+                    {
+                        <option value="@table.RestaurantTableID">@table.RestaurantTableID</option>
+                    }
+                </select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label for="AllYouCanEat"> All You Can Eat (Check if applicable)</label>&emsp;
+                <input type="checkbox" id="AllYouCanEat" name="AllYouCanEat" value="AllYouCanEat">
+
+            </div>
+            <br />
+        }
+
+        <input type="submit" value="Create Transaction" class="btn btn-primary" />
+    </form>
+</div>
+

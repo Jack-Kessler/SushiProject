@@ -1,4 +1,5 @@
 ﻿using SushiProject.Models;
+using System.Drawing;
 
 namespace SushiProject
 {
@@ -12,13 +13,14 @@ namespace SushiProject
         public SalesTransaction AssignOrderListSQL();
         public IEnumerable<Employee> GetServerListSQL();
         public SalesTransaction AssignServerListSQL();
-        public IEnumerable<RestaurantTable> GetRestaurantTableListSQL();
-        public SalesTransaction AssignRestaurantTableListSQL();
+        public IEnumerable<RestaurantTable> GetAllRestaurantTableListSQL();
+        public SalesTransaction AssignAllRestaurantTableListSQL();
+        public IEnumerable<RestaurantTable> GetRestaurantTableListSQL(int id);
+        public SalesTransaction AssignRestaurantTableListSQL(int employeeID);
         public void DeleteSalesTransactionSQL(SalesTransaction salesTransactionToDelete);
         public void CompleteSalesTransactionSQL(SalesTransaction salesTransactionToComplete);
         public SalesTransaction CreateShellSalesTransaction();
         public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate);
-
         public decimal GetPerOrderPrice(int orderID);
     }
 }
