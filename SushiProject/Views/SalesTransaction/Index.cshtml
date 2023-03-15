@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SalesTransaction>
+
+<h2>Sales Transactions</h2>
+
+<br />
+<div style="display: block">
+    <a href="/SalesTransaction/InsertSalesTransaction/">Create New Transaction</a>
+</div>
+<br />
+
+<table class="table">
+    <tr>
+        <th>Sales Transaction ID</th>
+        <th>Transaction Completed</th>
+        <th>Transaction Total</th>
+        <th>Date &Aacute; Time</th>
+        <th>Server</th>
+        <th>Table</th>
+    </tr>
+
+    @foreach (var tran in @Model)
+    {
+        <tr>
+            <td><a href=@Url.Action("ViewSalesTransaction", "SalesTransaction", new { transactionID = tran.SalesTransactionID })>@tran.SalesTransactionID</a></td>
+            <td>@tran.SalesTransactionCompleted</td>
+            <td>@tran.FinalTransactionAmount</td>
+            <td>@tran.FinalTransactionDateAndTime</td>
+            <td>@tran.EmployeeID</td>
+            <td>@tran.RestaurantTableID</td>
+        </tr>
+    }
+</table>

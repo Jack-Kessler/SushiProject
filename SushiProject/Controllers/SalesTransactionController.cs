@@ -19,7 +19,7 @@ namespace SushiProject.Controllers
             return View(transactions);
         }
 
-        public IActionResult ViewFoodBevOrder(int transactionID)
+        public IActionResult ViewSalesTransaction(int transactionID)
         {
             var transaction = repo.GetSalesTransactionSQL(transactionID);
             return View(transaction);
