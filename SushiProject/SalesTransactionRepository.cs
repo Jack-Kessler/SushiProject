@@ -19,7 +19,7 @@ namespace SushiProject
         }
         public SalesTransaction GetSalesTransactionSQL(int salesTransactionID)
         {
-            return _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE ORDERID = @id;", new { id = salesTransactionID });
+            return _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = salesTransactionID });
         }
         public void UpdateSalesTransactionSQL(SalesTransaction salesTransactionToUpdate)
         {
@@ -70,7 +70,7 @@ namespace SushiProject
         }
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert)
         {
-            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (FINALTRANSACTIONAMOUNT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1], ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20 VALUES(@amt, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
+            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (FINALTRANSACTIONAMOUNT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@amt, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
            new
            {
                amt = salesTransactionToInsert.FinalTransactionAmount,
@@ -116,8 +116,7 @@ namespace SushiProject
                o19 = salesTransactionToInsert.OrderID19,
                p19 = salesTransactionToInsert.OrderPrice19,
                o20 = salesTransactionToInsert.OrderID20,
-               p20 = salesTransactionToInsert.OrderPrice20,
-               ID = salesTransactionToInsert.SalesTransactionID
+               p20 = salesTransactionToInsert.OrderPrice20
            });
         }
         public IEnumerable<FoodBevOrder> GetOrderListSQL()
@@ -228,7 +227,7 @@ namespace SushiProject
 
         public decimal GetPerOrderPrice(int orderID)
         {
-            if (orderID != null)
+            if (orderID != 0)
             {
                 var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @id;", new { id = orderID });
                 return order.OrderSaleAmount;
