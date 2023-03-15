@@ -110,23 +110,23 @@ namespace SushiProject.Controllers
         public IActionResult SetupNewCustomer1()
         {
             var transaction = repo.AssignServerListSQL();
-            return View("SetupNewCustomerView1", transaction);
+            return View("SetupNewCustomerV1", transaction);
         }
         public IActionResult SetupNewCustomer2(SalesTransaction transaction)
         {
             var tempTransaction = repo.AssignRestaurantTableListSQL(transaction.EmployeeID);
             transaction.RestaurantTableList = tempTransaction.RestaurantTableList;
-            return View("SetupNewCustomerView2", transaction);
+            return View("SetupNewCustomerV2", transaction);
         }
         public IActionResult SetupNewCustomer3(SalesTransaction transaction)
         {
             var tempTransaction = repo.GetInitialSalesTransactionSQL(transaction);
-            return View("SetupNewCustomerView3", tempTransaction);
+            return View("SetupNewCustomerV3", tempTransaction);
         }
         public IActionResult CustomerHomePage(int transactionID)
         {
             var transaction = repo.GetSalesTransactionSQL(transactionID);
-            return View("NewCustomerHomePage");
+            return View("CustomerHomePage", transaction);
         }
     }
 }

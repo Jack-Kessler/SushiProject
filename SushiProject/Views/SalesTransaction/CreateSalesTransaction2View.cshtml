@@ -6,7 +6,7 @@
     <form asp-controller="SalesTransaction" asp-action="InsertSalesTransactionToDatabase" method="post">
 
         <div class="form-group">
-            <label asp-for="EmployeeID" class="col-md-2"></label>
+            @*<label asp-for="EmployeeID" class="col-md-2"></label>*@
             <input asp-for="EmployeeID" type="hidden" class="form-control" />
             <span asp-validation-for="EmployeeID" class="text-danger"></span>
         </div>

@@ -6,6 +6,7 @@ namespace SushiProject.Models
     public class FoodBevOrder
     {
         public int OrderID { get; set; }
+        public int TransactionID { get; set; }
         public bool OrderFulfilled { get; set; }
         public int EmployeeID { get; set; }
         public int TableID { get; set; }

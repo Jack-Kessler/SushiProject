@@ -73,6 +73,17 @@ namespace SushiProject
                new { fulfilled = 1, oID = foodBevOrderToFulfill.OrderID });
         }
 
+        public int GetServerSQL(int transactionID)
+        {
+            var transaction = _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = transactionID });
+            return transaction.EmployeeID;
+        }
+        public int GetRestaurantTableSQL(int transactionID)
+        {
+            var transaction = _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = transactionID });
+            return transaction.RestaurantTableID;
+        }
+
         public FoodBevOrder CreateShellFoodBevOrder()
         {
             FoodBevOrder order = new FoodBevOrder();

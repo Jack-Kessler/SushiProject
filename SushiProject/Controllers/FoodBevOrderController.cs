@@ -67,9 +67,16 @@ namespace SushiProject.Controllers
             //}
         }
 
-        public IActionResult InsertFoodBevOrder()
+        public IActionResult InsertFoodBevOrder(int transactionID)
         {
-           var order = repo.CreateShellFoodBevOrder();
+            FoodBevOrder order = new FoodBevOrder();
+
+            order.TransactionID = transactionID;
+            order.EmployeeID = repo.GetServerSQL(transactionID);
+            order.TableID = repo.GetRestaurantTableSQL(transactionID);
+
+            var menuItemList = repo.AssignMenuItemListSQL();
+            order.MenuItemList = menuItemList.MenuItemList;
 
             return View(order);
         }
@@ -77,18 +84,18 @@ namespace SushiProject.Controllers
         [HttpPost]
         public IActionResult InsertFoodBevOrderToDatabase(FoodBevOrder foodBevOrderToInsert)
         {
-            var order = repo.CreateShellFoodBevOrder();
+            //var order = repo.CreateShellFoodBevOrder();
 
-            foodBevOrderToInsert.MenuItemList = order.MenuItemList;
-            foodBevOrderToInsert.ServerList = order.ServerList;
-            foodBevOrderToInsert.RestaurantTableList = order.RestaurantTableList;
+            //foodBevOrderToInsert.MenuItemList = order.MenuItemList;
+            //foodBevOrderToInsert.ServerList = order.ServerList;
+            //foodBevOrderToInsert.RestaurantTableList = order.RestaurantTableList;
 
             foodBevOrderToInsert.DateAndTime = DateTime.Now;
 
             foodBevOrderToInsert.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToInsert);
            
             repo.InsertFoodBevOrderSQL(foodBevOrderToInsert);
-            return RedirectToAction("Index");
+            return RedirectToAction("CustomerHomePage", "SalesTransaction", new { transactionID = foodBevOrderToInsert.TransactionID }); //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
         }
 
         

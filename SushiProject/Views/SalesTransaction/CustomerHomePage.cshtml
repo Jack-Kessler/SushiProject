@@ -20,7 +20,7 @@
         <div class="main-page-guest">
 
             <input type="button" value="View Menu Items" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
-            <input type="button" value="Place New Order" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
+            <input type="button" value="Place New Order" onclick="@("window.location.href='" + @Url.Action("InsertFoodBev", "FoodBevOrder", Model.SalesTransactionID) + "'");" />
             <input type="button" value="Pay" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
 
             @*<button type="button">Chef</button>*@
