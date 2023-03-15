@@ -5,6 +5,7 @@ namespace SushiProject.Models
     public class MenuItem
     {
         public int MenuItemID { get; set; }
+        public int TransactionID { get; set; }
 
         
         [Required(ErrorMessage = "Please enter a valid menu item name")]
