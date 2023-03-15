@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label for="">Table</label>
-                <select class="form-control" name="TableID" value="">
+                <select class="form-control" name="RestaurantTableID" value="">
                     @foreach (var table in Model.RestaurantTableList)
                     {
                         if (table.RestaurantTableID == Model.RestaurantTableID)
@@ -85,7 +85,7 @@
             <div class="form-group">
                 <label for="">Order 2</label>
                 <select class="form-control" name="OrderID2" value="">
-                    @if (Model.OrderID2 == null)
+                    @if (Model.OrderID2 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -109,7 +109,7 @@
             <div class="form-group">
                 <label for="">Order 3</label>
                 <select class="form-control" name="OrderID3" value="">
-                    @if (Model.OrderID3 == null)
+                    @if (Model.OrderID3 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -133,7 +133,7 @@
             <div class="form-group">
                 <label for="">Order 4</label>
                 <select class="form-control" name="OrderID4" value="">
-                    @if (Model.OrderID4 == null)
+                    @if (Model.OrderID4 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -157,7 +157,7 @@
             <div class="form-group">
                 <label for="">Order 5</label>
                 <select class="form-control" name="OrderID5" value="">
-                    @if (Model.OrderID5 == null)
+                    @if (Model.OrderID5 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -181,7 +181,7 @@
             <div class="form-group">
                 <label for="">Order 6</label>
                 <select class="form-control" name="OrderID6" value="">
-                    @if (Model.OrderID6 == null)
+                    @if (Model.OrderID6 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -205,7 +205,7 @@
             <div class="form-group">
                 <label for="">Order 7</label>
                 <select class="form-control" name="OrderID7" value="">
-                    @if (Model.OrderID7 == null)
+                    @if (Model.OrderID7 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -229,7 +229,7 @@
             <div class="form-group">
                 <label for="">Order 8</label>
                 <select class="form-control" name="OrderID8" value="">
-                    @if (Model.OrderID8 == null)
+                    @if (Model.OrderID8 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -253,7 +253,7 @@
             <div class="form-group">
                 <label for="">Order 9</label>
                 <select class="form-control" name="OrderID9" value="">
-                    @if (Model.OrderID9 == null)
+                    @if (Model.OrderID9 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -277,7 +277,7 @@
             <div class="form-group">
                 <label for="">Order 10</label>
                 <select class="form-control" name="OrderID10" value="">
-                    @if (Model.OrderID10 == null)
+                    @if (Model.OrderID10 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -301,7 +301,7 @@
             <div class="form-group">
                 <label for="">Order 11</label>
                 <select class="form-control" name="OrderID11" value="">
-                    @if (Model.OrderID11 == null)
+                    @if (Model.OrderID11 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -325,7 +325,7 @@
             <div class="form-group">
                 <label for="">Order 12</label>
                 <select class="form-control" name="OrderID12" value="">
-                    @if (Model.OrderID12 == null)
+                    @if (Model.OrderID12 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -349,7 +349,7 @@
             <div class="form-group">
                 <label for="">Order 13</label>
                 <select class="form-control" name="OrderID13" value="">
-                    @if (Model.OrderID13 == null)
+                    @if (Model.OrderID13 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -373,13 +373,13 @@
             <div class="form-group">
                 <label for="">Order 14</label>
                 <select class="form-control" name="OrderID14" value="">
-                    @if (Model.OrderID14 == null)
+                    @if (Model.OrderID14 == 0)
                     {
                         <option value="" selected></option>
                     }
                     @foreach (var order in Model.OrderList)
                     {
-                        if (order.OrderID == Model.OrderID1)
+                        if (order.OrderID == Model.OrderID14)
                         {
                             <option value="@order.OrderID" selected>@order.OrderID</option>
                         }
@@ -397,7 +397,7 @@
             <div class="form-group">
                 <label for="">Order 15</label>
                 <select class="form-control" name="OrderID15" value="">
-                    @if (Model.OrderID15 == null)
+                    @if (Model.OrderID15 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -421,7 +421,7 @@
             <div class="form-group">
                 <label for="">Order 16</label>
                 <select class="form-control" name="OrderID16" value="">
-                    @if (Model.OrderID16 == null)
+                    @if (Model.OrderID16 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -446,7 +446,7 @@
             <div class="form-group">
                 <label for="">Order 17</label>
                 <select class="form-control" name="OrderID17" value="">
-                    @if (Model.OrderID17 == null)
+                    @if (Model.OrderID17 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -470,7 +470,7 @@
             <div class="form-group">
                 <label for="">Order 18</label>
                 <select class="form-control" name="OrderID18" value="">
-                    @if (Model.OrderID18 == null)
+                    @if (Model.OrderID18 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -494,7 +494,7 @@
             <div class="form-group">
                 <label for="">Order 19</label>
                 <select class="form-control" name="OrderID19" value="">
-                    @if (Model.OrderID19 == null)
+                    @if (Model.OrderID19 == 0)
                     {
                         <option value="" selected></option>
                     }
@@ -518,7 +518,7 @@
             <div class="form-group">
                 <label for="">Order 20</label>
                 <select class="form-control" name="OrderID20" value="">
-                    @if (Model.OrderID20 == null)
+                    @if (Model.OrderID20 == 0)
                     {
                         <option value="" selected></option>
                     }

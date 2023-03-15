@@ -7,7 +7,7 @@
     <tr>
         <th>Transaction Completed</th>
         <th>Transaction Total</th>
-        <th>Date &Aacute; Time</th>
+        <th>Date &amp; Time</th>
         @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
         {
             <th>Server</th>
@@ -34,7 +34,7 @@
         <th>Order Price</th>
     </tr>
     <tr>
-        <td>@Model.OrderID1</td>
+        <td><a href=@Url.Action("ViewFoodBevOrder", "FoodBevOrder", new { orderID = Model.OrderID1 })>@Model.OrderID1</a></td>
         <td>@Model.OrderPrice1</td>
     </tr>
     @if (Model.OrderPrice2 != 0)
