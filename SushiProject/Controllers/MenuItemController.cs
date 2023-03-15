@@ -21,12 +21,13 @@ namespace SushiProject.Controllers
         }
         public IActionResult ViewAllMenuItems(int transactionID) //For Customer viewing all menu items
         {
-            var items = repo.GetAllMenuItemsSQL();
-            foreach (var item in items)
-            {
-                item.TransactionID = transactionID;
-            }
-            return View("CustomerMenuItems", items);
+            var allMenuItems = repo.GetAllMenuItemsSQL();
+            var menuItem = new MenuItem();
+
+            menuItem.AllMenuItems = allMenuItems;
+            menuItem.TransactionID = transactionID;
+
+            return View("CustomerMenuItems", menuItem);
             //return RedirectToAction("CustomerHomePage", "MenuItem", new { transactionID = foodBevOrderToInsert.TransactionID }); //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
         }
         public IActionResult ViewMenuItem(int id)
