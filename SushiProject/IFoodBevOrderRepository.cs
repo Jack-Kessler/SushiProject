@@ -8,6 +8,9 @@ namespace SushiProject
         public FoodBevOrder GetFoodBevOrderSQL(int foodBevOrderID);
         public void UpdateFoodBevOrderSQL(FoodBevOrder foodBevOrderToUpdate);
         public void InsertFoodBevOrderSQL(FoodBevOrder foodBevOrderToInsert);
+        public int RetrieveOrderNumSQL(int transactionID, DateTime dateAndTime);
+        public int FindFirstNullOrderSlotSQL(int transactionID);
+        public void ApplyOrderToTransactionSQL(FoodBevOrder foodBevOrderToInsert, int nullOrderSlot);
         public IEnumerable<MenuItem> GetMenuItemListSQL();
         public FoodBevOrder AssignMenuItemListSQL();
         public IEnumerable<Employee> GetServerListSQL();

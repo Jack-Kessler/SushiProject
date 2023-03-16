@@ -84,18 +84,21 @@ namespace SushiProject.Controllers
         [HttpPost]
         public IActionResult InsertFoodBevOrderToDatabase(FoodBevOrder foodBevOrderToInsert)
         {
-            //var order = repo.CreateShellFoodBevOrder();
-
-            //foodBevOrderToInsert.MenuItemList = order.MenuItemList;
-            //foodBevOrderToInsert.ServerList = order.ServerList;
-            //foodBevOrderToInsert.RestaurantTableList = order.RestaurantTableList;
-
             foodBevOrderToInsert.DateAndTime = DateTime.Now;
 
             foodBevOrderToInsert.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToInsert);
            
             repo.InsertFoodBevOrderSQL(foodBevOrderToInsert);
-            return RedirectToAction("CustomerHomePage", "SalesTransaction", new { transactionID = foodBevOrderToInsert.TransactionID }); //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
+
+            int orderNum = repo.RetrieveOrderNumSQL(foodBevOrderToInsert.TransactionID, foodBevOrderToInsert.DateAndTime);
+            foodBevOrderToInsert.OrderID = orderNum;
+
+            int nullOrderSlot = repo.FindFirstNullOrderSlotSQL(foodBevOrderToInsert.TransactionID);
+
+            repo.ApplyOrderToTransactionSQL(foodBevOrderToInsert, nullOrderSlot);
+
+            return RedirectToAction("CustomerHomePage", "SalesTransaction", new { transactionID = foodBevOrderToInsert.TransactionID }); 
+            //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
         }
 
         
