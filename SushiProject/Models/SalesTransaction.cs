@@ -1,4 +1,6 @@
-﻿namespace SushiProject.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SushiProject.Models
 {
     public class SalesTransaction
     {
@@ -6,6 +8,11 @@
         public bool SalesTransactionCompleted { get; set; }
         public bool AllYouCanEat { get; set; }
         public decimal FinalTransactionAmount { get; set; }
+
+        [Required(ErrorMessage = "Please select a payment method")]
+        [StringLength(50)]
+        public string PaymentMethod { get; set; }
+        public IEnumerable<PaymentMethodCategory> PaymentMethodsList { get; set; }
         public DateTime FinalTransactionDateAndTime { get; set; }
         public int EmployeeID { get; set; }
 

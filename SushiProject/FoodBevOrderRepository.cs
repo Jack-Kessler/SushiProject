@@ -8,7 +8,6 @@ namespace SushiProject
     public class FoodBevOrderRepository : IFoodBevOrderRepository
     {
         private readonly IDbConnection _conn;
-
         public FoodBevOrderRepository(IDbConnection conn)
         {
             _conn = conn;
@@ -174,7 +173,6 @@ namespace SushiProject
             _conn.Execute("UPDATE FOOD_BEV_ORDERS SET ORDERFULFILLED = @fulfilled WHERE ORDERID = @oID;",
                new { fulfilled = 1, oID = foodBevOrderToFulfill.OrderID });
         }
-
         public int GetServerSQL(int transactionID)
         {
             var transaction = _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = transactionID });
@@ -185,7 +183,6 @@ namespace SushiProject
             var transaction = _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = transactionID });
             return transaction.RestaurantTableID;
         }
-
         public FoodBevOrder CreateShellFoodBevOrderSQL()
         {
             FoodBevOrder order = new FoodBevOrder();
@@ -201,7 +198,6 @@ namespace SushiProject
 
             return order;
         }
-
         public decimal CalculateOrderPriceSQL(FoodBevOrder orderToCalculate)
         {
             var subTotalPerItemList = new List<decimal>();
@@ -218,7 +214,6 @@ namespace SushiProject
 
             return subTotalPerItemList.Sum();
         }
-
         public decimal GetPerUnitPriceSQL(string menuItem)
         {
             if(menuItem != null)

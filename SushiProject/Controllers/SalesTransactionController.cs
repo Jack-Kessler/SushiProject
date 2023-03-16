@@ -93,7 +93,7 @@ namespace SushiProject.Controllers
         public IActionResult CompleteSalesTransaction(SalesTransaction transaction)
         {
             repo.CompleteSalesTransactionSQL(transaction);
-            return RedirectToAction("Index");
+            return View("CustomerPaymentReceipt", transaction);
         }
 
         public IActionResult SetupNewCustomer1()
@@ -112,10 +112,21 @@ namespace SushiProject.Controllers
             var tempTransaction = repo.GetInitialSalesTransactionSQL(transaction);
             return View("SetupNewCustomerV3", tempTransaction);
         }
+        public IActionResult PayFinalBill(int transactionID)
+        {
+            repo.CalculateFinalTransactionAmountSQL(transactionID);
+            var transaction = repo.GetSalesTransactionSQL(transactionID);
+            return View("CustomerPayBill", transaction);
+        }
         public IActionResult CustomerHomePage(int transactionID)
         {
             var transaction = repo.GetSalesTransactionSQL(transactionID);
             return View("CustomerHomePage", transaction);
+        }
+        public IActionResult CloseOutCustomer(int transactionID)
+        {
+            var transaction = repo.GetSalesTransactionSQL(transactionID);
+            return View("LogoutCustomer", transaction);
         }
     }
 }

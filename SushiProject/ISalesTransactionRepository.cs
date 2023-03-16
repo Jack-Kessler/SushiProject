@@ -23,5 +23,6 @@ namespace SushiProject
         public SalesTransaction CreateShellSalesTransaction();
         public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate);
         public decimal GetPerOrderPrice(int orderID);
+        public void CalculateFinalTransactionAmountSQL(int transactionID);
     }
 }

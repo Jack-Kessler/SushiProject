@@ -18,26 +18,12 @@
         <br />
         <br />
         <div class="main-page-guest">
-
             <input type="button" value="View Menu Items" onclick="@("window.location.href='" + @Url.Action("ViewAllMenuItems", "MenuItem", new {@transactionID = Model.SalesTransactionID}) + "'");" />
             <input type="button" value="Place New Order" onclick="@("window.location.href='" + @Url.Action("InsertFoodBevOrder", "FoodBevOrder", new {@transactionID = Model.SalesTransactionID}) + "'");" />
             <input type="button" value="View My Orders" onclick="@("window.location.href='" + @Url.Action("ViewCustomerFoodBevOrder", "FoodBevOrder", new {@transactionID = Model.SalesTransactionID}) + "'");" />
-            <input type="button" value="Pay" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
-
-            @*<button type="button">Chef</button>*@
-
-            @*How to create a button that will go to a different webpage*@
-            @* <button onclick="openTab()">Educative</button>
-
-        <script>
-        function openTab() {
-        window.open("https://www.educative.io/", "_blank");
-        }
-        </script>*@
-
+            <input type="button" value="Pay" onclick="@("window.location.href='" + @Url.Action("PayFinalBill", "SalesTransaction") + "'");" />
         </div>
     }
-  
 </div>
 
 

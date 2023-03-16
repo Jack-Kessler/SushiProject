@@ -138,7 +138,6 @@ namespace SushiProject
         {
             return _conn.Query<Employee>("SELECT * FROM EMPLOYEES WHERE ROLE = 'SERVER';");
         }
-
         public SalesTransaction AssignServerListSQL()
         {
             var serverList = GetServerListSQL();
@@ -174,10 +173,10 @@ namespace SushiProject
         }
         public void CompleteSalesTransactionSQL(SalesTransaction salesTransactionToComplete)
         {
-            _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete WHERE SALESTRANSACTIONID = @id;",
-              new { complete = 1, id = salesTransactionToComplete.SalesTransactionID });
+            salesTransactionToComplete.FinalTransactionDateAndTime = DateTime.Now;
+            _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, PAYMENTMETHOD = @pay, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
+            new { complete = 1, pay =salesTransactionToComplete.PaymentMethod, date =salesTransactionToComplete.FinalTransactionDateAndTime, id = salesTransactionToComplete.SalesTransactionID });
         }
-
         public SalesTransaction CreateShellSalesTransaction()
         {
             SalesTransaction sTransaction = new SalesTransaction();
@@ -193,7 +192,6 @@ namespace SushiProject
 
             return sTransaction;
         }
-
         public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate)
         {
             var subTotalPerOrderList = new List<decimal>();
@@ -242,7 +240,6 @@ namespace SushiProject
 
             return subTotalPerOrderList.Sum();
         }
-
         public decimal GetPerOrderPrice(int orderID)
         {
             if (orderID != 0)
@@ -251,6 +248,10 @@ namespace SushiProject
                 return order.OrderSaleAmount;
             }
             return 0;
+        }
+        public void CalculateFinalTransactionAmountSQL(int transactionID)
+        {
+            _conn.Execute("UPDATE SALES_TRANSACTIONS SET FINALTRANSACTIONAMOUNT = ORDERPRICE1 + ORDERPRICE2 + ORDERPRICE3 + ORDERPRICE4 + ORDERPRICE5 + ORDERPRICE6 + ORDERPRICE7 + ORDERPRICE8 + ORDERPRICE9 + ORDERPRICE10 + ORDERPRICE11 + ORDERPRICE12 + ORDERPRICE13 + ORDERPRICE14 + ORDERPRICE15 + ORDERPRICE16 + ORDERPRICE17 + ORDERPRICE18 + ORDERPRICE19 + ORDERPRICE20 WHERE SALESTRANSACTIONID = @ID;", new {ID = transactionID});
         }
     }
 }
