@@ -37,7 +37,7 @@
         <th>Order Price</th>
     </tr>
     <tr>
-        <td><@Model.OrderID1</td>
+        <td>@Model.OrderID1</td>
         <td>@Model.OrderPrice1</td>
     </tr>
     @if (Model.OrderPrice2 != 0)
@@ -176,33 +176,33 @@
 </table>
 <br />
 
-<div class="form-group">
-    <label for="">Payment Method</label>
-    <select class="form-control" name="PaymentMethod" value="">
-        <option value="Default" disabled selected>Please Select a Payment Method</option>
-        @foreach (var method in Model.PaymentMethodsList)
-        {
-            <option value="@method.PaymentMethodCategoryName">@method.PaymentMethodCategoryName</option>
-        }
-    </select>
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="SalesTransaction" asp-action="CompleteSalesTransaction" method="post">
+
+        <div class="form-group">
+            <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
+            <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label for="">Payment Method</label>
+            <select class="form-control" name="PaymentMethod" value="">
+                <option value="Default" disabled selected>Please Select a Payment Method</option>
+                @foreach (var method in Model.PaymentMethodsList)
+                {
+                    <option value="@method.PaymentMethodCategoryName">@method.PaymentMethodCategoryName</option>
+                }
+            </select>
+        </div>
+        <br />
+
+        <input type="submit" value="Submit Payment" class="btn btn-primary" />
+    </form>
 </div>
 <br />
 
-<div style="display: block">
-    @using (Html.BeginForm("CompleteSalesTransaction", "SalesTransaction", "Post"))
-    {
-        <input type="hidden" asp-for="SalesTransactionID" value="@Model.SalesTransactionID" />
-        <input type="submit" onclick="return confirm('Are you sure you would like to submit this payment?')" value="Submit Payment" />
-    }
-</div>
-<br />
-
-<div style="display: block">
-    @using (Html.BeginForm("CustomerHomePage", "SalesTransaction", "Post"))
-    {
-        <input type="hidden" asp-for="SalesTransactionID" value="@Model.SalesTransactionID" />
-        <input type="submit" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
-    }
-</div>
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("CustomerHomePage", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />
 
 

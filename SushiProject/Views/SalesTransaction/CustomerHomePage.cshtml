@@ -21,7 +21,7 @@
             <input type="button" value="View Menu Items" onclick="@("window.location.href='" + @Url.Action("ViewAllMenuItems", "MenuItem", new {@transactionID = Model.SalesTransactionID}) + "'");" />
             <input type="button" value="Place New Order" onclick="@("window.location.href='" + @Url.Action("InsertFoodBevOrder", "FoodBevOrder", new {@transactionID = Model.SalesTransactionID}) + "'");" />
             <input type="button" value="View My Orders" onclick="@("window.location.href='" + @Url.Action("ViewCustomerFoodBevOrder", "FoodBevOrder", new {@transactionID = Model.SalesTransactionID}) + "'");" />
-            <input type="button" value="Pay" onclick="@("window.location.href='" + @Url.Action("PayFinalBill", "SalesTransaction") + "'");" />
+            <input type="button" value="Pay" onclick="@("window.location.href='" + @Url.Action("PayFinalBill", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />
         </div>
     }
 </div>

@@ -1,8 +1,12 @@
 ﻿@model SalesTransaction
 
-<h2>Payment Receipt</h2>
+<h2>LogOut Screen</h2>
 <br />
-
+<br />
+@if (Model.PasswordIncorrect == true)
+{
+    <h3>Password Incorrect: Please Try Again</h3>
+}
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="SalesTransaction" asp-action="CheckPassword" method="post">
@@ -14,7 +18,7 @@
         <br />
 
         <div class="form-group">
-            <label asp-for="CustomerLogoutPassword" class="col-md-2">Logoff Password</label>
+            <label asp-for="CustomerLogoutPassword" class="">Logoff Password</label>
             <input asp-for="CustomerLogoutPassword" type="password" placeholder="Password" class="form-control" />
             <span asp-validation-for="CustomerLogoutPassword" class="text-danger"></span>
         </div>
@@ -23,11 +27,7 @@
         <input type="submit" value="Logout" class="btn btn-primary" />
     </form>
 </div>
+<br />
+<br />
 
-<div style="display: block">
-    @using (Html.BeginForm("ShowFinalReceipt", "SalesTransaction", "Post"))
-    {
-        <input type="hidden" asp-for="SalesTransactionID" value="@Model.SalesTransactionID" />
-        <input type="submit" value="Back" />
-    }
-</div>
+<input type="button" value="Return" onclick="@("window.location.href='" + @Url.Action("ShowFinalReceipt", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />

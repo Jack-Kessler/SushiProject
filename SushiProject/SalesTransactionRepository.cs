@@ -260,5 +260,10 @@ namespace SushiProject
         {
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET FINALTRANSACTIONAMOUNT = ORDERPRICE1 + ORDERPRICE2 + ORDERPRICE3 + ORDERPRICE4 + ORDERPRICE5 + ORDERPRICE6 + ORDERPRICE7 + ORDERPRICE8 + ORDERPRICE9 + ORDERPRICE10 + ORDERPRICE11 + ORDERPRICE12 + ORDERPRICE13 + ORDERPRICE14 + ORDERPRICE15 + ORDERPRICE16 + ORDERPRICE17 + ORDERPRICE18 + ORDERPRICE19 + ORDERPRICE20 WHERE SALESTRANSACTIONID = @ID;", new {ID = transactionID});
         }
+        public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL()
+        {
+            var paymentMethodsList = _conn.Query<PaymentMethodCategory>("SELECT * FROM PAYMENT_METHOD_CATEGORIES");
+            return paymentMethodsList;
+        }
     }
 }

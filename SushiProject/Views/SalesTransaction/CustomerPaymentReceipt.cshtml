@@ -11,7 +11,7 @@
 
 <table class="table">
     <tr>
-        <th>Transaction ID/th>
+        <th>Transaction ID</th>
         <th>Total</th>
         <th>All You Can Eat</th>
         <th>PaymentMethod</th>
@@ -38,7 +38,7 @@
         <th>Order Price</th>
     </tr>
     <tr>
-        <td><@Model.OrderID1</td>
+        <td>@Model.OrderID1</td>
         <td>@Model.OrderPrice1</td>
     </tr>
     @if (Model.OrderPrice2 != 0)
@@ -186,12 +186,6 @@
 <p>(Employee Only)</p>
 <br />
 
-<div style="display: block">
-    @using (Html.BeginForm("CloseOutCustomer", "SalesTransaction", "Post"))
-    {
-        <input type="hidden" asp-for="SalesTransactionID" value="@Model.SalesTransactionID" />
-        <input type="submit" value="Return to Main Screen" />
-    }
-</div>
+<input type="button" value="Logoff Customer" onclick="@("window.location.href='" + @Url.Action("CloseOutCustomer", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />
 
 

@@ -112,12 +112,15 @@ namespace SushiProject.Controllers
         {
             repo.CalculateFinalTransactionAmountSQL(transactionID);
             var transaction = repo.GetSalesTransactionSQL(transactionID);
+            var paymentMethodsList = repo.GetPaymentMethodsListSQL();
+            transaction.PaymentMethodsList = paymentMethodsList;
             return View("CustomerPayBill", transaction);
         }
         public IActionResult CompleteSalesTransaction(SalesTransaction transaction)
         {
             repo.CompleteSalesTransactionSQL(transaction);
-            return View("CustomerPaymentReceipt", transaction);
+            var fullTransaction = repo.GetSalesTransactionSQL(transaction.SalesTransactionID);
+            return View("CustomerPaymentReceipt", fullTransaction);
         }
         public IActionResult CloseOutCustomer(int transactionID)
         {
@@ -134,9 +137,13 @@ namespace SushiProject.Controllers
             bool success = repo.CheckCustomerLogoutPassword(transaction.CustomerLogoutPassword);
             if(success == true)
             {
-                return View("Index","Home");
+                return View("~/Views/Home/Index.cshtml");
             }
-            return View("LogoutCustomer", transaction);
+            else
+            {
+                transaction.PasswordIncorrect = true;
+                return View("LogoutCustomer", transaction);
+            }
         }
     }
 }
