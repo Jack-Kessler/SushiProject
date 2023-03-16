@@ -20,6 +20,7 @@ namespace SushiProject
         public SalesTransaction AssignRestaurantTableListSQL(int employeeID);
         public void DeleteSalesTransactionSQL(SalesTransaction salesTransactionToDelete);
         public void CompleteSalesTransactionSQL(SalesTransaction salesTransactionToComplete);
+        public bool CheckCustomerLogoutPassword(string enteredPass);
         public SalesTransaction CreateShellSalesTransaction();
         public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate);
         public decimal GetPerOrderPrice(int orderID);

@@ -82,20 +82,11 @@ namespace SushiProject.Controllers
             repo.InsertSalesTransactionSQL(transactionToInsert);
             return RedirectToAction("Index");
         }
-
-
         public IActionResult DeleteSalesTransaction(SalesTransaction transaction)
         {
             repo.DeleteSalesTransactionSQL(transaction);
             return RedirectToAction("Index");
         }
-
-        public IActionResult CompleteSalesTransaction(SalesTransaction transaction)
-        {
-            repo.CompleteSalesTransactionSQL(transaction);
-            return View("CustomerPaymentReceipt", transaction);
-        }
-
         public IActionResult SetupNewCustomer1()
         {
             var transaction = repo.AssignServerListSQL();
@@ -112,20 +103,39 @@ namespace SushiProject.Controllers
             var tempTransaction = repo.GetInitialSalesTransactionSQL(transaction);
             return View("SetupNewCustomerV3", tempTransaction);
         }
+        public IActionResult CustomerHomePage(int transactionID)
+        {
+            var transaction = repo.GetSalesTransactionSQL(transactionID);
+            return View("CustomerHomePage", transaction);
+        }
         public IActionResult PayFinalBill(int transactionID)
         {
             repo.CalculateFinalTransactionAmountSQL(transactionID);
             var transaction = repo.GetSalesTransactionSQL(transactionID);
             return View("CustomerPayBill", transaction);
         }
-        public IActionResult CustomerHomePage(int transactionID)
+        public IActionResult CompleteSalesTransaction(SalesTransaction transaction)
         {
-            var transaction = repo.GetSalesTransactionSQL(transactionID);
-            return View("CustomerHomePage", transaction);
+            repo.CompleteSalesTransactionSQL(transaction);
+            return View("CustomerPaymentReceipt", transaction);
         }
         public IActionResult CloseOutCustomer(int transactionID)
         {
             var transaction = repo.GetSalesTransactionSQL(transactionID);
+            return View("LogoutCustomer", transaction);
+        }
+        public IActionResult ShowFinalReceipt(int transactionID)
+        {
+            var transaction = repo.GetSalesTransactionSQL(transactionID);
+            return View("CustomerPaymentReceipt", transaction);
+        }
+        public IActionResult CheckPassword (SalesTransaction transaction)
+        {
+            bool success = repo.CheckCustomerLogoutPassword(transaction.CustomerLogoutPassword);
+            if(success == true)
+            {
+                return View("Index","Home");
+            }
             return View("LogoutCustomer", transaction);
         }
     }

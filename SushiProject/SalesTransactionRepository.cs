@@ -2,6 +2,7 @@
 using Mysqlx.Crud;
 using SushiProject.Models;
 using System.Data;
+using System.Transactions;
 
 namespace SushiProject
 {
@@ -176,6 +177,12 @@ namespace SushiProject
             salesTransactionToComplete.FinalTransactionDateAndTime = DateTime.Now;
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, PAYMENTMETHOD = @pay, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
             new { complete = 1, pay =salesTransactionToComplete.PaymentMethod, date =salesTransactionToComplete.FinalTransactionDateAndTime, id = salesTransactionToComplete.SalesTransactionID });
+        }
+        public bool CheckCustomerLogoutPassword(string enteredPass)
+        {
+            var actualPass = _conn.QuerySingle<CustomerLogoutPassword>("SELECT * FROM CUSTOMER_LOGOUT_PASSWORD WHERE CUSTOMERLOGOUTPASSWORDID = 1;");
+            string currentPassword = actualPass.CurrentPassword;
+            return currentPassword == enteredPass ? true : false;
         }
         public SalesTransaction CreateShellSalesTransaction()
         {

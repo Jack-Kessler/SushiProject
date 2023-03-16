@@ -18,6 +18,8 @@ namespace SushiProject.Models
 
         public int RestaurantTableID { get; set; }
 
+        public string CustomerLogoutPassword { get; set; }
+
         public IEnumerable<FoodBevOrder>? OrderList { get; set; } //Note this is null
 
         public IEnumerable<Employee>? ServerList { get; set; } //Note this is null
