@@ -7,16 +7,17 @@ namespace SushiProject.Models
     {
         public int OrderID { get; set; }
         public int TransactionID { get; set; }
+        public IEnumerable<FoodBevOrder>? CustomerOrderList { get; set; }
         public bool OrderFulfilled { get; set; }
         public int EmployeeID { get; set; }
         public int TableID { get; set; }
         public DateTime DateAndTime { get; set; }
 
-        public IEnumerable<MenuItem>? MenuItemList { get; set; } //Note this is null
+        public IEnumerable<MenuItem>? MenuItemList { get; set; }
 
-        public IEnumerable<Employee>? ServerList { get; set; } //Note this is null
+        public IEnumerable<Employee>? ServerList { get; set; }
 
-        public IEnumerable<RestaurantTable>? RestaurantTableList { get; set; } //Note this is null
+        public IEnumerable<RestaurantTable>? RestaurantTableList { get; set; }
 
         //[Required(ErrorMessage = "Please enter a valid ingredient cost per unit between $0.00 - $99.00")]
         //[Range(0, 99.99, ErrorMessage = "Value for {0} must be between {1} and {2}")]

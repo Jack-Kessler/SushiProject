@@ -22,6 +22,10 @@ namespace SushiProject
         {
             return _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @id;", new { id = OrderID });
         }
+        public IEnumerable<FoodBevOrder> GetCustomerFoodBevOrdersSQL(int transactionID)
+        {
+            return _conn.Query<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE TRANSACTIONID = @id;", new { id = transactionID });
+        }
         public void UpdateFoodBevOrderSQL(FoodBevOrder foodBevOrderToUpdate)
         {
             _conn.Execute("UPDATE FOOD_BEV_ORDERS SET EMPLOYEEID = @eID, TABLEID = @tID, DATEANDTIME = @date, ORDERSALEAMOUNT = @saleamt, MENUITEMNAME1 = @m1, QUANTITYITEM1 = @q1, PRICEITEM1 = @p1, MENUITEMNAME2 = @m2, QUANTITYITEM2 = @q2, PRICEITEM2 = @p2, MENUITEMNAME3 = @m3, QUANTITYITEM3 = @q3, PRICEITEM3 = @p3, MENUITEMNAME4 = @m4, QUANTITYITEM4 = @q4, PRICEITEM4 = @p4 WHERE ORDERID = @oID;",
@@ -182,7 +186,7 @@ namespace SushiProject
             return transaction.RestaurantTableID;
         }
 
-        public FoodBevOrder CreateShellFoodBevOrder()
+        public FoodBevOrder CreateShellFoodBevOrderSQL()
         {
             FoodBevOrder order = new FoodBevOrder();
 
@@ -198,14 +202,14 @@ namespace SushiProject
             return order;
         }
 
-        public decimal CalculateOrderPrice(FoodBevOrder orderToCalculate)
+        public decimal CalculateOrderPriceSQL(FoodBevOrder orderToCalculate)
         {
             var subTotalPerItemList = new List<decimal>();
             
-            orderToCalculate.PriceItem1 = GetPerUnitPrice(orderToCalculate.MenuItemName1);
-            orderToCalculate.PriceItem2 = GetPerUnitPrice(orderToCalculate.MenuItemName2);
-            orderToCalculate.PriceItem3 = GetPerUnitPrice(orderToCalculate.MenuItemName3);
-            orderToCalculate.PriceItem4 = GetPerUnitPrice(orderToCalculate.MenuItemName4);
+            orderToCalculate.PriceItem1 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName1);
+            orderToCalculate.PriceItem2 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName2);
+            orderToCalculate.PriceItem3 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName3);
+            orderToCalculate.PriceItem4 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName4);
 
             subTotalPerItemList.Add(orderToCalculate.PriceItem1 * orderToCalculate.QuantityItem1);
             subTotalPerItemList.Add(orderToCalculate.PriceItem2 * orderToCalculate.QuantityItem2);
@@ -215,7 +219,7 @@ namespace SushiProject
             return subTotalPerItemList.Sum();
         }
 
-        public decimal GetPerUnitPrice(string menuItem)
+        public decimal GetPerUnitPriceSQL(string menuItem)
         {
             if(menuItem != null)
             {

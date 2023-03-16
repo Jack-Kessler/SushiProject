@@ -1,4 +1,5 @@
 ﻿using SushiProject.Models;
+using System.Data;
 
 namespace SushiProject
 {
@@ -6,6 +7,7 @@ namespace SushiProject
     {
         public IEnumerable<FoodBevOrder> GetAllFoodBevOrdersSQL();
         public FoodBevOrder GetFoodBevOrderSQL(int foodBevOrderID);
+        public IEnumerable<FoodBevOrder> GetCustomerFoodBevOrdersSQL(int transactionID);
         public void UpdateFoodBevOrderSQL(FoodBevOrder foodBevOrderToUpdate);
         public void InsertFoodBevOrderSQL(FoodBevOrder foodBevOrderToInsert);
         public int RetrieveOrderNumSQL(int transactionID, DateTime dateAndTime);
@@ -21,8 +23,8 @@ namespace SushiProject
         public void FulfillFoodBevOrderSQL(FoodBevOrder foodBevOrderToFulfill);
         public int GetServerSQL(int transactionID);
         public int GetRestaurantTableSQL(int transactionID);
-        public FoodBevOrder CreateShellFoodBevOrder();
-        public decimal CalculateOrderPrice(FoodBevOrder orderToCalculate);
-        public decimal GetPerUnitPrice(string menuItem);
+        public FoodBevOrder CreateShellFoodBevOrderSQL();
+        public decimal CalculateOrderPriceSQL(FoodBevOrder orderToCalculate);
+        public decimal GetPerUnitPriceSQL(string menuItem);
     }
 }

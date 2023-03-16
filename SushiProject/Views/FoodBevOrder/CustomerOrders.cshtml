@@ -1,0 +1,85 @@
+﻿@model FoodBevOrder
+
+<h3>Customer's Orders</h3>
+<br />
+
+<div class="form-group">
+    @*<label asp-for="EmployeeID" class="col-md-2"></label>*@
+    <input asp-for="TransactionID" type="hidden" class="form-control" />
+    <span asp-validation-for="TransactionID" class="text-danger"></span>
+</div>
+
+<div style="display: block">
+    @using (Html.BeginForm("CustomerHomePage", "SalesTransaction", "Post"))
+    {
+        <input type="hidden" asp-for="TransactionID" value="@Model.TransactionID" />
+        <input type="submit" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
+    }
+</div>
+<br />
+
+@foreach (var order in @Model.CustomerOrderList)
+{
+    <table class="table">
+        <tr>
+            <th>Order ID</th>
+            <th>Order Fulfilled</th>
+            <th>Order Placed</th>
+            <th>Order Sale Amount</th>
+        </tr>
+        <tr>
+            <td>@order.OrderID</td>
+            <td>@order.OrderFulfilled</td>
+            <td>@order.DateAndTime</td>
+            <td>@order.OrderSaleAmount</td>
+        </tr>
+    </table>
+    <br />
+
+    <table class="table">
+        <tr>
+            <th>Menu Item</th>
+            <th>Quantity Ordered</th>
+            <th>Price Per Item</th>
+        </tr>
+        <tr>
+            <td>@order.MenuItemName1</td>
+            <td>@order.QuantityItem1</td>
+            <td>@order.PriceItem1</td>
+        </tr>
+        @if (order.QuantityItem2 != 0)
+        {
+            <tr>
+                <td>@order.MenuItemName2</td>
+                <td>@order.QuantityItem2</td>
+                <td>@order.PriceItem2</td>
+            </tr>
+        }
+        @if (order.QuantityItem3 != 0)
+        {
+            <tr>
+                <td>@order.MenuItemName3</td>
+                <td>@order.QuantityItem3</td>
+                <td>@order.PriceItem3</td>
+            </tr>
+        }
+        @if (order.QuantityItem4 != 0)
+        {
+            <tr>
+                <td>@order.MenuItemName4</td>
+                <td>@order.QuantityItem4</td>
+                <td>@order.PriceItem4</td>
+            </tr>
+        }
+    </table>
+    <br />
+    <br />
+}
+
+<div style="display: block">
+    @using (Html.BeginForm("CustomerHomePage", "SalesTransaction", "Post"))
+    {
+        <input type="hidden" asp-for="TransactionID" value="@Model.TransactionID" />
+        <input type="submit" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
+    }
+</div>

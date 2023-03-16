@@ -44,12 +44,6 @@ namespace SushiProject.Controllers
 
         public IActionResult UpdateSalesTransactionToDatabase(SalesTransaction transactionToUpdate)
         {
-            //var transaction = repo.CreateShellSalesTransaction();
-
-            //transactionToUpdate.OrderList = transaction.OrderList;
-            //transactionToUpdate.ServerList = transaction.ServerList;
-            //transactionToUpdate.RestaurantTableList = transaction.RestaurantTableList;
-
             transactionToUpdate.FinalTransactionDateAndTime = DateTime.Now;
 
             transactionToUpdate.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmount(transactionToUpdate);
@@ -70,6 +64,7 @@ namespace SushiProject.Controllers
             transaction.RestaurantTableList = tempTransaction.RestaurantTableList;
             return View("CreateSalesTransaction2View", transaction);
         }
+
         //public IActionResult InsertSalesTransaction(SalesTransaction transaction)
         //{
         //    var transaction = repo.CreateShellSalesTransaction(id);
@@ -80,12 +75,6 @@ namespace SushiProject.Controllers
         [HttpPost]
         public IActionResult InsertSalesTransactionToDatabase(SalesTransaction transactionToInsert)
         {
-            //var transaction = repo.CreateShellSalesTransaction();
-
-            //transactionToUpdate.OrderList = transaction.OrderList;
-            //transactionToUpdate.ServerList = transaction.ServerList;
-            //transactionToUpdate.RestaurantTableList = transaction.RestaurantTableList;
-
             transactionToInsert.FinalTransactionDateAndTime = DateTime.Now;
 
             transactionToInsert.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmount(transactionToInsert);

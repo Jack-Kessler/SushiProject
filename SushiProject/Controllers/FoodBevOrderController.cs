@@ -24,11 +24,20 @@ namespace SushiProject.Controllers
             return View(order);
         }
 
+        public IActionResult ViewCustomerFoodBevOrder(int transactionID)
+        {
+            var ordersList = new FoodBevOrder();
+            var customerOrders = repo.GetCustomerFoodBevOrdersSQL(transactionID);
+            ordersList.CustomerOrderList = customerOrders;
+            ordersList.TransactionID = transactionID;
+            return View("CustomerOrders", ordersList);
+        }
+
         public IActionResult UpdateFoodBevOrder(int id)
         {
             FoodBevOrder updateOrder = repo.GetFoodBevOrderSQL(id);
 
-            var order = repo.CreateShellFoodBevOrder();
+            var order = repo.CreateShellFoodBevOrderSQL();
 
             updateOrder.MenuItemList = order.MenuItemList;
             updateOrder.ServerList = order.ServerList;
@@ -43,28 +52,18 @@ namespace SushiProject.Controllers
 
         public IActionResult UpdateFoodBevOrderToDatabase(FoodBevOrder foodBevOrderToUpdate)
         {
-            var order = repo.CreateShellFoodBevOrder();
+            //var order = repo.CreateShellFoodBevOrder();
 
-            foodBevOrderToUpdate.MenuItemList = order.MenuItemList;
-            foodBevOrderToUpdate.ServerList = order.ServerList;
-            foodBevOrderToUpdate.RestaurantTableList = order.RestaurantTableList;
+            //foodBevOrderToUpdate.MenuItemList = order.MenuItemList;
+            //foodBevOrderToUpdate.ServerList = order.ServerList;
+            //foodBevOrderToUpdate.RestaurantTableList = order.RestaurantTableList;
 
             foodBevOrderToUpdate.DateAndTime = DateTime.Now;
 
-            foodBevOrderToUpdate.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToUpdate);
+            foodBevOrderToUpdate.OrderSaleAmount = repo.CalculateOrderPriceSQL(foodBevOrderToUpdate);
 
             repo.UpdateFoodBevOrderSQL(foodBevOrderToUpdate);
             return RedirectToAction("ViewFoodBevOrder", new { orderID = foodBevOrderToUpdate.OrderID });
-
-            //if (ModelState.IsValid)
-            //{
-            //    repo.UpdateFoodBevOrderSQL(foodBevOrderToUpdate);
-            //    return RedirectToAction("ViewFoodBevOrder", new { orderID = foodBevOrderToUpdate.OrderID });
-            //}
-            //else
-            //{
-            //    return View("UpdateFoodBevOrder", foodBevOrderToUpdate);
-            //}
         }
 
         public IActionResult InsertFoodBevOrder(int transactionID)
@@ -86,7 +85,7 @@ namespace SushiProject.Controllers
         {
             foodBevOrderToInsert.DateAndTime = DateTime.Now;
 
-            foodBevOrderToInsert.OrderSaleAmount = repo.CalculateOrderPrice(foodBevOrderToInsert);
+            foodBevOrderToInsert.OrderSaleAmount = repo.CalculateOrderPriceSQL(foodBevOrderToInsert);
            
             repo.InsertFoodBevOrderSQL(foodBevOrderToInsert);
 
@@ -98,10 +97,9 @@ namespace SushiProject.Controllers
             repo.ApplyOrderToTransactionSQL(foodBevOrderToInsert, nullOrderSlot);
 
             return RedirectToAction("CustomerHomePage", "SalesTransaction", new { transactionID = foodBevOrderToInsert.TransactionID }); 
-            //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
+            //Line of code above passes in Transaction ID as argument and redirects to SalesTransaction Controller -> CustomerHomePage
         }
 
-        
         public IActionResult DeleteFoodBevOrder(FoodBevOrder foodBevOrder)
         {
             repo.DeleteFoodBevOrderSQL(foodBevOrder);
