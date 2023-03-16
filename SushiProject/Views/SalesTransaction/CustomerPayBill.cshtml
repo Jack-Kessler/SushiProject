@@ -189,7 +189,6 @@
         <div class="form-group">
             <label for="">Payment Method</label>
             <select class="form-control" name="PaymentMethod" value="">
-                <option value="Default" disabled selected>Please Select a Payment Method</option>
                 @foreach (var method in Model.PaymentMethodsList)
                 {
                     <option value="@method.PaymentMethodCategoryName">@method.PaymentMethodCategoryName</option>
