@@ -12,7 +12,23 @@
 <table class="table">
     <tr>
         <th>Transaction ID</th>
+        <th>Pre-Tax Total</th>
+        <th>Tax</th>
+        <th>Tip</th>
         <th>Total</th>
+    </tr>
+    <tr>
+        <td>@Model.SalesTransactionID</td>
+        <td>@Model.SubTotalPreTax</td>
+        <td>@Model.TaxAmount</td>
+        <td>@Model.TipAmount</td>
+        <td>@Model.FinalTransactionAmount</td>
+    </tr>
+</table>
+<br />
+
+<table class="table">
+    <tr>
         <th>All You Can Eat</th>
         <th>PaymentMethod</th>
         <th>Date &amp; Time</th>
@@ -20,14 +36,11 @@
         <th>Table</th>
     </tr>
     <tr>
-        <td>@Model.SalesTransactionID</td>
-        <td>@Model.FinalTransactionAmount</td>
         <td>@Model.AllYouCanEat</td>
         <td>@Model.PaymentMethod</td>
         <td>@Model.FinalTransactionDateAndTime</td>
         <td>@Model.EmployeeID</td>
         <td>@Model.RestaurantTableID</td>
-
     </tr>
 </table>
 <br />

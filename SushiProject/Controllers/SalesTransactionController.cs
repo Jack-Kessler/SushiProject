@@ -110,8 +110,7 @@ namespace SushiProject.Controllers
         }
         public IActionResult PayFinalBill(int transactionID)
         {
-            repo.CalculateFinalTransactionAmountSQL(transactionID);
-            var transaction = repo.GetSalesTransactionSQL(transactionID);
+            var transaction = repo.CalculateSubTotalAmountSQL(transactionID);
             var paymentMethodsList = repo.GetPaymentMethodsListSQL();
             transaction.PaymentMethodsList = paymentMethodsList;
             return View("CustomerPayBill", transaction);

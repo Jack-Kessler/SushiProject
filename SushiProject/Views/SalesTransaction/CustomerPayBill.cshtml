@@ -24,9 +24,13 @@
 <table class="table">
     <tr>
         <th>Sub-Total</th>
+        <th>Tax</th>
+        <th>Total</th>
     </tr>
     <tr>
-        <td>@Model.SubTotal</td>
+        <td>@Model.SubTotalPreTax</td>
+        <td>@Model.TaxAmount</td>
+        <td>@Model.SubTotalAfterTax</td>
     </tr>
 </table>
 <br />
@@ -187,6 +191,32 @@
         <br />
 
         <div class="form-group">
+            <input asp-for="SubTotalPreTax" type="hidden" class="form-control" />
+            <span asp-validation-for="SubTotalPreTax" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <input asp-for="TaxAmount" type="hidden" class="form-control" />
+            <span asp-validation-for="TaxAmount" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <input asp-for="SubTotalAfterTax" type="hidden" class="form-control" />
+            <span asp-validation-for="SubTotalAfterTax" class="text-danger"></span>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label asp-for="TipAmount">Tip</label>
+            <input asp-for="TipAmount" type="text" max="1000.00" min="0.00" step="0.01" value="0" />
+            <span asp-validation-for="TipAmount" class="text-danger"></span>
+        </div>
+        <br />
+
+
+        <div class="form-group">
             <label for="">Payment Method</label>
             <select class="form-control" name="PaymentMethod" value="">
                 @foreach (var method in Model.PaymentMethodsList)
@@ -196,6 +226,7 @@
             </select>
         </div>
         <br />
+
 
         <a href="#" onclick="if(confirm('Are you sure you would like to make this payment?')) $(this).closest('form').submit();">Submit Payment</a>
 

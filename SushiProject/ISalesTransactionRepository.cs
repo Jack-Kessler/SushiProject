@@ -25,7 +25,7 @@ namespace SushiProject
         public TaxRate GetTaxRateSQL();
         public decimal CalculateTotalSalesTransactionAmountSQL(SalesTransaction transactionToCalculate);
         public decimal GetPerOrderPriceSQL(int orderID);
-        public void CalculateFinalTransactionAmountSQL(int transactionID);
+        public SalesTransaction CalculateSubTotalAmountSQL(int transactionID);
         public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL();
     }
 }

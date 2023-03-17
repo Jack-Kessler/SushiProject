@@ -75,7 +75,7 @@ namespace SushiProject
         }
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert)
         {
-            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (ALLYOUCANEAT, NUMOFCUSTOMERSADULT, NUMOFCUSTOMERSCHILD, TAXRATEFRACTIONALEQUIVALENT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@eat, @adult, @child, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
+            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (ALLYOUCANEAT, NUMOFCUSTOMERSADULT, NUMOFCUSTOMERSCHILD, TAXRATEFRACTIONALEQUIVALENT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@eat, @adult, @child, @tax, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
            new
            {
                eat = salesTransactionToInsert.AllYouCanEat,
@@ -230,9 +230,10 @@ namespace SushiProject
         }
         public void CompleteSalesTransactionSQL(SalesTransaction salesTransactionToComplete)
         {
+            salesTransactionToComplete.FinalTransactionAmount = salesTransactionToComplete.SubTotalAfterTax + salesTransactionToComplete.TipAmount;
             salesTransactionToComplete.FinalTransactionDateAndTime = DateTime.Now;
-            _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, PAYMENTMETHOD = @pay, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
-            new { complete = 1, pay =salesTransactionToComplete.PaymentMethod, date =salesTransactionToComplete.FinalTransactionDateAndTime, id = salesTransactionToComplete.SalesTransactionID });
+            _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, PAYMENTMETHOD = @pay, TIPAMOUNT = @tip, FinalTRANSACTIONAMOUNT = @finalamt, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
+            new { complete = 1, pay =salesTransactionToComplete.PaymentMethod, tip = salesTransactionToComplete.TipAmount, finalamt = salesTransactionToComplete.FinalTransactionAmount, date =salesTransactionToComplete.FinalTransactionDateAndTime, id = salesTransactionToComplete.SalesTransactionID });
         }
         public bool CheckCustomerLogoutPasswordSQL(string enteredPass)
         {
@@ -322,7 +323,7 @@ namespace SushiProject
             }
             return 0;
         }
-        public void CalculateFinalTransactionAmountSQL(int transactionID)
+        public SalesTransaction CalculateSubTotalAmountSQL(int transactionID)
         {
             var transaction = GetSalesTransactionSQL(transactionID);
             if (transaction.AllYouCanEat == true)
@@ -330,14 +331,22 @@ namespace SushiProject
                 var adultRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 1");
                 var childRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 2");
 
-                transaction.SubTotal = (decimal)((adultRate.AllYouCanEatRate * transaction.NumOfCustomersAdult) + (childRate.AllYouCanEatRate * transaction.NumOfCustomersChild));
+                transaction.SubTotalPreTax = (decimal)((adultRate.AllYouCanEatRate * transaction.NumOfCustomersAdult) + (childRate.AllYouCanEatRate * transaction.NumOfCustomersChild));
                 //needed to add case because NumOfCustomersAdult and NumOfCustomersChild are nullable - which is required for ModelState.IsValid to work
-                _conn.Execute("UPDATE SALES_TRANSACTIONS SET SUBTOTAL = @sub WHERE SALESTRANSACTIONID = @ID;", new { ID = transactionID, sub = transaction.SubTotal });
+
+                transaction.TaxAmount = Math.Round((transaction.SubTotalPreTax * transaction.TaxRateFractionalEquivalent), 2);
+                transaction.SubTotalAfterTax = transaction.SubTotalPreTax + transaction.TaxAmount;
             }
             else
             {
-                _conn.Execute("UPDATE SALES_TRANSACTIONS SET SUBTOTAL = ORDERPRICE1 + ORDERPRICE2 + ORDERPRICE3 + ORDERPRICE4 + ORDERPRICE5 + ORDERPRICE6 + ORDERPRICE7 + ORDERPRICE8 + ORDERPRICE9 + ORDERPRICE10 + ORDERPRICE11 + ORDERPRICE12 + ORDERPRICE13 + ORDERPRICE14 + ORDERPRICE15 + ORDERPRICE16 + ORDERPRICE17 + ORDERPRICE18 + ORDERPRICE19 + ORDERPRICE20 WHERE SALESTRANSACTIONID = @ID;", new { ID = transactionID });
+                transaction.SubTotalPreTax = transaction.OrderPrice1 + transaction.OrderPrice2 + transaction.OrderPrice3 + transaction.OrderPrice4 + transaction.OrderPrice5 + transaction.OrderPrice6 + transaction.OrderPrice7 + transaction.OrderPrice8 + transaction.OrderPrice9 + transaction.OrderPrice10 + transaction.OrderPrice11 + transaction.OrderPrice12 + transaction.OrderPrice13 + transaction.OrderPrice14 + transaction.OrderPrice15 + transaction.OrderPrice16 + transaction.OrderPrice17 + transaction.OrderPrice18 + transaction.OrderPrice19 + transaction.OrderPrice20;
+
+                transaction.TaxAmount = Math.Round((transaction.SubTotalPreTax * transaction.TaxRateFractionalEquivalent),2);
+
+                transaction.SubTotalAfterTax = transaction.SubTotalPreTax + transaction.TaxAmount;  
             }
+            _conn.Execute("UPDATE SALES_TRANSACTIONS SET SUBTOTALPRETAX = @pre, TAXAMOUNT = @tax, SUBTOTALAFTERTAX = @after WHERE SALESTRANSACTIONID = @ID;", new { ID = transactionID, pre = transaction.SubTotalPreTax, tax = transaction.TaxAmount, after = transaction.SubTotalAfterTax });
+            return transaction;
         }
         public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL()
         {

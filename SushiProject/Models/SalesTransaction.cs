@@ -20,7 +20,9 @@ namespace SushiProject.Models
         public int? NumOfCustomersChild { get; set; }
 
 
-        public decimal SubTotal { get; set; }
+        public decimal SubTotalPreTax { get; set; }
+        public decimal TaxAmount { get; set; }
+        public decimal SubTotalAfterTax { get; set; }
 
         //NOTE: Next three variables if turned nullable created problems with ModelState.IsValid on Line 84 of SalesTransactionController.
 
