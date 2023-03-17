@@ -21,10 +21,10 @@ namespace SushiProject
         public void DeleteSalesTransactionSQL(SalesTransaction salesTransactionToDelete);
         public void CompleteSalesTransactionSQL(SalesTransaction salesTransactionToComplete);
         public bool CheckCustomerLogoutPasswordSQL(string enteredPass);
-        public SalesTransaction CreateShellSalesTransaction(SalesTransaction transaction);
+        public SalesTransaction CreateShellSalesTransactionSQL(SalesTransaction transaction);
         public TaxRate GetTaxRateSQL();
-        public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate);
-        public decimal GetPerOrderPrice(int orderID);
+        public decimal CalculateTotalSalesTransactionAmountSQL(SalesTransaction transactionToCalculate);
+        public decimal GetPerOrderPriceSQL(int orderID);
         public void CalculateFinalTransactionAmountSQL(int transactionID);
         public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL();
     }

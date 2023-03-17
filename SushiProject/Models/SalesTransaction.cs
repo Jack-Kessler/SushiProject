@@ -9,16 +9,20 @@ namespace SushiProject.Models
 
         public bool AllYouCanEat { get; set; }
 
-        [Range(0, 100, ErrorMessage = "Please enter a number between {1} and {2}.")]
-        public int NumOfCustomersAdult { get; set; }
+        // Need to make all of the following variables nullable to customize error message next to "Required" attribute
 
+        [Required(ErrorMessage = "Please enter a number between 0 and 100")]
+        [Range(0, 100, ErrorMessage = "Please enter a number between {1} and {2}")]
+        public int? NumOfCustomersAdult { get; set; }
+
+        [Required(ErrorMessage = "Please enter a number between 0 and 100")]
         [Range(0, 100, ErrorMessage = "Please enter a number between {1} and {2}.")]
-        public int NumOfCustomersChild { get; set; }
+        public int? NumOfCustomersChild { get; set; }
 
 
         public decimal SubTotal { get; set; }
 
-
+        //NOTE: Next three variables if turned nullable created problems with ModelState.IsValid on Line 84 of SalesTransactionController.
 
         [Required(ErrorMessage = "Please enter a valid tip amount of $0.00 or greater")]
         [RegularExpression(@"^\d+(\.\d{1,2})?$")]
@@ -32,6 +36,8 @@ namespace SushiProject.Models
         [Range(0.0000, 1.0000, ErrorMessage = "The tip amount entered {0} must be greater than {1} and less than {2}.")]
         public decimal TaxRateFractionalEquivalent { get; set; }
 
+
+
         [Required(ErrorMessage = "Please enter a valid total transaction amount up to 2 decimal places")]
         [RegularExpression(@"^\d+(\.\d{1,2})?$")]
         [Range(0.00, 1000000.00, ErrorMessage = "The tip amount entered {0} must be greater than {1} and less than {2}.")]
@@ -39,8 +45,6 @@ namespace SushiProject.Models
 
 
 
-        [Required(ErrorMessage = "Please select a payment method")]
-        [StringLength(50)]
         public string? PaymentMethod { get; set; }
         public IEnumerable<PaymentMethodCategory>? PaymentMethodsList { get; set; }
 

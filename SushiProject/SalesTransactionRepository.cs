@@ -75,12 +75,13 @@ namespace SushiProject
         }
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert)
         {
-            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (ALLYOUCANEAT, NUMOFCUSTOMERSADULT, NUMOFCUSTOMERSCHILD, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@eat, @adult, @child, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
+            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (ALLYOUCANEAT, NUMOFCUSTOMERSADULT, NUMOFCUSTOMERSCHILD, TAXRATEFRACTIONALEQUIVALENT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@eat, @adult, @child, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
            new
            {
                eat = salesTransactionToInsert.AllYouCanEat,
                adult = salesTransactionToInsert.NumOfCustomersAdult,
                child = salesTransactionToInsert.NumOfCustomersChild,
+               tax = salesTransactionToInsert.TaxRateFractionalEquivalent,
                date = salesTransactionToInsert.FinalTransactionDateAndTime,
                eID = salesTransactionToInsert.EmployeeID,
                tID = salesTransactionToInsert.RestaurantTableID,
@@ -245,15 +246,17 @@ namespace SushiProject
             var actualPass = _conn.QuerySingle<CustomerLogoutPassword>("SELECT * FROM CUSTOMER_LOGOUT_PASSWORD WHERE CUSTOMERLOGOUTPASSWORDID = 1;");
             return actualPass.CurrentPassword;
         }
-        public SalesTransaction CreateShellSalesTransaction(SalesTransaction transaction)
+        public SalesTransaction CreateShellSalesTransactionSQL(SalesTransaction transaction)
         {
-            transaction.TipAmount = 0;
+            transaction.TipAmount = 0; //Set to 0 for time being to satisfy "ModelIsValid" in calling method.
 
             var currentTaxRate = GetTaxRateSQL();
             transaction.TaxRateFractionalEquivalent = currentTaxRate.CurrentTaxRate;
 
-            transaction.FinalTransactionAmount = 0;
-            transaction.PaymentMethod = "cash";
+            var tableList = AssignRestaurantTableListSQL(transaction.EmployeeID);
+            transaction.RestaurantTableList = tableList.RestaurantTableList;
+
+            transaction.FinalTransactionAmount = 0; //Set to 0 for time being to satisfy "ModelIsValid" in calling method.
 
             return transaction;
         }
@@ -262,30 +265,30 @@ namespace SushiProject
             var tax = _conn.QuerySingle<TaxRate>("SELECT * FROM TAX_RATE WHERE TAXRATEID = 1;");
             return tax;
         }
-        public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate) //Necessary?
+        public decimal CalculateTotalSalesTransactionAmountSQL(SalesTransaction transactionToCalculate) //Necessary?
         {
             var subTotalPerOrderList = new List<decimal>();
 
-            transactionToCalculate.OrderPrice1 = GetPerOrderPrice(transactionToCalculate.OrderID1);
-            transactionToCalculate.OrderPrice2 = GetPerOrderPrice(transactionToCalculate.OrderID2);
-            transactionToCalculate.OrderPrice3 = GetPerOrderPrice(transactionToCalculate.OrderID3);
-            transactionToCalculate.OrderPrice4 = GetPerOrderPrice(transactionToCalculate.OrderID4);
-            transactionToCalculate.OrderPrice5 = GetPerOrderPrice(transactionToCalculate.OrderID5);
-            transactionToCalculate.OrderPrice6 = GetPerOrderPrice(transactionToCalculate.OrderID6);
-            transactionToCalculate.OrderPrice7 = GetPerOrderPrice(transactionToCalculate.OrderID7);
-            transactionToCalculate.OrderPrice8 = GetPerOrderPrice(transactionToCalculate.OrderID8);
-            transactionToCalculate.OrderPrice9 = GetPerOrderPrice(transactionToCalculate.OrderID9);
-            transactionToCalculate.OrderPrice10 = GetPerOrderPrice(transactionToCalculate.OrderID10);
-            transactionToCalculate.OrderPrice11 = GetPerOrderPrice(transactionToCalculate.OrderID11);
-            transactionToCalculate.OrderPrice12 = GetPerOrderPrice(transactionToCalculate.OrderID12);
-            transactionToCalculate.OrderPrice13 = GetPerOrderPrice(transactionToCalculate.OrderID13);
-            transactionToCalculate.OrderPrice14 = GetPerOrderPrice(transactionToCalculate.OrderID14);
-            transactionToCalculate.OrderPrice15 = GetPerOrderPrice(transactionToCalculate.OrderID15);
-            transactionToCalculate.OrderPrice16 = GetPerOrderPrice(transactionToCalculate.OrderID16);
-            transactionToCalculate.OrderPrice17 = GetPerOrderPrice(transactionToCalculate.OrderID17);
-            transactionToCalculate.OrderPrice18 = GetPerOrderPrice(transactionToCalculate.OrderID18);
-            transactionToCalculate.OrderPrice19 = GetPerOrderPrice(transactionToCalculate.OrderID19);
-            transactionToCalculate.OrderPrice20 = GetPerOrderPrice(transactionToCalculate.OrderID20);
+            transactionToCalculate.OrderPrice1 = GetPerOrderPriceSQL(transactionToCalculate.OrderID1);
+            transactionToCalculate.OrderPrice2 = GetPerOrderPriceSQL(transactionToCalculate.OrderID2);
+            transactionToCalculate.OrderPrice3 = GetPerOrderPriceSQL(transactionToCalculate.OrderID3);
+            transactionToCalculate.OrderPrice4 = GetPerOrderPriceSQL(transactionToCalculate.OrderID4);
+            transactionToCalculate.OrderPrice5 = GetPerOrderPriceSQL(transactionToCalculate.OrderID5);
+            transactionToCalculate.OrderPrice6 = GetPerOrderPriceSQL(transactionToCalculate.OrderID6);
+            transactionToCalculate.OrderPrice7 = GetPerOrderPriceSQL(transactionToCalculate.OrderID7);
+            transactionToCalculate.OrderPrice8 = GetPerOrderPriceSQL(transactionToCalculate.OrderID8);
+            transactionToCalculate.OrderPrice9 = GetPerOrderPriceSQL(transactionToCalculate.OrderID9);
+            transactionToCalculate.OrderPrice10 = GetPerOrderPriceSQL(transactionToCalculate.OrderID10);
+            transactionToCalculate.OrderPrice11 = GetPerOrderPriceSQL(transactionToCalculate.OrderID11);
+            transactionToCalculate.OrderPrice12 = GetPerOrderPriceSQL(transactionToCalculate.OrderID12);
+            transactionToCalculate.OrderPrice13 = GetPerOrderPriceSQL(transactionToCalculate.OrderID13);
+            transactionToCalculate.OrderPrice14 = GetPerOrderPriceSQL(transactionToCalculate.OrderID14);
+            transactionToCalculate.OrderPrice15 = GetPerOrderPriceSQL(transactionToCalculate.OrderID15);
+            transactionToCalculate.OrderPrice16 = GetPerOrderPriceSQL(transactionToCalculate.OrderID16);
+            transactionToCalculate.OrderPrice17 = GetPerOrderPriceSQL(transactionToCalculate.OrderID17);
+            transactionToCalculate.OrderPrice18 = GetPerOrderPriceSQL(transactionToCalculate.OrderID18);
+            transactionToCalculate.OrderPrice19 = GetPerOrderPriceSQL(transactionToCalculate.OrderID19);
+            transactionToCalculate.OrderPrice20 = GetPerOrderPriceSQL(transactionToCalculate.OrderID20);
 
             subTotalPerOrderList.Add(transactionToCalculate.OrderPrice1);
             subTotalPerOrderList.Add(transactionToCalculate.OrderPrice2);
@@ -310,7 +313,7 @@ namespace SushiProject
 
             return subTotalPerOrderList.Sum();
         }
-        public decimal GetPerOrderPrice(int orderID)
+        public decimal GetPerOrderPriceSQL(int orderID)
         {
             if (orderID != 0)
             {
@@ -321,7 +324,20 @@ namespace SushiProject
         }
         public void CalculateFinalTransactionAmountSQL(int transactionID)
         {
-            _conn.Execute("UPDATE SALES_TRANSACTIONS SET FINALTRANSACTIONAMOUNT = ORDERPRICE1 + ORDERPRICE2 + ORDERPRICE3 + ORDERPRICE4 + ORDERPRICE5 + ORDERPRICE6 + ORDERPRICE7 + ORDERPRICE8 + ORDERPRICE9 + ORDERPRICE10 + ORDERPRICE11 + ORDERPRICE12 + ORDERPRICE13 + ORDERPRICE14 + ORDERPRICE15 + ORDERPRICE16 + ORDERPRICE17 + ORDERPRICE18 + ORDERPRICE19 + ORDERPRICE20 WHERE SALESTRANSACTIONID = @ID;", new {ID = transactionID});
+            var transaction = GetSalesTransactionSQL(transactionID);
+            if (transaction.AllYouCanEat == true)
+            {
+                var adultRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 1");
+                var childRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 2");
+
+                transaction.SubTotal = (decimal)((adultRate.AllYouCanEatRate * transaction.NumOfCustomersAdult) + (childRate.AllYouCanEatRate * transaction.NumOfCustomersChild));
+                //needed to add case because NumOfCustomersAdult and NumOfCustomersChild are nullable - which is required for ModelState.IsValid to work
+                _conn.Execute("UPDATE SALES_TRANSACTIONS SET SUBTOTAL = @sub WHERE SALESTRANSACTIONID = @ID;", new { ID = transactionID, sub = transaction.SubTotal });
+            }
+            else
+            {
+                _conn.Execute("UPDATE SALES_TRANSACTIONS SET SUBTOTAL = ORDERPRICE1 + ORDERPRICE2 + ORDERPRICE3 + ORDERPRICE4 + ORDERPRICE5 + ORDERPRICE6 + ORDERPRICE7 + ORDERPRICE8 + ORDERPRICE9 + ORDERPRICE10 + ORDERPRICE11 + ORDERPRICE12 + ORDERPRICE13 + ORDERPRICE14 + ORDERPRICE15 + ORDERPRICE16 + ORDERPRICE17 + ORDERPRICE18 + ORDERPRICE19 + ORDERPRICE20 WHERE SALESTRANSACTIONID = @ID;", new { ID = transactionID });
+            }
         }
         public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL()
         {

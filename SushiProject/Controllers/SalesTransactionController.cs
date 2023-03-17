@@ -46,7 +46,7 @@ namespace SushiProject.Controllers
         {
             transactionToUpdate.FinalTransactionDateAndTime = DateTime.Now;
 
-            transactionToUpdate.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmount(transactionToUpdate);
+            transactionToUpdate.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmountSQL(transactionToUpdate);
 
             repo.UpdateSalesTransactionSQL(transactionToUpdate);
 
@@ -65,21 +65,12 @@ namespace SushiProject.Controllers
             return View("CreateSalesTransaction2View", transaction);
         }
 
-        //public IActionResult InsertSalesTransaction(SalesTransaction transaction)
-        //{
-        //    var transaction = repo.CreateShellSalesTransaction(id);
-
-        //    return View(transaction);
-        //}
-
         [HttpPost]
         public IActionResult InsertSalesTransactionToDatabase(SalesTransaction transactionToInsert)
         {
             transactionToInsert.FinalTransactionDateAndTime = DateTime.Now;
 
-            transactionToInsert = repo.CreateShellSalesTransaction(transactionToInsert);
-
-            //transactionToInsert.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmount(transactionToInsert);
+            transactionToInsert = repo.CreateShellSalesTransactionSQL(transactionToInsert);
 
             if (ModelState.IsValid)
             {
