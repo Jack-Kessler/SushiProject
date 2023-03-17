@@ -75,10 +75,12 @@ namespace SushiProject
         }
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert)
         {
-            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (FINALTRANSACTIONAMOUNT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@amt, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
+            _conn.Execute("INSERT INTO SALES_TRANSACTIONS (ALLYOUCANEAT, NUMOFCUSTOMERSADULT, NUMOFCUSTOMERSCHILD, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@eat, @adult, @child, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
            new
            {
-               amt = salesTransactionToInsert.FinalTransactionAmount,
+               eat = salesTransactionToInsert.AllYouCanEat,
+               adult = salesTransactionToInsert.NumOfCustomersAdult,
+               child = salesTransactionToInsert.NumOfCustomersChild,
                date = salesTransactionToInsert.FinalTransactionDateAndTime,
                eID = salesTransactionToInsert.EmployeeID,
                tID = salesTransactionToInsert.RestaurantTableID,
@@ -124,6 +126,59 @@ namespace SushiProject
                p20 = salesTransactionToInsert.OrderPrice20
            });
         }
+        //OLD Function below
+
+        //public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert)
+        //{
+        //    _conn.Execute("INSERT INTO SALES_TRANSACTIONS (FINALTRANSACTIONAMOUNT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@amt, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
+        //   new
+        //   {
+        //       amt = salesTransactionToInsert.FinalTransactionAmount,
+        //       date = salesTransactionToInsert.FinalTransactionDateAndTime,
+        //       eID = salesTransactionToInsert.EmployeeID,
+        //       tID = salesTransactionToInsert.RestaurantTableID,
+        //       o1 = salesTransactionToInsert.OrderID1,
+        //       p1 = salesTransactionToInsert.OrderPrice1,
+        //       o2 = salesTransactionToInsert.OrderID2,
+        //       p2 = salesTransactionToInsert.OrderPrice2,
+        //       o3 = salesTransactionToInsert.OrderID3,
+        //       p3 = salesTransactionToInsert.OrderPrice3,
+        //       o4 = salesTransactionToInsert.OrderID4,
+        //       p4 = salesTransactionToInsert.OrderPrice4,
+        //       o5 = salesTransactionToInsert.OrderID5,
+        //       p5 = salesTransactionToInsert.OrderPrice5,
+        //       o6 = salesTransactionToInsert.OrderID6,
+        //       p6 = salesTransactionToInsert.OrderPrice6,
+        //       o7 = salesTransactionToInsert.OrderID7,
+        //       p7 = salesTransactionToInsert.OrderPrice7,
+        //       o8 = salesTransactionToInsert.OrderID8,
+        //       p8 = salesTransactionToInsert.OrderPrice8,
+        //       o9 = salesTransactionToInsert.OrderID9,
+        //       p9 = salesTransactionToInsert.OrderPrice9,
+        //       o10 = salesTransactionToInsert.OrderID10,
+        //       p10 = salesTransactionToInsert.OrderPrice10,
+        //       o11 = salesTransactionToInsert.OrderID11,
+        //       p11 = salesTransactionToInsert.OrderPrice11,
+        //       o12 = salesTransactionToInsert.OrderID12,
+        //       p12 = salesTransactionToInsert.OrderPrice12,
+        //       o13 = salesTransactionToInsert.OrderID13,
+        //       p13 = salesTransactionToInsert.OrderPrice13,
+        //       o14 = salesTransactionToInsert.OrderID14,
+        //       p14 = salesTransactionToInsert.OrderPrice14,
+        //       o15 = salesTransactionToInsert.OrderID15,
+        //       p15 = salesTransactionToInsert.OrderPrice15,
+        //       o16 = salesTransactionToInsert.OrderID16,
+        //       p16 = salesTransactionToInsert.OrderPrice16,
+        //       o17 = salesTransactionToInsert.OrderID17,
+        //       p17 = salesTransactionToInsert.OrderPrice17,
+        //       o18 = salesTransactionToInsert.OrderID18,
+        //       p18 = salesTransactionToInsert.OrderPrice18,
+        //       o19 = salesTransactionToInsert.OrderID19,
+        //       p19 = salesTransactionToInsert.OrderPrice19,
+        //       o20 = salesTransactionToInsert.OrderID20,
+        //       p20 = salesTransactionToInsert.OrderPrice20
+        //   });
+        //}
         public IEnumerable<FoodBevOrder> GetOrderListSQL()
         {
             return _conn.Query<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS;");
@@ -178,28 +233,36 @@ namespace SushiProject
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, PAYMENTMETHOD = @pay, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
             new { complete = 1, pay =salesTransactionToComplete.PaymentMethod, date =salesTransactionToComplete.FinalTransactionDateAndTime, id = salesTransactionToComplete.SalesTransactionID });
         }
-        public bool CheckCustomerLogoutPassword(string enteredPass)
+        public bool CheckCustomerLogoutPasswordSQL(string enteredPass)
         {
             var actualPass = _conn.QuerySingle<CustomerLogoutPassword>("SELECT * FROM CUSTOMER_LOGOUT_PASSWORD WHERE CUSTOMERLOGOUTPASSWORDID = 1;");
             string currentPassword = actualPass.CurrentPassword;
             return currentPassword == enteredPass ? true : false;
         }
-        public SalesTransaction CreateShellSalesTransaction()
+
+        public string GetLogoutPasswordSQL()
         {
-            SalesTransaction sTransaction = new SalesTransaction();
-
-            var orderList = AssignOrderListSQL();
-            sTransaction.OrderList = orderList.OrderList;
-
-            var serverList = AssignServerListSQL();
-            sTransaction.ServerList = serverList.ServerList;
-
-            var tableList = AssignAllRestaurantTableListSQL();
-            sTransaction.RestaurantTableList = tableList.RestaurantTableList;
-
-            return sTransaction;
+            var actualPass = _conn.QuerySingle<CustomerLogoutPassword>("SELECT * FROM CUSTOMER_LOGOUT_PASSWORD WHERE CUSTOMERLOGOUTPASSWORDID = 1;");
+            return actualPass.CurrentPassword;
         }
-        public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate)
+        public SalesTransaction CreateShellSalesTransaction(SalesTransaction transaction)
+        {
+            transaction.TipAmount = 0;
+
+            var currentTaxRate = GetTaxRateSQL();
+            transaction.TaxRateFractionalEquivalent = currentTaxRate.CurrentTaxRate;
+
+            transaction.FinalTransactionAmount = 0;
+            transaction.PaymentMethod = "cash";
+
+            return transaction;
+        }
+        public TaxRate GetTaxRateSQL()
+        {
+            var tax = _conn.QuerySingle<TaxRate>("SELECT * FROM TAX_RATE WHERE TAXRATEID = 1;");
+            return tax;
+        }
+        public decimal CalculateTotalSalesTransactionAmount(SalesTransaction transactionToCalculate) //Necessary?
         {
             var subTotalPerOrderList = new List<decimal>();
 

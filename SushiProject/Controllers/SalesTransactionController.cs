@@ -29,11 +29,11 @@ namespace SushiProject.Controllers
         {
             SalesTransaction updateTransaction = repo.GetSalesTransactionSQL(id);
 
-            var transaction = repo.CreateShellSalesTransaction();
+            //var transaction = repo.CreateShellSalesTransaction();
 
-            updateTransaction.OrderList = transaction.OrderList;
-            updateTransaction.ServerList = transaction.ServerList;
-            updateTransaction.RestaurantTableList = transaction.RestaurantTableList;
+            //updateTransaction.OrderList = transaction.OrderList;
+            //updateTransaction.ServerList = transaction.ServerList;
+            //updateTransaction.RestaurantTableList = transaction.RestaurantTableList;
 
             if (updateTransaction == null)
             {
@@ -77,10 +77,19 @@ namespace SushiProject.Controllers
         {
             transactionToInsert.FinalTransactionDateAndTime = DateTime.Now;
 
-            transactionToInsert.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmount(transactionToInsert);
+            transactionToInsert = repo.CreateShellSalesTransaction(transactionToInsert);
 
-            repo.InsertSalesTransactionSQL(transactionToInsert);
-            return RedirectToAction("Index");
+            //transactionToInsert.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmount(transactionToInsert);
+
+            if (ModelState.IsValid)
+            {
+                repo.InsertSalesTransactionSQL(transactionToInsert);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("CreateSalesTransaction2View", transactionToInsert);
+            }
         }
         public IActionResult DeleteSalesTransaction(SalesTransaction transaction)
         {
@@ -134,7 +143,7 @@ namespace SushiProject.Controllers
         }
         public IActionResult CheckPassword (SalesTransaction transaction)
         {
-            bool success = repo.CheckCustomerLogoutPassword(transaction.CustomerLogoutPassword);
+            bool success = repo.CheckCustomerLogoutPasswordSQL(transaction.CustomerLogoutPassword);
             if(success == true)
             {
                 return View("~/Views/Home/Index.cshtml");

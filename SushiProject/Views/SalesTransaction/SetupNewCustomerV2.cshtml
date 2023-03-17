@@ -1,6 +1,7 @@
 ﻿@model SalesTransaction
 
 <h2>Setup New Customer - Step 2</h2>
+<br />
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="SalesTransaction" asp-action="SetupNewCustomer3" method="post">
@@ -24,4 +25,5 @@
         <input type="submit" value="Next" class="btn btn-primary" />
     </form>
 </div>
-
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

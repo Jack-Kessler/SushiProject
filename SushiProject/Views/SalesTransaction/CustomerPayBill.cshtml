@@ -23,7 +23,7 @@
 
 <table class="table">
     <tr>
-        <th>Transaction Total</th>
+        <th>Sub-Total</th>
     </tr>
     <tr>
         <td>@Model.FinalTransactionAmount</td>
@@ -197,7 +197,8 @@
         </div>
         <br />
 
-        <input type="submit" value="Submit Payment" class="btn btn-primary" />
+        <a href="#" onclick="if(confirm('Are you sure you would like to make this payment?')) $(this).closest('form').submit();">Submit Payment</a>
+
     </form>
 </div>
 <br />

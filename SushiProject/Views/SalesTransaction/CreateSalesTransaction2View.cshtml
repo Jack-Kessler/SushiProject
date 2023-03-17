@@ -1,6 +1,8 @@
 ﻿@model SalesTransaction
 
 <h2>Create New Transaction - Step 2</h2>
+<br />
+
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="SalesTransaction" asp-action="InsertSalesTransactionToDatabase" method="post">
@@ -26,14 +28,31 @@
             <br />
 
             <div class="form-group">
-                <label for="AllYouCanEat"> All You Can Eat (Check if applicable)</label>&emsp;
-                <input type="checkbox" id="AllYouCanEat" name="AllYouCanEat" value="AllYouCanEat">
+                <label asp-for="AllYouCanEat" >All You Can Eat (Check if applicable)</label>
+                <input asp-for="AllYouCanEat" type="checkbox"/>
+                <span asp-validation-for="AllYouCanEat" class="text-danger"></span>
+            </div>
+            <br />
 
+            <p>Only enter the information below for "All You Can Eat" Customers</p>
+            <br />
+            <div class="form-group">
+                <label asp-for="NumOfCustomersAdult">Number of Adults</label>
+                <input asp-for="NumOfCustomersAdult" type="text" max="100" min="0" step="1" value="0"/>
+                <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="NumOfCustomersChild">Number of Children</label>
+                <input asp-for="NumOfCustomersChild" type="text" max="100" min="0" step="1" value="0" />
+                <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
             </div>
             <br />
         }
-
         <input type="submit" value="Create Transaction" class="btn btn-primary" />
     </form>
 </div>
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 
