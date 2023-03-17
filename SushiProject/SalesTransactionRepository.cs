@@ -230,7 +230,7 @@ namespace SushiProject
         }
         public void CompleteSalesTransactionSQL(SalesTransaction salesTransactionToComplete)
         {
-            salesTransactionToComplete.FinalTransactionAmount = salesTransactionToComplete.SubTotalAfterTax + salesTransactionToComplete.TipAmount;
+            salesTransactionToComplete.FinalTransactionAmount = (decimal)(salesTransactionToComplete.SubTotalAfterTax + salesTransactionToComplete.TipAmount);
             salesTransactionToComplete.FinalTransactionDateAndTime = DateTime.Now;
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, PAYMENTMETHOD = @pay, TIPAMOUNT = @tip, FinalTRANSACTIONAMOUNT = @finalamt, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
             new { complete = 1, pay =salesTransactionToComplete.PaymentMethod, tip = salesTransactionToComplete.TipAmount, finalamt = salesTransactionToComplete.FinalTransactionAmount, date =salesTransactionToComplete.FinalTransactionDateAndTime, id = salesTransactionToComplete.SalesTransactionID });
@@ -249,8 +249,6 @@ namespace SushiProject
         }
         public SalesTransaction CreateShellSalesTransactionSQL(SalesTransaction transaction)
         {
-            transaction.TipAmount = 0; //Set to 0 for time being to satisfy "ModelIsValid" in calling method.
-
             var currentTaxRate = GetTaxRateSQL();
             transaction.TaxRateFractionalEquivalent = currentTaxRate.CurrentTaxRate;
 

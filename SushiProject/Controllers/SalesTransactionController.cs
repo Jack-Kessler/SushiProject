@@ -117,9 +117,23 @@ namespace SushiProject.Controllers
         }
         public IActionResult CompleteSalesTransaction(SalesTransaction transaction)
         {
-            repo.CompleteSalesTransactionSQL(transaction);
-            var fullTransaction = repo.GetSalesTransactionSQL(transaction.SalesTransactionID);
-            return View("CustomerPaymentReceipt", fullTransaction);
+            if (transaction.TipAmount == null)
+            { 
+                transaction.TipAmount = 0;
+            }
+
+            if (ModelState.IsValid)
+            {
+                repo.CompleteSalesTransactionSQL(transaction);
+                var fullTransaction = repo.GetSalesTransactionSQL(transaction.SalesTransactionID);
+                return View("CustomerPaymentReceipt", fullTransaction);
+            }
+            else
+            {
+                var paymentMethodsList = repo.GetPaymentMethodsListSQL();
+                transaction.PaymentMethodsList = paymentMethodsList;
+                return View("CustomerPayBill", transaction);
+            }
         }
         public IActionResult CloseOutCustomer(int transactionID)
         {

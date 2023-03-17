@@ -24,24 +24,18 @@ namespace SushiProject.Models
         public decimal TaxAmount { get; set; }
         public decimal SubTotalAfterTax { get; set; }
 
-        //NOTE: Next three variables if turned nullable created problems with ModelState.IsValid on Line 84 of SalesTransactionController.
-
-        [Required(ErrorMessage = "Please enter a valid tip amount of $0.00 or greater")]
-        [RegularExpression(@"^\d+(\.\d{1,2})?$")]
-        [Range(0.00, 1000.00, ErrorMessage = "The tip amount entered {0} must be greater than {1}.")]
-        public decimal TipAmount { get; set; }
+        [Range(0, 1000.00, ErrorMessage = "The tip amount entered must be equal to or greater than ${1}")]
+        public decimal? TipAmount { get; set; }
 
 
-
+        //NOTE: Next two variables if turned nullable created problems with ModelState.IsValid of InsertSalesTransactionToDatabase Method
         [Required(ErrorMessage = "Please enter a valid tax rate between 0 and 1 up to 4 decimal places")]
-        [RegularExpression(@"^\d+(\.\d{1,4})?$")]
         [Range(0.0000, 1.0000, ErrorMessage = "The tip amount entered {0} must be greater than {1} and less than {2}.")]
         public decimal TaxRateFractionalEquivalent { get; set; }
 
 
 
         [Required(ErrorMessage = "Please enter a valid total transaction amount up to 2 decimal places")]
-        [RegularExpression(@"^\d+(\.\d{1,2})?$")]
         [Range(0.00, 1000000.00, ErrorMessage = "The tip amount entered {0} must be greater than {1} and less than {2}.")]
         public decimal FinalTransactionAmount { get; set; }
 
