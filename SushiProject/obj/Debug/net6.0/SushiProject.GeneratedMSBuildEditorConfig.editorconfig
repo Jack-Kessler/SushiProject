@@ -20,6 +20,30 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzXExvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/AllYouCanEatRateChangedSuccessfully.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWxsWW91Q2FuRWF0UmF0ZUNoYW5nZWRTdWNjZXNzZnVsbHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/ChangeAllYouCanEatRate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlQWxsWW91Q2FuRWF0UmF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/ChangeCustomerLogoutPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlQ3VzdG9tZXJMb2dvdXRQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/ChangeTaxRate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlVGF4UmF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/PasswordChangedSuccessfully.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFzc3dvcmRDaGFuZ2VkU3VjY2Vzc2Z1bGx5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/TaxRateChangedSuccessfully.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGF4UmF0ZUNoYW5nZWRTdWNjZXNzZnVsbHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/FoodBevIngredient/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZEJldkluZ3JlZGllbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

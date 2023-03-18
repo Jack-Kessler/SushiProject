@@ -1,0 +1,36 @@
+﻿@model TaxRate
+
+<h2>Change Tax Rate</h2>
+<br />
+<div class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-controller="Admin" asp-action="InsertTaxRateToDatabase" method="post">
+        @if (User.IsInRole("Owner"))
+        {
+            <div class="form-group">
+                <label asp-for="CurrentTaxRate">Old Tax Rate</label>
+                <input asp-for="CurrentTaxRate" type="number" min="0" max="1" step="0.0001" />
+                <span asp-validation-for="CurrentTaxRate" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="NewTaxRate">New Tax Rate</label>
+                <input asp-for="NewTaxRate" type="number" min="0" max="1" step="0.0001" />
+                <span asp-validation-for="NewTaxRate" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="ConfirmNewTaxRate">Confirm New Tax Rate</label>
+                <input asp-for="ConfirmNewTaxRate" type="number" min="0" max="1" step="0.0001" />
+                <span asp-validation-for="ConfirmNewTaxRate" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to change the tax rate?')) $(this).closest('form').submit();">Submit Payment</a>
+        }
+    </form>
+</div>
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

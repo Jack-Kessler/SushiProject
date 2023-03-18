@@ -86,6 +86,9 @@
             <button type="button">Update Inventory</button>
             <button type="button">Edit Employee Info</button>
             <button type="button">Create New Employee Account</button>
+            <input type="button" value="Change Tax Rate" onclick="@("window.location.href='" + @Url.Action("ChangeTaxRate", "Home") + "'");" />
+            <input type="button" value="Change All You Can Eat Rate" onclick="@("window.location.href='" + @Url.Action("ChangeAllYouCanEatRate", "Home") + "'");" />
+            <input type="button" value="Change Guest Password" onclick="@("window.location.href='" + @Url.Action("ChangeCustomerLogoutPassword", "Home") + "'");" />
         </div>
     }
 </div>
