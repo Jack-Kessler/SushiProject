@@ -17,29 +17,45 @@ namespace SushiProject
         public bool ChangeCustomerLogoutPasswordSQL(CustomerLogoutPassword password)
         {
             var currentPass = _conn.QuerySingle<CustomerLogoutPassword>("SELECT * FROM CUSTOMER_LOGOUT_PASSWORD WHERE CUSTOMERLOGOUTPASSWORDID = 1");
-            if (password.CurrentPassword == currentPass.CurrentPassword && password.NewPassword == currentPass.ConfirmPassword)
+            if (password.CurrentPassword == currentPass.CurrentPassword && password.NewPassword == password.ConfirmPassword)
             {
                 return true;
             }
             return false;
         }
-        public bool ChangeAllYouCanEatRateAdultSQL(AllYouCanEat eatRate)
+        public void UpdateCustomerLogoutPasswordInDatabaseSQl(CustomerLogoutPassword password)
         {
-            var currentAdultRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 1");
-            if (eatRate.AllYouCanEatRate == currentAdultRate.AllYouCanEatRate && eatRate.NewAllYouCanEatRate == eatRate.ConfirmAllYouCanEatRate)
-            {
-                return true;
-            }
-            return false;
+            _conn.Execute("UPDATE CUSTOMER_LOGOUT_PASSWORD SET CURRENTPASSWORD = @pass WHERE CUSTOMERLOGOUTPASSWORDID = 1;", new { pass = password.NewPassword });
         }
-        public bool ChangeAllYouCanEatRateChildSQL(AllYouCanEat eatRate)
+        public bool ChangeAllYouCanEatRateSQL(AllYouCanEat eatRate)
         {
-            var currentChildRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 2");
-            if (eatRate.AllYouCanEatRate == currentChildRate.AllYouCanEatRate && eatRate.NewAllYouCanEatRate == eatRate.ConfirmAllYouCanEatRate)
+            var currentRate = new AllYouCanEat();
+            if (eatRate.Adult == true)
+            {
+                currentRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 1");
+            }
+            else
+            {
+                currentRate = _conn.QuerySingle<AllYouCanEat>("SELECT * FROM ALL_YOU_CAN_EAT WHERE ALLYOUCANEATID = 2");
+            }
+
+            if (eatRate.AllYouCanEatRate == currentRate.AllYouCanEatRate && eatRate.NewAllYouCanEatRate == eatRate.ConfirmAllYouCanEatRate)
             {
                 return true;
             }
             return false;
+
+        }
+        public void UpdateAllYouCanEatRateInDatabaseSQl(AllYouCanEat eatRate)
+        {
+            if(eatRate.Adult == true)
+            {
+                _conn.Execute("UPDATE ALL_YOU_CAN_EAT SET ALLYOUCANEATRATE = @eat WHERE ALLYOUCANEATID = 1;", new { eat = eatRate.NewAllYouCanEatRate });
+            }
+            else
+            {
+                _conn.Execute("UPDATE ALL_YOU_CAN_EAT SET ALLYOUCANEATRATE = @eat WHERE ALLYOUCANEATID = 2;", new { eat = eatRate.NewAllYouCanEatRate });
+            }
         }
         public bool ChangeTaxRateSQL(TaxRate taxRate)
         {
@@ -49,6 +65,10 @@ namespace SushiProject
                 return true;
             }
             return false;
+        }
+        public void UpdateTaxRateInDatabaseSQl(TaxRate taxRate)
+        {
+            _conn.Execute("UPDATE TAX_RATE SET CURRENTTAXRATE = @tax WHERE TAXRATEID = 1;", new { tax = taxRate.NewTaxRate });
         }
     }
 }

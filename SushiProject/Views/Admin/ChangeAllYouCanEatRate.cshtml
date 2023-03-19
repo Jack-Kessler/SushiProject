@@ -1,12 +1,39 @@
 ﻿@model AllYouCanEat
 
-<h2>Change All You Can Eat Rate</h2>
-<br />
+@if (Model.Adult == true)
+{
+    <h2>Change All You Can Eat Rate - Adult</h2>
+    <br />
+}
+else
+{
+    <h2>Change All You Can Eat Rate - Child</h2>
+    <br />
+}
+
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="Admin" asp-action="InsertAllYouCanEatRateToDatabase" method="post">
         @if (User.IsInRole("Owner"))
         {
+            @if (Model.Success == false)
+            {
+                <h3>A parameter(s) entered was invalid. Please try again.</h3>
+                <br />
+            }
+
+            <div class="form-group">
+                <input asp-for="Success" type="hidden" class="form-control" />
+                <span asp-validation-for="Success" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <input asp-for="Adult" type="hidden" class="form-control" />
+                <span asp-validation-for="Adult" class="text-danger"></span>
+            </div>
+            <br />
+
             <div class="form-group">
                 <label asp-for="AllYouCanEatRate">Old Rate</label>
                 <input asp-for="AllYouCanEatRate" type="number" min="0" max="100" step="0.01" />
@@ -28,7 +55,7 @@
             </div>
             <br />
 
-            <a href="#" onclick="if(confirm('Are you sure you would like to change the All You Can Eat rate?')) $(this).closest('form').submit();">Submit Payment</a>
+            <a href="#" onclick="if(confirm('Are you sure you would like to change the All You Can Eat rate?')) $(this).closest('form').submit();">Change Rate</a>
         }
     </form>
 </div>

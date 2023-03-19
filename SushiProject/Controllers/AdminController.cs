@@ -18,42 +18,61 @@ namespace SushiProject.Controllers
 
         public IActionResult ChangeTaxRate()
         {
-            return View("ChangeTaxRate");
+            var rate = new TaxRate();
+            rate.Success = true;
+            return View("ChangeTaxRate", rate);
         }
         public IActionResult InsertTaxRateToDatabase(TaxRate rate)
         {
             var success = repo.ChangeTaxRateSQL(rate);
             if (success == true)
             {
+                repo.UpdateTaxRateInDatabaseSQl(rate);
                 return View("TaxRateChangedSuccessfully");
             }
+            rate.Success = false;
             return View("ChangeTaxRate", rate);
         }
-        public IActionResult ChangeAllYouCanEatRate()
+        public IActionResult ChangeAllYouCanEatRateAdult()
         {
-            return View("ChangeAllYouCanEatRate");
+            var rate = new AllYouCanEat();
+            rate.Success = true;
+            rate.Adult = true;
+            return View("ChangeAllYouCanEatRate", rate);
+        }
+        public IActionResult ChangeAllYouCanEatRateChild()
+        {
+            var rate = new AllYouCanEat();
+            rate.Success = true;
+            rate.Adult = false;
+            return View("ChangeAllYouCanEatRate", rate);
         }
         public IActionResult InsertAllYouCanEatRateToDatabase(AllYouCanEat rate)
         {
-            var success1 = repo.ChangeAllYouCanEatRateAdultSQL(rate);
-            var success2 = repo.ChangeAllYouCanEatRateChildSQL(rate);
-            if (success1 == true && success2 == true)
+            var success = repo.ChangeAllYouCanEatRateSQL(rate);
+            if (success == true)
             {
+                repo.UpdateAllYouCanEatRateInDatabaseSQl(rate);
                 return View("AllYouCanEatRateChangedSuccessfully");
             }
+            rate.Success = false;
             return View("ChangeAllYouCanEatRate", rate);
         }
         public IActionResult ChangeCustomerLogoutPassword()
         {
-            return View("ChangeCustomerLogoutPassword");
+            var pass = new CustomerLogoutPassword();
+            pass.Success = true;
+            return View("ChangeCustomerLogoutPassword", pass);
         }
         public IActionResult InsertCustomerLogoutPasswordToDatabase(CustomerLogoutPassword password)
         {
             var success = repo.ChangeCustomerLogoutPasswordSQL(password);
             if (success == true)
             {
+                repo.UpdateCustomerLogoutPasswordInDatabaseSQl(password);
                 return View("PasswordChangedSuccessfully");
             }
+            password.Success = false;
             return View("ChangeCustomerLogoutPassword", password);
         }
     }

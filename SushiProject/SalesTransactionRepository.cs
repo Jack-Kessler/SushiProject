@@ -250,7 +250,7 @@ namespace SushiProject
         public SalesTransaction CreateShellSalesTransactionSQL(SalesTransaction transaction)
         {
             var currentTaxRate = GetTaxRateSQL();
-            transaction.TaxRateFractionalEquivalent = currentTaxRate.CurrentTaxRate;
+            transaction.TaxRateFractionalEquivalent = (decimal)currentTaxRate.CurrentTaxRate; //Cast added because tax rate is nullable
 
             var tableList = AssignRestaurantTableListSQL(transaction.EmployeeID);
             transaction.RestaurantTableList = tableList.RestaurantTableList;
