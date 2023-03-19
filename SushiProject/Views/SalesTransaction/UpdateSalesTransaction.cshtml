@@ -6,14 +6,14 @@
 {
     <div class="row">
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <form asp-controller="SalesTransaction" asp-action="UpdateSalesTransactionToDatabaseFirst" method="post">
+        
+        <form asp-controller="SalesTransaction" asp-action="UpdateSalesTransactionToDatabase" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
                 <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <label asp-for="SalesTransactionCompleted">Sales Transaction Completed (Check if applicable)</label>
@@ -31,14 +31,14 @@
 
             <div class="form-group">
                 <label asp-for="NumOfCustomersAdult">Number of Adults</label>
-                <input asp-for="NumOfCustomersAdult" type="number" max="100" min="0" step="1" value="@Model.NumOfCustomersAdult" />
+                <input asp-for="NumOfCustomersAdult" type="number" step="1" value="@Model.NumOfCustomersAdult" />
                 <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
             </div>
             <br />
 
             <div class="form-group">
                 <label asp-for="NumOfCustomersChild">Number of Children</label>
-                <input asp-for="NumOfCustomersChild" type="number" max="100" min="0" step="1" value="@Model.NumOfCustomersChild" />
+                <input asp-for="NumOfCustomersChild" type="number" step="1" value="@Model.NumOfCustomersChild" />
                 <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
             </div>
             <br />
@@ -47,23 +47,20 @@
                 <input asp-for="SubTotalPreTax" type="hidden" class="form-control" />
                 <span asp-validation-for="SubTotalPreTax" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="TaxAmount" type="hidden" class="form-control" />
                 <span asp-validation-for="TaxAmount" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="SubTotalAfterTax" type="hidden" class="form-control" />
                 <span asp-validation-for="SubTotalAfterTax" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <label asp-for="TipAmount">Tip Amount</label>
-                <input asp-for="TipAmount" type="number" max="1000" min="0" step="0.01" value="@Model.TipAmount" />
+                <input asp-for="TipAmount" value="@Model.TipAmount" />
                 <span asp-validation-for="TipAmount" class="text-danger"></span>
             </div>
             <br />
@@ -72,21 +69,17 @@
                 <input asp-for="TaxRateFractionalEquivalent" type="hidden" class="form-control" />
                 <span asp-validation-for="TaxRateFractionalEquivalent" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="FinalTransactionAmount" type="hidden" class="form-control" />
                 <span asp-validation-for="FinalTransactionAmount" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <label for="">Payment Method</label>
                 <select class="form-control" name="PaymentMethod" value="">
                     @foreach (var method in Model.PaymentMethodsList)
                     {
-                        <option value="@method.PaymentMethodCategoryName">@method.PaymentMethodCategoryName</option>
-
                         if (method.PaymentMethodCategoryName == Model.PaymentMethod)
                         {
                             <option value="@method.PaymentMethodCategoryName" selected>@method.PaymentMethodCategoryName</option>
@@ -95,12 +88,15 @@
                         {
                             <option value="@method.PaymentMethodCategoryName">@method.PaymentMethodCategoryName</option>
                         }
-
                     }
                 </select>
             </div>
             <br />
 
+            <div class="form-group">
+                <input asp-for="PaymentMethodsList" type="hidden" class="form-control" />
+                <span asp-validation-for="PaymentMethodsList" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label for="">Server ID</label>
@@ -120,6 +116,11 @@
             </div>
             <br />
 
+            <div class="form-group">
+                <input asp-for="ServerList" type="hidden" class="form-control" />
+                <span asp-validation-for="ServerList" class="text-danger"></span>
+            </div>
+
 
             <div class="form-group">
                 <label for="">Table</label>
@@ -138,6 +139,16 @@
                 </select>
             </div>
             <br />
+
+            <div class="form-group">
+                <input asp-for="RestaurantTableList" type="hidden" class="form-control" />
+                <span asp-validation-for="PaymentMethodsList" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="OrderList" type="hidden" class="form-control" />
+                <span asp-validation-for="OrderList" class="text-danger"></span>
+            </div>
 
             @*Order 1*@
             <div class="form-group">

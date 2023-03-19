@@ -24,6 +24,7 @@ namespace SushiProject.Models
         public decimal TaxAmount { get; set; }
         public decimal SubTotalAfterTax { get; set; }
 
+        [Required(ErrorMessage = "Please enter a number of at least 0")]
         [Range(0, 1000.00, ErrorMessage = "The tip amount entered must be equal to or greater than ${1}")]
         public decimal? TipAmount { get; set; }
 
@@ -60,64 +61,64 @@ namespace SushiProject.Models
 
         public IEnumerable<RestaurantTable>? RestaurantTableList { get; set; } //Note this is null
 
-        public int OrderID1 { get; set; }
-        public decimal OrderPrice1 { get; set; }
+        public int? OrderID1 { get; set; }
+        public decimal? OrderPrice1 { get; set; }
 
-        public int OrderID2 { get; set; }
-        public decimal OrderPrice2 { get; set; }
+        public int? OrderID2 { get; set; }
+        public decimal? OrderPrice2 { get; set; }
 
-        public int OrderID3 { get; set; }
-        public decimal OrderPrice3 { get; set; }
+        public int? OrderID3 { get; set; }
+        public decimal? OrderPrice3 { get; set; }
 
-        public int OrderID4 { get; set; }
-        public decimal OrderPrice4 { get; set; }
+        public int? OrderID4 { get; set; }
+        public decimal? OrderPrice4 { get; set; }
 
-        public int OrderID5 { get; set; }
-        public decimal OrderPrice5 { get; set; }
+        public int? OrderID5 { get; set; }
+        public decimal? OrderPrice5 { get; set; }
 
-        public int OrderID6 { get; set; }
-        public decimal OrderPrice6 { get; set; }
+        public int? OrderID6 { get; set; }
+        public decimal? OrderPrice6 { get; set; }
 
-        public int OrderID7 { get; set; }
-        public decimal OrderPrice7 { get; set; }
+        public int? OrderID7 { get; set; }
+        public decimal? OrderPrice7 { get; set; }
 
-        public int OrderID8 { get; set; }
-        public decimal OrderPrice8 { get; set; }
+        public int? OrderID8 { get; set; }
+        public decimal? OrderPrice8 { get; set; }
 
-        public int OrderID9 { get; set; }
-        public decimal OrderPrice9 { get; set; }
+        public int? OrderID9 { get; set; }
+        public decimal? OrderPrice9 { get; set; }
 
-        public int OrderID10 { get; set; }
-        public decimal OrderPrice10 { get; set; }
+        public int? OrderID10 { get; set; }
+        public decimal? OrderPrice10 { get; set; }
 
-        public int OrderID11 { get; set; }
-        public decimal OrderPrice11 { get; set; }
+        public int? OrderID11 { get; set; }
+        public decimal? OrderPrice11 { get; set; }
 
-        public int OrderID12 { get; set; }
-        public decimal OrderPrice12 { get; set; }
+        public int? OrderID12 { get; set; }
+        public decimal? OrderPrice12 { get; set; }
 
-        public int OrderID13 { get; set; }
-        public decimal OrderPrice13 { get; set; }
+        public int? OrderID13 { get; set; }
+        public decimal? OrderPrice13 { get; set; }
 
-        public int OrderID14 { get; set; }
-        public decimal OrderPrice14 { get; set; }
+        public int? OrderID14 { get; set; }
+        public decimal? OrderPrice14 { get; set; }
 
-        public int OrderID15 { get; set; }
-        public decimal OrderPrice15 { get; set; }
+        public int? OrderID15 { get; set; }
+        public decimal? OrderPrice15 { get; set; }
 
-        public int OrderID16 { get; set; }
-        public decimal OrderPrice16 { get; set; }
+        public int? OrderID16 { get; set; }
+        public decimal? OrderPrice16 { get; set; }
 
-        public int OrderID17 { get; set; }
-        public decimal OrderPrice17 { get; set; }
+        public int? OrderID17 { get; set; }
+        public decimal? OrderPrice17 { get; set; }
 
-        public int OrderID18 { get; set; }
-        public decimal OrderPrice18 { get; set; }
+        public int? OrderID18 { get; set; }
+        public decimal? OrderPrice18 { get; set; }
 
-        public int OrderID19 { get; set; }
-        public decimal OrderPrice19 { get; set; }
+        public int? OrderID19 { get; set; }
+        public decimal? OrderPrice19 { get; set; }
 
-        public int OrderID20 { get; set; }
-        public decimal OrderPrice20 { get; set; }
+        public int? OrderID20 { get; set; }
+        public decimal? OrderPrice20 { get; set; }
     }
 }

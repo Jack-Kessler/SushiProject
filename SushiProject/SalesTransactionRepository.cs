@@ -289,7 +289,7 @@ namespace SushiProject
             }
             else
             {
-                transaction.SubTotalPreTax = transaction.OrderPrice1 + transaction.OrderPrice2 + transaction.OrderPrice3 + transaction.OrderPrice4 + transaction.OrderPrice5 + transaction.OrderPrice6 + transaction.OrderPrice7 + transaction.OrderPrice8 + transaction.OrderPrice9 + transaction.OrderPrice10 + transaction.OrderPrice11 + transaction.OrderPrice12 + transaction.OrderPrice13 + transaction.OrderPrice14 + transaction.OrderPrice15 + transaction.OrderPrice16 + transaction.OrderPrice17 + transaction.OrderPrice18 + transaction.OrderPrice19 + transaction.OrderPrice20;
+                transaction.SubTotalPreTax = (decimal)(transaction.OrderPrice1 + transaction.OrderPrice2 + transaction.OrderPrice3 + transaction.OrderPrice4 + transaction.OrderPrice5 + transaction.OrderPrice6 + transaction.OrderPrice7 + transaction.OrderPrice8 + transaction.OrderPrice9 + transaction.OrderPrice10 + transaction.OrderPrice11 + transaction.OrderPrice12 + transaction.OrderPrice13 + transaction.OrderPrice14 + transaction.OrderPrice15 + transaction.OrderPrice16 + transaction.OrderPrice17 + transaction.OrderPrice18 + transaction.OrderPrice19 + transaction.OrderPrice20);
 
                 transaction.TaxAmount = Math.Round((transaction.SubTotalPreTax * transaction.TaxRateFractionalEquivalent),2);
 

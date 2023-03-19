@@ -51,12 +51,16 @@ namespace SushiProject.Controllers
 
         public IActionResult UpdateSalesTransactionToDatabase(SalesTransaction transactionToUpdate)
         {
-            repo.UpdateSalesTransactionToDatabaseFirstSQL(transactionToUpdate);
+            if (ModelState.IsValid)
+            {
+                repo.UpdateSalesTransactionToDatabaseFirstSQL(transactionToUpdate);
 
-            SalesTransaction updatedTransaction = repo.CalculateSubTotalAmountSQL(transactionToUpdate.SalesTransactionID);
-            repo.CalculateFinalTransactionAmountSQL(updatedTransaction);
+                SalesTransaction updatedTransaction = repo.CalculateSubTotalAmountSQL(transactionToUpdate.SalesTransactionID);
+                repo.CalculateFinalTransactionAmountSQL(updatedTransaction);
 
-            return RedirectToAction("ViewSalesTransaction", new { transactionID = updatedTransaction.SalesTransactionID });
+                return RedirectToAction("ViewSalesTransaction", new { transactionID = updatedTransaction.SalesTransactionID });
+            }
+            return View("UpdateSalesTransaction", transactionToUpdate);
         }
         public IActionResult CreateSalesTransaction1()
         {
