@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SushiProject.Models;
+using System.Data.Common;
 using System.Transactions;
 
 namespace SushiProject.Controllers
@@ -29,30 +30,34 @@ namespace SushiProject.Controllers
         {
             SalesTransaction updateTransaction = repo.GetSalesTransactionSQL(id);
 
-            //var transaction = repo.CreateShellSalesTransaction();
+            var orderTrans = repo.GetOrderListSQL();
+            updateTransaction.OrderList = orderTrans;
 
-            //updateTransaction.OrderList = transaction.OrderList;
-            //updateTransaction.ServerList = transaction.ServerList;
-            //updateTransaction.RestaurantTableList = transaction.RestaurantTableList;
+            var serverTrans = repo.GetServerListSQL();
+            updateTransaction.ServerList = serverTrans;
+
+            var tableTrans = repo.GetAllRestaurantTableListSQL();
+            updateTransaction.RestaurantTableList = tableTrans;
+
+            var paymentTrans = repo.GetPaymentMethodsListSQL();
+            updateTransaction.PaymentMethodsList = paymentTrans;
 
             if (updateTransaction == null)
             {
                 return View("ProductNotFound");
             }
-            return View(updateTransaction);
+            return View("UpdateSalesTransaction", updateTransaction);
         }
 
         public IActionResult UpdateSalesTransactionToDatabase(SalesTransaction transactionToUpdate)
         {
-            transactionToUpdate.FinalTransactionDateAndTime = DateTime.Now;
+            repo.UpdateSalesTransactionToDatabaseFirstSQL(transactionToUpdate);
 
-            transactionToUpdate.FinalTransactionAmount = repo.CalculateTotalSalesTransactionAmountSQL(transactionToUpdate);
+            SalesTransaction updatedTransaction = repo.CalculateSubTotalAmountSQL(transactionToUpdate.SalesTransactionID);
+            repo.CalculateFinalTransactionAmountSQL(updatedTransaction);
 
-            repo.UpdateSalesTransactionSQL(transactionToUpdate);
-
-            return RedirectToAction("ViewSalesTransaction", new { transactionID = transactionToUpdate.SalesTransactionID });
+            return RedirectToAction("ViewSalesTransaction", new { transactionID = updatedTransaction.SalesTransactionID });
         }
-
         public IActionResult CreateSalesTransaction1()
         {
             var transaction = repo.AssignServerListSQL();

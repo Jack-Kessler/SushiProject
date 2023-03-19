@@ -8,14 +8,14 @@ namespace SushiProject
         public IEnumerable<SalesTransaction> GetAllSalesTransactionsSQL();
         public IEnumerable<SalesTransaction> GetInitialSalesTransactionSQL(SalesTransaction transaction);
         public SalesTransaction GetSalesTransactionSQL(int salesTransactionID);
-        public void UpdateSalesTransactionSQL(SalesTransaction salesTransactionToUpdate);
+        public void UpdateSalesTransactionToDatabaseFirstSQL(SalesTransaction salesTransactionToUpdate);
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert);
         public IEnumerable<FoodBevOrder> GetOrderListSQL();
-        public SalesTransaction AssignOrderListSQL();
+        //public SalesTransaction AssignOrderListSQL();
         public IEnumerable<Employee> GetServerListSQL();
         public SalesTransaction AssignServerListSQL();
         public IEnumerable<RestaurantTable> GetAllRestaurantTableListSQL();
-        public SalesTransaction AssignAllRestaurantTableListSQL();
+        //public SalesTransaction AssignAllRestaurantTableListSQL();
         public IEnumerable<RestaurantTable> GetRestaurantTableListSQL(int id);
         public SalesTransaction AssignRestaurantTableListSQL(int employeeID);
         public void DeleteSalesTransactionSQL(SalesTransaction salesTransactionToDelete);
@@ -23,9 +23,9 @@ namespace SushiProject
         public bool CheckCustomerLogoutPasswordSQL(string enteredPass);
         public SalesTransaction CreateShellSalesTransactionSQL(SalesTransaction transaction);
         public TaxRate GetTaxRateSQL();
-        public decimal CalculateTotalSalesTransactionAmountSQL(SalesTransaction transactionToCalculate);
         public decimal GetPerOrderPriceSQL(int orderID);
         public SalesTransaction CalculateSubTotalAmountSQL(int transactionID);
+        public void CalculateFinalTransactionAmountSQL(SalesTransaction transaction);
         public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL();
     }
 }

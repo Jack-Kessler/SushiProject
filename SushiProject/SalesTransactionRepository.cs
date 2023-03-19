@@ -26,9 +26,9 @@ namespace SushiProject
         {
             return _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = salesTransactionID });
         }
-        public void UpdateSalesTransactionSQL(SalesTransaction salesTransactionToUpdate)
+        public void UpdateSalesTransactionToDatabaseFirstSQL(SalesTransaction salesTransactionToUpdate)
         {
-            _conn.Execute("UPDATE SALES_TRANSACTIONS SET FINALTRANSACTIONAMOUNT = @amt, FINALTRANSACTIONDATEANDTIME = @date, EMPLOYEEID = @eID, RESTAURANTTABLEID = @tID, " +
+            _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, ALLYOUCANEAT = @eat, NUMOFCUSTOMERSADULT = @adult, NUMOFCUSTOMERSCHILD = @child, TIPAMOUNT = @tip, PAYMENTMETHOD = @pay, EMPLOYEEID = @eID, RESTAURANTTABLEID = @tID, " +
                 "ORDERID1 = @o1, ORDERPRICE1 = @p1, " +
                 "ORDERID2 = @o2, ORDERPRICE2 = @p2, " +
                 "ORDERID3 = @o3, ORDERPRICE3 = @p3, " +
@@ -50,7 +50,7 @@ namespace SushiProject
                 "ORDERID19 = @o19, ORDERPRICE19 = @p19, " +
                 "ORDERID20 = @o20, ORDERPRICE20 = @p20 " +
                 "WHERE SALESTRANSACTIONID = @ID;",
-               new { amt = salesTransactionToUpdate.FinalTransactionAmount, date =salesTransactionToUpdate.FinalTransactionDateAndTime, eID = salesTransactionToUpdate.EmployeeID, tID = salesTransactionToUpdate.RestaurantTableID, 
+               new { complete = salesTransactionToUpdate.SalesTransactionCompleted, eat = salesTransactionToUpdate.AllYouCanEat, adult = salesTransactionToUpdate.NumOfCustomersAdult, child = salesTransactionToUpdate.NumOfCustomersChild, tip = salesTransactionToUpdate.TipAmount, pay = salesTransactionToUpdate.PaymentMethod, eID = salesTransactionToUpdate.EmployeeID, tID = salesTransactionToUpdate.RestaurantTableID, 
                    o1 = salesTransactionToUpdate.OrderID1, p1 = salesTransactionToUpdate.OrderPrice1,
                    o2 = salesTransactionToUpdate.OrderID2, p2 = salesTransactionToUpdate.OrderPrice2,
                    o3 = salesTransactionToUpdate.OrderID3, p3 = salesTransactionToUpdate.OrderPrice3,
@@ -184,13 +184,13 @@ namespace SushiProject
         {
             return _conn.Query<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS;");
         }
-        public SalesTransaction AssignOrderListSQL()
-        {
-            var orderList = GetOrderListSQL();
-            var salesTransaction = new SalesTransaction();
-            salesTransaction.OrderList = orderList;
-            return salesTransaction;
-        }
+        //public SalesTransaction AssignOrderListSQL()
+        //{
+        //    var orderList = GetOrderListSQL();
+        //    var salesTransaction = new SalesTransaction();
+        //    salesTransaction.OrderList = orderList;
+        //    return salesTransaction;
+        //}
         public IEnumerable<Employee> GetServerListSQL()
         {
             return _conn.Query<Employee>("SELECT * FROM EMPLOYEES WHERE ROLE = 'SERVER';");
@@ -206,13 +206,13 @@ namespace SushiProject
         {
             return _conn.Query<RestaurantTable>("SELECT * FROM RESTAURANT_TABLES;");
         }
-        public SalesTransaction AssignAllRestaurantTableListSQL()
-        {
-            var tableList = GetAllRestaurantTableListSQL();
-            var salesTransaction = new SalesTransaction();
-            salesTransaction.RestaurantTableList = tableList;
-            return salesTransaction;
-        }
+        //public SalesTransaction AssignAllRestaurantTableListSQL()
+        //{
+        //    var tableList = GetAllRestaurantTableListSQL();
+        //    var salesTransaction = new SalesTransaction();
+        //    salesTransaction.RestaurantTableList = tableList;
+        //    return salesTransaction;
+        //}
         public IEnumerable<RestaurantTable> GetRestaurantTableListSQL(int id)
         {
             return _conn.Query<RestaurantTable>("SELECT * FROM RESTAURANT_TABLES WHERE RestaurantTableAssignedEmployeeID = @id;", new { id = id });
@@ -264,54 +264,6 @@ namespace SushiProject
             var tax = _conn.QuerySingle<TaxRate>("SELECT * FROM TAX_RATE WHERE TAXRATEID = 1;");
             return tax;
         }
-        public decimal CalculateTotalSalesTransactionAmountSQL(SalesTransaction transactionToCalculate) //Necessary?
-        {
-            var subTotalPerOrderList = new List<decimal>();
-
-            transactionToCalculate.OrderPrice1 = GetPerOrderPriceSQL(transactionToCalculate.OrderID1);
-            transactionToCalculate.OrderPrice2 = GetPerOrderPriceSQL(transactionToCalculate.OrderID2);
-            transactionToCalculate.OrderPrice3 = GetPerOrderPriceSQL(transactionToCalculate.OrderID3);
-            transactionToCalculate.OrderPrice4 = GetPerOrderPriceSQL(transactionToCalculate.OrderID4);
-            transactionToCalculate.OrderPrice5 = GetPerOrderPriceSQL(transactionToCalculate.OrderID5);
-            transactionToCalculate.OrderPrice6 = GetPerOrderPriceSQL(transactionToCalculate.OrderID6);
-            transactionToCalculate.OrderPrice7 = GetPerOrderPriceSQL(transactionToCalculate.OrderID7);
-            transactionToCalculate.OrderPrice8 = GetPerOrderPriceSQL(transactionToCalculate.OrderID8);
-            transactionToCalculate.OrderPrice9 = GetPerOrderPriceSQL(transactionToCalculate.OrderID9);
-            transactionToCalculate.OrderPrice10 = GetPerOrderPriceSQL(transactionToCalculate.OrderID10);
-            transactionToCalculate.OrderPrice11 = GetPerOrderPriceSQL(transactionToCalculate.OrderID11);
-            transactionToCalculate.OrderPrice12 = GetPerOrderPriceSQL(transactionToCalculate.OrderID12);
-            transactionToCalculate.OrderPrice13 = GetPerOrderPriceSQL(transactionToCalculate.OrderID13);
-            transactionToCalculate.OrderPrice14 = GetPerOrderPriceSQL(transactionToCalculate.OrderID14);
-            transactionToCalculate.OrderPrice15 = GetPerOrderPriceSQL(transactionToCalculate.OrderID15);
-            transactionToCalculate.OrderPrice16 = GetPerOrderPriceSQL(transactionToCalculate.OrderID16);
-            transactionToCalculate.OrderPrice17 = GetPerOrderPriceSQL(transactionToCalculate.OrderID17);
-            transactionToCalculate.OrderPrice18 = GetPerOrderPriceSQL(transactionToCalculate.OrderID18);
-            transactionToCalculate.OrderPrice19 = GetPerOrderPriceSQL(transactionToCalculate.OrderID19);
-            transactionToCalculate.OrderPrice20 = GetPerOrderPriceSQL(transactionToCalculate.OrderID20);
-
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice1);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice2);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice3);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice4);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice5);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice6);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice7);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice8);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice9);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice10);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice11);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice12);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice13);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice14);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice15);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice16);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice17);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice18);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice19);
-            subTotalPerOrderList.Add(transactionToCalculate.OrderPrice20);
-
-            return subTotalPerOrderList.Sum();
-        }
         public decimal GetPerOrderPriceSQL(int orderID)
         {
             if (orderID != 0)
@@ -343,8 +295,17 @@ namespace SushiProject
 
                 transaction.SubTotalAfterTax = transaction.SubTotalPreTax + transaction.TaxAmount;  
             }
+
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SUBTOTALPRETAX = @pre, TAXAMOUNT = @tax, SUBTOTALAFTERTAX = @after WHERE SALESTRANSACTIONID = @ID;", new { ID = transactionID, pre = transaction.SubTotalPreTax, tax = transaction.TaxAmount, after = transaction.SubTotalAfterTax });
             return transaction;
+        }
+        public void CalculateFinalTransactionAmountSQL(SalesTransaction transaction)
+        {
+            transaction.FinalTransactionAmount = (decimal)(transaction.SubTotalAfterTax + transaction.TipAmount);
+            transaction.FinalTransactionDateAndTime = DateTime.Now;
+
+            _conn.Execute("UPDATE SALES_TRANSACTIONS SET FinalTRANSACTIONAMOUNT = @amt, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
+            new {amt = transaction.FinalTransactionAmount, date = transaction.FinalTransactionDateAndTime, id = transaction.SalesTransactionID });
         }
         public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL()
         {

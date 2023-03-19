@@ -34,18 +34,18 @@
             </div>
             <br />
 
-            <p>Only enter the information below for "All You Can Eat" Customers</p>
+            <p>Only enter the information below for "All You Can Eat" Customers. Otherwise, leave defaults.</p>
             <br />
             <div class="form-group">
                 <label asp-for="NumOfCustomersAdult">Number of Adults</label>
-                <input asp-for="NumOfCustomersAdult" type="text" max="100" min="0" step="1" value="0"/>
+                <input asp-for="NumOfCustomersAdult" type="number" max="100" min="0" step="1" value="0"/>
                 <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
             </div>
             <br />
 
             <div class="form-group">
                 <label asp-for="NumOfCustomersChild">Number of Children</label>
-                <input asp-for="NumOfCustomersChild" type="text" max="100" min="0" step="1" value="0" />
+                <input asp-for="NumOfCustomersChild" type="number" max="100" min="0" step="1" value="0" />
                 <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
             </div>
             <br />
