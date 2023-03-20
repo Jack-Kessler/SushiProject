@@ -138,3 +138,53 @@ span.psw {
     }
 
 /*</style >*/
+
+label {
+    display: block;
+    margin: 1px;
+    padding: 1px;
+}
+
+.field {
+    margin: 1px;
+    padding: 1px;
+}
+
+input:valid {
+    background-color: #ddffdd; /*Light green = #ddffdd*/
+}
+
+input:invalid {
+    background-color: #ffdddd; /*Light red = #ffdddd*/
+}
+
+/*form:valid {
+    border: 5px solid lightgreen;
+}
+
+form:invalid {
+    border: 5px solid lightred;
+}
+
+input:required {
+    border-color: darkred;*/ /*Dark red = #800000*/
+    /*border-width: 3px;
+}
+    
+input:required:invalid {
+    border-color: darkred;*/ /*Dark red = #800000*/
+/*}*/
+
+.field-validation-error {
+    color: red;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid red;
+}
