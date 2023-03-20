@@ -31,48 +31,48 @@ namespace SushiProject
         public void UpdateSalesTransactionToDatabaseSQL(SalesTransaction salesTransactionToUpdate)
         {
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, ALLYOUCANEAT = @eat, NUMOFCUSTOMERSADULT = @adult, NUMOFCUSTOMERSCHILD = @child, TIPAMOUNT = @tip, PAYMENTMETHOD = @pay, EMPLOYEEID = @eID, RESTAURANTTABLEID = @tID, " +
-                "ORDERID1 = @o1, ORDERPRICE1 = @p1, " +
-                "ORDERID2 = @o2, ORDERPRICE2 = @p2, " +
-                "ORDERID3 = @o3, ORDERPRICE3 = @p3, " +
-                "ORDERID4 = @o4, ORDERPRICE4 = @p4, " +
-                "ORDERID5 = @o5, ORDERPRICE5 = @p5, " +
-                "ORDERID6 = @o6, ORDERPRICE6 = @p6, " +
-                "ORDERID7 = @o7, ORDERPRICE7 = @p7, " +
-                "ORDERID8 = @o8, ORDERPRICE8 = @p8, " +
-                "ORDERID9 = @o9, ORDERPRICE9 = @p9, " +
-                "ORDERID10 = @o10, ORDERPRICE10 = @p10, " +
-                "ORDERID11 = @o11, ORDERPRICE11 = @p11, " +
-                "ORDERID12 = @o12, ORDERPRICE12 = @p12, " +
-                "ORDERID13 = @o13, ORDERPRICE13 = @p13, " +
-                "ORDERID14 = @o14, ORDERPRICE14 = @p14, " +
-                "ORDERID15 = @o15, ORDERPRICE15 = @p15, " +
-                "ORDERID16 = @o16, ORDERPRICE16 = @p16, " +
-                "ORDERID17 = @o17, ORDERPRICE17 = @p17, " +
-                "ORDERID18 = @o18, ORDERPRICE18 = @p18, " +
-                "ORDERID19 = @o19, ORDERPRICE19 = @p19, " +
-                "ORDERID20 = @o20, ORDERPRICE20 = @p20 " +
+                "ORDERID1 = @o1, " +
+                "ORDERID2 = @o2, " +
+                "ORDERID3 = @o3, " +
+                "ORDERID4 = @o4, " +
+                "ORDERID5 = @o5, " +
+                "ORDERID6 = @o6, " +
+                "ORDERID7 = @o7, " +
+                "ORDERID8 = @o8, " +
+                "ORDERID9 = @o9, " +
+                "ORDERID10 = @o10, " +
+                "ORDERID11 = @o11, " +
+                "ORDERID12 = @o12, " +
+                "ORDERID13 = @o13, " +
+                "ORDERID14 = @o14, " +
+                "ORDERID15 = @o15, " +
+                "ORDERID16 = @o16, " +
+                "ORDERID17 = @o17, " +
+                "ORDERID18 = @o18, " +
+                "ORDERID19 = @o19, " +
+                "ORDERID20 = @o20 " +
                 "WHERE SALESTRANSACTIONID = @ID;",
                new { complete = salesTransactionToUpdate.SalesTransactionCompleted, eat = salesTransactionToUpdate.AllYouCanEat, adult = salesTransactionToUpdate.NumOfCustomersAdult, child = salesTransactionToUpdate.NumOfCustomersChild, tip = salesTransactionToUpdate.TipAmount, pay = salesTransactionToUpdate.PaymentMethod, eID = salesTransactionToUpdate.EmployeeID, tID = salesTransactionToUpdate.RestaurantTableID, 
-                   o1 = salesTransactionToUpdate.OrderID1, p1 = salesTransactionToUpdate.OrderPrice1,
-                   o2 = salesTransactionToUpdate.OrderID2, p2 = salesTransactionToUpdate.OrderPrice2,
-                   o3 = salesTransactionToUpdate.OrderID3, p3 = salesTransactionToUpdate.OrderPrice3,
-                   o4 = salesTransactionToUpdate.OrderID4, p4 = salesTransactionToUpdate.OrderPrice4,
-                   o5 = salesTransactionToUpdate.OrderID5, p5 = salesTransactionToUpdate.OrderPrice5,
-                   o6 = salesTransactionToUpdate.OrderID6, p6 = salesTransactionToUpdate.OrderPrice6,
-                   o7 = salesTransactionToUpdate.OrderID7, p7 = salesTransactionToUpdate.OrderPrice7,
-                   o8 = salesTransactionToUpdate.OrderID8, p8 = salesTransactionToUpdate.OrderPrice8,
-                   o9 = salesTransactionToUpdate.OrderID9, p9 = salesTransactionToUpdate.OrderPrice9,
-                   o10 = salesTransactionToUpdate.OrderID10, p10 = salesTransactionToUpdate.OrderPrice10,
-                   o11 = salesTransactionToUpdate.OrderID11, p11 = salesTransactionToUpdate.OrderPrice11,
-                   o12 = salesTransactionToUpdate.OrderID12, p12 = salesTransactionToUpdate.OrderPrice12,
-                   o13 = salesTransactionToUpdate.OrderID13, p13 = salesTransactionToUpdate.OrderPrice13,
-                   o14 = salesTransactionToUpdate.OrderID14, p14 = salesTransactionToUpdate.OrderPrice14,
-                   o15 = salesTransactionToUpdate.OrderID15, p15 = salesTransactionToUpdate.OrderPrice15,
-                   o16 = salesTransactionToUpdate.OrderID16, p16 = salesTransactionToUpdate.OrderPrice16,
-                   o17 = salesTransactionToUpdate.OrderID17, p17 = salesTransactionToUpdate.OrderPrice17,
-                   o18 = salesTransactionToUpdate.OrderID18, p18 = salesTransactionToUpdate.OrderPrice18,
-                   o19 = salesTransactionToUpdate.OrderID19, p19 = salesTransactionToUpdate.OrderPrice19,
-                   o20 = salesTransactionToUpdate.OrderID20, p20 = salesTransactionToUpdate.OrderPrice20,
+                   o1 = salesTransactionToUpdate.OrderID1, 
+                   o2 = salesTransactionToUpdate.OrderID2, 
+                   o3 = salesTransactionToUpdate.OrderID3, 
+                   o4 = salesTransactionToUpdate.OrderID4, 
+                   o5 = salesTransactionToUpdate.OrderID5, 
+                   o6 = salesTransactionToUpdate.OrderID6, 
+                   o7 = salesTransactionToUpdate.OrderID7, 
+                   o8 = salesTransactionToUpdate.OrderID8, 
+                   o9 = salesTransactionToUpdate.OrderID9, 
+                   o10 = salesTransactionToUpdate.OrderID10, 
+                   o11 = salesTransactionToUpdate.OrderID11, 
+                   o12 = salesTransactionToUpdate.OrderID12, 
+                   o13 = salesTransactionToUpdate.OrderID13, 
+                   o14 = salesTransactionToUpdate.OrderID14, 
+                   o15 = salesTransactionToUpdate.OrderID15, 
+                   o16 = salesTransactionToUpdate.OrderID16, 
+                   o17 = salesTransactionToUpdate.OrderID17, 
+                   o18 = salesTransactionToUpdate.OrderID18, 
+                   o19 = salesTransactionToUpdate.OrderID19, 
+                   o20 = salesTransactionToUpdate.OrderID20, 
                    ID = salesTransactionToUpdate.SalesTransactionID });
         }
         public void UpdateOrderPricesInDatabaseSQL(SalesTransaction transaction)
