@@ -70,5 +70,18 @@ namespace SushiProject
         {
             _conn.Execute("UPDATE TAX_RATE SET CURRENTTAXRATE = @tax WHERE TAXRATEID = 1;", new { tax = taxRate.NewTaxRate });
         }
+        public void InsertClockInToDatabase(int employeeID)
+        {
+            _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "IN", eID = employeeID, date = DateTime.Now });
+        }
+        public void InsertClockOutToDatabase(int employeeID)
+        {
+            _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "OUT", eID = employeeID, date = DateTime.Now });
+        }
+        public IEnumerable<ClockInOut> GetEmployeeClockInOutHistory(int employeeID)
+        {
+            var history = _conn.Query<ClockInOut>("SELECT * FROM LOG_IN_OUT WHERE EMPLOYEEID = @id;", new {id = employeeID});
+            return history;
+        }
     }
 }

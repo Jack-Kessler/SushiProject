@@ -1,0 +1,26 @@
+﻿@model ClockInOut
+
+<h2>Successfully Clocked-In/Out</h2>
+<br />
+
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager"))
+{
+     <table class="table">
+        <tr>
+            <th>In Or Out</th>
+            <th>EmployeeID</th>
+            <th>Date And Time</th>
+        </tr>
+        @foreach (var hist in Model.ClockInOutHistory)
+        {
+            <tr>
+                <td>@Model.InOrOut</td>
+                <td>@Model.EmployeeID</td>
+                <td>@Model.DateAndTime</td>
+            </tr>
+        }
+    </table>
+    <br />
+}
+
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

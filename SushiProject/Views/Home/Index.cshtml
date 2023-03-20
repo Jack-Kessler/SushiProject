@@ -38,8 +38,8 @@
         <div class="main-page-buttons">
             <button type="button">View Table Assignments</button>
             <button type="button">View My Tables</button>
-            <button type="button">Clock-In</button>
-            <button type="button">Clock-Off</button>
+            <input type="button" value="Clock-In" onclick="@("window.location.href='" + @Url.Action("ClockIn", "Admin") + "'");" />
+            <input type="button" value="Clock-Out" onclick="@("window.location.href='" + @Url.Action("ClockOut", "Admin") + "'");" />
         </div>
     }
     @if (User.IsInRole("Chef"))
@@ -52,7 +52,7 @@
         <div class="main-page-buttons">
             <input type="button" value="View All Orders" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevOrder") + "'");" />
             <input type="button" value="View Open Orders" onclick="@("window.location.href='" + @Url.Action("ViewOpenFoodBevOrders", "FoodBevOrder") + "'");" />
-            <button type="button">View Ingredient Stock Level</button>
+            <input type="button" value="Ingredients - Stock Level" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevIngredient") + "'");" />
             <button type="button">Clock-In</button>
             <button type="button">Clock-Off</button>
         </div>
@@ -65,11 +65,15 @@
         <br />
         <br />
         <div class="main-page-buttons">
-            <button type="button">View Tables</button>
-            <button type="button">View Orders</button>
-            <button type="button">View Transactions</button>
+            <input type="button" value="Tables" onclick="@("window.location.href='" + @Url.Action("Index", "RestaurantTable") + "'");" />
+            <input type="button" value="Orders" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevOrder") + "'");" />
+            <input type="button" value="Transactions" onclick="@("window.location.href='" + @Url.Action("Index", "SalesTransaction") + "'");" />
+            <input type="button" value="Menu Items" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
+            <input type="button" value="Ingredients" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevIngredient") + "'");" />
+            <input type="button" value="Reset All Inventory Levels" onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
             <button type="button">View Clocked-In Staff</button>
-            <input type="button" value="Reset Inventory Levels" onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
+            <button type="button">Clock-In</button>
+            <button type="button">Clock-Off</button>
         </div>
     }
     @if (User.IsInRole("Owner"))
@@ -80,9 +84,10 @@
         <br />
         <br />
         <div class="main-page-buttons">
-            <button type="button">Tables</button>
-            <button type="button">Orders</button>
-            <button type="button">Transactions</button>
+            <input type="button" value="Tables" onclick="@("window.location.href='" + @Url.Action("Index", "RestaurantTable") + "'");" />
+            <input type="button" value="Orders" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevOrder") + "'");" />
+            <input type="button" value="Transactions" onclick="@("window.location.href='" + @Url.Action("Index", "SalesTransaction") + "'");" />
+            <input type="button" value="Menu Items" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
             <input type="button" value="Ingredients" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevIngredient") + "'");" />
             <input type="button" value="Reset All Inventory Levels" onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
             <button type="button">View Clocked-In Staff</button>

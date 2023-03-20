@@ -1,0 +1,24 @@
+﻿@model Employee
+
+<h2>Clock-Out</h2>
+<br />
+
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Admin" asp-action="ClockOutToDatabase" method="post">
+
+            <div class="form-group">
+                <input asp-for="EmployeeID" type="hidden" class="form-control" />
+                <span asp-validation-for="EmployeeID" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to clock-out?')) $(this).closest('form').submit();">Clock-Out</a>
+        </form>
+    </div>
+    <br />
+}
+
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

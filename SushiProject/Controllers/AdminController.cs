@@ -75,5 +75,29 @@ namespace SushiProject.Controllers
             password.Success = false;
             return View("ChangeCustomerLogoutPassword", password);
         }
+        public IActionResult ClockIn()
+        {
+            return View("ClockIn");
+        }
+        public IActionResult ClockOut()
+        {
+            return View("ClockOut");
+        }
+        public IActionResult ClockInToDatabase(Employee employee)
+        {
+            repo.InsertClockInToDatabase(employee.EmployeeID);
+            var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
+            ClockInOut history = new ClockInOut();
+            history.ClockInOutHistory = employeeClockInOutHistory;
+            return View("SuccessfullyClockedInOut", employeeClockInOutHistory);
+        }
+        public IActionResult ClockOutToDatabase(Employee employee)
+        {
+            repo.InsertClockInToDatabase(employee.EmployeeID);
+            var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
+            ClockInOut history = new ClockInOut();
+            history.ClockInOutHistory = employeeClockInOutHistory;
+            return View("SuccessfullyClockedInOut", employeeClockInOutHistory);
+        }
     }
 }

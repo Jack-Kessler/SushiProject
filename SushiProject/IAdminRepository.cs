@@ -11,5 +11,8 @@ namespace SushiProject
         public void UpdateAllYouCanEatRateInDatabaseSQl(AllYouCanEat eatRate);
         public bool ChangeTaxRateSQL(TaxRate taxRate);
         public void UpdateTaxRateInDatabaseSQl(TaxRate taxRate);
+        public void InsertClockInToDatabase(int employeeID);
+        public void InsertClockOutToDatabase(int employeeID);
+        public IEnumerable<ClockInOut> GetEmployeeClockInOutHistory(int employeeID);
     }
 }
