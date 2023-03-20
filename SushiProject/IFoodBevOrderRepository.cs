@@ -28,5 +28,7 @@ namespace SushiProject
         public FoodBevOrder CreateShellFoodBevOrderSQL();
         public decimal CalculateOrderPriceSQL(FoodBevOrder orderToCalculate);
         public decimal GetPerUnitPriceSQL(string menuItem);
+        public void SubtractIngredientInventorySQL(FoodBevOrder order);
+        public void SubtractIndividualIngredientFromInventorySQL(string item, int quantity);
     }
 }

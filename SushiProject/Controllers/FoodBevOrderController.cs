@@ -34,7 +34,7 @@ namespace SushiProject.Controllers
         }
         public IActionResult ViewOpenFoodBevOrders()
         {
-            var openOrders = repo.GetAllFoodBevOrdersSQL();
+            var openOrders = repo.GetAllOpenFoodBevOrdersSQL();
             return View("ChefOpenOrders", openOrders);
         }
         public IActionResult UpdateFoodBevOrder(int id)
@@ -112,7 +112,9 @@ namespace SushiProject.Controllers
 
         public IActionResult FulfillFoodBevOrder (FoodBevOrder foodBevOrder)
         {
-            repo.FulfillFoodBevOrderSQL(foodBevOrder);
+            FoodBevOrder order = repo.GetFoodBevOrderSQL(foodBevOrder.OrderID);
+            repo.SubtractIngredientInventorySQL(order);
+            repo.FulfillFoodBevOrderSQL(order);
             return RedirectToAction("Index");
         }
     }

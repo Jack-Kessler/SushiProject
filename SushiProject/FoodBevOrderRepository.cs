@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Mysqlx.Crud;
+using Org.BouncyCastle.Asn1.X509;
 using SushiProject.Models;
 using System.Data;
 
@@ -32,11 +33,11 @@ namespace SushiProject
         public void UpdateFoodBevOrderSQL(FoodBevOrder foodBevOrderToUpdate)
         {
             _conn.Execute("UPDATE FOOD_BEV_ORDERS SET EMPLOYEEID = @eID, TABLEID = @tID, DATEANDTIME = @date, ORDERSALEAMOUNT = @saleamt, MENUITEMNAME1 = @m1, QUANTITYITEM1 = @q1, PRICEITEM1 = @p1, MENUITEMNAME2 = @m2, QUANTITYITEM2 = @q2, PRICEITEM2 = @p2, MENUITEMNAME3 = @m3, QUANTITYITEM3 = @q3, PRICEITEM3 = @p3, MENUITEMNAME4 = @m4, QUANTITYITEM4 = @q4, PRICEITEM4 = @p4 WHERE ORDERID = @oID;",
-               new { eID = foodBevOrderToUpdate.EmployeeID, tID = foodBevOrderToUpdate.TableID, date = foodBevOrderToUpdate.DateAndTime, saleamt = foodBevOrderToUpdate.OrderSaleAmount, m1 = foodBevOrderToUpdate.MenuItemName1, q1 = foodBevOrderToUpdate.QuantityItem1, p1 = foodBevOrderToUpdate.PriceItem1, m2 = foodBevOrderToUpdate.MenuItemName2, q2 = foodBevOrderToUpdate.QuantityItem2, p2 = foodBevOrderToUpdate.PriceItem2, m3 = foodBevOrderToUpdate.MenuItemName3, q3 = foodBevOrderToUpdate.QuantityItem3, p3 = foodBevOrderToUpdate.PriceItem3, m4 = foodBevOrderToUpdate.MenuItemName4, q4 = foodBevOrderToUpdate.QuantityItem4, p4 = foodBevOrderToUpdate.PriceItem4, oID = foodBevOrderToUpdate.OrderID});
+               new { eID = foodBevOrderToUpdate.EmployeeID, tID = foodBevOrderToUpdate.TableID, date = foodBevOrderToUpdate.DateAndTime, saleamt = foodBevOrderToUpdate.OrderSaleAmount, m1 = foodBevOrderToUpdate.MenuItemName1, q1 = foodBevOrderToUpdate.QuantityItem1, p1 = foodBevOrderToUpdate.PriceItem1, m2 = foodBevOrderToUpdate.MenuItemName2, q2 = foodBevOrderToUpdate.QuantityItem2, p2 = foodBevOrderToUpdate.PriceItem2, m3 = foodBevOrderToUpdate.MenuItemName3, q3 = foodBevOrderToUpdate.QuantityItem3, p3 = foodBevOrderToUpdate.PriceItem3, m4 = foodBevOrderToUpdate.MenuItemName4, q4 = foodBevOrderToUpdate.QuantityItem4, p4 = foodBevOrderToUpdate.PriceItem4, oID = foodBevOrderToUpdate.OrderID });
         }
         public void InsertFoodBevOrderSQL(FoodBevOrder foodBevOrderToInsert)
         {
-            _conn.Execute("INSERT INTO FOOD_BEV_ORDERS (TransactionID, EmployeeID, TableID, DateAndTime, OrderSaleAmount, MenuItemName1, QuantityItem1, PriceItem1, MenuItemName2, QuantityItem2, PriceItem2, MenuItemName3, QuantityItem3, PriceItem3, MenuItemName4, QuantityItem4, PriceItem4) VALUES(@tran, @eID, @tID, @date, @saleamt, @m1, @q1, @p1, @m2, @q2, @p2, @m3, @q3, @p3, @m4, @q4, @p4);", new { tran =foodBevOrderToInsert.TransactionID, eID = foodBevOrderToInsert.EmployeeID, tID = foodBevOrderToInsert.TableID, date = foodBevOrderToInsert.DateAndTime, saleamt = foodBevOrderToInsert.OrderSaleAmount, m1 = foodBevOrderToInsert.MenuItemName1, q1 = foodBevOrderToInsert.QuantityItem1, p1 = foodBevOrderToInsert.PriceItem1, m2 = foodBevOrderToInsert.MenuItemName2, q2 = foodBevOrderToInsert.QuantityItem2, p2 = foodBevOrderToInsert.PriceItem2, m3 = foodBevOrderToInsert.MenuItemName3, q3 = foodBevOrderToInsert.QuantityItem3, p3 = foodBevOrderToInsert.PriceItem3, m4 = foodBevOrderToInsert.MenuItemName4, q4 = foodBevOrderToInsert.QuantityItem4, p4 = foodBevOrderToInsert.PriceItem4});
+            _conn.Execute("INSERT INTO FOOD_BEV_ORDERS (TransactionID, EmployeeID, TableID, DateAndTime, OrderSaleAmount, MenuItemName1, QuantityItem1, PriceItem1, MenuItemName2, QuantityItem2, PriceItem2, MenuItemName3, QuantityItem3, PriceItem3, MenuItemName4, QuantityItem4, PriceItem4) VALUES(@tran, @eID, @tID, @date, @saleamt, @m1, @q1, @p1, @m2, @q2, @p2, @m3, @q3, @p3, @m4, @q4, @p4);", new { tran = foodBevOrderToInsert.TransactionID, eID = foodBevOrderToInsert.EmployeeID, tID = foodBevOrderToInsert.TableID, date = foodBevOrderToInsert.DateAndTime, saleamt = foodBevOrderToInsert.OrderSaleAmount, m1 = foodBevOrderToInsert.MenuItemName1, q1 = foodBevOrderToInsert.QuantityItem1, p1 = foodBevOrderToInsert.PriceItem1, m2 = foodBevOrderToInsert.MenuItemName2, q2 = foodBevOrderToInsert.QuantityItem2, p2 = foodBevOrderToInsert.PriceItem2, m3 = foodBevOrderToInsert.MenuItemName3, q3 = foodBevOrderToInsert.QuantityItem3, p3 = foodBevOrderToInsert.PriceItem3, m4 = foodBevOrderToInsert.MenuItemName4, q4 = foodBevOrderToInsert.QuantityItem4, p4 = foodBevOrderToInsert.PriceItem4 });
         }
         public int RetrieveOrderNumSQL(int transactionID, DateTime dateAndTime)
         {
@@ -46,7 +47,7 @@ namespace SushiProject
         public int FindFirstNullOrderSlotSQL(int transactionID)
         {
             var transaction = _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = transactionID });
-            
+
             if (transaction.OrderID1 == 0) return 1;
             else if (transaction.OrderID2 == 0) return 2;
             else if (transaction.OrderID3 == 0) return 3;
@@ -70,7 +71,7 @@ namespace SushiProject
         }
         public void ApplyOrderToTransactionSQL(FoodBevOrder foodBevOrderToInsert, int nullOrderSlot)
         {
-            switch(nullOrderSlot)
+            switch (nullOrderSlot)
             {
                 case 1:
                     _conn.Execute("UPDATE SALES_TRANSACTIONS SET OrderID1 = @oID, OrderPrice1 = @pID WHERE SALESTRANSACTIONID = @tID;", new { oID = foodBevOrderToInsert.OrderID, pID = foodBevOrderToInsert.OrderSaleAmount, tID = foodBevOrderToInsert.TransactionID });
@@ -133,7 +134,7 @@ namespace SushiProject
                     _conn.Execute("UPDATE SALES_TRANSACTIONS SET OrderID20 = @oID, OrderPrice20 = @pID WHERE SALESTRANSACTIONID = @tID;", new { oID = foodBevOrderToInsert.OrderID, pID = foodBevOrderToInsert.OrderSaleAmount, tID = foodBevOrderToInsert.TransactionID });
                     break;
             }
-            
+
         }
         public IEnumerable<MenuItem> GetMenuItemListSQL()
         {
@@ -205,7 +206,7 @@ namespace SushiProject
         public decimal CalculateOrderPriceSQL(FoodBevOrder orderToCalculate)
         {
             var subTotalPerItemList = new List<decimal>();
-            
+
             orderToCalculate.PriceItem1 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName1);
             orderToCalculate.PriceItem2 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName2);
             orderToCalculate.PriceItem3 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName3);
@@ -220,12 +221,87 @@ namespace SushiProject
         }
         public decimal GetPerUnitPriceSQL(string menuItem)
         {
-            if(menuItem != null)
+            if (menuItem != null)
             {
                 var item = _conn.QuerySingle<MenuItem>("SELECT * FROM MENU_ITEMS WHERE MENUITEMNAME = @name;", new { name = menuItem });
                 return item.MenuItemPrice;
             }
             return 0;
+        }
+        public void SubtractIngredientInventorySQL(FoodBevOrder order)
+        {
+            SubtractIndividualIngredientFromInventorySQL(order.MenuItemName1, order.QuantityItem1);
+            if (order.MenuItemName2 != null)
+            SubtractIndividualIngredientFromInventorySQL(order.MenuItemName2, order.QuantityItem2);
+            if (order.MenuItemName3 != null)
+            SubtractIndividualIngredientFromInventorySQL(order.MenuItemName3, order.QuantityItem3);
+            if (order.MenuItemName4 != null)
+            SubtractIndividualIngredientFromInventorySQL(order.MenuItemName4, order.QuantityItem4);
+        }
+        public void SubtractIndividualIngredientFromInventorySQL(string foodBevItem, int quantity)
+        {
+            var item = _conn.QuerySingle<MenuItem>("SELECT * FROM MENU_ITEMS WHERE MENUITEMNAME = @name;", new { name = foodBevItem });
+
+            _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;",
+              new { used = item.MenuItemIngredientQuantity1 * quantity, name = item.MenuItemIngredientName1 });
+            
+            while (true)
+            {
+                if (item.MenuItemIngredientName2 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity2 * quantity, name = item.MenuItemIngredientName2 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName3 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity3 * quantity, name = item.MenuItemIngredientName3 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName4 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity4 * quantity, name = item.MenuItemIngredientName4 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName5 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity5 * quantity, name = item.MenuItemIngredientName5 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName6 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity6 * quantity, name = item.MenuItemIngredientName6 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName7 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity7 * quantity, name = item.MenuItemIngredientName7 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName8 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity8 * quantity, name = item.MenuItemIngredientName8 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName9 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity9 * quantity, name = item.MenuItemIngredientName9 });
+                }
+                else break;
+
+                if (item.MenuItemIngredientName10 != null)
+                {
+                    _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = INGREDIENTSTOCKLEVEL - @used WHERE INGREDIENTNAME = @name;", new { used = item.MenuItemIngredientQuantity10 * quantity, name = item.MenuItemIngredientName10 });
+                }
+                else break;
+                break;
+            }
         }
     }
 }
