@@ -72,11 +72,15 @@ namespace SushiProject
         }
         public void InsertClockInToDatabase(int employeeID)
         {
-            _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "IN", eID = employeeID, date = DateTime.Now });
+            var dateTimeNow = DateTime.Now;
+            _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "IN", eID = employeeID, date = dateTimeNow });
+            _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'IN', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = id;", new { time = dateTimeNow, id = employeeID });
         }
         public void InsertClockOutToDatabase(int employeeID)
         {
-            _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "OUT", eID = employeeID, date = DateTime.Now });
+            var dateTimeNow = DateTime.Now;
+            _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "OUT", eID = employeeID, date = dateTimeNow });
+            _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'OUT', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = id;", new { time = dateTimeNow, id = employeeID });
         }
         public IEnumerable<ClockInOut> GetEmployeeClockInOutHistory(int employeeID)
         {
@@ -103,6 +107,11 @@ namespace SushiProject
                 return true;
             }
             return false;
+        }
+        public IEnumerable<Employee> GetAllClockedInOutStaff()
+        {
+            var employeeList = _conn.Query<Employee>("SELECT * FROM EMPLOYEES;");
+            return employeeList;
         }
     }
 }

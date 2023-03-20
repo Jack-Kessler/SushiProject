@@ -15,5 +15,6 @@ namespace SushiProject
         public void InsertClockOutToDatabase(int employeeID);
         public IEnumerable<ClockInOut> GetEmployeeClockInOutHistory(int employeeID);
         public bool ValidateEmployeeAndPasswordSQL(ClockInOut employee);
+        public IEnumerable<Employee> GetAllClockedInOutStaff();
     }
 }

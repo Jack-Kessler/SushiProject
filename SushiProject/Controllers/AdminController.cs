@@ -129,5 +129,10 @@ namespace SushiProject.Controllers
                 return View("ClockOut", employee);
             }
         }
+        public IActionResult ViewClockedInOutStaff()
+        {
+            var staffList = repo.GetAllClockedInOutStaff();
+            return View("ClockedInOutStaff", staffList);
+        }
     }
 }

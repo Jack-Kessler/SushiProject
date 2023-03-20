@@ -53,8 +53,8 @@
             <input type="button" value="View All Orders" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevOrder") + "'");" />
             <input type="button" value="View Open Orders" onclick="@("window.location.href='" + @Url.Action("ViewOpenFoodBevOrders", "FoodBevOrder") + "'");" />
             <input type="button" value="Ingredients - Stock Level" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevIngredient") + "'");" />
-            <button type="button">Clock-In</button>
-            <button type="button">Clock-Off</button>
+            <input type="button" value="Clock-In" onclick="@("window.location.href='" + @Url.Action("ClockIn", "Admin") + "'");" />
+            <input type="button" value="Clock-Out" onclick="@("window.location.href='" + @Url.Action("ClockOut", "Admin") + "'");" />
         </div>
     }
     @if (User.IsInRole("Manager"))
@@ -71,9 +71,9 @@
             <input type="button" value="Menu Items" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
             <input type="button" value="Ingredients" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevIngredient") + "'");" />
             <input type="button" value="Reset All Inventory Levels" onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
-            <button type="button">View Clocked-In Staff</button>
-            <button type="button">Clock-In</button>
-            <button type="button">Clock-Off</button>
+            <input type="button" value="View Clocked-In / Out Staff" onclick="@("window.location.href='" + @Url.Action("ViewClockedInOutStaff", "Admin") + "'");" />
+            <input type="button" value="Clock-In" onclick="@("window.location.href='" + @Url.Action("ClockIn", "Admin") + "'");" />
+            <input type="button" value="Clock-Out" onclick="@("window.location.href='" + @Url.Action("ClockOut", "Admin") + "'");" />
         </div>
     }
     @if (User.IsInRole("Owner"))
@@ -90,7 +90,7 @@
             <input type="button" value="Menu Items" onclick="@("window.location.href='" + @Url.Action("Index", "MenuItem") + "'");" />
             <input type="button" value="Ingredients" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevIngredient") + "'");" />
             <input type="button" value="Reset All Inventory Levels" onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
-            <button type="button">View Clocked-In Staff</button>
+            <input type="button" value="View Clocked-In / Out Staff" onclick="@("window.location.href='" + @Url.Action("ViewClockedInOutStaff", "Admin") + "'");" />
             <button type="button">Edit Employee Info</button>
             <button type="button">Create New Employee Account</button>
             <input type="button" value="Change Tax Rate" onclick="@("window.location.href='" + @Url.Action("ChangeTaxRate", "Admin") + "'");" />

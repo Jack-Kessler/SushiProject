@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Employee>
+
+<h2>Clocked-In / Clocked-Out Staff</h2>
+<br />
+
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <table class="table">
+        <tr>
+            <th>Clocked-In/Out</th>
+            <th>Most Recent Activity</th>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+
+        @foreach (var emp in @Model)
+        {
+            <tr>
+                <td>@emp.ClockedInOrOut</td>
+                <td>@emp.MostRecentClockInOut</td>
+                <td>@emp.EmployeeID</td>
+                <td>@emp.FirstName</td>
+                <td>@emp.LastName</td>
+            </tr>
+        }
+    </table>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
