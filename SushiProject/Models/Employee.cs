@@ -18,6 +18,6 @@ namespace SushiProject.Models
         public bool Guest { get; set; }
         public IEnumerable<EmployeeCategory>? EmployeeCategories { get; set; } //Note this is null
         public string ClockedInOrOut { get; set; }
-        public DateAndTime MostRecentClockInOut { get; set; }
+        public DateTime MostRecentClockInOut { get; set; }
     }
 }
