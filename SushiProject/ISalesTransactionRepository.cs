@@ -8,7 +8,8 @@ namespace SushiProject
         public IEnumerable<SalesTransaction> GetAllSalesTransactionsSQL();
         public IEnumerable<SalesTransaction> GetInitialSalesTransactionSQL(SalesTransaction transaction);
         public SalesTransaction GetSalesTransactionSQL(int salesTransactionID);
-        public void UpdateSalesTransactionToDatabaseFirstSQL(SalesTransaction salesTransactionToUpdate);
+        public void UpdateSalesTransactionToDatabaseSQL(SalesTransaction salesTransactionToUpdate);
+        public void UpdateOrderPricesInDatabaseSQL(SalesTransaction transaction);
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert);
         public IEnumerable<FoodBevOrder> GetOrderListSQL();
         //public SalesTransaction AssignOrderListSQL();

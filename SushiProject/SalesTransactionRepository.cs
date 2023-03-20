@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Operations;
 using Mysqlx.Crud;
 using SushiProject.Models;
 using System.Data;
@@ -26,7 +28,7 @@ namespace SushiProject
         {
             return _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = salesTransactionID });
         }
-        public void UpdateSalesTransactionToDatabaseFirstSQL(SalesTransaction salesTransactionToUpdate)
+        public void UpdateSalesTransactionToDatabaseSQL(SalesTransaction salesTransactionToUpdate)
         {
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, ALLYOUCANEAT = @eat, NUMOFCUSTOMERSADULT = @adult, NUMOFCUSTOMERSCHILD = @child, TIPAMOUNT = @tip, PAYMENTMETHOD = @pay, EMPLOYEEID = @eID, RESTAURANTTABLEID = @tID, " +
                 "ORDERID1 = @o1, ORDERPRICE1 = @p1, " +
@@ -72,6 +74,153 @@ namespace SushiProject
                    o19 = salesTransactionToUpdate.OrderID19, p19 = salesTransactionToUpdate.OrderPrice19,
                    o20 = salesTransactionToUpdate.OrderID20, p20 = salesTransactionToUpdate.OrderPrice20,
                    ID = salesTransactionToUpdate.SalesTransactionID });
+        }
+        public void UpdateOrderPricesInDatabaseSQL(SalesTransaction transaction)
+        {
+            while (true)
+            {
+                if (transaction.OrderID1 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID1});
+                    transaction.OrderPrice1 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE1 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice1, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID2 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID2 });
+                    transaction.OrderPrice2 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE2 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice2, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID3 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID3 });
+                    transaction.OrderPrice3 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE3 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice3, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID4 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID4 });
+                    transaction.OrderPrice4 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE4 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice4, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID5 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID5 });
+                    transaction.OrderPrice5 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE5 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice5, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID6 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID6 });
+                    transaction.OrderPrice6 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE6 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice6, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID7 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID7 });
+                    transaction.OrderPrice7 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE7 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice7, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID8 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID8 });
+                    transaction.OrderPrice8 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE8 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice8, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID9 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID9 });
+                    transaction.OrderPrice9 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE9 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice9, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID10 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID10 });
+                    transaction.OrderPrice10 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE10 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice10, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID11 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID11 });
+                    transaction.OrderPrice11 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE11 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice11, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID12 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID12 });
+                    transaction.OrderPrice12 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE12 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice12, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID13 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID13 });
+                    transaction.OrderPrice13 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE13 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice13, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID14 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID14 });
+                    transaction.OrderPrice14 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE14 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice14, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID15 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID15 });
+                    transaction.OrderPrice15 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE15 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice15, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID16 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID16 });
+                    transaction.OrderPrice16 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE16 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice16, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID17 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID17 });
+                    transaction.OrderPrice17 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE17 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice17, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID18 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID18 });
+                    transaction.OrderPrice18 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE18 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice18, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID19 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID19 });
+                    transaction.OrderPrice19 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE19 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice19, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                if (transaction.OrderID20 != null)
+                {
+                    var order = _conn.QuerySingle<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERID = @ID;", new { ID = transaction.OrderID20 });
+                    transaction.OrderPrice20 = order.OrderSaleAmount;
+                    _conn.Execute("UPDATE SALES_TRANSACTIONS SET ORDERPRICE20 = @price WHERE SALESTRANSACTIONID = @ID;", new { price = transaction.OrderPrice20, ID = transaction.SalesTransactionID });
+                }
+                else break;
+                break;
+            }
         }
         public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert)
         {
@@ -127,70 +276,10 @@ namespace SushiProject
                p20 = salesTransactionToInsert.OrderPrice20
            });
         }
-        //OLD Function below
-
-        //public void InsertSalesTransactionSQL(SalesTransaction salesTransactionToInsert)
-        //{
-        //    _conn.Execute("INSERT INTO SALES_TRANSACTIONS (FINALTRANSACTIONAMOUNT, FINALTRANSACTIONDATEANDTIME, EMPLOYEEID, RESTAURANTTABLEID, ORDERID1, ORDERPRICE1, ORDERID2, ORDERPRICE2, ORDERID3, ORDERPRICE3, ORDERID4, ORDERPRICE4, ORDERID5, ORDERPRICE5, ORDERID6, ORDERPRICE6, ORDERID7, ORDERPRICE7, ORDERID8, ORDERPRICE8, ORDERID9, ORDERPRICE9, ORDERID10, ORDERPRICE10, ORDERID11, ORDERPRICE11, ORDERID12, ORDERPRICE12, ORDERID13, ORDERPRICE13, ORDERID14, ORDERPRICE14, ORDERID15, ORDERPRICE15, ORDERID16, ORDERPRICE16, ORDERID17, ORDERPRICE17, ORDERID18, ORDERPRICE18, ORDERID19, ORDERPRICE19, ORDERID20, ORDERPRICE20) VALUES(@amt, @date, @eID, @tID, @o1, @p1, @o2, @p2, @o3, @p3, @o4, @p4, @o5, @p5, @o6, @p6, @o7, @p7, @o8, @p8, @o9, @p9, @o10, @p10, @o11, @p11, @o12, @p12, @o13, @p13, @o14, @p14, @o15, @p15, @o16, @p16, @o17, @p17, @o18, @p18, @o19, @p19, @o20, @p20);",
-        //   new
-        //   {
-        //       amt = salesTransactionToInsert.FinalTransactionAmount,
-        //       date = salesTransactionToInsert.FinalTransactionDateAndTime,
-        //       eID = salesTransactionToInsert.EmployeeID,
-        //       tID = salesTransactionToInsert.RestaurantTableID,
-        //       o1 = salesTransactionToInsert.OrderID1,
-        //       p1 = salesTransactionToInsert.OrderPrice1,
-        //       o2 = salesTransactionToInsert.OrderID2,
-        //       p2 = salesTransactionToInsert.OrderPrice2,
-        //       o3 = salesTransactionToInsert.OrderID3,
-        //       p3 = salesTransactionToInsert.OrderPrice3,
-        //       o4 = salesTransactionToInsert.OrderID4,
-        //       p4 = salesTransactionToInsert.OrderPrice4,
-        //       o5 = salesTransactionToInsert.OrderID5,
-        //       p5 = salesTransactionToInsert.OrderPrice5,
-        //       o6 = salesTransactionToInsert.OrderID6,
-        //       p6 = salesTransactionToInsert.OrderPrice6,
-        //       o7 = salesTransactionToInsert.OrderID7,
-        //       p7 = salesTransactionToInsert.OrderPrice7,
-        //       o8 = salesTransactionToInsert.OrderID8,
-        //       p8 = salesTransactionToInsert.OrderPrice8,
-        //       o9 = salesTransactionToInsert.OrderID9,
-        //       p9 = salesTransactionToInsert.OrderPrice9,
-        //       o10 = salesTransactionToInsert.OrderID10,
-        //       p10 = salesTransactionToInsert.OrderPrice10,
-        //       o11 = salesTransactionToInsert.OrderID11,
-        //       p11 = salesTransactionToInsert.OrderPrice11,
-        //       o12 = salesTransactionToInsert.OrderID12,
-        //       p12 = salesTransactionToInsert.OrderPrice12,
-        //       o13 = salesTransactionToInsert.OrderID13,
-        //       p13 = salesTransactionToInsert.OrderPrice13,
-        //       o14 = salesTransactionToInsert.OrderID14,
-        //       p14 = salesTransactionToInsert.OrderPrice14,
-        //       o15 = salesTransactionToInsert.OrderID15,
-        //       p15 = salesTransactionToInsert.OrderPrice15,
-        //       o16 = salesTransactionToInsert.OrderID16,
-        //       p16 = salesTransactionToInsert.OrderPrice16,
-        //       o17 = salesTransactionToInsert.OrderID17,
-        //       p17 = salesTransactionToInsert.OrderPrice17,
-        //       o18 = salesTransactionToInsert.OrderID18,
-        //       p18 = salesTransactionToInsert.OrderPrice18,
-        //       o19 = salesTransactionToInsert.OrderID19,
-        //       p19 = salesTransactionToInsert.OrderPrice19,
-        //       o20 = salesTransactionToInsert.OrderID20,
-        //       p20 = salesTransactionToInsert.OrderPrice20
-        //   });
-        //}
         public IEnumerable<FoodBevOrder> GetOrderListSQL()
         {
             return _conn.Query<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS;");
         }
-        //public SalesTransaction AssignOrderListSQL()
-        //{
-        //    var orderList = GetOrderListSQL();
-        //    var salesTransaction = new SalesTransaction();
-        //    salesTransaction.OrderList = orderList;
-        //    return salesTransaction;
-        //}
         public IEnumerable<Employee> GetServerListSQL()
         {
             return _conn.Query<Employee>("SELECT * FROM EMPLOYEES WHERE ROLE = 'SERVER';");
@@ -206,13 +295,6 @@ namespace SushiProject
         {
             return _conn.Query<RestaurantTable>("SELECT * FROM RESTAURANT_TABLES;");
         }
-        //public SalesTransaction AssignAllRestaurantTableListSQL()
-        //{
-        //    var tableList = GetAllRestaurantTableListSQL();
-        //    var salesTransaction = new SalesTransaction();
-        //    salesTransaction.RestaurantTableList = tableList;
-        //    return salesTransaction;
-        //}
         public IEnumerable<RestaurantTable> GetRestaurantTableListSQL(int id)
         {
             return _conn.Query<RestaurantTable>("SELECT * FROM RESTAURANT_TABLES WHERE RestaurantTableAssignedEmployeeID = @id;", new { id = id });

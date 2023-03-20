@@ -53,7 +53,8 @@ namespace SushiProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.UpdateSalesTransactionToDatabaseFirstSQL(transactionToUpdate);
+                repo.UpdateSalesTransactionToDatabaseSQL(transactionToUpdate);
+                repo.UpdateOrderPricesInDatabaseSQL(transactionToUpdate);
 
                 SalesTransaction updatedTransaction = repo.CalculateSubTotalAmountSQL(transactionToUpdate.SalesTransactionID);
                 repo.CalculateFinalTransactionAmountSQL(updatedTransaction);
