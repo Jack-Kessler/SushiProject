@@ -95,8 +95,8 @@ namespace SushiProject.Controllers
                 bool success = repo.ValidateEmployeeAndPasswordSQL(employee);
                 if (success == true)
                 {
-                    repo.InsertClockInToDatabase(employee.EmployeeID);
-                    var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
+                    repo.InsertClockInToDatabase((int)employee.EmployeeID);
+                    var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory((int)employee.EmployeeID);
                     employee.ClockInOutHistory = employeeClockInOutHistory;
                     return View("SuccessfullyClockedInOut", employee);
                 }
@@ -118,8 +118,8 @@ namespace SushiProject.Controllers
             bool success = repo.ValidateEmployeeAndPasswordSQL(employee);
             if (success == true)
             {
-                repo.InsertClockOutToDatabase(employee.EmployeeID);
-                var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
+                repo.InsertClockOutToDatabase((int)employee.EmployeeID);
+                var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory((int)employee.EmployeeID);
                 employee.ClockInOutHistory = employeeClockInOutHistory;
                 return View("SuccessfullyClockedInOut", employee);
             }

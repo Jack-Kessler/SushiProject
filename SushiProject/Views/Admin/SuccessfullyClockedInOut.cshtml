@@ -14,9 +14,9 @@
         @foreach (var hist in Model.ClockInOutHistory)
         {
             <tr>
-                <td>@Model.InOrOut</td>
-                <td>@Model.EmployeeID</td>
-                <td>@Model.DateAndTime</td>
+                <td>@hist.InOrOut</td>
+                <td>@hist.EmployeeID</td>
+                <td>@hist.DateAndTime</td>
             </tr>
         }
     </table>

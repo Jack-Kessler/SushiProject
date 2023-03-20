@@ -85,7 +85,19 @@ namespace SushiProject
         }
         public bool ValidateEmployeeAndPasswordSQL(ClockInOut employee)
         {
-            var credentials = _conn.QuerySingle<Employee>("SELECT * FROM EMPLOYEES WHERE EMPLOYEEID = @id;", new { id = employee.EmployeeID });
+            Employee credentials = new Employee();
+            try
+            {
+                credentials = _conn.QuerySingle<Employee>("SELECT * FROM EMPLOYEES WHERE EMPLOYEEID = @id;", new { id = employee.EmployeeID });
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
             if (credentials.EmployeeID == employee.EmployeeID && credentials.Password == employee.Password)
             {
                 return true;
