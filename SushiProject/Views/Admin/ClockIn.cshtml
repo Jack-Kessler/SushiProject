@@ -1,21 +1,33 @@
-﻿@model Employee
+﻿@model ClockInOut
 
 <h2>Clock-In</h2>
 <br />
 
-@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager"))
+@if (User.IsInRole("Server")|| User.IsInRole("Chef") || User.IsInRole("Manager"))
 {
+    @if (Model.Success == false)
+    {
+        <p>Employee ID and/or Password were invalid. Please try again.</p>
+    }
     <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-controller="Admin" asp-action="ClockInToDatabase" method="post">
 
             <div class="form-group">
-                <input asp-for="EmployeeID" type="hidden" class="form-control" />
+                <label asp-for="EmployeeID" class="col-md-2">Employee ID</label>
+                <input asp-for="EmployeeID" type="number" min="0" step="1" class="form-control" required />
                 <span asp-validation-for="EmployeeID" class="text-danger"></span>
             </div>
             <br />
 
-            <a href="#" onclick="if(confirm('Are you sure you would like to clock-out?')) $(this).closest('form').submit();">Clock-Out</a>
+            <div class="form-group">
+                <label asp-for="Password" class="col-md-2">Password</label>
+                <input asp-for="Password" type="password" class="form-control" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to clock-in?')) $(this).closest('form').submit();">Clock-In</a>
         </form>
     </div>
     <br />

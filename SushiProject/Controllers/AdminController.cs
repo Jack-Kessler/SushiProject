@@ -77,27 +77,57 @@ namespace SushiProject.Controllers
         }
         public IActionResult ClockIn()
         {
-            return View("ClockIn");
+            ClockInOut clockInOut = new ClockInOut();
+            clockInOut.Success = true;
+            return View("ClockIn", clockInOut);
         }
         public IActionResult ClockOut()
         {
-            return View("ClockOut");
+            ClockInOut clockInOut = new ClockInOut();
+            clockInOut.Success = true;
+            return View("ClockOut", clockInOut);
         }
-        public IActionResult ClockInToDatabase(Employee employee)
+        public IActionResult ClockInToDatabase(ClockInOut employee)
         {
-            repo.InsertClockInToDatabase(employee.EmployeeID);
-            var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
-            ClockInOut history = new ClockInOut();
-            history.ClockInOutHistory = employeeClockInOutHistory;
-            return View("SuccessfullyClockedInOut", employeeClockInOutHistory);
+            if(ModelState.IsValid)
+            {
+                //Need to validate if EmployeeID entered exists - if it does not, there will be an error thrown.
+                bool success = repo.ValidateEmployeeAndPasswordSQL(employee);
+                if (success == true)
+                {
+                    repo.InsertClockInToDatabase(employee.EmployeeID);
+                    var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
+                    employee.ClockInOutHistory = employeeClockInOutHistory;
+                    return View("SuccessfullyClockedInOut", employee);
+                }
+                else
+                {
+                    employee.Success = false;
+                    return View("ClockIn", employee);
+                }
+            }
+            else
+            {
+                employee.Success = false;
+                return View("ClockIn", employee);
+            }
+
         }
-        public IActionResult ClockOutToDatabase(Employee employee)
+        public IActionResult ClockOutToDatabase(ClockInOut employee)
         {
-            repo.InsertClockInToDatabase(employee.EmployeeID);
-            var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
-            ClockInOut history = new ClockInOut();
-            history.ClockInOutHistory = employeeClockInOutHistory;
-            return View("SuccessfullyClockedInOut", employeeClockInOutHistory);
+            bool success = repo.ValidateEmployeeAndPasswordSQL(employee);
+            if (success == true)
+            {
+                repo.InsertClockOutToDatabase(employee.EmployeeID);
+                var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory(employee.EmployeeID);
+                employee.ClockInOutHistory = employeeClockInOutHistory;
+                return View("SuccessfullyClockedInOut", employee);
+            }
+            else
+            {
+                employee.Success = false;
+                return View("ClockOut", employee);
+            }
         }
     }
 }
