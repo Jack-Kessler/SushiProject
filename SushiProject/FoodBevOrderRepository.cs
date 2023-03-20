@@ -25,6 +25,10 @@ namespace SushiProject
         {
             return _conn.Query<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE TRANSACTIONID = @id;", new { id = transactionID });
         }
+        public IEnumerable<FoodBevOrder> GetAllOpenFoodBevOrdersSQL()
+        {
+            return _conn.Query<FoodBevOrder>("SELECT * FROM FOOD_BEV_ORDERS WHERE ORDERFULFILLED = 0;");
+        }
         public void UpdateFoodBevOrderSQL(FoodBevOrder foodBevOrderToUpdate)
         {
             _conn.Execute("UPDATE FOOD_BEV_ORDERS SET EMPLOYEEID = @eID, TABLEID = @tID, DATEANDTIME = @date, ORDERSALEAMOUNT = @saleamt, MENUITEMNAME1 = @m1, QUANTITYITEM1 = @q1, PRICEITEM1 = @p1, MENUITEMNAME2 = @m2, QUANTITYITEM2 = @q2, PRICEITEM2 = @p2, MENUITEMNAME3 = @m3, QUANTITYITEM3 = @q3, PRICEITEM3 = @p3, MENUITEMNAME4 = @m4, QUANTITYITEM4 = @q4, PRICEITEM4 = @p4 WHERE ORDERID = @oID;",

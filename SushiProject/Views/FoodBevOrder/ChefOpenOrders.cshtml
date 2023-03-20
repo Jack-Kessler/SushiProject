@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FoodBevOrder>
+
+<h2>Open Orders</h2>
+<br />
+
+<table class="table">
+    <tr>
+        <th>Order ID</th>
+        <th>Server</th>
+        <th>Table ID</th>
+        <th>Order Placed</th>
+        <th>Item 1</th>
+        <th>Qty</th>
+        <th>Item 2</th>
+        <th>Qty</th>
+        <th>Item 3</th>
+        <th>Qty</th>
+        <th>Item 4</th>
+        <th>Qty</th>
+    </tr>
+
+    @foreach (var order in @Model)
+    {
+        <tr>
+            <td><a href=@Url.Action("ViewFoodBevOrder", "FoodBevOrder", new { OrderID = order.OrderID })>@order.OrderID</a></td>
+            @*<td><a href=/FoodBevOrder/ViewFoodBevOrder/@order.OrderID>@order.OrderID</a></td> -- OLD CODE THAT DOESN'T WORK*@
+            <td>@order.EmployeeID</td>
+            <td>@order.TableID</td>
+            <td>@order.DateAndTime</td>
+            <td>@order.MenuItemName1</td>
+            <td>@order.QuantityItem1</td>
+            <td>@order.MenuItemName2</td>
+            <td>@order.QuantityItem2</td>
+            <td>@order.MenuItemName3</td>
+            <td>@order.QuantityItem3</td>
+            <td>@order.MenuItemName4</td>
+            <td>@order.QuantityItem4</td>
+        </tr>
+    }
+</table>
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

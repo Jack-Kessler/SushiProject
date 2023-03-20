@@ -50,7 +50,8 @@
         <br />
         <br />
         <div class="main-page-buttons">
-            <button type="button">View All Orders</button>
+            <input type="button" value="View All Orders" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevOrder") + "'");" />
+            <input type="button" value="View Open Orders" onclick="@("window.location.href='" + @Url.Action("ViewOpenFoodBevOrders", "FoodBevOrder") + "'");" />
             <button type="button">View Ingredient Stock Level</button>
             <button type="button">Clock-In</button>
             <button type="button">Clock-Off</button>

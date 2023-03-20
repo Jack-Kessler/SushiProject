@@ -32,7 +32,11 @@ namespace SushiProject.Controllers
             ordersList.TransactionID = transactionID;
             return View("CustomerOrders", ordersList);
         }
-
+        public IActionResult ViewOpenFoodBevOrders()
+        {
+            var openOrders = repo.GetAllFoodBevOrdersSQL();
+            return View("ChefOpenOrders", openOrders);
+        }
         public IActionResult UpdateFoodBevOrder(int id)
         {
             FoodBevOrder updateOrder = repo.GetFoodBevOrderSQL(id);

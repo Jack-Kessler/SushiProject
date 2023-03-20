@@ -9,7 +9,7 @@
         <th>Order Fulfilled</th>
         @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
         {
-            <th>Employee ID</th>
+            <th>Server</th>
         }
         <th>Table ID</th>
         <th>Order Placed</th>
@@ -74,7 +74,6 @@
         <a href="/FoodBevOrder/UpdateFoodBevOrder/@Model.OrderID">Update Order</a>
     </div>
     <br />
-    <br />
 }
 
 @if (User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
@@ -88,7 +87,6 @@
         }
     </div>
     <br />
-    <br />
 }
 
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
@@ -101,4 +99,7 @@
             <input type="submit" onclick="return confirm('Are you sure you would like to delete this order?')" value="Delete Order" />
         }
     </div>
+    <br />
 }
+
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
