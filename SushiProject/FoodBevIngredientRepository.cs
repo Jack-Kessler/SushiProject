@@ -70,7 +70,8 @@ namespace SushiProject
             for (int i = 1; i <= numOfIngredients; i++)
             {
                 _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = 1000 WHERE INGREDIENTID = @id;", new { id = i });
-            } 
+            }
+            _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = 10000 WHERE INGREDIENTNAME = 'Rice';");
             //Need to use count and for loop because I did not want to disable safe mode for update/delete in MySQL. Therefore, needed to use WHERE statement with primary key.
         }
     }
