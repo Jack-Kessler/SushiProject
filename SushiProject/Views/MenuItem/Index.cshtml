@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<MenuItem>
 
 <h2>Menu Items</h2>
-
 <br/>
-<div style="display: block">
-    <a href="/MenuItem/InsertMenuItem/">Create New Menu Item</a>
-</div>
-<br />
+@if (User.IsInRole("Owner"))
+{
+    <div style="display: block">
+        <a href="/MenuItem/InsertMenuItem/">Create New Menu Item</a>
+    </div>
+    <br />
+}
 
 <table class="table">
     <tr>
@@ -62,3 +64,5 @@
         </tr>
     }
 </table>
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

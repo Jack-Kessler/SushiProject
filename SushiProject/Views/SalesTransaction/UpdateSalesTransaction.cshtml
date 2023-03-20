@@ -699,9 +699,12 @@
                 </select>
             </div>
             <br />
-            
-            <input type="submit" value="Update Transaction" class="btn btn-primary" />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to update this transaction?')) $(this).closest('form').submit();">Update Transaction</a>
         </form>
     </div>
 }
-
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+}

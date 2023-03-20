@@ -7,11 +7,11 @@ namespace SushiProject.Models
         public int MenuItemID { get; set; }
         public int TransactionID { get; set; }
 
-        public IEnumerable<MenuItem> AllMenuItems { get; set; } //Needed to create this property to make code for customer view all menu items work
+        public IEnumerable<MenuItem>? AllMenuItems { get; set; } //Needed to create this property to make code for customer view all menu items work
 
         
         [Required(ErrorMessage = "Please enter a valid menu item name")]
-        [StringLength(50)] //Will not allow user to enter more than 50 chars.
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "The value cannot exceed 50 characters. ")]
         public string? MenuItemName { get; set; }
 
 

@@ -2,12 +2,12 @@
 
 <h2>Setup New Customer - Step 1</h2>
 <br />
-<div class="row">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="SalesTransaction" asp-action="SetupNewCustomer2" method="post">
+@if (User.IsInRole("Guest"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="SalesTransaction" asp-action="SetupNewCustomer2" method="post">
 
-        @if (User.IsInRole("Guest"))
-        {
             <div class="form-group">
                 <label for="">Server ID</label>
                 <select class="form-control" name="EmployeeID" value="">
@@ -18,12 +18,16 @@
                 </select>
             </div>
             <br />
-        }
-
-        <input type="submit" value="Next" class="btn btn-primary" />
-    </form>
-</div>
-<br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 
 
+            <input type="submit" value="Next" class="btn btn-primary" />
+        </form>
+    </div>
+    <br />
+    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+}
+
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+}

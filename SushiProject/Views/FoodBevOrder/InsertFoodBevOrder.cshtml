@@ -1,110 +1,116 @@
 ﻿@model FoodBevOrder
 
 <h2>Create New Order</h2>
-<div class="row">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="FoodBevOrder" asp-action="InsertFoodBevOrderToDatabase" method="post">
+<br />
 
-        <div class="form-group">
-            <input asp-for="TransactionID" type="hidden" class="form-control" />
-            <span asp-validation-for="TransactionID" class="text-danger"></span>
-        </div>
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="FoodBevOrder" asp-action="InsertFoodBevOrderToDatabase" method="post">
 
-        <div class="form-group">
-            <input asp-for="EmployeeID" type="hidden" class="form-control" />
-            <span asp-validation-for="EmployeeID" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <input asp-for="TransactionID" type="hidden" class="form-control" />
+                <span asp-validation-for="TransactionID" class="text-danger"></span>
+            </div>
 
-        <div class="form-group">
-            <input asp-for="TableID" type="hidden" class="form-control" />
-            <span asp-validation-for="TableID" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <input asp-for="EmployeeID" type="hidden" class="form-control" />
+                <span asp-validation-for="EmployeeID" class="text-danger"></span>
+            </div>
 
-        @*Menu Item 1*@
-        <div class="form-group">
-            <label for="">Menu Item 1</label>
-            <select class="form-control" name="MenuItemName1" value="">
-                <option value="" disabled selected>Select Menu Item From List</option>
-                @foreach (var item in Model.MenuItemList)
-                {
-                    <option value="@item.MenuItemName">@item.MenuItemName</option>
-                }
-            </select>
-        </div>
-        <br />
+            <div class="form-group">
+                <input asp-for="TableID" type="hidden" class="form-control" />
+                <span asp-validation-for="TableID" class="text-danger"></span>
+            </div>
 
-        <div class="form-group">
-            <label asp-for="QuantityItem1" class="col-md-2">Menu Item 1 Quantity</label>
-            <input asp-for="QuantityItem1" type="number" min="0" step="1" max="10" class="form-control" />
-            <span asp-validation-for="QuantityItem1" class="text-danger"></span>
-        </div>
-        <br />
+            @*Menu Item 1*@
+            <div class="form-group">
+                <label for="">Menu Item 1</label>
+                <select class="form-control" name="MenuItemName1" value="">
+                    <option value="" disabled selected>Select Menu Item From List</option>
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                    }
+                </select>
+            </div>
+            <br />
 
-
-        @*Menu Item 2*@
-        <div class="form-group">
-            <label for="">Menu Item 2</label>
-            <select class="form-control" name="MenuItemName2" value="">
-                <option value="" selected></option>
-                @foreach (var item in Model.MenuItemList)
-                {
-                    <option value="@item.MenuItemName">@item.MenuItemName</option>
-                }
-            </select>
-        </div>
-        <br />
-
-        <div class="form-group">
-            <label asp-for="QuantityItem2" class="col-md-2">Menu Item 2 Quantity</label>
-            <input asp-for="QuantityItem2" type="number" min="0" step="1" max="10" class="form-control" />
-            <span asp-validation-for="QuantityItem2" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="QuantityItem1" class="col-md-2">Menu Item 1 Quantity</label>
+                <input asp-for="QuantityItem1" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem1" class="text-danger"></span>
+            </div>
+            <br />
 
 
-        @*Menu Item 3*@
-        <div class="form-group">
-            <label for="">Menu Item 3</label>
-            <select class="form-control" name="MenuItemName3" value="">
-                <option value="" selected></option>
-                @foreach (var item in Model.MenuItemList)
-                {
-                    <option value="@item.MenuItemName">@item.MenuItemName</option>
-                }
-            </select>
-        </div>
-        <br />
+            @*Menu Item 2*@
+            <div class="form-group">
+                <label for="">Menu Item 2</label>
+                <select class="form-control" name="MenuItemName2" value="">
+                    <option value="" selected></option>
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                    }
+                </select>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label asp-for="QuantityItem3" class="col-md-2">Menu Item 3 Quantity</label>
-            <input asp-for="QuantityItem3" type="number" min="0" step="1" max="10" class="form-control" />
-            <span asp-validation-for="QuantityItem3" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="QuantityItem2" class="col-md-2">Menu Item 2 Quantity</label>
+                <input asp-for="QuantityItem2" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem2" class="text-danger"></span>
+            </div>
+            <br />
 
 
-        @*Menu Item 4*@
-        <div class="form-group">
-            <label for="">Menu Item 4</label>
-            <select class="form-control" name="MenuItemName4" value="">
-                <option value="" selected></option>
-                @foreach (var item in Model.MenuItemList)
-                {
-                    <option value="@item.MenuItemName">@item.MenuItemName</option>
-                }
-            </select>
-        </div>
-        <br />
+            @*Menu Item 3*@
+            <div class="form-group">
+                <label for="">Menu Item 3</label>
+                <select class="form-control" name="MenuItemName3" value="">
+                    <option value="" selected></option>
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                    }
+                </select>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label asp-for="QuantityItem4" class="col-md-2">Menu Item 4 Quantity</label>
-            <input asp-for="QuantityItem4" type="number" min="0" step="1" max="10" class="form-control" />
-            <span asp-validation-for="QuantityItem4" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="QuantityItem3" class="col-md-2">Menu Item 3 Quantity</label>
+                <input asp-for="QuantityItem3" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem3" class="text-danger"></span>
+            </div>
+            <br />
 
-        <input type="submit" onsubmit="return confirm('Orders can't be changed once they are submitted.<br> Are you sure you would like to submit this order?')" value="Submit Order" class="btn btn-primary" />
-    </form>
 
-</div>
+            @*Menu Item 4*@
+            <div class="form-group">
+                <label for="">Menu Item 4</label>
+                <select class="form-control" name="MenuItemName4" value="">
+                    <option value="" selected></option>
+                    @foreach (var item in Model.MenuItemList)
+                    {
+                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                    }
+                </select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="QuantityItem4" class="col-md-2">Menu Item 4 Quantity</label>
+                <input asp-for="QuantityItem4" type="number" min="0" step="1" max="10" class="form-control" />
+                <span asp-validation-for="QuantityItem4" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to add this order?')) $(this).closest('form').submit();">Add Order</a>
+        </form>
+    </div>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 

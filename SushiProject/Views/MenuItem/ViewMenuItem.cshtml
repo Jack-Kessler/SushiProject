@@ -1,15 +1,14 @@
 ﻿@model MenuItem
 
-<h3>@Model.MenuItemName Information</h3>
+<h2>@Model.MenuItemName Information</h2>
+<br />
 
 <table class="table">
     <tr>
-        @*<th>ID</th>*@
         <th>Name</th>
         <th>Price</th>
         <th>Category Name</th>
         <th>Ingredients</th>
-
     </tr>
 
     @while (true) //Used while loop in order to write C# below. Could be better way.
@@ -63,16 +62,21 @@
     }
 </table>
 
-<div style="display: block">
-    <a href="/MenuItem/UpdateMenuItem/@Model.MenuItemID">Update Menu Item</a>
-</div>
-<br/>
+@if (User.IsInRole("Owner"))
+{
+    <div style="display: block">
+        <a href="/MenuItem/UpdateMenuItem/@Model.MenuItemID">Update Menu Item</a>
+    </div>
+    <br />
 
-<div style="display: block">
+    <div style="display: block">
 
-    @using (Html.BeginForm("DeleteMenuItem", "MenuItem", "Post"))
-    {
-        <input type="hidden" asp-for="MenuItemID" value="@Model.MenuItemID" />
-        <input type="submit" onclick="return confirm('Are you sure you would like to delete this menu item?')" value="Delete Menu Item" />
-    }
-</div>
+        @using (Html.BeginForm("DeleteMenuItem", "MenuItem", "Post"))
+        {
+            <input type="hidden" asp-for="MenuItemID" value="@Model.MenuItemID" />
+            <input type="submit" onclick="return confirm('Are you sure you would like to delete this menu item?')" value="Delete Menu Item" />
+        }
+    </div>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

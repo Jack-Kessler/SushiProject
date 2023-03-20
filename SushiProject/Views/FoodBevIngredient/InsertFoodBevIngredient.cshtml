@@ -1,71 +1,46 @@
 ﻿@model FoodBevIngredient
 
 <h2>Add Ingredient</h2>
-<div class="row">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="FoodBevIngredient" asp-action="InsertFoodBevIngredientToDatabase" method="post">
-        <div class="form-group">
-            <label asp-for="IngredientName" class="col-md-2">Ingredient Name</label>
-            <input asp-for="IngredientName" class="form-control" />
-            <span asp-validation-for="IngredientName" class="text-danger"></span>
-        </div>
-        <br />
+@if (User.IsInRole("Owner"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="FoodBevIngredient" asp-action="InsertFoodBevIngredientToDatabase" method="post">
+            <div class="form-group">
+                <label asp-for="IngredientName" class="col-md-2">Ingredient Name</label>
+                <input asp-for="IngredientName" class="form-control" required />
+                <span asp-validation-for="IngredientName" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label asp-for="IngredientStockLevel" class="col-md-2"> Ingredient Stock Level</label>
-            <input asp-for="IngredientStockLevel" type="number" min="0" step="1" max="2147483646" class="form-control" />
-            <span asp-validation-for="IngredientStockLevel" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="IngredientStockLevel" class="col-md-2"> Ingredient Stock Level</label>
+                <input asp-for="IngredientStockLevel" type="number" min="0" step="1" max="2147483646" class="form-control" required />
+                <span asp-validation-for="IngredientStockLevel" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label asp-for="IngredientCost" class="">Cost Per Unit (Between $00.00 - $99.99)</label>
-            <input asp-for="IngredientCost" type="number" max="99.99" min="00.01" step="0.01" class="form-control" />
-            <span asp-validation-for="IngredientCost" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="IngredientCost" class="">Cost Per Unit (Between $00.00 - $99.99)</label>
+                <input asp-for="IngredientCost" type="number" max="99.99" min="00.01" step="0.01" class="form-control" required />
+                <span asp-validation-for="IngredientCost" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label for="">Ingredient Category</label>
-            <select class="form-control" name="IngredientCategoryName" value="">
-                @foreach (var cat in Model.IngredientCategories)
-                {
-                    <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
-                }
-            </select>
-        </div>
-        <br />
+            <div class="form-group">
+                <label for="">Ingredient Category</label>
+                <select class="form-control" name="IngredientCategoryName" value="">
+                    @foreach (var cat in Model.IngredientCategories)
+                    {
+                        <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
+                    }
+                </select>
+            </div>
+            <br />
 
-        <input type="submit" value="Add Ingredient" class="btn btn-primary" />
-    </form>
-</div>
-
-@*-------------------------------------------------------------------------------------------------------
-<hr />
-<input asp-for="IngredientID" type="hidden" value="" />
-
-<label asp-for="IngredientName" class="control-label">New Ingredient Name</label>
-<input type="text" name="IngredientName" class="form-control" value="" />
-
+            <a href="#" onclick="if(confirm('Are you sure you would like to add this ingredient?')) $(this).closest('form').submit();">Add Ingredient</a>
+        </form>
+    </div>
+}
 <br />
-
-<label asp-for="IngredientStockLevel" class="control-label">Initial Stock Level</label>
-<input type="number" step="1" name="IngredientStockLevel" class="form-control" />
-<br />
-
-<label asp-for="IngredientCost" class="control-label">Cost Per Unit - Between $00.00 - $99.99</label>
-<span class="control-label-addon">$</span>
-<input type="number" max="99.99" min="00.01" step="0.01" name="IngredientCost" class="form-control" />
-<br />
-
-<div class="form-group">
-    <label for="">Ingredient Category</label>
-    <select class="form-control" name="IngredientCategoryName" value="">
-        @foreach (var cat in Model.IngredientCategories)
-        {
-            <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
-        }
-    </select>
-</div>
-<br />
-*@
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

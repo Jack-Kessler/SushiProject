@@ -3,248 +3,238 @@
 <h2>Pay Final Bill</h2>
 <br />
 
-<div class="form-group">
-    <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
-    <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
-</div>
-<br />
+@if (User.IsInRole("Guest"))
+{
+    <div class="form-group">
+        <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
+        <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
+    </div>
+    <br />
 
-@*<div class="form-group">
-    <input asp-for="SalesTransactionCompleted" type="hidden" class="form-control" />
-    <span asp-validation-for="SalesTransactionCompleted" class="text-danger"></span>
-</div>
-<br />
+    <table class="table">
+        <tr>
+            <th>Sub-Total</th>
+            <th>Tax</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>@Model.SubTotalPreTax</td>
+            <td>@Model.TaxAmount</td>
+            <td>@Model.SubTotalAfterTax</td>
+        </tr>
+    </table>
+    <br />
 
-<div class="form-group">
-    <input asp-for="AllYouCanEat" type="hidden" class="form-control" />
-    <span asp-validation-for="AllYouCanEat" class="text-danger"></span>
-</div>
-<br />*@
+    <table class="table">
+        <tr>
+            <th>Order Number</th>
+            <th>Order Price</th>
+        </tr>
+        <tr>
+            <td>@Model.OrderID1</td>
+            <td>@Model.OrderPrice1</td>
+        </tr>
+        @if (Model.OrderPrice2 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID2</td>
+                <td>@Model.OrderPrice2</td>
+            </tr>
+        }
+        @if (Model.OrderPrice3 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID3</td>
+                <td>@Model.OrderPrice3</td>
+            </tr>
+        }
+        @if (Model.OrderPrice4 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID4</td>
+                <td>@Model.OrderPrice4</td>
+            </tr>
+        }
+        @if (Model.OrderPrice5 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID5</td>
+                <td>@Model.OrderPrice5</td>
+            </tr>
+        }
+        @if (Model.OrderPrice6 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID6</td>
+                <td>@Model.OrderPrice6</td>
+            </tr>
+        }
+        @if (Model.OrderPrice7 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID7</td>
+                <td>@Model.OrderPrice7</td>
+            </tr>
+        }
+        @if (Model.OrderPrice8 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID8</td>
+                <td>@Model.OrderPrice8</td>
+            </tr>
+        }
+        @if (Model.OrderPrice9 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID9</td>
+                <td>@Model.OrderPrice9</td>
+            </tr>
+        }
+        @if (Model.OrderPrice10 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID10</td>
+                <td>@Model.OrderPrice10</td>
+            </tr>
+        }
+        @if (Model.OrderPrice11 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID11</td>
+                <td>@Model.OrderPrice11</td>
+            </tr>
+        }
+        @if (Model.OrderPrice12 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID12</td>
+                <td>@Model.OrderPrice12</td>
+            </tr>
+        }
+        @if (Model.OrderPrice13 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID13</td>
+                <td>@Model.OrderPrice13</td>
+            </tr>
+        }
+        @if (Model.OrderPrice14 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID14</td>
+                <td>@Model.OrderPrice14</td>
+            </tr>
+        }
+        @if (Model.OrderPrice15 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID15</td>
+                <td>@Model.OrderPrice15</td>
+            </tr>
+        }
+        @if (Model.OrderPrice16 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID16</td>
+                <td>@Model.OrderPrice16</td>
+            </tr>
+        }
+        @if (Model.OrderPrice17 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID17</td>
+                <td>@Model.OrderPrice17</td>
+            </tr>
+        }
+        @if (Model.OrderPrice18 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID18</td>
+                <td>@Model.OrderPrice18</td>
+            </tr>
+        }
+        @if (Model.OrderPrice19 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID19</td>
+                <td>@Model.OrderPrice19</td>
+            </tr>
+        }
+        @if (Model.OrderPrice20 != 0)
+        {
+            <tr>
+                <td>@Model.OrderID20</td>
+                <td>@Model.OrderPrice20</td>
+            </tr>
+        }
+    </table>
+    <br />
 
-<table class="table">
-    <tr>
-        <th>Sub-Total</th>
-        <th>Tax</th>
-        <th>Total</th>
-    </tr>
-    <tr>
-        <td>@Model.SubTotalPreTax</td>
-        <td>@Model.TaxAmount</td>
-        <td>@Model.SubTotalAfterTax</td>
-    </tr>
-</table>
-<br />
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="SalesTransaction" asp-action="CompleteSalesTransaction" method="post">
 
-<table class="table">
-    <tr>
-        <th>Order Number</th>
-        <th>Order Price</th>
-    </tr>
-    <tr>
-        <td>@Model.OrderID1</td>
-        <td>@Model.OrderPrice1</td>
-    </tr>
-    @if (Model.OrderPrice2 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID2</td>
-            <td>@Model.OrderPrice2</td>
-        </tr>
-    }
-    @if (Model.OrderPrice3 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID3</td>
-            <td>@Model.OrderPrice3</td>
-        </tr>
-    }
-    @if (Model.OrderPrice4 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID4</td>
-            <td>@Model.OrderPrice4</td>
-        </tr>
-    }
-    @if (Model.OrderPrice5 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID5</td>
-            <td>@Model.OrderPrice5</td>
-        </tr>
-    }
-    @if (Model.OrderPrice6 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID6</td>
-            <td>@Model.OrderPrice6</td>
-        </tr>
-    }
-    @if (Model.OrderPrice7 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID7</td>
-            <td>@Model.OrderPrice7</td>
-        </tr>
-    }
-    @if (Model.OrderPrice8 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID8</td>
-            <td>@Model.OrderPrice8</td>
-        </tr>
-    }
-    @if (Model.OrderPrice9 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID9</td>
-            <td>@Model.OrderPrice9</td>
-        </tr>
-    }
-    @if (Model.OrderPrice10 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID10</td>
-            <td>@Model.OrderPrice10</td>
-        </tr>
-    }
-    @if (Model.OrderPrice11 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID11</td>
-            <td>@Model.OrderPrice11</td>
-        </tr>
-    }
-    @if (Model.OrderPrice12 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID12</td>
-            <td>@Model.OrderPrice12</td>
-        </tr>
-    }
-    @if (Model.OrderPrice13 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID13</td>
-            <td>@Model.OrderPrice13</td>
-        </tr>
-    }
-    @if (Model.OrderPrice14 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID14</td>
-            <td>@Model.OrderPrice14</td>
-        </tr>
-    }
-    @if (Model.OrderPrice15 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID15</td>
-            <td>@Model.OrderPrice15</td>
-        </tr>
-    }
-    @if (Model.OrderPrice16 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID16</td>
-            <td>@Model.OrderPrice16</td>
-        </tr>
-    }
-    @if (Model.OrderPrice17 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID17</td>
-            <td>@Model.OrderPrice17</td>
-        </tr>
-    }
-    @if (Model.OrderPrice18 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID18</td>
-            <td>@Model.OrderPrice18</td>
-        </tr>
-    }
-    @if (Model.OrderPrice19 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID19</td>
-            <td>@Model.OrderPrice19</td>
-        </tr>
-    }
-    @if (Model.OrderPrice20 != 0)
-    {
-        <tr>
-            <td>@Model.OrderID20</td>
-            <td>@Model.OrderPrice20</td>
-        </tr>
-    }
-</table>
-<br />
+            <div class="form-group">
+                <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
+                <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
+            </div>
+            <br />
 
-<div class="row">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="SalesTransaction" asp-action="CompleteSalesTransaction" method="post">
+            <div class="form-group">
+                <input asp-for="NumOfCustomersAdult" type="hidden" class="form-control" />
+                <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
-            <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <input asp-for="NumOfCustomersChild" type="hidden" class="form-control" />
+                <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-for="SubTotalPreTax" type="hidden" class="form-control" />
+                <span asp-validation-for="SubTotalPreTax" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <input asp-for="NumOfCustomersAdult" type="hidden" class="form-control" />
-            <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <input asp-for="TaxAmount" type="hidden" class="form-control" />
+                <span asp-validation-for="TaxAmount" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <input asp-for="NumOfCustomersChild" type="hidden" class="form-control" />
-            <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="form-group">
-            <input asp-for="SubTotalPreTax" type="hidden" class="form-control" />
-            <span asp-validation-for="SubTotalPreTax" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <input asp-for="SubTotalAfterTax" type="hidden" class="form-control" />
+                <span asp-validation-for="SubTotalAfterTax" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <input asp-for="TaxAmount" type="hidden" class="form-control" />
-            <span asp-validation-for="TaxAmount" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="TipAmount">Tip</label>
+                <input asp-for="TipAmount" type="number" max="1000.00" min="0.00" step="0.01" value="0" />
+                <span asp-validation-for="TipAmount" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <input asp-for="SubTotalAfterTax" type="hidden" class="form-control" />
-            <span asp-validation-for="SubTotalAfterTax" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label for="">Payment Method</label>
+                <select class="form-control" name="PaymentMethod" value="">
+                    @foreach (var method in Model.PaymentMethodsList)
+                    {
+                        <option value="@method.PaymentMethodCategoryName">@method.PaymentMethodCategoryName</option>
+                    }
+                </select>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label asp-for="TipAmount">Tip</label>
-            <input asp-for="TipAmount" type="number" max="1000.00" min="0.00" step="0.01" value="0" />
-            <span asp-validation-for="TipAmount" class="text-danger"></span>
-        </div>
-        <br />
+            <a href="#" onclick="if(confirm('Are you sure you would like to make this payment?')) $(this).closest('form').submit();">Submit Payment</a>
+        </form>
+    </div>
+    <br />
+    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("CustomerHomePage", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />
+}
 
-
-        <div class="form-group">
-            <label for="">Payment Method</label>
-            <select class="form-control" name="PaymentMethod" value="">
-                @foreach (var method in Model.PaymentMethodsList)
-                {
-                    <option value="@method.PaymentMethodCategoryName">@method.PaymentMethodCategoryName</option>
-                }
-            </select>
-        </div>
-        <br />
-
-
-        <a href="#" onclick="if(confirm('Are you sure you would like to make this payment?')) $(this).closest('form').submit();">Submit Payment</a>
-
-    </form>
-</div>
-<br />
-
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("CustomerHomePage", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />
-
-
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+}

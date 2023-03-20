@@ -1,37 +1,57 @@
 ﻿@model FoodBevIngredient
 
 <h2>Update @Model.IngredientName</h2>
-
-@using (Html.BeginForm("UpdateFoodBevIngredientToDatabase", "FoodBevIngredient", "Post"))
+<br />
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
-    <input asp-for="IngredientID" type="hidden" value="@Model.IngredientID" />
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="FoodBevIngredient" asp-action="UpdateFoodBevIngredientToDatabase" method="post">
 
-    <label asp-for="IngredientName" class="control-label">Ingredient Name</label>
-    <input type="text" name="IngredientName" class="form-control" value="@Model.IngredientName" />
-    <br />
+            <div class="form-group">
+                <input asp-for="IngredientID" type="hidden" class="form-control" />
+                <span asp-validation-for="IngredientID" class="text-danger"></span>
+            </div>
 
-    <label asp-for="IngredientStockLevel" class="control-label">Stock Level</label>
-    <input type="number" step="1" name="IngredientStockLevel" class="form-control" value="@Model.IngredientStockLevel" />
-    <br />
+            <div class="form-group">
+                <label asp-for="IngredientName" class="col-md-2">Ingredient Name</label>
+                <input asp-for="IngredientName" type="text" class="form-control" required />
+                <span asp-validation-for="IngredientName" class="text-danger"></span>
+            </div>
+            <br />
 
-    <label asp-for="IngredientCost" class="control-label">Cost (Per Unit)</label>
-    <input type="number" step="0.01" name="IngredientCost" class="form-control" value="@Model.IngredientCost" />
-    <br />
+            <div class="form-group">
+                <label asp-for="IngredientStockLevel" class="col-md-2">Stock Level</label>
+                <input asp-for="IngredientStockLevel" type="number" max="2147483647" min="0" step="1" class="form-control" required />
+                <span asp-validation-for="IngredientStockLevel" class="text-danger"></span>
+            </div>
+            <br />
 
-@*    <label asp-for="IngredientCategoryName" class="control-label">Category Name</label>
-    <input type="text" name="IngredientCategoryName" class="form-control" value="@Model.IngredientCategoryName" />
-    <br />*@
-
-    <div class="form-group">
-        <label for="">Ingredient Category</label>
-        <select class="form-control" name="IngredientCategoryName" value="">
-            @foreach (var cat in Model.IngredientCategories)
+            @if (User.IsInRole("Owner"))
             {
-                <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
+                <div class="form-group">
+                    <label asp-for="IngredientCost" class="col-md-2">Ingredient Cost</label>
+                    <input asp-for="IngredientCost" type="number" max="2147483647" min="0" step="0.01" class="form-control" required />
+                    <span asp-validation-for="IngredientCost" class="text-danger"></span>
+                </div>
+                <br />
             }
-        </select>
-    </div>
-    <br />
 
-    <input type="submit" value="Update Ingredient" class="btn btn-primary" />
+
+            <div class="form-group">
+                <label for="">Ingredient Category</label>
+                <select class="form-control" name="IngredientCategoryName" value="">
+                    @foreach (var cat in Model.IngredientCategories)
+                    {
+                        <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
+                    }
+                </select>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to save changes entered for this ingredient?')) $(this).closest('form').submit();">Update Ingredient</a>
+        </form>
+    </div>
 }
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

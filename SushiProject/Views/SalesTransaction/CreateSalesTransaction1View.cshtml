@@ -2,12 +2,13 @@
 
 <h2>Create New Transaction - Step 1</h2>
 <br />
-<div class="row">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="SalesTransaction" asp-action="CreateSalesTransaction2" method="post">
 
-        @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
-        {
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="SalesTransaction" asp-action="CreateSalesTransaction2" method="post">
+
             <div class="form-group">
                 <label for="">Server ID</label>
                 <select class="form-control" name="EmployeeID" value="">
@@ -18,10 +19,10 @@
                 </select>
             </div>
             <br />
-        }
 
-        <input type="submit" value="Next Step" class="btn btn-primary" />
-    </form>
-</div>
+            <input type="submit" value="Next Step" class="btn btn-primary" />
+        </form>
+    </div>
+}
 <br />
 <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

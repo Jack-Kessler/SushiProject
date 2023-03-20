@@ -2,39 +2,43 @@
 
 <h2>Table @Model.RestaurantTableID Assignment</h2>
 
-<div class="row">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="RestaurantTable" asp-action="UpdateRestaurantTableToDatabase" method="post">
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="RestaurantTable" asp-action="UpdateRestaurantTableToDatabase" method="post">
 
-        <div class="form-group">
-            <label asp-for="RestaurantTableID" class="col-md-2"></label>
-            <input asp-for="RestaurantTableID" type="hidden" class="form-control" />
-            <span asp-validation-for="RestaurantTableID" class="text-danger"></span>
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="RestaurantTableID" class="col-md-2"></label>
+                <input asp-for="RestaurantTableID" type="hidden" class="form-control" />
+                <span asp-validation-for="RestaurantTableID" class="text-danger"></span>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label for="RestaurantTableAssignedEmployeeID">Assigned Server</label>
-            <select class="form-control" name="RestaurantTableAssignedEmployeeID" value="">
+            <div class="form-group">
+                <label for="RestaurantTableAssignedEmployeeID">Assigned Server</label>
+                <select class="form-control" name="RestaurantTableAssignedEmployeeID" value="">
 
-                @foreach (var cat in Model.ServerList)
-                {
-                    if (cat.EmployeeID == Model.RestaurantTableAssignedEmployeeID)
+                    @foreach (var cat in Model.ServerList)
                     {
-                        <option value="@cat.EmployeeID" selected>Employee ID:<text>&nbsp;</text>@cat.EmployeeID<text>&emsp;&emsp;</text>Name:<text>&nbsp;</text>@cat.FirstName @cat.LastName</option> @*Sets default value = existing value*@
+                        if (cat.EmployeeID == Model.RestaurantTableAssignedEmployeeID)
+                        {
+                            <option value="@cat.EmployeeID" selected>Employee ID:<text>&nbsp;</text>@cat.EmployeeID<text>&emsp;&emsp;</text>Name:<text>&nbsp;</text>@cat.FirstName @cat.LastName</option> @*Sets default value = existing value*@
+                        }
+                        else
+                        {
+                            <option value="@cat.EmployeeID">Employee ID:<text>&nbsp;</text>@cat.EmployeeID<text>&emsp;&emsp;</text>Name:<text>&nbsp;</text>@cat.FirstName @cat.LastName</option>
+                        }
                     }
-                    else
-                    {
-                        <option value="@cat.EmployeeID">Employee ID:<text>&nbsp;</text>@cat.EmployeeID<text>&emsp;&emsp;</text>Name:<text>&nbsp;</text>@cat.FirstName @cat.LastName</option>
-                    }
-                }
-                <option value="Unassign">Unassign - Select if table is now open</option>
-            </select>
-        </div>
-        <br />
+                    <option value="Unassign">Unassign - Select if table is now open</option>
+                </select>
+            </div>
+            <br />
 
-
-        <input type="submit" value="Update Table Assignment" class="btn btn-primary" />
-    </form>
-</div>
+            <a href="#" onclick="if(confirm('Are you sure you would like to update the table assignment?')) $(this).closest('form').submit();">Update Table Assignment</a>
+        </form>
+    </div>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 

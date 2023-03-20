@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<RestaurantTable>
 
 <h2>Restaurant Tables</h2>
-
 <br/>
 
-@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+@if (User.IsInRole("Owner"))
 {
     <div style="display: block">
 
@@ -15,27 +14,31 @@
     </div>
 }
 
-<table class="table">
-    <tr>
-        <th>Table Number</th>
-        <th>Assigned Server</th>
-    </tr>
-    
-    @foreach (var rtable in @Model)
-    {
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <table class="table">
         <tr>
-            <td><a href=@Url.Action("ViewRestaurantTable", "RestaurantTable", new { RestaurantTableID = rtable.RestaurantTableID })>@rtable.RestaurantTableID</a></td>
-            @*<td><a href=/RestaurantTable/ViewRestaurantTable/@rtable.RestaurantTableID>@rtable.RestaurantTableID</a></td>*@
-            <td>
-                @if(rtable.RestaurantTableAssignedEmployeeFirstName != null)
-                {
-                    @rtable.RestaurantTableAssignedEmployeeFirstName <text>&nbsp;</text> @rtable.RestaurantTableAssignedEmployeeLastName
-                }
-                else
-                {
-                    <text>Unassigned</text>
-                }
-            </td>
+            <th>Table Number</th>
+            <th>Assigned Server</th>
         </tr>
-    }
-</table>
+
+        @foreach (var rtable in @Model)
+        {
+            <tr>
+                <td><a href=@Url.Action("ViewRestaurantTable", "RestaurantTable", new { RestaurantTableID = rtable.RestaurantTableID })>@rtable.RestaurantTableID</a></td>
+                <td>
+                    @if (rtable.RestaurantTableAssignedEmployeeFirstName != null)
+                    {
+                        @rtable.RestaurantTableAssignedEmployeeFirstName <text>&nbsp;</text> @rtable.RestaurantTableAssignedEmployeeLastName
+                    }
+                    else
+                    {
+                        <text>Unassigned</text>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

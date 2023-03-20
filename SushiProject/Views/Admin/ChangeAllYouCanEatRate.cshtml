@@ -36,21 +36,21 @@ else
 
             <div class="form-group">
                 <label asp-for="AllYouCanEatRate">Old Rate</label>
-                <input asp-for="AllYouCanEatRate" type="number" min="0" max="100" step="0.01" />
+                <input asp-for="AllYouCanEatRate" type="number" min="0" max="100" step="0.01" required/>
                 <span asp-validation-for="AllYouCanEatRate" class="text-danger"></span>
             </div>
             <br />
 
             <div class="form-group">
                 <label asp-for="NewAllYouCanEatRate">New Rate</label>
-                <input asp-for="NewAllYouCanEatRate" type="number" min="0" max="100" step="0.01" />
+                <input asp-for="NewAllYouCanEatRate" type="number" min="0" max="100" step="0.01" required/>
                 <span asp-validation-for="NewAllYouCanEatRate" class="text-danger"></span>
             </div>
             <br />
 
             <div class="form-group">
                 <label asp-for="ConfirmAllYouCanEatRate">Confirm New Rate</label>
-                <input asp-for="ConfirmAllYouCanEatRate" type="number" min="0" max="100" step="0.01" />
+                <input asp-for="ConfirmAllYouCanEatRate" type="number" min="0" max="100" step="0.01" required/>
                 <span asp-validation-for="ConfirmAllYouCanEatRate" class="text-danger"></span>
             </div>
             <br />

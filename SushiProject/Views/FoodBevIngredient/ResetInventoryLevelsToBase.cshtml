@@ -2,11 +2,15 @@
 
 <h2>Reset Ingredient Inventory to Base Levels</h2>
 <br />
+@if (User.IsInRole("Manager")||User.IsInRole("Owner"))
+{
+    <div style="display: block">
 
-<div style="display: block">
-
-    @using (Html.BeginForm("ResetAllIngredientsToBaseLevelToDatabase", "FoodBevIngredient", "Post"))
-    {
-        <input type="submit" onclick="return confirm('Are you sure you would like to reset the inventory to base levels?')" value="Reset Inventory Levels" />
-    }
-</div>
+        @using (Html.BeginForm("ResetAllIngredientsToBaseLevelToDatabase", "FoodBevIngredient", "Post"))
+        {
+            <input type="submit" onclick="return confirm('Are you sure you would like to reset all inventory to base levels?')" value="Reset Inventory Levels" />
+        }
+    </div>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

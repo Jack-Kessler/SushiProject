@@ -1,27 +1,23 @@
 ﻿@model FoodBevOrder
 
 <h2>Update Order @Model.OrderID</h2>
+<br />
 
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="FoodBevOrder" asp-action="UpdateFoodBevOrderToDatabase" method="post">
 
         <div class="form-group">
-            @*<label asp-for="OrderID" class="col-md-2"></label>*@
             <input asp-for="OrderID" type="hidden" class="form-control" />
             <span asp-validation-for="OrderID" class="text-danger"></span>
         </div>
         <br />
 
-        @if (User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
-        {
             <div class="form-group">
-                @*<label asp-for="OrderFulfilled" class="col-md-2"></label>*@
                 <input asp-for="OrderFulfilled" type="hidden" class="form-control" />
                 <span asp-validation-for="OrderFulfilled" class="text-danger"></span>
             </div>
             <br />
-        }
 
         @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
         {
@@ -64,7 +60,7 @@
         }
 
 
-        @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+        @if (User.IsInRole("Server") || User.IsInRole("Manager") || User.IsInRole("Owner"))
         {
             @*Menu Item 1*@
             <div class="form-group">
@@ -188,8 +184,9 @@
             </div>
             <br />
         }
-  
-        <input type="submit" value="Update Order" class="btn btn-primary" />
+        
+        <a href="#" onclick="if(confirm('Are you sure you would like to update this order?')) $(this).closest('form').submit();">Update Order</a>
     </form>
 </div>
-
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

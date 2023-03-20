@@ -2,32 +2,39 @@
 
 <h2>LogOut Screen</h2>
 <br />
-<br />
-@if (Model.PasswordIncorrect == true)
+
+@if (User.IsInRole("Guest"))
 {
-    <h3>Password Incorrect: Please Try Again</h3>
+    @if (Model.PasswordIncorrect == true)
+    {
+        <h3>Password Incorrect: Please Try Again</h3>
+    }
+
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="SalesTransaction" asp-action="CheckPassword" method="post">
+
+            <div class="form-group">
+                <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
+                <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="CustomerLogoutPassword" class="">Logoff Password</label>
+                <input asp-for="CustomerLogoutPassword" type="password" placeholder="Password" class="form-control" />
+                <span asp-validation-for="CustomerLogoutPassword" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to logout')) $(this).closest('form').submit();">Logout</a>
+        </form>
+    </div>
+    <br />
+    <input type="button" value="Return" onclick="@("window.location.href='" + @Url.Action("ShowFinalReceipt", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />
 }
-<div class="row">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-controller="SalesTransaction" asp-action="CheckPassword" method="post">
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+}
 
-        <div class="form-group">
-            <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
-            <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
-        </div>
-        <br />
-
-        <div class="form-group">
-            <label asp-for="CustomerLogoutPassword" class="">Logoff Password</label>
-            <input asp-for="CustomerLogoutPassword" type="password" placeholder="Password" class="form-control" />
-            <span asp-validation-for="CustomerLogoutPassword" class="text-danger"></span>
-        </div>
-        <br />
-
-        <input type="submit" value="Logout" class="btn btn-primary" />
-    </form>
-</div>
-<br />
-<br />
-
-<input type="button" value="Return" onclick="@("window.location.href='" + @Url.Action("ShowFinalReceipt", "SalesTransaction", new {@transactionID = Model.SalesTransactionID}) + "'");" />
