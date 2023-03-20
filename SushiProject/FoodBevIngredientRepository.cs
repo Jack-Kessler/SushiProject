@@ -62,5 +62,16 @@ namespace SushiProject
             _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME9 = @id;", new { id = ingredient.IngredientName });
             _conn.Execute("DELETE FROM MENU_ITEMS WHERE MENUITEMINGREDIENTNAME10 = @id;", new { id = ingredient.IngredientName });
         }
+
+        public void ResetAllIngredientsToBaseLevelSQL()
+        {
+            var allIngredientsList = GetAllFoodBevIngredientsSQL();
+            int numOfIngredients = allIngredientsList.Count();
+            for (int i = 1; i <= numOfIngredients; i++)
+            {
+                _conn.Execute("UPDATE FOOD_BEV_INGREDIENTS SET INGREDIENTSTOCKLEVEL = 1000 WHERE INGREDIENTID = @id;", new { id = i });
+            } 
+            //Need to use count and for loop because I did not want to disable safe mode for update/delete in MySQL. Therefore, needed to use WHERE statement with primary key.
+        }
     }
 }

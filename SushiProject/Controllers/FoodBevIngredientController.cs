@@ -42,15 +42,22 @@ namespace SushiProject.Controllers
 
             return RedirectToAction("ViewFoodBevIngredient", new { id = ingredient.IngredientID });
         }
-
+        public IActionResult ResetAllIngredientsToBaseLevel()
+        {
+            return View("ResetInventoryLevelsToBase");
+        }
+        public IActionResult ResetAllIngredientsToBaseLevelToDatabase()
+        {
+            repo.ResetAllIngredientsToBaseLevelSQL();
+            return RedirectToAction("Index");
+        }
         public IActionResult InsertFoodBevIngredient()
         {
             var ingredient = repo.AssignFoodBevIngredientCategorySQL();
             return View(ingredient);
         }
 
-
-        [HttpPost] //Maybe don't need
+        [HttpPost]
         public IActionResult InsertFoodBevIngredientToDatabase(FoodBevIngredient ingredientToInsert)
         {
             var ingr = repo.AssignFoodBevIngredientCategorySQL();

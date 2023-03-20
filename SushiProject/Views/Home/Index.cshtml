@@ -69,7 +69,8 @@
             <button type="button">View Orders</button>
             <button type="button">View Transactions</button>
             <button type="button">View Clocked-In Staff</button>
-            <button type="button">Update Inventory</button>
+            <input type="button" value="Update Inventory" onclick="return confirm('Are you sure you would like to reset the inventory levels?')" 
+                onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
         </div>
     }
     @if (User.IsInRole("Owner"))
@@ -87,6 +88,7 @@
             <button type="button">Update Inventory</button>
             <button type="button">Edit Employee Info</button>
             <button type="button">Create New Employee Account</button>
+            <input type="button" value="Reset Inventory Levels" onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
             <input type="button" value="Change Tax Rate" onclick="@("window.location.href='" + @Url.Action("ChangeTaxRate", "Admin") + "'");" />
             <input type="button" value="Change All You Can Eat Rate - Adult" onclick="@("window.location.href='" + @Url.Action("ChangeAllYouCanEatRateAdult", "Admin") + "'");" />
             <input type="button" value="Change All You Can Eat Rate - Child" onclick="@("window.location.href='" + @Url.Action("ChangeAllYouCanEatRateChild", "Admin") + "'");" />

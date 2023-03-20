@@ -11,5 +11,6 @@ namespace SushiProject
         public IEnumerable<FoodBevIngredientCategory> GetFoodBevCategoriesSQL();
         public FoodBevIngredient AssignFoodBevIngredientCategorySQL();
         public void DeleteFoodBevIngredientSQL(FoodBevIngredient ingredient);
+        public void ResetAllIngredientsToBaseLevelSQL();
     }
 }
