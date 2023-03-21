@@ -1,0 +1,22 @@
+﻿@model IEnumerable<PaymentMethodCategory>
+
+<h2>Payment Methods</h2>
+<br />
+
+@if (User.IsInRole("Owner"))
+{
+    <table class="table">
+        <tr>
+            <th>Payment Method</th>
+        </tr>
+        @foreach (var pay in @Model)
+        {
+            <tr>
+                <td><a href=/Admin/ViewSinglePaymentMethod/@pay.PaymentMethodCategoryName>@pay.PaymentMethodCategoryName</a></td>
+            </tr>
+        }
+    </table>
+    <br />
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

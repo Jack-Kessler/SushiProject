@@ -1,0 +1,28 @@
+﻿@model PaymentMethodCategory
+
+<h2>Update Payment Method: @Model.PaymentMethodCategoryName</h2>
+<br />
+@if (User.IsInRole("Owner"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Admin" asp-action="UpdatePaymentMethod" method="post">
+
+            <div class="form-group">
+                <input asp-for="PaymentMethodCategoryID" type="hidden" class="form-control" />
+                <span asp-validation-for="PaymentMethodCategoryID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentMethodCategoryName" class="col-md-2">Ingredient Name</label>
+                <input asp-for="PaymentMethodCategoryName" type="text" class="form-control" required />
+                <span asp-validation-for="PaymentMethodCategoryName" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to save changes made to this payment method?')) $(this).closest('form').submit();">Update Payment Method</a>
+        </form>
+    </div>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

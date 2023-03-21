@@ -134,5 +134,20 @@ namespace SushiProject.Controllers
             var staffList = repo.GetAllClockedInOutStaff();
             return View("ClockedInOutStaff", staffList);
         }
+        public IActionResult ViewAllPaymentMethods()
+        {
+            IEnumerable<PaymentMethodCategory> paymentMethodsList = repo.GetAllPaymentMethods();
+            return View("ViewAllPaymentMethods", paymentMethodsList);
+        }
+        public IActionResult UpdatePaymentMethod(PaymentMethodCategory pay)
+        {
+            repo.UpdatePaymentMethodInDatabase(pay);
+            return RedirectToAction("ViewAllPaymentMethods");
+        }
+        public IActionResult DeletePaymentMethod(PaymentMethodCategory pay)
+        {
+            repo.DeletePaymentMethodInDatabase(pay);
+            return RedirectToAction("ViewAllPaymentMethods");
+        }
     }
 }

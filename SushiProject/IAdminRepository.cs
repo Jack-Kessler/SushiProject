@@ -16,5 +16,8 @@ namespace SushiProject
         public IEnumerable<ClockInOut> GetEmployeeClockInOutHistory(int employeeID);
         public bool ValidateEmployeeAndPasswordSQL(ClockInOut employee);
         public IEnumerable<Employee> GetAllClockedInOutStaff();
+        public IEnumerable<PaymentMethodCategory> GetAllPaymentMethods();
+        public void DeletePaymentMethodInDatabase(PaymentMethodCategory pay);
+        public void UpdatePaymentMethodInDatabase(PaymentMethodCategory pay);
     }
 }

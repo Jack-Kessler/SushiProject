@@ -113,5 +113,19 @@ namespace SushiProject
             var employeeList = _conn.Query<Employee>("SELECT * FROM EMPLOYEES;");
             return employeeList;
         }
+        public IEnumerable<PaymentMethodCategory> GetAllPaymentMethods()
+        {
+            var paymentMethodsList = _conn.Query<PaymentMethodCategory>("SELECT * FROM PAYMENT_METHOD_CATEGORIES;");
+            return paymentMethodsList;
+        }
+        public void UpdatePaymentMethodInDatabase(PaymentMethodCategory pay)
+        {
+            _conn.Execute("UPDATE PAYMENT_METHOD_CATEGORIES SET PAYMENTMETHODCATEGORYNAME = @name WHERE PAYMENTMETHODCATEGORYID = @id;", new { name = pay.PaymentMethodCategoryName, id = pay.PaymentMethodCategoryID });
+        }
+        public void DeletePaymentMethodInDatabase(PaymentMethodCategory pay)
+        {
+            _conn.Execute("DELETE FROM PAYMENT_METHOD_CATEGORIES WHERE PAYMENTMETHODCATEGORYID = @id;", new { id = pay.PaymentMethodCategoryID });
+        }
+
     }
 }
