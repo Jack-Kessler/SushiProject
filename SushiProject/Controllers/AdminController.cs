@@ -151,8 +151,12 @@ namespace SushiProject.Controllers
         }
         public IActionResult InsertPaymentMethodToDatabase(PaymentMethodCategory pay)
         {
-            repo.InsertPaymentMethodInDatabaseSQL(pay);
-            return RedirectToAction("ViewAllPaymentMethods");
+            if (ModelState.IsValid)
+            {
+                repo.InsertPaymentMethodInDatabaseSQL(pay);
+                return RedirectToAction("ViewAllPaymentMethods");
+            }
+            return View("InsertPaymentMethod", pay);
         }
         public IActionResult UpdatePaymentMethod(int id)
         {
@@ -161,8 +165,12 @@ namespace SushiProject.Controllers
         }
         public IActionResult UpdatePaymentMethodInDatabase(PaymentMethodCategory pay)
         {
-            repo.UpdatePaymentMethodInDatabaseSQL(pay);
-            return RedirectToAction("ViewAllPaymentMethods");
+            if (ModelState.IsValid)
+            {
+                repo.UpdatePaymentMethodInDatabaseSQL(pay);
+                return RedirectToAction("ViewAllPaymentMethods");
+            }
+            return View("UpdatePaymentMethod", pay);
         }
         public IActionResult DeletePaymentMethod(PaymentMethodCategory pay)
         {

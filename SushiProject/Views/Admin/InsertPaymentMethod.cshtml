@@ -9,7 +9,7 @@
 
             <div class="form-group">
                 <label asp-for="PaymentMethodCategoryName" class="col-md-2">Payment Method Name</label>
-                <input asp-for="PaymentMethodCategoryName" type="text" class="form-control" required />
+                <input asp-for="PaymentMethodCategoryName" type="text" minlength="1" maxlength="50" data-val-required="This field is required." class="form-control" required />
                 <span asp-validation-for="PaymentMethodCategoryName" class="text-danger"></span>
             </div>
             <br />
