@@ -36,8 +36,8 @@
         <br />
         <br />
         <div class="main-page-buttons">
-            <button type="button">View Table Assignments</button>
-            <button type="button">View My Tables</button>
+            <input type="button" value="Tables" onclick="@("window.location.href='" + @Url.Action("Index", "RestaurantTable") + "'");" />
+            <input type="button" value="My Open Orders" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevOrders") + "'");" />
             <input type="button" value="Clock-In" onclick="@("window.location.href='" + @Url.Action("ClockIn", "Admin") + "'");" />
             <input type="button" value="Clock-Out" onclick="@("window.location.href='" + @Url.Action("ClockOut", "Admin") + "'");" />
         </div>
