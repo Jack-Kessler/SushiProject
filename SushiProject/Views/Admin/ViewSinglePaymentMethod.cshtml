@@ -1,6 +1,6 @@
 ﻿@model PaymentMethodCategory
 
-<h2>Payment Methods</h2>
+<h2>Payment Method: @Model.PaymentMethodCategoryName</h2>
 <br />
 
 @if (User.IsInRole("Owner"))
@@ -17,7 +17,7 @@
     <br />
 
     <div style="display: block">
-        <a href="/Admin/UpdatePaymentMethod/@Model.PaymentMethodCategoryName>@Model.PaymentMethodCategoryName">Update Payment Method</a>
+        <a href="/Admin/UpdatePaymentMethod/@Model.PaymentMethodCategoryID">Update Payment Method</a>
     </div>
     <br />
 

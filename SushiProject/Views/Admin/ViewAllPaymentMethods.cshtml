@@ -5,6 +5,11 @@
 
 @if (User.IsInRole("Owner"))
 {
+    <div style="display: block">
+        <a href="/Admin/InsertPaymentMethod/">Add a New Payment Method</a>
+    </div>
+    <br />
+
     <table class="table">
         <tr>
             <th>Payment Method</th>
@@ -12,7 +17,7 @@
         @foreach (var pay in @Model)
         {
             <tr>
-                <td><a href=/Admin/ViewSinglePaymentMethod/@pay.PaymentMethodCategoryName>@pay.PaymentMethodCategoryName</a></td>
+                <td><a href=/Admin/ViewSinglePaymentMethod/@pay.PaymentMethodCategoryID>@pay.PaymentMethodCategoryName</a></td>
             </tr>
         }
     </table>

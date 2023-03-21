@@ -95,8 +95,8 @@ namespace SushiProject.Controllers
                 bool success = repo.ValidateEmployeeAndPasswordSQL(employee);
                 if (success == true)
                 {
-                    repo.InsertClockInToDatabase((int)employee.EmployeeID);
-                    var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory((int)employee.EmployeeID);
+                    repo.InsertClockInToDatabaseSQL((int)employee.EmployeeID);
+                    var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistorySQL((int)employee.EmployeeID);
                     employee.ClockInOutHistory = employeeClockInOutHistory;
                     return View("SuccessfullyClockedInOut", employee);
                 }
@@ -118,8 +118,8 @@ namespace SushiProject.Controllers
             bool success = repo.ValidateEmployeeAndPasswordSQL(employee);
             if (success == true)
             {
-                repo.InsertClockOutToDatabase((int)employee.EmployeeID);
-                var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistory((int)employee.EmployeeID);
+                repo.InsertClockOutToDatabaseSQL((int)employee.EmployeeID);
+                var employeeClockInOutHistory = repo.GetEmployeeClockInOutHistorySQL((int)employee.EmployeeID);
                 employee.ClockInOutHistory = employeeClockInOutHistory;
                 return View("SuccessfullyClockedInOut", employee);
             }
@@ -131,22 +131,42 @@ namespace SushiProject.Controllers
         }
         public IActionResult ViewClockedInOutStaff()
         {
-            var staffList = repo.GetAllClockedInOutStaff();
+            var staffList = repo.GetAllClockedInOutStaffSQL();
             return View("ClockedInOutStaff", staffList);
         }
         public IActionResult ViewAllPaymentMethods()
         {
-            IEnumerable<PaymentMethodCategory> paymentMethodsList = repo.GetAllPaymentMethods();
+            IEnumerable<PaymentMethodCategory> paymentMethodsList = repo.GetAllPaymentMethodsSQL();
             return View("ViewAllPaymentMethods", paymentMethodsList);
         }
-        public IActionResult UpdatePaymentMethod(PaymentMethodCategory pay)
+        public IActionResult ViewSinglePaymentMethod(int id)
         {
-            repo.UpdatePaymentMethodInDatabase(pay);
+            PaymentMethodCategory paymentMethod = repo.GetSinglePaymentMethodSQL(id);
+            return View("ViewSinglePaymentMethod", paymentMethod);
+        }
+        public IActionResult InsertPaymentMethod()
+        {
+            PaymentMethodCategory paymentMethod = new PaymentMethodCategory();
+            return View("InsertPaymentMethod", paymentMethod);
+        }
+        public IActionResult InsertPaymentMethodToDatabase(PaymentMethodCategory pay)
+        {
+            repo.InsertPaymentMethodInDatabaseSQL(pay);
+            return RedirectToAction("ViewAllPaymentMethods");
+        }
+        public IActionResult UpdatePaymentMethod(int id)
+        {
+            PaymentMethodCategory paymentMethod = repo.GetSinglePaymentMethodSQL(id);
+            return View("UpdatePaymentMethod", paymentMethod);
+        }
+        public IActionResult UpdatePaymentMethodInDatabase(PaymentMethodCategory pay)
+        {
+            repo.UpdatePaymentMethodInDatabaseSQL(pay);
             return RedirectToAction("ViewAllPaymentMethods");
         }
         public IActionResult DeletePaymentMethod(PaymentMethodCategory pay)
         {
-            repo.DeletePaymentMethodInDatabase(pay);
+            repo.DeletePaymentMethodInDatabaseSQL(pay);
             return RedirectToAction("ViewAllPaymentMethods");
         }
     }

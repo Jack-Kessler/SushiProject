@@ -70,19 +70,19 @@ namespace SushiProject
         {
             _conn.Execute("UPDATE TAX_RATE SET CURRENTTAXRATE = @tax WHERE TAXRATEID = 1;", new { tax = taxRate.NewTaxRate });
         }
-        public void InsertClockInToDatabase(int employeeID)
+        public void InsertClockInToDatabaseSQL(int employeeID)
         {
             var dateTimeNow = DateTime.Now;
             _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "IN", eID = employeeID, date = dateTimeNow });
             _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'IN', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = id;", new { time = dateTimeNow, id = employeeID });
         }
-        public void InsertClockOutToDatabase(int employeeID)
+        public void InsertClockOutToDatabaseSQL(int employeeID)
         {
             var dateTimeNow = DateTime.Now;
             _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "OUT", eID = employeeID, date = dateTimeNow });
             _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'OUT', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = id;", new { time = dateTimeNow, id = employeeID });
         }
-        public IEnumerable<ClockInOut> GetEmployeeClockInOutHistory(int employeeID)
+        public IEnumerable<ClockInOut> GetEmployeeClockInOutHistorySQL(int employeeID)
         {
             var history = _conn.Query<ClockInOut>("SELECT * FROM LOG_IN_OUT WHERE EMPLOYEEID = @id;", new {id = employeeID});
             return history;
@@ -108,21 +108,30 @@ namespace SushiProject
             }
             return false;
         }
-        public IEnumerable<Employee> GetAllClockedInOutStaff()
+        public IEnumerable<Employee> GetAllClockedInOutStaffSQL()
         {
             var employeeList = _conn.Query<Employee>("SELECT * FROM EMPLOYEES;");
             return employeeList;
         }
-        public IEnumerable<PaymentMethodCategory> GetAllPaymentMethods()
+        public IEnumerable<PaymentMethodCategory> GetAllPaymentMethodsSQL()
         {
             var paymentMethodsList = _conn.Query<PaymentMethodCategory>("SELECT * FROM PAYMENT_METHOD_CATEGORIES;");
             return paymentMethodsList;
         }
-        public void UpdatePaymentMethodInDatabase(PaymentMethodCategory pay)
+        public PaymentMethodCategory GetSinglePaymentMethodSQL(int id)
+        {
+            var paymentMethod = _conn.QuerySingle<PaymentMethodCategory>("SELECT * FROM PAYMENT_METHOD_CATEGORIES WHERE PAYMENTMETHODCATEGORYID = @id;", new {id = id});
+            return paymentMethod;
+        }
+        public void InsertPaymentMethodInDatabaseSQL(PaymentMethodCategory pay)
+        {
+            _conn.Execute("INSERT INTO PAYMENT_METHOD_CATEGORIES (PAYMENTMETHODCATEGORYNAME) VALUES (@name);", new { name = pay.PaymentMethodCategoryName});
+        }
+        public void UpdatePaymentMethodInDatabaseSQL(PaymentMethodCategory pay)
         {
             _conn.Execute("UPDATE PAYMENT_METHOD_CATEGORIES SET PAYMENTMETHODCATEGORYNAME = @name WHERE PAYMENTMETHODCATEGORYID = @id;", new { name = pay.PaymentMethodCategoryName, id = pay.PaymentMethodCategoryID });
         }
-        public void DeletePaymentMethodInDatabase(PaymentMethodCategory pay)
+        public void DeletePaymentMethodInDatabaseSQL(PaymentMethodCategory pay)
         {
             _conn.Execute("DELETE FROM PAYMENT_METHOD_CATEGORIES WHERE PAYMENTMETHODCATEGORYID = @id;", new { id = pay.PaymentMethodCategoryID });
         }

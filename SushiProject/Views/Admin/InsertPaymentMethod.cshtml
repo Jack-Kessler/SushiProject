@@ -1,0 +1,22 @@
+﻿@model PaymentMethodCategory
+
+<h2>Add Payment Method</h2>
+@if (User.IsInRole("Owner"))
+{
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Admin" asp-action="InsertPaymentMethodToDatabase" method="post">
+
+            <div class="form-group">
+                <label asp-for="PaymentMethodCategoryName" class="col-md-2">Payment Method Name</label>
+                <input asp-for="PaymentMethodCategoryName" type="text" class="form-control" required />
+                <span asp-validation-for="PaymentMethodCategoryName" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a href="#" onclick="if(confirm('Are you sure you would like to add this ingredient?')) $(this).closest('form').submit();">Add Payment Method</a>
+        </form>
+    </div>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
