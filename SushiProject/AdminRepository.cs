@@ -149,12 +149,12 @@ namespace SushiProject
         public void InsertFundsToDatabaseSQL(MoneyAccounting funds)
         {
             var lastRecord = _conn.QuerySingle<MoneyAccounting>("SELECT * FROM MONEY_ACCOUNTING ORDER BY CREDITDEBITID DESC LIMIT 1;");
-            funds.DebitCreditAmount = Math.Abs(funds.DebitCreditAmount);
+            funds.DebitCreditAmount = Math.Abs((decimal)funds.DebitCreditAmount);
             if(funds.DebitOrCredit == "CREDIT")
             {
                 funds.DebitCreditAmount = funds.DebitCreditAmount * -1;
             }
-            funds.TotalBalance = lastRecord.TotalBalance + funds.DebitCreditAmount;
+            funds.TotalBalance = (decimal)(lastRecord.TotalBalance + funds.DebitCreditAmount);
             _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @sales, @date, @total);", new { or = funds.DebitOrCredit, type = "TRANSFER FUNDS", amt = funds.DebitCreditAmount, sales = funds.SalesTransactionID, date = DateTime.Now, total = funds.TotalBalance });
         }
     }

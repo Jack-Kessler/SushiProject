@@ -23,7 +23,7 @@
 
             <div class="form-group">
                 <label asp-for="DebitCreditAmount" class="form-control">Amount to Transfer (Enter as positive number)</label>
-                <input asp-for="DebitCreditAmount" type="number" min="0" step=".01" max=100000000 class="form-control" required />
+                <input asp-for="DebitCreditAmount" type="number" min="0.01" step=".01" max=100000000 class="form-control" required />
                 <span asp-validation-for="DebitCreditAmount" class="text-danger"></span>
             </div>
             <br />
