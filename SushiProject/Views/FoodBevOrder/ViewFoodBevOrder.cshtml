@@ -16,7 +16,14 @@
     </tr>
     <tr>
         <td>@Model.OrderID</td>
-        <td>@Model.OrderFulfilled</td>
+        @if (Model.OrderFulfilled == true)
+        {
+            <td>Yes</td>
+        }
+        else
+        {
+            <td>No</td>
+        }
         @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
         {
             <td>@Model.EmployeeID</td>
