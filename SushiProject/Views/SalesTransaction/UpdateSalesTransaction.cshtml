@@ -57,7 +57,7 @@
 
             <div class="form-group">
                 <label asp-for="TipAmount">Tip Amount</label>
-                <input asp-for="TipAmount" value="@Model.TipAmount" />
+                <input asp-for="TipAmount" type="number" step="0.01" min="0" value="@Model.TipAmount" required/>
                 <span asp-validation-for="TipAmount" class="text-danger"></span>
             </div>
             <br />

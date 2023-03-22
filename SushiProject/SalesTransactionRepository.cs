@@ -30,50 +30,85 @@ namespace SushiProject
         }
         public void UpdateSalesTransactionToDatabaseSQL(SalesTransaction salesTransactionToUpdate)
         {
-            _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, ALLYOUCANEAT = @eat, NUMOFCUSTOMERSADULT = @adult, NUMOFCUSTOMERSCHILD = @child, TIPAMOUNT = @tip, PAYMENTMETHOD = @pay, EMPLOYEEID = @eID, RESTAURANTTABLEID = @tID, " +
-                "ORDERID1 = @o1, " +
-                "ORDERID2 = @o2, " +
-                "ORDERID3 = @o3, " +
-                "ORDERID4 = @o4, " +
-                "ORDERID5 = @o5, " +
-                "ORDERID6 = @o6, " +
-                "ORDERID7 = @o7, " +
-                "ORDERID8 = @o8, " +
-                "ORDERID9 = @o9, " +
-                "ORDERID10 = @o10, " +
-                "ORDERID11 = @o11, " +
-                "ORDERID12 = @o12, " +
-                "ORDERID13 = @o13, " +
-                "ORDERID14 = @o14, " +
-                "ORDERID15 = @o15, " +
-                "ORDERID16 = @o16, " +
-                "ORDERID17 = @o17, " +
-                "ORDERID18 = @o18, " +
-                "ORDERID19 = @o19, " +
-                "ORDERID20 = @o20 " +
-                "WHERE SALESTRANSACTIONID = @ID;",
-               new { complete = salesTransactionToUpdate.SalesTransactionCompleted, eat = salesTransactionToUpdate.AllYouCanEat, adult = salesTransactionToUpdate.NumOfCustomersAdult, child = salesTransactionToUpdate.NumOfCustomersChild, tip = salesTransactionToUpdate.TipAmount, pay = salesTransactionToUpdate.PaymentMethod, eID = salesTransactionToUpdate.EmployeeID, tID = salesTransactionToUpdate.RestaurantTableID, 
-                   o1 = salesTransactionToUpdate.OrderID1, 
-                   o2 = salesTransactionToUpdate.OrderID2, 
-                   o3 = salesTransactionToUpdate.OrderID3, 
-                   o4 = salesTransactionToUpdate.OrderID4, 
-                   o5 = salesTransactionToUpdate.OrderID5, 
-                   o6 = salesTransactionToUpdate.OrderID6, 
-                   o7 = salesTransactionToUpdate.OrderID7, 
-                   o8 = salesTransactionToUpdate.OrderID8, 
-                   o9 = salesTransactionToUpdate.OrderID9, 
-                   o10 = salesTransactionToUpdate.OrderID10, 
-                   o11 = salesTransactionToUpdate.OrderID11, 
-                   o12 = salesTransactionToUpdate.OrderID12, 
-                   o13 = salesTransactionToUpdate.OrderID13, 
-                   o14 = salesTransactionToUpdate.OrderID14, 
-                   o15 = salesTransactionToUpdate.OrderID15, 
-                   o16 = salesTransactionToUpdate.OrderID16, 
-                   o17 = salesTransactionToUpdate.OrderID17, 
-                   o18 = salesTransactionToUpdate.OrderID18, 
-                   o19 = salesTransactionToUpdate.OrderID19, 
-                   o20 = salesTransactionToUpdate.OrderID20, 
-                   ID = salesTransactionToUpdate.SalesTransactionID });
+            var transaction = GetSalesTransactionSQL(salesTransactionToUpdate.SalesTransactionID);
+
+            if (transaction.SalesTransactionCompleted == false && salesTransactionToUpdate.SalesTransactionCompleted == true)
+            {
+                CompleteSalesTransactionSQL(salesTransactionToUpdate);
+                //Essentially finalized transaction for firs time so need to use the method above.
+            }
+            else
+            {
+                if (transaction.SalesTransactionCompleted == true) //If the transaction was already finalized and editing after the fact
+                {
+                    var lastRecord = _conn.QuerySingle<MoneyAccounting>("SELECT * FROM MONEY_ACCOUNTING ORDER BY CREDITDEBITID DESC LIMIT 1;");
+                    var totalAfterCredit = lastRecord.TotalBalance - transaction.FinalTransactionAmount;
+                    var totalAfterDebit = totalAfterCredit + salesTransactionToUpdate.FinalTransactionAmount;
+
+                    _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @sales, @date, @total);",
+                    new { or = "CREDIT", type = "ALTERED TRANSACTION", amt = transaction.FinalTransactionAmount, sales = salesTransactionToUpdate.SalesTransactionID, date = DateTime.Now, total = totalAfterCredit });
+                    //Creating entry to credit total of altered transaction (essentially voiding it from math perspective)
+
+                    _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @sales, @date, @total);",
+                    new { or = "DEBIT", type = "ALTERED TRANSACTION", amt = salesTransactionToUpdate.FinalTransactionAmount, sales = salesTransactionToUpdate.SalesTransactionID, date = DateTime.Now, total = totalAfterDebit });
+                    //Creating another entry to debit total of altered transaction (essentially adding back in whatever the correct final transaction amount is)
+                }
+                //Code below is for any transaction that was NOT closed initially but is now finalized with update
+                _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, ALLYOUCANEAT = @eat, NUMOFCUSTOMERSADULT = @adult, NUMOFCUSTOMERSCHILD = @child, TIPAMOUNT = @tip, PAYMENTMETHOD = @pay, EMPLOYEEID = @eID, RESTAURANTTABLEID = @tID, " +
+                  "ORDERID1 = @o1, " +
+                  "ORDERID2 = @o2, " +
+                  "ORDERID3 = @o3, " +
+                  "ORDERID4 = @o4, " +
+                  "ORDERID5 = @o5, " +
+                  "ORDERID6 = @o6, " +
+                  "ORDERID7 = @o7, " +
+                  "ORDERID8 = @o8, " +
+                  "ORDERID9 = @o9, " +
+                  "ORDERID10 = @o10, " +
+                  "ORDERID11 = @o11, " +
+                  "ORDERID12 = @o12, " +
+                  "ORDERID13 = @o13, " +
+                  "ORDERID14 = @o14, " +
+                  "ORDERID15 = @o15, " +
+                  "ORDERID16 = @o16, " +
+                  "ORDERID17 = @o17, " +
+                  "ORDERID18 = @o18, " +
+                  "ORDERID19 = @o19, " +
+                  "ORDERID20 = @o20 " +
+                  "WHERE SALESTRANSACTIONID = @ID;",
+                 new
+                 {
+                     complete = salesTransactionToUpdate.SalesTransactionCompleted,
+                     eat = salesTransactionToUpdate.AllYouCanEat,
+                     adult = salesTransactionToUpdate.NumOfCustomersAdult,
+                     child = salesTransactionToUpdate.NumOfCustomersChild,
+                     tip = salesTransactionToUpdate.TipAmount,
+                     pay = salesTransactionToUpdate.PaymentMethod,
+                     eID = salesTransactionToUpdate.EmployeeID,
+                     tID = salesTransactionToUpdate.RestaurantTableID,
+                     o1 = salesTransactionToUpdate.OrderID1,
+                     o2 = salesTransactionToUpdate.OrderID2,
+                     o3 = salesTransactionToUpdate.OrderID3,
+                     o4 = salesTransactionToUpdate.OrderID4,
+                     o5 = salesTransactionToUpdate.OrderID5,
+                     o6 = salesTransactionToUpdate.OrderID6,
+                     o7 = salesTransactionToUpdate.OrderID7,
+                     o8 = salesTransactionToUpdate.OrderID8,
+                     o9 = salesTransactionToUpdate.OrderID9,
+                     o10 = salesTransactionToUpdate.OrderID10,
+                     o11 = salesTransactionToUpdate.OrderID11,
+                     o12 = salesTransactionToUpdate.OrderID12,
+                     o13 = salesTransactionToUpdate.OrderID13,
+                     o14 = salesTransactionToUpdate.OrderID14,
+                     o15 = salesTransactionToUpdate.OrderID15,
+                     o16 = salesTransactionToUpdate.OrderID16,
+                     o17 = salesTransactionToUpdate.OrderID17,
+                     o18 = salesTransactionToUpdate.OrderID18,
+                     o19 = salesTransactionToUpdate.OrderID19,
+                     o20 = salesTransactionToUpdate.OrderID20,
+                     ID = salesTransactionToUpdate.SalesTransactionID
+                 });
+            }
         }
         public void UpdateOrderPricesInDatabaseSQL(SalesTransaction transaction)
         {
@@ -308,7 +343,15 @@ namespace SushiProject
         }
         public void DeleteSalesTransactionSQL(SalesTransaction salesTransactionToDelete)
         {
+            var transaction = GetSalesTransactionSQL(salesTransactionToDelete.SalesTransactionID);
+            var debitAmt = transaction.FinalTransactionAmount * -1;
+            var lastRecord = _conn.QuerySingle<MoneyAccounting>("SELECT * FROM MONEY_ACCOUNTING ORDER BY CREDITDEBITID DESC LIMIT 1;");
+            var newTotal = lastRecord.TotalBalance + debitAmt;
+
             _conn.Execute("DELETE FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = salesTransactionToDelete.SalesTransactionID });
+            _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @sales, @date, @total);",
+            new { or = "CREDIT", type = "VOID TRANSACTION", amt = debitAmt, sales = salesTransactionToDelete.SalesTransactionID, date = DateTime.Now, total = newTotal });
+
         }
         public void CompleteSalesTransactionSQL(SalesTransaction salesTransactionToComplete)
         {
@@ -316,6 +359,12 @@ namespace SushiProject
             salesTransactionToComplete.FinalTransactionDateAndTime = DateTime.Now;
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SALESTRANSACTIONCOMPLETED = @complete, PAYMENTMETHOD = @pay, TIPAMOUNT = @tip, FinalTRANSACTIONAMOUNT = @finalamt, FinalTransactionDateAndTime = @date WHERE SALESTRANSACTIONID = @id;",
             new { complete = 1, pay =salesTransactionToComplete.PaymentMethod, tip = salesTransactionToComplete.TipAmount, finalamt = salesTransactionToComplete.FinalTransactionAmount, date =salesTransactionToComplete.FinalTransactionDateAndTime, id = salesTransactionToComplete.SalesTransactionID });
+
+            var lastRecord = _conn.QuerySingle<MoneyAccounting>("SELECT * FROM MONEY_ACCOUNTING ORDER BY CREDITDEBITID DESC LIMIT 1;");
+            var newTotal = lastRecord.TotalBalance + salesTransactionToComplete.FinalTransactionAmount;
+
+            _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @id, @date, @total);",
+            new { or = "DEBIT", type = salesTransactionToComplete.PaymentMethod, amt = salesTransactionToComplete.FinalTransactionAmount, id = salesTransactionToComplete.SalesTransactionID, date = salesTransactionToComplete.FinalTransactionDateAndTime, total = newTotal});
         }
         public bool CheckCustomerLogoutPasswordSQL(string enteredPass)
         {

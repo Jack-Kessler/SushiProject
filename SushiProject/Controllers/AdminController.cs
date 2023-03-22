@@ -177,5 +177,35 @@ namespace SushiProject.Controllers
             repo.DeletePaymentMethodInDatabaseSQL(pay);
             return RedirectToAction("ViewAllPaymentMethods");
         }
+        public IActionResult ViewAllDebitCreditHistory()
+        {
+            var history = repo.ViewAllDebitCreditHistorySQL();
+            return View("ViewAllCreditDebitHistory", history);
+        }
+        public IActionResult DepositFunds()
+        {
+            var transfer = new MoneyAccounting();
+            transfer.DebitOrCredit = "DEBIT";
+            transfer.DebitCreditType = "ADD FUNDS";
+            transfer.SalesTransactionID = 0;
+            return View("TransferFunds", transfer);
+        }
+        public IActionResult WithdrawFunds()
+        {
+            var transfer = new MoneyAccounting();
+            transfer.DebitOrCredit = "CREDIT";
+            transfer.DebitCreditType = "TRANSFER TO BANK ACCOUNT";
+            transfer.SalesTransactionID = 0;
+            return View("TransferFunds", transfer);
+        }
+        public IActionResult InsertFundsToDatabase(MoneyAccounting funds)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.InsertFundsToDatabaseSQL(funds);
+                return RedirectToAction("ViewAllDebitCreditHistory");
+            }
+            return View("TransferFunds", funds);
+        }
     }
 }

@@ -74,6 +74,7 @@
             <input type="button" value="View Clocked-In / Out Staff" onclick="@("window.location.href='" + @Url.Action("ViewClockedInOutStaff", "Admin") + "'");" />
             <input type="button" value="Clock-In" onclick="@("window.location.href='" + @Url.Action("ClockIn", "Admin") + "'");" />
             <input type="button" value="Clock-Out" onclick="@("window.location.href='" + @Url.Action("ClockOut", "Admin") + "'");" />
+            <input type="button" value="View Debit/Credit History" onclick="@("window.location.href='" + @Url.Action("ViewAllDebitCreditHistory", "Admin") + "'");" />
         </div>
     }
     @if (User.IsInRole("Owner"))
@@ -98,6 +99,7 @@
             <input type="button" value="Change All You Can Eat Rate - Child" onclick="@("window.location.href='" + @Url.Action("ChangeAllYouCanEatRateChild", "Admin") + "'");" />
             <input type="button" value="Change Customer Logout Password" onclick="@("window.location.href='" + @Url.Action("ChangeCustomerLogoutPassword", "Admin") + "'");" />
             <input type="button" value="Payment Methods" onclick="@("window.location.href='" + @Url.Action("ViewAllPaymentMethods", "Admin") + "'");" />
+            <input type="button" value="View Debit/Credit History" onclick="@("window.location.href='" + @Url.Action("ViewAllDebitCreditHistory", "Admin") + "'");" />
         </div>
     }
 </div>

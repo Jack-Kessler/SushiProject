@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MoneyAccounting>
+
+<h2>Debit / Credit History</h2>
+<br />
+
+@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <div style="display: block">
+        <a href="/Admin/DepositFunds/">Deposit Funds</a>
+    </div>
+    <br />
+
+    <div style="display: block">
+        <a href="/Admin/WithdrawFunds/">Withdraw Funds</a>
+    </div>
+    <br />
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Debit/Credit</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Transaction ID</th>
+            <th>Date &Aacute; Time</th>
+            <th>Total Balance</th>
+        </tr>
+
+        @foreach (var rec in @Model)
+        {
+            <tr>
+                <td>@rec.CreditDebitID</td>
+                <td>@rec.DebitOrCredit</td>
+                <td>@rec.DebitCreditType</td>
+                <td>@rec.DebitCreditAmount</td>
+                <td>@rec.SalesTransactionID</td>
+                <td>@rec.DateAndTime</td>
+                <td>@rec.TotalBalance</td>
+            </tr>
+        }
+    </table>
+}
+<br />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

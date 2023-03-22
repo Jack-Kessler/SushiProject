@@ -64,8 +64,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGF4UmF0ZUNoYW5nZWRTdWNjZXNzZnVsbHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/TransferFunds.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVHJhbnNmZXJGdW5kcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/UpdatePaymentMethod.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBkYXRlUGF5bWVudE1ldGhvZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/ViewAllCreditDebitHistory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld0FsbENyZWRpdERlYml0SGlzdG9yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jack_/OneDrive/Desktop/Repos/SushiProject/SushiProject/Views/Admin/ViewAllPaymentMethods.cshtml]

@@ -21,5 +21,9 @@ namespace SushiProject
         public void InsertPaymentMethodInDatabaseSQL(PaymentMethodCategory pay);
         public void DeletePaymentMethodInDatabaseSQL(PaymentMethodCategory pay);
         public void UpdatePaymentMethodInDatabaseSQL(PaymentMethodCategory pay);
+        public IEnumerable<MoneyAccounting> ViewAllDebitCreditHistorySQL();
+        public MoneyAccounting GetSingleDebitCreditRecordSQL(int id);
+        public void InsertFundsToDatabaseSQL(MoneyAccounting funds);
+
     }
 }
