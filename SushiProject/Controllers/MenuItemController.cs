@@ -19,14 +19,31 @@ namespace SushiProject.Controllers
             var items = repo.GetAllMenuItemsSQL();
             return View(items);
         }
-        public IActionResult ViewAllMenuItems(int transactionID) //For Customer viewing all menu items
+        //public IActionResult ViewAllMenuItems(int transactionID) //For Customer viewing all menu items
+        //{
+        //    var allMenuItems = repo.GetAllMenuItemsSQL();
+        //    var menuItem = new MenuItem();
+
+        //    menuItem.AllMenuItems = allMenuItems;
+        //    menuItem.TransactionID = transactionID;
+
+        //    return View("CustomerMenuItems", menuItem);
+        //    //return RedirectToAction("CustomerHomePage", "MenuItem", new { transactionID = foodBevOrderToInsert.TransactionID }); //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
+        //}
+        public async Task<IActionResult> ViewAllMenuItems(int transactionID, string SearchString) //For Customer viewing all menu items
         {
             var allMenuItems = repo.GetAllMenuItemsSQL();
             var menuItem = new MenuItem();
 
-            menuItem.AllMenuItems = allMenuItems;
             menuItem.TransactionID = transactionID;
 
+            ViewData["CurrentFilter"] = SearchString;
+            var menuItems = from m in allMenuItems select m;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                menuItems = menuItems.Where(m => m.MenuItemName.Contains(SearchString));
+            }
+            menuItem.AllMenuItems = menuItems;
             return View("CustomerMenuItems", menuItem);
             //return RedirectToAction("CustomerHomePage", "MenuItem", new { transactionID = foodBevOrderToInsert.TransactionID }); //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
         }
