@@ -19,18 +19,7 @@ namespace SushiProject.Controllers
             var items = repo.GetAllMenuItemsSQL();
             return View(items);
         }
-        //public IActionResult ViewAllMenuItems(int transactionID) //For Customer viewing all menu items
-        //{
-        //    var allMenuItems = repo.GetAllMenuItemsSQL();
-        //    var menuItem = new MenuItem();
-
-        //    menuItem.AllMenuItems = allMenuItems;
-        //    menuItem.TransactionID = transactionID;
-
-        //    return View("CustomerMenuItems", menuItem);
-        //    //return RedirectToAction("CustomerHomePage", "MenuItem", new { transactionID = foodBevOrderToInsert.TransactionID }); //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
-        //}
-        public async Task<IActionResult> ViewAllMenuItems(int transactionID, string SearchString) //For Customer viewing all menu items
+        public async Task<IActionResult> ViewAllMenuItems(int transactionID, string SearchString, string SearchStringIngredient) //For Customer viewing all menu items
         {
             var allMenuItems = repo.GetAllMenuItemsSQL();
             var menuItem = new MenuItem();
@@ -38,22 +27,34 @@ namespace SushiProject.Controllers
             menuItem.TransactionID = transactionID;
 
             ViewData["CurrentFilter"] = SearchString;
+            ViewData["CurrentFilterIngredient"] = SearchStringIngredient;
             var menuItems = from m in allMenuItems select m;
             if (!String.IsNullOrEmpty(SearchString))
             {
                 //menuItems = menuItems.Where(m => m.MenuItemName.Contains(SearchString)); //Code here was case sensitive.
                 menuItems = menuItems.Where(m => m.MenuItemName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) >= 0); //Code here makes search NOT case sensitive.
             }
+            else if (!String.IsNullOrEmpty(SearchStringIngredient))
+            {
+                menuItems = menuItems.Where(m => m.MenuItemIngredientName1.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                            (m.MenuItemIngredientName2 != null && m.MenuItemIngredientName2.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName3 != null && m.MenuItemIngredientName3.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName4 != null && m.MenuItemIngredientName4.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName5 != null && m.MenuItemIngredientName5.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName6 != null && m.MenuItemIngredientName6.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName7 != null && m.MenuItemIngredientName7.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName8 != null && m.MenuItemIngredientName8.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName9 != null && m.MenuItemIngredientName9.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                            (m.MenuItemIngredientName10 != null && m.MenuItemIngredientName10.IndexOf(SearchStringIngredient, StringComparison.OrdinalIgnoreCase) >= 0));
+            }
             menuItem.AllMenuItems = menuItems;
             return View("CustomerMenuItems", menuItem);
-            //return RedirectToAction("CustomerHomePage", "MenuItem", new { transactionID = foodBevOrderToInsert.TransactionID }); //Pass in Transaction ID and redirect to SalesTransaction Controller -> CustomerHomePage
         }
         public IActionResult ViewMenuItem(int id)
         {
             var item = repo.GetMenuItemSQL(id);
             return View(item);
         }
-
         public IActionResult UpdateMenuItem(int id)
         {
             MenuItem updateItem = repo.GetMenuItemSQL(id);//These two lines of code ensure MenuItemCategory is not null
@@ -68,7 +69,6 @@ namespace SushiProject.Controllers
             }
             return View(updateItem);
         }
-
         public IActionResult UpdateMenuItemToDatabase(MenuItem menuItemToUpdate)
         {
             var menuItemCat = repo.AssignMenuItemCategorySQL();
@@ -87,7 +87,6 @@ namespace SushiProject.Controllers
                 return View("UpdateMenuItem", menuItemToUpdate);
             }
         }
-
         public IActionResult InsertMenuItem()
         {
             var item = repo.AssignMenuItemCategorySQL();
@@ -95,7 +94,6 @@ namespace SushiProject.Controllers
             item.MenuItemIngredientList = ingredients;
             return View(item);
         }
-
         [HttpPost]
         public IActionResult InsertMenuItemToDatabase(MenuItem menuItemToInsert)
         {
@@ -116,7 +114,6 @@ namespace SushiProject.Controllers
                 return View("InsertMenuItem", menuItemToInsert);
             }
         }
-
         public IActionResult DeleteMenuItem(MenuItem menuItem)
         {
             repo.DeleteMenuItemSQL(menuItem);

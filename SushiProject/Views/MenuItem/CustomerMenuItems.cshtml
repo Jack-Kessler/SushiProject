@@ -17,6 +17,7 @@
 </div>
 <br />
 
+@*Search by Menu Item Name*@
 <form asp-controller="MenuItem" asp-action="ViewAllMenuItems" method="get">
     <div class="form-group">
         <input asp-for="TransactionID" type="hidden" class="form-control" />
@@ -30,6 +31,22 @@
     <input type="submit" value="Search" class="btn btn-primary" />
 </form>
 <br />
+
+@*Search by Ingredient*@
+<form asp-controller="MenuItem" asp-action="ViewAllMenuItems" method="get">
+    <div class="form-group">
+        <input asp-for="TransactionID" type="hidden" class="form-control" />
+        <span asp-validation-for="TransactionID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="SearchStringIngredient"> Search by partial ingredient name:</label>
+        <input type="text" name="SearchStringIngredient" value="@ViewData["CurrentFilterIngredient"]" />
+    </div>
+    <input type="submit" value="Search" class="btn btn-primary" />
+</form>
+<br />
+
 <form asp-controller="MenuItem" asp-action="ViewAllMenuItems" method="get">
     <div class="form-group">
         <input asp-for="TransactionID" type="hidden" class="form-control" />
