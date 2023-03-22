@@ -28,7 +28,14 @@
         </tr>
         <tr>
             <td>@order.OrderID</td>
-            <td>@order.OrderFulfilled</td>
+            @if(@order.OrderFulfilled == true)
+            {
+                <td>Yes</td>
+            }
+            else
+            {
+                <td>No</td>
+            }
             <td>@order.DateAndTime</td>
             <td>@order.OrderSaleAmount</td>
         </tr>
