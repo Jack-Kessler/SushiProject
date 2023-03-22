@@ -43,10 +43,11 @@ namespace SushiProject
                 {
                     var lastRecord = _conn.QuerySingle<MoneyAccounting>("SELECT * FROM MONEY_ACCOUNTING ORDER BY CREDITDEBITID DESC LIMIT 1;");
                     var totalAfterCredit = lastRecord.TotalBalance - transaction.FinalTransactionAmount;
+                    var negative = transaction.FinalTransactionAmount * -1;
                     var totalAfterDebit = totalAfterCredit + salesTransactionToUpdate.FinalTransactionAmount;
 
                     _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @sales, @date, @total);",
-                    new { or = "CREDIT", type = "ALTERED TRANSACTION", amt = transaction.FinalTransactionAmount, sales = salesTransactionToUpdate.SalesTransactionID, date = DateTime.Now, total = totalAfterCredit });
+                    new { or = "CREDIT", type = "ALTERED TRANSACTION", amt = negative, sales = salesTransactionToUpdate.SalesTransactionID, date = DateTime.Now, total = totalAfterCredit });
                     //Creating entry to credit total of altered transaction (essentially voiding it from math perspective)
 
                     _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @sales, @date, @total);",
