@@ -1,11 +1,13 @@
 ﻿@model FoodBevIngredient
 
 <h2>Add Ingredient</h2>
+<br />
 @if (User.IsInRole("Owner"))
 {
     <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-controller="FoodBevIngredient" asp-action="InsertFoodBevIngredientToDatabase" method="post">
+
             <div class="form-group">
                 <label asp-for="IngredientName" class="col-md-2">Ingredient Name</label>
                 <input asp-for="IngredientName" class="form-control" required />

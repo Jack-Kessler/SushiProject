@@ -12,6 +12,7 @@ namespace SushiProject.Models
         // Need to make all of the following variables nullable to customize error message next to "Required" attribute
 
         [Required(ErrorMessage = "Please enter a number between 0 and 100")]
+
         [Range(0, 100, ErrorMessage = "Please enter a number between {1} and {2}")]
         public int? NumOfCustomersAdult { get; set; }
 

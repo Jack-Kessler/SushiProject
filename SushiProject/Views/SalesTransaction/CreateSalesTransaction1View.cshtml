@@ -10,6 +10,21 @@
         <form asp-controller="SalesTransaction" asp-action="CreateSalesTransaction2" method="post">
 
             <div class="form-group">
+                <input asp-for="TipAmount" type="hidden" class="form-control" />
+                <span asp-validation-for="TipAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="NumOfCustomersAdult" type="hidden" class="form-control" />
+                <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="NumOfCustomersChild" type="hidden" class="form-control" />
+                <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
                 <label for="">Server ID</label>
                 <select class="form-control" name="EmployeeID" value="">
                     @foreach (var emp in Model.ServerList)

@@ -66,12 +66,18 @@ namespace SushiProject.Controllers
         public IActionResult CreateSalesTransaction1()
         {
             var transaction = repo.AssignServerListSQL();
+            transaction.TipAmount = 0; //Need to set tip amount to 0 here so that ModelState.IsValid in "InsertSalesTransactionToDatabase" method will be valid.
+            transaction.NumOfCustomersAdult = 0;
+            transaction.NumOfCustomersChild = 0;
             return View("CreateSalesTransaction1View", transaction);
         }
         public IActionResult CreateSalesTransaction2(SalesTransaction transaction)
         {
             var tempTransaction = repo.AssignRestaurantTableListSQL(transaction.EmployeeID);
             transaction.RestaurantTableList = tempTransaction.RestaurantTableList;
+            transaction.FinalTransactionDateAndTime = DateTime.Now;
+            transaction = repo.CreateShellSalesTransactionSQL(transaction);
+
             return View("CreateSalesTransaction2View", transaction);
         }
 

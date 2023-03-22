@@ -33,18 +33,24 @@
             </div>
             <br />
 
+            <div class="form-group">
+                <input asp-for="TipAmount" type="hidden" class="form-control" />
+                <span asp-validation-for="TipAmount" class="text-danger"></span>
+            </div>
+            <br />
+
             <p>Only enter the information below for "All You Can Eat" Customers. Otherwise, leave defaults.</p>
             <br />
             <div class="form-group">
-                <label asp-for="NumOfCustomersAdult">Number of Adults</label>
-                <input asp-for="NumOfCustomersAdult" type="number" max="100" min="0" step="1" value="0" />
+                <label asp-for="NumOfCustomersAdult" class="">Number of Adults</label>
+                <input asp-for="NumOfCustomersAdult" type="number" max="100" min="0" step="1" class="form-control" required />
                 <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
             </div>
             <br />
 
             <div class="form-group">
-                <label asp-for="NumOfCustomersChild">Number of Children</label>
-                <input asp-for="NumOfCustomersChild" type="number" max="100" min="0" step="1" value="0" />
+                <label asp-for="NumOfCustomersChild" class="">Number of Children</label>
+                <input asp-for="NumOfCustomersChild" type="number" max="100" min="0" step="1" class="form-control" required />
                 <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
             </div>
             <br />
