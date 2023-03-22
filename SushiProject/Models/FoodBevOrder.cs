@@ -28,8 +28,8 @@ namespace SushiProject.Models
         public string MenuItemName1 { get; set; }
 
         [Required(ErrorMessage = "Please enter a quantity between 0 and 10")]
-        [Range(0, 10, ErrorMessage = "Please enter a quantity between 0 and 10")]
-        public int QuantityItem1 { get; set; }
+        [Range(1, 10, ErrorMessage = "Please enter a quantity between 0 and 10")]
+        public int? QuantityItem1 { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid menu item price between $0.00 - $99.00")]
         [Range(0, 99.99, ErrorMessage = "Value for {0} must be between {1} and {2}")]
@@ -37,7 +37,7 @@ namespace SushiProject.Models
 
 
 
-        public string MenuItemName2 { get; set; }
+        public string? MenuItemName2 { get; set; }
 
         [Range(0, 10, ErrorMessage = "Please enter a quantity between 0 and 10")]
         public int QuantityItem2 { get; set; }
@@ -47,7 +47,7 @@ namespace SushiProject.Models
 
 
 
-        public string MenuItemName3 { get; set; }
+        public string? MenuItemName3 { get; set; }
 
         [Range(0, 10, ErrorMessage = "Please enter a quantity between 0 and 10")]
         public int QuantityItem3 { get; set; }
@@ -57,7 +57,7 @@ namespace SushiProject.Models
 
 
 
-        public string MenuItemName4 { get; set; }
+        public string? MenuItemName4 { get; set; }
 
         [Range(0, 10, ErrorMessage = "Please enter a quantity between 0 and 10")]
         public int QuantityItem4 { get; set; }

@@ -35,6 +35,25 @@ namespace SushiProject
             _conn.Execute("UPDATE FOOD_BEV_ORDERS SET EMPLOYEEID = @eID, TABLEID = @tID, DATEANDTIME = @date, ORDERSALEAMOUNT = @saleamt, MENUITEMNAME1 = @m1, QUANTITYITEM1 = @q1, PRICEITEM1 = @p1, MENUITEMNAME2 = @m2, QUANTITYITEM2 = @q2, PRICEITEM2 = @p2, MENUITEMNAME3 = @m3, QUANTITYITEM3 = @q3, PRICEITEM3 = @p3, MENUITEMNAME4 = @m4, QUANTITYITEM4 = @q4, PRICEITEM4 = @p4 WHERE ORDERID = @oID;",
                new { eID = foodBevOrderToUpdate.EmployeeID, tID = foodBevOrderToUpdate.TableID, date = foodBevOrderToUpdate.DateAndTime, saleamt = foodBevOrderToUpdate.OrderSaleAmount, m1 = foodBevOrderToUpdate.MenuItemName1, q1 = foodBevOrderToUpdate.QuantityItem1, p1 = foodBevOrderToUpdate.PriceItem1, m2 = foodBevOrderToUpdate.MenuItemName2, q2 = foodBevOrderToUpdate.QuantityItem2, p2 = foodBevOrderToUpdate.PriceItem2, m3 = foodBevOrderToUpdate.MenuItemName3, q3 = foodBevOrderToUpdate.QuantityItem3, p3 = foodBevOrderToUpdate.PriceItem3, m4 = foodBevOrderToUpdate.MenuItemName4, q4 = foodBevOrderToUpdate.QuantityItem4, p4 = foodBevOrderToUpdate.PriceItem4, oID = foodBevOrderToUpdate.OrderID });
         }
+        public FoodBevOrder CleanUpInvalidMenuItemsSQL(FoodBevOrder foodBevOrderToInsert)
+        {
+            if (foodBevOrderToInsert.MenuItemName2 == null || foodBevOrderToInsert.QuantityItem2 < 1)
+            {
+                foodBevOrderToInsert.MenuItemName2 = null;
+                foodBevOrderToInsert.QuantityItem2 = 0;
+            }
+            if (foodBevOrderToInsert.MenuItemName3 == null || foodBevOrderToInsert.QuantityItem3 < 1)
+            {
+                foodBevOrderToInsert.MenuItemName3 = null;
+                foodBevOrderToInsert.QuantityItem3 = 0;
+            }
+            if (foodBevOrderToInsert.MenuItemName4 == null || foodBevOrderToInsert.QuantityItem4 < 1)
+            {
+                foodBevOrderToInsert.MenuItemName4 = null;
+                foodBevOrderToInsert.QuantityItem4 = 0;
+            }
+            return foodBevOrderToInsert;
+        }
         public void InsertFoodBevOrderSQL(FoodBevOrder foodBevOrderToInsert)
         {
             _conn.Execute("INSERT INTO FOOD_BEV_ORDERS (TransactionID, EmployeeID, TableID, DateAndTime, OrderSaleAmount, MenuItemName1, QuantityItem1, PriceItem1, MenuItemName2, QuantityItem2, PriceItem2, MenuItemName3, QuantityItem3, PriceItem3, MenuItemName4, QuantityItem4, PriceItem4) VALUES(@tran, @eID, @tID, @date, @saleamt, @m1, @q1, @p1, @m2, @q2, @p2, @m3, @q3, @p3, @m4, @q4, @p4);", new { tran = foodBevOrderToInsert.TransactionID, eID = foodBevOrderToInsert.EmployeeID, tID = foodBevOrderToInsert.TableID, date = foodBevOrderToInsert.DateAndTime, saleamt = foodBevOrderToInsert.OrderSaleAmount, m1 = foodBevOrderToInsert.MenuItemName1, q1 = foodBevOrderToInsert.QuantityItem1, p1 = foodBevOrderToInsert.PriceItem1, m2 = foodBevOrderToInsert.MenuItemName2, q2 = foodBevOrderToInsert.QuantityItem2, p2 = foodBevOrderToInsert.PriceItem2, m3 = foodBevOrderToInsert.MenuItemName3, q3 = foodBevOrderToInsert.QuantityItem3, p3 = foodBevOrderToInsert.PriceItem3, m4 = foodBevOrderToInsert.MenuItemName4, q4 = foodBevOrderToInsert.QuantityItem4, p4 = foodBevOrderToInsert.PriceItem4 });
@@ -212,7 +231,12 @@ namespace SushiProject
             orderToCalculate.PriceItem3 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName3);
             orderToCalculate.PriceItem4 = GetPerUnitPriceSQL(orderToCalculate.MenuItemName4);
 
-            subTotalPerItemList.Add(orderToCalculate.PriceItem1 * orderToCalculate.QuantityItem1);
+            if(orderToCalculate.QuantityItem1 == null)
+            {
+                orderToCalculate.QuantityItem1 = 0;
+            } //Need to add this if statement because QuantityItem1 is nullable which needed to be done to show error message for Modelstate check
+
+            subTotalPerItemList.Add((decimal)(orderToCalculate.PriceItem1 * orderToCalculate.QuantityItem1));
             subTotalPerItemList.Add(orderToCalculate.PriceItem2 * orderToCalculate.QuantityItem2);
             subTotalPerItemList.Add(orderToCalculate.PriceItem3 * orderToCalculate.QuantityItem3);
             subTotalPerItemList.Add(orderToCalculate.PriceItem4 * orderToCalculate.QuantityItem4);
@@ -230,7 +254,7 @@ namespace SushiProject
         }
         public void SubtractIngredientInventorySQL(FoodBevOrder order)
         {
-            SubtractIndividualIngredientFromInventorySQL(order.MenuItemName1, order.QuantityItem1);
+            SubtractIndividualIngredientFromInventorySQL(order.MenuItemName1, (int)order.QuantityItem1);
             if (order.MenuItemName2 != null)
             SubtractIndividualIngredientFromInventorySQL(order.MenuItemName2, order.QuantityItem2);
             if (order.MenuItemName3 != null)

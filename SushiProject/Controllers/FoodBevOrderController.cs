@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Mysqlx.Crud;
 using SushiProject.Models;
 
 namespace SushiProject.Controllers
@@ -81,27 +82,36 @@ namespace SushiProject.Controllers
             var menuItemList = repo.AssignMenuItemListSQL();
             order.MenuItemList = menuItemList.MenuItemList;
 
-            return View(order);
+            return View("InsertFoodBevOrder", order);
         }
 
         [HttpPost]
         public IActionResult InsertFoodBevOrderToDatabase(FoodBevOrder foodBevOrderToInsert)
         {
             foodBevOrderToInsert.DateAndTime = DateTime.Now;
-
             foodBevOrderToInsert.OrderSaleAmount = repo.CalculateOrderPriceSQL(foodBevOrderToInsert);
-           
-            repo.InsertFoodBevOrderSQL(foodBevOrderToInsert);
 
-            int orderNum = repo.RetrieveOrderNumSQL(foodBevOrderToInsert.TransactionID, foodBevOrderToInsert.DateAndTime);
-            foodBevOrderToInsert.OrderID = orderNum;
+            if (ModelState.IsValid)
+            {
+                repo.CleanUpInvalidMenuItemsSQL(foodBevOrderToInsert);
+                repo.InsertFoodBevOrderSQL(foodBevOrderToInsert);
 
-            int nullOrderSlot = repo.FindFirstNullOrderSlotSQL(foodBevOrderToInsert.TransactionID);
+                int orderNum = repo.RetrieveOrderNumSQL(foodBevOrderToInsert.TransactionID, foodBevOrderToInsert.DateAndTime);
+                foodBevOrderToInsert.OrderID = orderNum;
 
-            repo.ApplyOrderToTransactionSQL(foodBevOrderToInsert, nullOrderSlot);
+                int nullOrderSlot = repo.FindFirstNullOrderSlotSQL(foodBevOrderToInsert.TransactionID);
 
-            return RedirectToAction("CustomerHomePage", "SalesTransaction", new { transactionID = foodBevOrderToInsert.TransactionID }); 
-            //Line of code above passes in Transaction ID as argument and redirects to SalesTransaction Controller -> CustomerHomePage
+                repo.ApplyOrderToTransactionSQL(foodBevOrderToInsert, nullOrderSlot);
+
+                return RedirectToAction("CustomerHomePage", "SalesTransaction", new { transactionID = foodBevOrderToInsert.TransactionID });
+                //Line of code above passes in Transaction ID as argument and redirects to SalesTransaction Controller -> CustomerHomePage
+            }
+            else
+            {
+                var menuItemList = repo.AssignMenuItemListSQL();
+                foodBevOrderToInsert.MenuItemList = menuItemList.MenuItemList;
+                return View("InsertFoodBevOrder", foodBevOrderToInsert);
+            }
         }
 
         public IActionResult DeleteFoodBevOrder(FoodBevOrder foodBevOrder)
