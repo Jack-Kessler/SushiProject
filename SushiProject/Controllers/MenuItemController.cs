@@ -41,7 +41,8 @@ namespace SushiProject.Controllers
             var menuItems = from m in allMenuItems select m;
             if (!String.IsNullOrEmpty(SearchString))
             {
-                menuItems = menuItems.Where(m => m.MenuItemName.Contains(SearchString));
+                //menuItems = menuItems.Where(m => m.MenuItemName.Contains(SearchString)); //Code here was case sensitive.
+                menuItems = menuItems.Where(m => m.MenuItemName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) >= 0); //Code here makes search NOT case sensitive.
             }
             menuItem.AllMenuItems = menuItems;
             return View("CustomerMenuItems", menuItem);

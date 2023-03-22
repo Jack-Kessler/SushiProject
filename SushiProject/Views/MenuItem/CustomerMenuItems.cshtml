@@ -28,8 +28,17 @@
         <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
     </div>
     <input type="submit" value="Search" class="btn btn-primary" />
+</form>
+<br />
+<form asp-controller="MenuItem" asp-action="ViewAllMenuItems" method="get">
+    <div class="form-group">
+        <input asp-for="TransactionID" type="hidden" class="form-control" />
+        <span asp-validation-for="TransactionID" class="text-danger"></span>
+    </div>
+    <input type="submit" value="View Full List of Menu Items" class="btn btn-primary" />
     <br />
 </form>
+<hr />
 
 <table class="table">
     <tr>
