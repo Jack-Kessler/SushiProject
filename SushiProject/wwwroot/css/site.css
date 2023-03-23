@@ -46,14 +46,6 @@ body {
 
 }
 
-/*Found Below from Website*/
-/*<style >*/
-/* CSS properties */
-/*body {
-    
-}*/
-
-/* for username and password fields */
 input[type=text],
 input[type=password],
 input[type=number]{
@@ -65,29 +57,20 @@ input[type=number]{
     box-sizing: border-box;
 }
 
-/* login and cancel button */
-/*button {
-    background-color: lightpink;
-    border-color: black;
+/*button {*/
+/*    background-color: lightpink;*/
+    /*border-color: black;
     border-width: 2in;
-    color: white;
+    color: black;
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
+    border: 1px;
     cursor: pointer;
-    width: 100%;
-    font-size: 25px
-}
+    width: 10%;
+}*/
 
 button:hover {
     opacity: 0.8;
-}*/
-
-/* only for cancel button */
-/*.cancelbtn {
-    width: auto;
-    padding: 9px 16px;
-    background-color: #f44336;
 }
 
 .container {
@@ -97,59 +80,23 @@ button:hover {
 span.psw {
     float: right;
     padding-top: 16px;
-}*/
-
-/* for the background */
-/*.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-}*/
-
-/* for the box */
-/*.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 20% auto;
-    border: 2px solid #888;
-    width: 80%;
-    border-color: #329dd5;
-}*/
-
-/* The Close Button properties (x) */
-/*.close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
-}*/
-
 /*</style >*/
-
 label {
-    display: block;
-    margin: 1px;
-    padding: 1px;
+display: block;
+margin: 1px;
+padding: 1px;
 }
 
 .field {
     margin: 1px;
     padding: 1px;
+}
+
+input:required {
+    border-color: black;
+    border-width: 2px;
 }
 
 input:valid {
@@ -160,22 +107,6 @@ input:invalid {
     background-color: #ffdddd; /*Light red = #ffdddd*/
 }
 
-/*form:valid {
-    border: 5px solid lightgreen;
-}
-
-form:invalid {
-    border: 5px solid lightred;
-}
-
-input:required {
-    border-color: darkred;*/ /*Dark red = #800000*/
-    /*border-width: 3px;
-}
-    
-input:required:invalid {
-    border-color: darkred;*/ /*Dark red = #800000*/
-/*}*/
 
 .field-validation-error {
     color: red;
