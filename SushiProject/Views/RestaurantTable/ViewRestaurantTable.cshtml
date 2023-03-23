@@ -31,7 +31,8 @@
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href=@Url.Action("UpdateRestaurantTable", "RestaurantTable", new { RestaurantTableID = Model.RestaurantTableID })>Update Table Assignment</a>
+        <a href=@Url.Action("UpdateRestaurantTable", "RestaurantTable", new { RestaurantTableID = Model.RestaurantTableID })>
+            <button>Update Table Assignment</button></a>
     </div>
     <br />
 }

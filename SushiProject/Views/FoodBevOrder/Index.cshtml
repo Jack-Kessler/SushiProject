@@ -2,14 +2,6 @@
 
 <h2>All Food / Bev Orders</h2>
 <hr />
-@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
-{
-    <div style="display: block">
-        <a href="/FoodBevOrder/InsertFoodBevOrder/">Create New Order</a>
-    </div>
-    <br />
-}
-
 @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <table class="table">

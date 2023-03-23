@@ -1,5 +1,15 @@
 ﻿@model FoodBevOrder
 
+<style>
+    .validInput {
+        color: green;
+    }
+
+    .invalidInput {
+        color: red;
+    }
+</style>
+
 <h2>Order @Model.OrderID Information</h2>
 <hr />
 <table class="table">
@@ -75,7 +85,14 @@
 @if (User.IsInRole("Server") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/FoodBevOrder/UpdateFoodBevOrder/@Model.OrderID">Update Order</a>
+        <div class="validInput">
+
+        </div>
+        @using (Html.BeginForm("UpdateFoodBevOrder", "FoodBevOrder", "Post"))
+        {
+            <input type="hidden" asp-for="OrderID" value="@Model.OrderID" />
+            <input type="submit" value="Edit Order" />
+        }
     </div>
     <br />
 }

@@ -57,6 +57,9 @@ input[type=number]{
     box-sizing: border-box;
 }
 
+input[type=hidden] {
+    background-color: white;
+}
 /*button {*/
 /*    background-color: lightpink;*/
     /*border-color: black;

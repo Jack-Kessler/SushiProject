@@ -38,9 +38,9 @@ namespace SushiProject.Controllers
             var openOrders = repo.GetAllOpenFoodBevOrdersSQL();
             return View("ChefOpenOrders", openOrders);
         }
-        public IActionResult UpdateFoodBevOrder(int id)
+        public IActionResult UpdateFoodBevOrder(int OrderID)
         {
-            FoodBevOrder updateOrder = repo.GetFoodBevOrderSQL(id);
+            FoodBevOrder updateOrder = repo.GetFoodBevOrderSQL(OrderID);
 
             var order = repo.CreateShellFoodBevOrderSQL();
 
