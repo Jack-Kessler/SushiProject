@@ -1,8 +1,7 @@
 ﻿@model FoodBevIngredient
 
 <h2>@Model.IngredientName Information</h2>
-<br />
-
+<hr />
 @if (User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <table class="table">

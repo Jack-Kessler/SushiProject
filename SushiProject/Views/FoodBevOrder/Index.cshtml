@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<FoodBevOrder>
 
-<h2>Food and Beverage Orders</h2>
-<br />
-
+<h2>All Food / Bev Orders</h2>
+<hr />
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">

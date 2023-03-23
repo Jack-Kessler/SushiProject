@@ -1,8 +1,7 @@
 ﻿@model FoodBevOrder
 
 <h2>Create New Order</h2>
-<br />
-
+<hr />
 @if (User.IsInRole("Guest") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div class="row">

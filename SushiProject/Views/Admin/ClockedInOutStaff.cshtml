@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<Employee>
 
 <h2>Clocked-In / Clocked-Out Staff</h2>
-<br />
-
+<hr />
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <table class="table">

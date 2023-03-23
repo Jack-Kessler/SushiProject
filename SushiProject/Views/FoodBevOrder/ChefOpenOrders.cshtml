@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<FoodBevOrder>
 
 <h2>Open Orders</h2>
-<br />
-
-@if (User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+<hr />
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <table class="table">
         <tr>

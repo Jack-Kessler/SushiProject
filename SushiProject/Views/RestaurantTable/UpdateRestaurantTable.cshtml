@@ -1,7 +1,7 @@
 ﻿@model RestaurantTable
 
 <h2>Table @Model.RestaurantTableID Assignment</h2>
-
+<hr />
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div class="row">

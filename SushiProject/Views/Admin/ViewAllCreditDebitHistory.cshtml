@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<MoneyAccounting>
 
 <h2>Debit / Credit History</h2>
-<br />
-
+<hr />
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">

@@ -1,8 +1,7 @@
 ﻿@model FoodBevOrder
 
 <h2>Update Order @Model.OrderID</h2>
-<br />
-
+<hr />
 <div class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <form asp-controller="FoodBevOrder" asp-action="UpdateFoodBevOrderToDatabase" method="post">

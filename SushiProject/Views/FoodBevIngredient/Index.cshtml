@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<FoodBevIngredient>
 
 <h2>Ingredients</h2>
+<hr />
+<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<br />
 <br />
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {

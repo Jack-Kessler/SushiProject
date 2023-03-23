@@ -1,8 +1,7 @@
 ﻿@model PaymentMethodCategory
 
 <h2>Payment Method: @Model.PaymentMethodCategoryName</h2>
-<br />
-
+<hr />
 @if (User.IsInRole("Owner"))
 {
     <table class="table">

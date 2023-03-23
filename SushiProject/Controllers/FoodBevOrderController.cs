@@ -16,7 +16,7 @@ namespace SushiProject.Controllers
         public IActionResult Index()
         {
             var orders = repo.GetAllFoodBevOrdersSQL();
-            return View(orders);
+            return View("Index", orders);
         }
 
         public IActionResult ViewFoodBevOrder(int orderID) //Matched with index view - can change? -- need to try.

@@ -75,13 +75,13 @@ namespace SushiProject
         {
             var dateTimeNow = DateTime.Now;
             _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "IN", eID = employeeID, date = dateTimeNow });
-            _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'IN', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = id;", new { time = dateTimeNow, id = employeeID });
+            _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'IN', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = @id;", new { time = dateTimeNow, id = employeeID });
         }
         public void InsertClockOutToDatabaseSQL(int employeeID)
         {
             var dateTimeNow = DateTime.Now;
             _conn.Execute("INSERT INTO LOG_IN_OUT (INOROUT, EMPLOYEEID, DATEANDTIME) VALUES(@inout, @eID, @date);", new { inout = "OUT", eID = employeeID, date = dateTimeNow });
-            _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'OUT', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = id;", new { time = dateTimeNow, id = employeeID });
+            _conn.Execute("UPDATE EMPLOYEES SET CLOCKEDINOROUT = 'OUT', MOSTRECENTCLOCKINOUT = @time WHERE EMPLOYEEID = @id;", new { time = dateTimeNow, id = employeeID });
         }
         public IEnumerable<ClockInOut> GetEmployeeClockInOutHistorySQL(int employeeID)
         {
