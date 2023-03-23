@@ -1,5 +1,7 @@
 ﻿@model ClockInOut
 
+<link rel="stylesheet" href="~/css/ValidateInputStyleSheet.css" asp-append-version="true" />
+
 <h2>Clock-In</h2>
 <hr />
 @if (User.IsInRole("Server")|| User.IsInRole("Chef") || User.IsInRole("Manager"))

@@ -1,5 +1,7 @@
 ﻿@model FoodBevIngredient
 
+<link rel="stylesheet" href="~/css/ValidateInputStyleSheet.css" asp-append-version="true" />
+
 <h2>Update @Model.IngredientName</h2>
 <hr />
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))

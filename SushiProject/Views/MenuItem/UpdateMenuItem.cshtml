@@ -1,5 +1,7 @@
 ﻿@model MenuItem
 
+<link rel="stylesheet" href="~/css/ValidateInputStyleSheet.css" asp-append-version="true" />
+
 <h2>Update Menu Item: @Model.MenuItemName</h2>
 <hr />
 @if (User.IsInRole("Owner"))

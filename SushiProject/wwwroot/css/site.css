@@ -57,9 +57,6 @@ input[type=number]{
     box-sizing: border-box;
 }
 
-input[type=hidden] {
-    background-color: white;
-}
 /*button {*/
 /*    background-color: lightpink;*/
     /*border-color: black;
@@ -86,7 +83,7 @@ span.psw {
 }
 
 /*</style >*/
-label {
+/*label {
 display: block;
 margin: 1px;
 padding: 1px;
@@ -103,13 +100,13 @@ input:required {
 }
 
 input:valid {
-    background-color: #ddffdd; /*Light green = #ddffdd*/
-}
+    
+    background-color: #ddffdd;*/ /*Light green = #ddffdd*/
+/*}
 
 input:invalid {
-    background-color: #ffdddd; /*Light red = #ffdddd*/
-}
-
+    background-color: #ffdddd;*/ /*Light red = #ffdddd*/
+/*}
 
 .field-validation-error {
     color: red;
@@ -123,11 +120,7 @@ input:invalid {
 
 input.input-validation-error {
     border: 1px solid red;
-}
-
-.navbar-collapse collapse d-sm-inline-flex justify-content-between {
-    float: right;
-}
+}*/
 
 .container-fluid {
     background-color: darkgrey;

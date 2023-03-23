@@ -1,5 +1,7 @@
 ﻿@model PaymentMethodCategory
 
+<link rel="stylesheet" href="~/css/ValidateInputStyleSheet.css" asp-append-version="true" />
+
 <h2>Update Payment Method: @Model.PaymentMethodCategoryName</h2>
 <hr />
 @if (User.IsInRole("Owner"))

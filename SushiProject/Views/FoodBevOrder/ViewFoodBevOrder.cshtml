@@ -1,15 +1,5 @@
 ﻿@model FoodBevOrder
 
-<style>
-    .validInput {
-        color: green;
-    }
-
-    .invalidInput {
-        color: red;
-    }
-</style>
-
 <h2>Order @Model.OrderID Information</h2>
 <hr />
 <table class="table">
@@ -85,9 +75,6 @@
 @if (User.IsInRole("Server") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <div class="validInput">
-
-        </div>
         @using (Html.BeginForm("UpdateFoodBevOrder", "FoodBevOrder", "Post"))
         {
             <input type="hidden" asp-for="OrderID" value="@Model.OrderID" />
@@ -100,7 +87,6 @@
 @if (User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
-
         @using (Html.BeginForm("FulfillFoodBevOrder", "FoodBevOrder", "Post"))
         {
             <input type="hidden" asp-for="OrderID" value="@Model.OrderID" />
@@ -122,5 +108,5 @@
     </div>
     <br />
 }
-
+<br />
 <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
