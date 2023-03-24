@@ -159,6 +159,28 @@ namespace SushiProject
                     });
             var done = ReorderMenuItemIDNumbersSQL();
         }
+        public MenuItem ValidateIngredients(MenuItem item)
+        {
+            if (item.MenuItemIngredientName2 == null || item.MenuItemIngredientQuantity2 == null || item.MenuItemIngredientQuantity2 <= 0)
+            { item.MenuItemIngredientName2 = null; item.MenuItemIngredientQuantity2 = null; }
+            if (item.MenuItemIngredientName3 == null || item.MenuItemIngredientQuantity3 == null || item.MenuItemIngredientQuantity3 <= 0)
+            { item.MenuItemIngredientName3 = null; item.MenuItemIngredientQuantity3 = null; }
+            if (item.MenuItemIngredientName4 == null || item.MenuItemIngredientQuantity4 == null || item.MenuItemIngredientQuantity4 <= 0)
+            { item.MenuItemIngredientName4 = null; item.MenuItemIngredientQuantity4 = null; }
+            if (item.MenuItemIngredientName5 == null || item.MenuItemIngredientQuantity5 == null || item.MenuItemIngredientQuantity5 <= 0)
+            { item.MenuItemIngredientName5 = null; item.MenuItemIngredientQuantity5 = null; }
+            if (item.MenuItemIngredientName6 == null || item.MenuItemIngredientQuantity6 == null || item.MenuItemIngredientQuantity6 <= 0)
+            { item.MenuItemIngredientName6 = null; item.MenuItemIngredientQuantity6 = null; }
+            if (item.MenuItemIngredientName7 == null || item.MenuItemIngredientQuantity7 == null || item.MenuItemIngredientQuantity7 <= 0)
+            { item.MenuItemIngredientName7 = null; item.MenuItemIngredientQuantity7 = null; }
+            if (item.MenuItemIngredientName8 == null || item.MenuItemIngredientQuantity8 == null || item.MenuItemIngredientQuantity8 <= 0)
+            { item.MenuItemIngredientName8 = null; item.MenuItemIngredientQuantity8 = null; }
+            if (item.MenuItemIngredientName9 == null || item.MenuItemIngredientQuantity9 == null || item.MenuItemIngredientQuantity9 <= 0)
+            { item.MenuItemIngredientName9 = null; item.MenuItemIngredientQuantity9 = null; }
+            if (item.MenuItemIngredientName10 == null || item.MenuItemIngredientQuantity10 == null || item.MenuItemIngredientQuantity10 <= 0)
+            { item.MenuItemIngredientName10 = null; item.MenuItemIngredientQuantity10 = null; }
+            return item;
+        }
         public IEnumerable<MenuItemCategory> GetMenuItemCategoriesSQL()
         {
             return _conn.Query<MenuItemCategory>("SELECT * FROM MENU_CATEGORIES;");

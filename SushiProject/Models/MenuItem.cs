@@ -17,7 +17,7 @@ namespace SushiProject.Models
 
 
         [Required(ErrorMessage = "Please enter a valid menu item price between $0.00 - $99.00")]
-        [Range(0, 99.99, ErrorMessage = "Value for {0} must be between {1} and {2}")]
+        [Range(0, 99.99, ErrorMessage = "Please enter a valid menu item price between $0.00 - $99.00")]
         public decimal MenuItemPrice { get; set; }
 
 
@@ -34,8 +34,8 @@ namespace SushiProject.Models
         //[Required(ErrorMessage = "Please enter a valid ingredient")]
         public string? MenuItemIngredientName1 { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid quantity from 1 - 2147483647")]
-        [Range(1, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}")]
+        [Required(ErrorMessage = "Please enter a valid quantity from 1 - 100")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a valid quantity from 1 - 100")]
         public int? MenuItemIngredientQuantity1 { get; set; }
 
 

@@ -103,6 +103,7 @@ namespace SushiProject.Controllers
             menuItemToInsert.MenuItemIngredientList = ingredients;
             menuItemToInsert = repo.IngredientSetNullValues(menuItemToInsert);
 
+            menuItemToInsert = repo.ValidateIngredients(menuItemToInsert);
 
             if (ModelState.IsValid)
             {
