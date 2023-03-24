@@ -12,20 +12,8 @@
         <br />
         <br />
         <div class="main-page-guest">
-
             <input type="button" value="Setup New Customer" onclick="@("window.location.href='" + @Url.Action("SetupNewCustomer1", "SalesTransaction") + "'");" />
-
-            @*<button type="button">Chef</button>*@
-        
-            @*How to create a button that will go to a different webpage*@
-            @* <button onclick="openTab()">Educative</button>
-
-            <script>
-                function openTab() {
-                    window.open("https://www.educative.io/", "_blank");
-                }
-            </script>*@
-
+            <input type="button" value="Logout Guest" onclick="@("window.location.href='" + @Url.Action("LogoutGuest", "Admin") + "'");" />
         </div>
     }
     @if (User.IsInRole("Server"))

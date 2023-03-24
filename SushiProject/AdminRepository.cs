@@ -157,5 +157,10 @@ namespace SushiProject
             funds.TotalBalance = (decimal)(lastRecord.TotalBalance + funds.DebitCreditAmount);
             _conn.Execute("INSERT INTO MONEY_ACCOUNTING (DEBITORCREDIT, DEBITCREDITTYPE, DEBITCREDITAMOUNT, SALESTRANSACTIONID, DATEANDTIME, TOTALBALANCE) VALUES(@or, @type, @amt, @sales, @date, @total);", new { or = funds.DebitOrCredit, type = "TRANSFER FUNDS", amt = funds.DebitCreditAmount, sales = funds.SalesTransactionID, date = DateTime.Now, total = funds.TotalBalance });
         }
+        public string GetGuestLogoutPasswordSQL()
+        {
+            var actualPass = _conn.QuerySingle<CustomerLogoutPassword>("SELECT * FROM CUSTOMER_LOGOUT_PASSWORD WHERE CUSTOMERLOGOUTPASSWORDID = 1;");
+            return actualPass.CurrentPassword;
+        }
     }
 }

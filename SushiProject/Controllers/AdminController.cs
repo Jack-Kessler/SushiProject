@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SushiProject.Models;
+using System.Transactions;
 
 namespace SushiProject.Controllers
 {
@@ -206,6 +207,24 @@ namespace SushiProject.Controllers
                 return RedirectToAction("ViewAllDebitCreditHistory");
             }
             return View("TransferFunds", funds);
+        }
+        public IActionResult LogoutGuest()
+        {
+            CustomerLogoutPassword password = new CustomerLogoutPassword();
+            return View("LogoutGuest", password);
+        }
+        public IActionResult CheckGuestLogoutPassword(CustomerLogoutPassword password)
+        {
+            string currentPassword = repo.GetGuestLogoutPasswordSQL();
+            if (currentPassword == password.CurrentPassword)
+            {
+                return RedirectToAction("Logout", "Home");
+            }
+            else
+            {
+                password.Success = true;
+                return View("LogoutGuest", password);
+            }
         }
     }
 }

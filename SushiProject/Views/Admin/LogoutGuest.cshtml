@@ -1,0 +1,37 @@
+﻿@model CustomerLogoutPassword
+
+<link rel="stylesheet" href="~/css/ValidateInputStyleSheet.css" asp-append-version="true" />
+
+<style>
+    h3 {
+        color: red;
+    }
+</style>
+
+<h2>LogOut Screen</h2>
+<hr />
+@if (User.IsInRole("Guest"))
+{
+    @if (Model.Success == true)
+    {
+        <h3>Password Incorrect: Please Try Again</h3>
+    }
+
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Admin" asp-action="CheckGuestLogoutPassword" method="post">
+
+            <div class="form-group">
+                <label asp-for="CurrentPassword" class="">Password</label>
+                <input asp-for="CurrentPassword" type="password" placeholder="Password" class="form-control" />
+                <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+            </div>
+            <br />
+
+            <a class="btn btn-primary" href="#" onclick="if(confirm('Are you sure you would like to logout')) $(this).closest('form').submit();">Logout</a>
+        </form>
+    </div>
+    <br />
+    <input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+}
+

@@ -24,6 +24,6 @@ namespace SushiProject
         public IEnumerable<MoneyAccounting> ViewAllDebitCreditHistorySQL();
         public MoneyAccounting GetSingleDebitCreditRecordSQL(int id);
         public void InsertFundsToDatabaseSQL(MoneyAccounting funds);
-
+        public string GetGuestLogoutPasswordSQL();
     }
 }
