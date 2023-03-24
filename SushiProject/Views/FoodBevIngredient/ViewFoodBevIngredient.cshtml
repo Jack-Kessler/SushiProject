@@ -29,20 +29,17 @@
             @using (Html.BeginForm("UpdateFoodBevIngredient", "FoodBevIngredient", "Post"))
         {
             <input type="hidden" asp-for="IngredientID" value="@Model.IngredientID" />
-            <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to delete this ingredient?')" value="Delete this product" />
+            <input type="submit" class="StandardButtonOutline" value="Edit Ingredient" />
         }
     </div>
     <br />
-}
 
-@if (User.IsInRole("Owner"))
-{
     <div style="display: block">
 
         @using (Html.BeginForm("DeleteFoodBevIngredient", "FoodBevIngredient", "Post"))
         {
             <input type="hidden" asp-for="IngredientID" value="@Model.IngredientID" />
-            <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to delete this ingredient?')" value="Delete this product" />
+            <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to delete this ingredient?')" value="Delete Ingredient" />
         }
     </div>
 }

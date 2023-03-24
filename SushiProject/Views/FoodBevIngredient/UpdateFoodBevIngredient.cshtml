@@ -4,7 +4,7 @@
 
 <h2>Update @Model.IngredientName</h2>
 <hr />
-@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+@if (User.IsInRole("Owner"))
 {
     <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -29,29 +29,32 @@
             </div>
             <br />
 
-            @if (User.IsInRole("Owner"))
-            {
-                <div class="form-group">
-                    <label asp-for="IngredientCost" class="col-md-2">Ingredient Cost</label>
-                    <input asp-for="IngredientCost" type="number" max="2147483647" min="0" step="0.01" class="form-control" required />
-                    <span asp-validation-for="IngredientCost" class="text-danger"></span>
-                </div>
-                <br />
-            }
-
+            <div class="form-group">
+                <label asp-for="IngredientCost" class="col-md-2">Ingredient Cost</label>
+                <input asp-for="IngredientCost" type="number" max="2147483647" min="0" step="0.01" class="form-control" required />
+                <span asp-validation-for="IngredientCost" class="text-danger"></span>
+            </div>
+            <br />
 
             <div class="form-group">
                 <label for="">Ingredient Category</label>
                 <select class="form-control" name="IngredientCategoryName" value="">
                     @foreach (var cat in Model.IngredientCategories)
                     {
-                        <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
+                        if (cat.IngredientCategoryName == Model.IngredientCategoryName)
+                        {
+                            <option value="@cat.IngredientCategoryName" selected>@cat.IngredientCategoryName</option>
+                        }
+                        else
+                        {
+                            <option value="@cat.IngredientCategoryName">@cat.IngredientCategoryName</option>
+                        } 
                     }
                 </select>
             </div>
             <br />
 
-            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to save changes entered for this ingredient?')) $(this).closest('form').submit();">Update Ingredient</a>
+            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to save changes entered for this ingredient?')) $(this).closest('form').submit();"><button>Update Ingredient</button></a>
         </form>
     </div>
 }

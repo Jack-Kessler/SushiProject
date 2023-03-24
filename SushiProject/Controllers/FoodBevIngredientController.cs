@@ -33,14 +33,23 @@ namespace SushiProject.Controllers
                 return View("ProductNotFound");
             }
             ingredient.IngredientCategories = categories.IngredientCategories;
-            return View(ingredient);
+            return View("UpdateFoodBevIngredient", ingredient);
         }
 
         public IActionResult UpdateFoodBevIngredientToDatabase(FoodBevIngredient ingredient)
         {
-            repo.UpdateFoodBevIngredientSQL(ingredient);
-
-            return RedirectToAction("ViewFoodBevIngredient", new { id = ingredient.IngredientID });
+            if (ModelState.IsValid)
+            {
+                repo.UpdateFoodBevIngredientSQL(ingredient);
+                return RedirectToAction("ViewFoodBevIngredient", new { id = ingredient.IngredientID });
+            }
+            else
+            {
+                var categories = repo.AssignFoodBevIngredientCategorySQL();
+                ingredient.IngredientCategories = categories.IngredientCategories;
+                return View("UpdateFoodBevIngredient", ingredient);
+            }
+                
         }
         public IActionResult ResetAllIngredientsToBaseLevel()
         {
