@@ -37,7 +37,14 @@
                     <option value="" disabled selected>Select Menu Item From List</option>
                     @foreach (var item in Model.MenuItemList)
                     {
-                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        if (item.MenuItemName == Model.MenuItemName1)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
                     }
                 </select>
             </div>
@@ -58,7 +65,14 @@
                     <option value="" selected></option>
                     @foreach (var item in Model.MenuItemList)
                     {
-                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        if (item.MenuItemName == Model.MenuItemName2)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
                     }
                 </select>
             </div>
@@ -79,7 +93,14 @@
                     <option value="" selected></option>
                     @foreach (var item in Model.MenuItemList)
                     {
-                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        if (item.MenuItemName == Model.MenuItemName3)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
                     }
                 </select>
             </div>
@@ -100,7 +121,14 @@
                     <option value="" selected></option>
                     @foreach (var item in Model.MenuItemList)
                     {
-                        <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        if (item.MenuItemName == Model.MenuItemName4)
+                        {
+                            <option value="@item.MenuItemName" selected>@item.MenuItemName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.MenuItemName">@item.MenuItemName</option>
+                        }
                     }
                 </select>
             </div>
@@ -116,7 +144,23 @@
             <a class="btn btn-primary" href="#" onclick="if(confirm('Are you sure you would like to add this order?')) $(this).closest('form').submit();">Add Order</a>
         </form>
     </div>
+    <br />
 }
-<br />
-<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+@if (User.IsInRole("Guest"))
+{
+    <div style="display: block">
+        @using (Html.BeginForm("CustomerHomePage", "SalesTransaction", "Post"))
+        {
+            <input type="hidden" asp-for="TransactionID" value="@Model.TransactionID" />
+            <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
+        }
+    </div>
+    <br />
+}
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+}
+
+
 

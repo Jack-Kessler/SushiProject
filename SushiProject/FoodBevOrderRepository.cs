@@ -52,6 +52,33 @@ namespace SushiProject
                 foodBevOrderToInsert.MenuItemName4 = null;
                 foodBevOrderToInsert.QuantityItem4 = 0;
             }
+            if (foodBevOrderToInsert.MenuItemName2 == null && foodBevOrderToInsert.MenuItemName4 != null) //The following code pushes up menu items if there are any null spaces above.
+            {
+                foodBevOrderToInsert.MenuItemName2 = foodBevOrderToInsert.MenuItemName4;
+                foodBevOrderToInsert.QuantityItem2 = foodBevOrderToInsert.QuantityItem4;
+                foodBevOrderToInsert.PriceItem2 = foodBevOrderToInsert.PriceItem4;
+                foodBevOrderToInsert.MenuItemName4 = null;
+                foodBevOrderToInsert.QuantityItem4 = 0;
+                foodBevOrderToInsert.PriceItem4 = 0;
+            }
+            if (foodBevOrderToInsert.MenuItemName3 == null && foodBevOrderToInsert.MenuItemName4 != null)
+            {
+                foodBevOrderToInsert.MenuItemName3 = foodBevOrderToInsert.MenuItemName4;
+                foodBevOrderToInsert.QuantityItem3 = foodBevOrderToInsert.QuantityItem4;
+                foodBevOrderToInsert.PriceItem3 = foodBevOrderToInsert.PriceItem4;
+                foodBevOrderToInsert.MenuItemName4 = null;
+                foodBevOrderToInsert.QuantityItem4 = 0;
+                foodBevOrderToInsert.PriceItem4 = 0;
+            }
+            if (foodBevOrderToInsert.MenuItemName2 == null && foodBevOrderToInsert.MenuItemName3 != null)
+            {
+                foodBevOrderToInsert.MenuItemName2 = foodBevOrderToInsert.MenuItemName3;
+                foodBevOrderToInsert.QuantityItem2 = foodBevOrderToInsert.QuantityItem3;
+                foodBevOrderToInsert.PriceItem2 = foodBevOrderToInsert.PriceItem3;
+                foodBevOrderToInsert.MenuItemName3 = null;
+                foodBevOrderToInsert.QuantityItem3 = 0;
+                foodBevOrderToInsert.PriceItem3 = 0;
+            }
             return foodBevOrderToInsert;
         }
         public void InsertFoodBevOrderSQL(FoodBevOrder foodBevOrderToInsert)
