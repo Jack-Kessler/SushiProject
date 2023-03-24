@@ -10,22 +10,57 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sushi Project</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        @if (User.IsInRole("Guest"))
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                @*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">*@
+                <div class="container-fluid">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item ms-auto"> @*The "ms-auto" makes logout right aligned on the nav bar.*@
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="logOut">Logout </a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" onclick="openTabFacebook()">Facebook</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" onclick="openTabInstagram()">Instagram</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" onclick="openTabGitHub()">GitHub</a>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
+            </nav>
+            
+            <script>
+            function openTabFacebook() {
+                window.open("https://www.facebook.com/", "_blank");
+            }
+            function openTabInstagram() {
+                window.open("https://www.instagram.com/", "_blank");
+            }
+            function openTabGitHub() {
+                    window.open("https://github.com/Jack-Kessler/SushiProject", "_blank");
+            }
+            </script>
+        }
+        @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Sushi Project</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item ms-auto">
+                                @*The "ms-auto" makes logout right aligned on the nav bar.*@
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="logOut">Logout </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        }
     </header>
     <div class="container">
         <main role="main" class="pb-3">
