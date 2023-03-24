@@ -28,30 +28,28 @@ namespace SushiProject
             _conn.Execute("UPDATE MENU_ITEMS " +
                 "SET " +
                 "MENUITEMNAME = @name, " +
-                "MENUITEMPRICE = @price " +
+                "MENUITEMPRICE = @price, " +
                 "MENUITEMCATEGORY = @cat, " +
-                "MENUITEMINGREDIENTNAME1 = @I1, " +
-                "MenuItemIngredientQuantity1 = @Q1," +
-                "MENUITEMINGREDIENTNAME2 = @I2," +
-                "MenuItemIngredientQuantity2 = @Q2," +
-                "MENUITEMINGREDIENTNAME3 = @I3," +
-                "MenuItemIngredientQuantity3 = @Q3," +
-                "MENUITEMINGREDIENTNAME4 = @I4," +
-                "MenuItemIngredientQuantity4 = @Q4," +
-                "MENUITEMINGREDIENTNAME5 = @I5," +
-                "MenuItemIngredientQuantity5 = @Q5," +
-                "MENUITEMINGREDIENTNAME6 = @I6," +
-                "MenuItemIngredientQuantity6 = @Q6," +
-                "MENUITEMINGREDIENTNAME7 = @I7," +
-                "MenuItemIngredientQuantity7 = @Q7," +
-                "MENUITEMINGREDIENTNAME8 = @I8," +
-                "MenuItemIngredientQuantity8 = @Q8," +
-                "MENUITEMINGREDIENTNAME9 = @I9," +
-                "MenuItemIngredientQuantity9 = @Q9," +
-                "MENUITEMINGREDIENTNAME10 = @I10," +
-                "MenuItemIngredientQuantity10 = @Q10" +
-                "" +
-                "WHERE MENUITEMID = @id;",
+                "MENUITEMINGREDIENTNAME1 = @i1, " +
+                "MenuItemIngredientQuantity1 = @q1, " +
+                "MENUITEMINGREDIENTNAME2 = @i2, " +
+                "MenuItemIngredientQuantity2 = @q2, " +
+                "MENUITEMINGREDIENTNAME3 = @i3, " +
+                "MenuItemIngredientQuantity3 = @q3, " +
+                "MENUITEMINGREDIENTNAME4 = @i4, " +
+                "MenuItemIngredientQuantity4 = @q4, " +
+                "MENUITEMINGREDIENTNAME5 = @i5, " +
+                "MenuItemIngredientQuantity5 = @q5, " +
+                "MENUITEMINGREDIENTNAME6 = @i6, " +
+                "MenuItemIngredientQuantity6 = @q6, " +
+                "MENUITEMINGREDIENTNAME7 = @i7, " +
+                "MenuItemIngredientQuantity7 = @q7, " +
+                "MENUITEMINGREDIENTNAME8 = @i8, " +
+                "MenuItemIngredientQuantity8 = @q8, " +
+                "MENUITEMINGREDIENTNAME9 = @i9, " +
+                "MenuItemIngredientQuantity9 = @q9, " +
+                "MENUITEMINGREDIENTNAME10 = @i10, " +
+                "MenuItemIngredientQuantity10 = @q10 WHERE MENUITEMID = @id;",
                  new
                  {
                      name = menuItemToUpdate.MenuItemName,
@@ -77,6 +75,7 @@ namespace SushiProject
                      q9 = menuItemToUpdate.MenuItemIngredientQuantity9,
                      i10 = menuItemToUpdate.MenuItemIngredientName10,
                      q10 = menuItemToUpdate.MenuItemIngredientQuantity10,
+                     id = menuItemToUpdate.MenuItemID
                  });
         }
 

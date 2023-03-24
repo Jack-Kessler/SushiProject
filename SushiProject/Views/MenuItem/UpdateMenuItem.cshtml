@@ -11,6 +11,12 @@
         <form asp-controller="MenuItem" asp-action="UpdateMenuItemToDatabase" method="post">
 
             <div class="form-group">
+                <input asp-for="MenuItemID" type="hidden" class="form-control" />
+                <span asp-validation-for="MenuItemID" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
                 <label asp-for="MenuItemName" class="col-md-2">Menu Item Name</label>
                 <input asp-for="MenuItemName" class="form-control" required />
                 <span asp-validation-for="MenuItemName" class="text-danger"></span>
@@ -77,6 +83,10 @@
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
                     }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                    }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
                         if (cat.IngredientName == Model.MenuItemIngredientName2)
@@ -106,6 +116,10 @@
                     @if (Model.MenuItemIngredientName3 == null)
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
+                    }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
                     }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
@@ -137,6 +151,10 @@
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
                     }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                    }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
                         if (cat.IngredientName == Model.MenuItemIngredientName4)
@@ -166,6 +184,10 @@
                     @if (Model.MenuItemIngredientName5 == null)
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
+                    }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
                     }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
@@ -197,6 +219,10 @@
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
                     }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                    }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
                         if (cat.IngredientName == Model.MenuItemIngredientName6)
@@ -226,6 +252,10 @@
                     @if (Model.MenuItemIngredientName7 == null)
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
+                    }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
                     }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
@@ -257,6 +287,10 @@
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
                     }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                    }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
                         if (cat.IngredientName == Model.MenuItemIngredientName8)
@@ -286,6 +320,10 @@
                     @if (Model.MenuItemIngredientName9 == null)
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
+                    }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
                     }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
@@ -317,6 +355,10 @@
                     {
                         <option value="Default-NoIngredient" selected>Default - Leave If Not Applicable</option>
                     }
+                    else
+                    {
+                        <option value="Default-NoIngredient">Default - Leave If Not Applicable</option>
+                    }
                     @foreach (var cat in Model.MenuItemIngredientList)
                     {
                         if (cat.IngredientName == Model.MenuItemIngredientName10)
@@ -338,7 +380,7 @@
             </div>
             <br />
 
-            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to save changes entered for the menu item')) $(this).closest('form').submit();">Update Menu Item</a>
+            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to save changes entered for the menu item')) $(this).closest('form').submit();"><button>Update Menu Item</button></a>
         </form>
     </div>
 }

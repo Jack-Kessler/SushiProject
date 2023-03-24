@@ -92,8 +92,8 @@
             <input type="button" value="Ingredients" onclick="@("window.location.href='" + @Url.Action("Index", "FoodBevIngredient") + "'");" />
             <input type="button" value="Reset All Inventory Levels" onclick="@("window.location.href='" + @Url.Action("ResetAllIngredientsToBaseLevel", "FoodBevIngredient") + "'");" />
             <input type="button" value="View Clocked-In / Out Staff" onclick="@("window.location.href='" + @Url.Action("ViewClockedInOutStaff", "Admin") + "'");" />
-            <button type="button">Edit Employee Info</button>
-            <button type="button">Create New Employee Account</button>
+@*            <button type="button">Edit Employee Info</button>
+            <button type="button">Create New Employee Account</button>*@
             <input type="button" value="Change Tax Rate" onclick="@("window.location.href='" + @Url.Action("ChangeTaxRate", "Admin") + "'");" />
             <input type="button" value="Change All You Can Eat Rate - Adult" onclick="@("window.location.href='" + @Url.Action("ChangeAllYouCanEatRateAdult", "Admin") + "'");" />
             <input type="button" value="Change All You Can Eat Rate - Child" onclick="@("window.location.href='" + @Url.Action("ChangeAllYouCanEatRateChild", "Admin") + "'");" />
