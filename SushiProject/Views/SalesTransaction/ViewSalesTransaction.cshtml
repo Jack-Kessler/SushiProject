@@ -203,7 +203,6 @@
         }
     </div>
     <br />
-    <br />
 }
 
 @if (User.IsInRole("Server") || User.IsInRole("Manager") || User.IsInRole("Owner"))
@@ -217,7 +216,6 @@
         }
     </div>
     <br />
-    <br />
 }
 
 @if (User.IsInRole("Owner"))
@@ -230,5 +228,11 @@
             <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to delete this transaction?')" value="Delete Transaction" />
         }
     </div>
+    <br />
+}
+
+@if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
+{
+    <input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 }
 

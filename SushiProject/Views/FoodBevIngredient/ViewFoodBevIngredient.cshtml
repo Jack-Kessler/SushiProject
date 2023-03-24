@@ -23,7 +23,7 @@
     <br />
 }
 
-@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+@if (User.IsInRole("Owner"))
 {
     <div style="display: block">
             @using (Html.BeginForm("UpdateFoodBevIngredient", "FoodBevIngredient", "Post"))

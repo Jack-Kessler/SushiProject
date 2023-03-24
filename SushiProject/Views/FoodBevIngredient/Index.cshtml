@@ -5,10 +5,15 @@
 <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 <br />
 <br />
-@if (User.IsInRole("Manager") || User.IsInRole("Owner"))
+@if (User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/FoodBevIngredient/InsertFoodBevIngredient/">Add a New Ingredient</a>
+
+        @using (Html.BeginForm("InsertFoodBevIngredient", "FoodBevIngredient", "Post"))
+        {
+            <input type="hidden" />
+            <input type="submit" class="StandardButtonOutline" value="Add New Ingredient" />
+        }
     </div>
     <br />
 }
