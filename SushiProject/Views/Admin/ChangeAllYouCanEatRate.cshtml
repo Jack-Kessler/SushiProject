@@ -2,6 +2,12 @@
 
 <link rel="stylesheet" href="~/css/ValidateInputStyleSheet.css" asp-append-version="true" />
 
+<style>
+    h3 {
+        color: red;
+    }
+</style>
+
 @if (Model.Adult == true)
 {
     <h2>Change All You Can Eat Rate - Adult</h2>
@@ -21,14 +27,11 @@ else
             @if (Model.Success == false)
             {
                 <h3>A parameter(s) entered was invalid. Please try again.</h3>
-                <br />
             }
-
             <div class="form-group">
                 <input asp-for="Success" type="hidden" class="form-control" />
                 <span asp-validation-for="Success" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="Adult" type="hidden" class="form-control" />
@@ -57,7 +60,7 @@ else
             </div>
             <br />
 
-            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to change the All You Can Eat rate?')) $(this).closest('form').submit();">Change Rate</a>
+            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to change the All You Can Eat rate?')) $(this).closest('form').submit();"><button>Change Rate</button></a>
         }
     </form>
 </div>

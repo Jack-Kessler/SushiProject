@@ -5,7 +5,11 @@
 @if (User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/Admin/InsertPaymentMethod/">Add a New Payment Method</a>
+        @using (Html.BeginForm("InsertPaymentMethod", "Admin", "Post"))
+        {
+            <input type="hidden"/>
+            <input type="submit" class="StandardButtonOutline" value="Add a New Payment Method" />
+        }
     </div>
     <br />
 

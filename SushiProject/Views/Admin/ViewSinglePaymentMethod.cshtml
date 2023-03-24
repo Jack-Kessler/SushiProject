@@ -15,8 +15,22 @@
     </table>
     <br />
 
-    <div style="display: block">
-        <a href="/Admin/UpdatePaymentMethod/@Model.PaymentMethodCategoryID">Update Payment Method</a>
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Admin" asp-action="UpdatePaymentMethod" method="post">
+
+            <div class="form-group">
+                <input asp-for="PaymentMethodCategoryID" type="hidden" class="form-control" />
+                <span asp-validation-for="PaymentMethodCategoryID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="PaymentMethodCategoryName" type="hidden" class="form-control" />
+                <span asp-validation-for="PaymentMethodCategoryName" class="text-danger"></span>
+            </div>
+
+            <a href="#" class="StandardButtonOutline"><button>Edit Payment Method</button></a>
+        </form>
     </div>
     <br />
 
@@ -28,6 +42,6 @@
             <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to delete this payment method?')" value="Delete Payment Method" />
         }
     </div>
+    <br />
 }
-<br />
 <input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

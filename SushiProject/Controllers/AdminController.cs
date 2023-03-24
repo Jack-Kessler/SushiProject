@@ -158,10 +158,10 @@ namespace SushiProject.Controllers
             }
             return View("InsertPaymentMethod", pay);
         }
-        public IActionResult UpdatePaymentMethod(int id)
+        public IActionResult UpdatePaymentMethod(PaymentMethodCategory pay)
         {
-            PaymentMethodCategory paymentMethod = repo.GetSinglePaymentMethodSQL(id);
-            return View("UpdatePaymentMethod", paymentMethod);
+            PaymentMethodCategory paymentMethod = repo.GetSinglePaymentMethodSQL(pay.PaymentMethodCategoryID);
+            return View("UpdatePaymentMethod", pay);
         }
         public IActionResult UpdatePaymentMethodInDatabase(PaymentMethodCategory pay)
         {
