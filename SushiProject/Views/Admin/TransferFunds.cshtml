@@ -29,9 +29,9 @@
             </div>
             <br />
 
-            <a href="#" onclick="if(confirm('Are you sure you would like to transfer funds?')) $(this).closest('form').submit();">Transfer Funds</a>
+            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to transfer funds?')) $(this).closest('form').submit();">Transfer Funds</a>
         </form>
     </div>
 }
 <br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

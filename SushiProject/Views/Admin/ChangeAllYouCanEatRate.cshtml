@@ -57,9 +57,9 @@ else
             </div>
             <br />
 
-            <a href="#" onclick="if(confirm('Are you sure you would like to change the All You Can Eat rate?')) $(this).closest('form').submit();">Change Rate</a>
+            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to change the All You Can Eat rate?')) $(this).closest('form').submit();">Change Rate</a>
         }
     </form>
 </div>
 <br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

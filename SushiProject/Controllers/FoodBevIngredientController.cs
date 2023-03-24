@@ -24,10 +24,10 @@ namespace SushiProject.Controllers
             return View(ingredient);
         }
 
-        public IActionResult UpdateFoodBevIngredient(int id)
+        public IActionResult UpdateFoodBevIngredient(FoodBevIngredient id)
         {
             var categories = repo.AssignFoodBevIngredientCategorySQL();
-            FoodBevIngredient ingredient = repo.GetFoodBevIngredientSQL(id);
+            FoodBevIngredient ingredient = repo.GetFoodBevIngredientSQL(id.IngredientID);
             if (ingredient == null)
             {
                 return View("ProductNotFound");

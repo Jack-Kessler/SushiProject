@@ -20,14 +20,14 @@
             <br />
 
 
-            <input type="submit" value="Next" class="btn btn-primary" />
+            <input type="submit" class="StandardButtonOutline" value="Next" class="btn btn-primary" />
         </form>
     </div>
     <br />
-    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+    <input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 }
 
 @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
-    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+    <input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 }

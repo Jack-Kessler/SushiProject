@@ -55,9 +55,9 @@ namespace SushiProject.Controllers
             var item = repo.GetMenuItemSQL(id);
             return View(item);
         }
-        public IActionResult UpdateMenuItem(int id)
+        public IActionResult UpdateMenuItem(MenuItem item)
         {
-            MenuItem updateItem = repo.GetMenuItemSQL(id);//These two lines of code ensure MenuItemCategory is not null
+            MenuItem updateItem = repo.GetMenuItemSQL(item.MenuItemID);//These two lines of code ensure MenuItemCategory is not null
             var menuItemCat = repo.AssignMenuItemCategorySQL();
             updateItem.MenuItemCategories = menuItemCat.MenuItemCategories;//These two lines of code ensure MenuItemIngredientList is not null
             var ingredients = repo.AssignMenuItemIngredientListSQL();

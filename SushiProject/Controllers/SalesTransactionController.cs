@@ -26,9 +26,9 @@ namespace SushiProject.Controllers
             return View(transaction);
         }
 
-        public IActionResult UpdateSalesTransaction(int id)
+        public IActionResult UpdateSalesTransaction(SalesTransaction transaction)
         {
-            SalesTransaction updateTransaction = repo.GetSalesTransactionSQL(id);
+            SalesTransaction updateTransaction = repo.GetSalesTransactionSQL(transaction.SalesTransactionID);
 
             var orderTrans = repo.GetOrderListSQL();
             updateTransaction.OrderList = orderTrans;

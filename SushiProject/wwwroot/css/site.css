@@ -82,46 +82,6 @@ span.psw {
     padding-top: 16px;
 }
 
-/*</style >*/
-/*label {
-display: block;
-margin: 1px;
-padding: 1px;
-}
-
-.field {
-    margin: 1px;
-    padding: 1px;
-}
-
-input:required {
-    border-color: black;
-    border-width: 2px;
-}
-
-input:valid {
-    
-    background-color: #ddffdd;*/ /*Light green = #ddffdd*/
-/*}
-
-input:invalid {
-    background-color: #ffdddd;*/ /*Light red = #ffdddd*/
-/*}
-
-.field-validation-error {
-    color: red;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.field-validation-valid {
-    display: none;
-}
-
-input.input-validation-error {
-    border: 1px solid red;
-}*/
-
 .container-fluid {
     background-color: darkgrey;
 }
@@ -129,4 +89,19 @@ input.input-validation-error {
 .nav-item a:hover {
     background-color: #ddd;
     color: black;
+}
+
+.StandardButtonOutline button {
+    border: 1px solid #333;
+    border-radius: 2px;
+}
+
+input[type=button] {
+    border: 1px solid #333;
+    border-radius: 2px;
+}
+
+input[type=submit] {
+    border: 1px solid #333;
+    border-radius: 2px;
 }

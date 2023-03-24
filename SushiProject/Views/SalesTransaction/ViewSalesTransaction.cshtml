@@ -195,7 +195,12 @@
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/SalesTransaction/UpdateSalesTransaction/@Model.SalesTransactionID">Edit Sales Transaction</a>
+
+        @using (Html.BeginForm("UpdateSalesTransaction", "SalesTransaction", "Post"))
+        {
+            <input type="hidden" asp-for="SalesTransactionID" value="@Model.SalesTransactionID" />
+            <input type="submit" class="StandardButtonOutline" value="Edit Sales Transaction" />
+        }
     </div>
     <br />
     <br />
@@ -208,7 +213,7 @@
         @using (Html.BeginForm("CompleteSalesTransaction", "SalesTransaction", "Post"))
         {
             <input type="hidden" asp-for="SalesTransactionID" value="@Model.SalesTransactionID" />
-            <input type="submit" onclick="return confirm('Are you sure you would like to mark this transaction as completed?')" value="Mark Transaction as Complete" />
+            <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to mark this transaction as completed?')" value="Mark Transaction as Complete" />
         }
     </div>
     <br />
@@ -222,7 +227,7 @@
         @using (Html.BeginForm("DeleteSalesTransaction", "SalesTransaction", "Post"))
         {
             <input type="hidden" asp-for="SalesTransactionID" value="@Model.SalesTransactionID" />
-            <input type="submit" onclick="return confirm('Are you sure you would like to delete this transaction?')" value="Delete Transaction" />
+            <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to delete this transaction?')" value="Delete Transaction" />
         }
     </div>
 }

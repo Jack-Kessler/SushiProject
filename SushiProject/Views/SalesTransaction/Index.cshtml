@@ -5,7 +5,10 @@
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/SalesTransaction/CreateSalesTransaction1/">Create New Transaction</a>
+        @using (Html.BeginForm("CreateSalesTransaction1", "SalesTransaction", "Post"))
+        {
+            <input type="submit" class="StandardButtonOutline" value="Create New Transaction" />
+        }
     </div>
     <br />
 }
@@ -38,4 +41,4 @@
     </table>
     <br />
 }
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

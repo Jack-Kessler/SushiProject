@@ -5,7 +5,11 @@
 @if (User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/MenuItem/InsertMenuItem/">Create New Menu Item</a>
+        @using (Html.BeginForm("InsertMenuItem", "MenuItem", "Post"))
+        {
+            <input type="hidden" />
+            <input type="submit" class="StandardButtonOutline" value="Create New Menu Item" />
+        }
     </div>
     <br />
 }
@@ -65,4 +69,4 @@
     }
 </table>
 <br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

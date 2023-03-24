@@ -37,10 +37,10 @@
             </div>
             <br />
             <br />
-            <a href="#" onclick="if(confirm('Are you sure you would like to update the table assignment?')) $(this).closest('form').submit();"><button>Update Table Assignment</button></a>
+            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to update the table assignment?')) $(this).closest('form').submit();"><button>Update Table Assignment</button></a>
         </form>
     </div>
 }
 <br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 

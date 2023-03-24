@@ -702,11 +702,11 @@
             </div>
             <br />
 
-            <a href="#" onclick="if(confirm('Are you sure you would like to update this transaction?')) $(this).closest('form').submit();">Update Transaction</a>
+            <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to update this transaction?')) $(this).closest('form').submit();">Update Transaction</a>
         </form>
     </div>
 }
 @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
-    <input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+    <input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
 }

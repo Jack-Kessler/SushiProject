@@ -12,7 +12,7 @@
     @using (Html.BeginForm("CustomerHomePage", "SalesTransaction", "Post"))
     {
         <input type="hidden" asp-for="TransactionID" value="@Model.TransactionID" />
-        <input type="submit" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
+        <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
     }
 </div>
 <br />
@@ -28,7 +28,7 @@
         <label for="SearchString"> Search by partial menu item name:</label>
         <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
     </div>
-    <input type="submit" value="Search" class="btn btn-primary" />
+    <input type="submit" class="StandardButtonOutline" value="Search" class="btn btn-primary" />
 </form>
 <br />
 
@@ -43,7 +43,7 @@
         <label for="SearchStringIngredient"> Search by partial ingredient name:</label>
         <input type="text" name="SearchStringIngredient" value="@ViewData["CurrentFilterIngredient"]" />
     </div>
-    <input type="submit" value="Search" class="btn btn-primary" />
+    <input type="submit" class="StandardButtonOutline" value="Search" class="btn btn-primary" />
 </form>
 <br />
 
@@ -52,7 +52,7 @@
         <input asp-for="TransactionID" type="hidden" class="form-control" />
         <span asp-validation-for="TransactionID" class="text-danger"></span>
     </div>
-    <input type="submit" value="View Full List of Menu Items" class="btn btn-primary" />
+    <input type="submit" class="StandardButtonOutline" value="View Full List of Menu Items" class="btn btn-primary" />
     <br />
 </form>
 <hr />
@@ -117,6 +117,6 @@
     @using (Html.BeginForm("CustomerHomePage", "SalesTransaction", "Post"))
     {
         <input type="hidden" asp-for="TransactionID" value="@Model.TransactionID" />
-        <input type="submit" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
+        <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to return to the main screen?')" value="Return to Main Screen" />
     }
 </div>

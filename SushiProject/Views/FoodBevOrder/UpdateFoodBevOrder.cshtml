@@ -186,8 +186,8 @@
             <br />
         }
         
-        <a href="#" onclick="if(confirm('Are you sure you would like to update this order?')) $(this).closest('form').submit();"><button>Update Order</button></a>
+        <a href="#" class="StandardButtonOutline" onclick="if(confirm('Are you sure you would like to update this order?')) $(this).closest('form').submit();"><button>Update Order</button></a>
     </form>
 </div>
 <br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

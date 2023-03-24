@@ -64,18 +64,22 @@
 @if (User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/MenuItem/UpdateMenuItem/@Model.MenuItemID">Update Menu Item</a>
+
+        @using (Html.BeginForm("UpdateMenuItem", "MenuItem", "Post"))
+        {
+            <input type="hidden" asp-for="MenuItemID" value="@Model.MenuItemID" />
+            <input type="submit" class="StandardButtonOutline" value="Update Menu Item" />
+        }
     </div>
-    <br />
 
     <div style="display: block">
 
         @using (Html.BeginForm("DeleteMenuItem", "MenuItem", "Post"))
         {
             <input type="hidden" asp-for="MenuItemID" value="@Model.MenuItemID" />
-            <input type="submit" onclick="return confirm('Are you sure you would like to delete this menu item?')" value="Delete Menu Item" />
+            <input type="submit" class="StandardButtonOutline" onclick="return confirm('Are you sure you would like to delete this menu item?')" value="Delete Menu Item" />
         }
     </div>
 }
 <br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />

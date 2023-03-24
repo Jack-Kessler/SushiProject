@@ -35,10 +35,9 @@
                 </select>
             </div>
             <br />
-
-            <input type="submit" value="Next Step" class="btn btn-primary" />
+            <a href="#" class="StandardButtonOutline"><button>Next Step</button></a>
         </form>
     </div>
 }
 <br />
-<input type="button" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+<input type="button" class="StandardButtonOutline" value="Return to Main Screen" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
