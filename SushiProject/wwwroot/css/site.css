@@ -92,16 +92,37 @@ span.psw {
 }
 
 .StandardButtonOutline button {
+    color: black;
+    background-color: #f0f0f0;
     border: 1px solid #333;
     border-radius: 2px;
 }
 
 input[type=button] {
+    color: black;
+    background-color: #f0f0f0;
     border: 1px solid #333;
     border-radius: 2px;
 }
 
 input[type=submit] {
+    color: black;
+    background-color: #f0f0f0;
     border: 1px solid #333;
     border-radius: 2px;
+}
+
+.btn-primary {
+    color: black;
+    background-color: #f0f0f0;
+    border: 1px solid #333;
+    border-radius: 2px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #f0f0f0 !important;
+}
+
+.btn-primary.active {
+    background-color: #f0f0f0 !important;
 }
