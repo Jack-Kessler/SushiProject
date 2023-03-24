@@ -1,5 +1,11 @@
 ﻿@model SalesTransaction
 
+<style>
+    p {
+        color: red;
+    }
+</style>
+
 <h2>Payment Receipt</h2>
 <hr />
 @if (User.IsInRole("Guest"))
@@ -9,6 +15,15 @@
         <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
     </div>
     <br />
+
+    @if (Model.AllYouCanEat == true)
+    {
+        <p>All You Can Eat: Yes</p>
+    }
+    else
+    {
+        <p>All You Can Eat: No</p>
+    }
 
     <table class="table">
         <tr>
@@ -30,14 +45,12 @@
 
     <table class="table">
         <tr>
-            <th>All You Can Eat</th>
             <th>PaymentMethod</th>
             <th>Date &amp; Time</th>
             <th>Server</th>
             <th>Table</th>
         </tr>
         <tr>
-            <td>@Model.AllYouCanEat</td>
             <td>@Model.PaymentMethod</td>
             <td>@Model.FinalTransactionDateAndTime</td>
             <td>@Model.EmployeeID</td>
@@ -49,143 +62,206 @@
     <table class="table">
         <tr>
             <th>Order Number</th>
-            <th>Order Price</th>
+            @if (Model.AllYouCanEat == false)
+            {
+                <th>Order Price</th>
+            }
         </tr>
         <tr>
             <td>@Model.OrderID1</td>
-            <td>@Model.OrderPrice1</td>
+            @if (Model.AllYouCanEat == false)
+            {
+                <td>@Model.OrderPrice1</td>
+            }
         </tr>
         @if (Model.OrderPrice2 != null)
         {
             <tr>
                 <td>@Model.OrderID2</td>
-                <td>@Model.OrderPrice2</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice2</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice3 != null)
         {
             <tr>
                 <td>@Model.OrderID3</td>
-                <td>@Model.OrderPrice3</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice3</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice4 != null)
         {
             <tr>
                 <td>@Model.OrderID4</td>
-                <td>@Model.OrderPrice4</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice4</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice5 != null)
         {
             <tr>
                 <td>@Model.OrderID5</td>
-                <td>@Model.OrderPrice5</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice5</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice6 != null)
         {
             <tr>
                 <td>@Model.OrderID6</td>
-                <td>@Model.OrderPrice6</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice6</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice7 != null)
         {
             <tr>
                 <td>@Model.OrderID7</td>
-                <td>@Model.OrderPrice7</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice7</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice8 != null)
         {
             <tr>
                 <td>@Model.OrderID8</td>
-                <td>@Model.OrderPrice8</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice8</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice9 != null)
         {
             <tr>
                 <td>@Model.OrderID9</td>
-                <td>@Model.OrderPrice9</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice9</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice10 != null)
         {
             <tr>
                 <td>@Model.OrderID10</td>
-                <td>@Model.OrderPrice10</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice10</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice11 != null)
         {
             <tr>
                 <td>@Model.OrderID11</td>
-                <td>@Model.OrderPrice11</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice11</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice12 != null)
         {
             <tr>
                 <td>@Model.OrderID12</td>
-                <td>@Model.OrderPrice12</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice12</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice13 != null)
         {
             <tr>
                 <td>@Model.OrderID13</td>
-                <td>@Model.OrderPrice13</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice13</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice14 != null)
         {
             <tr>
                 <td>@Model.OrderID14</td>
-                <td>@Model.OrderPrice14</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice14</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice15 != null)
         {
             <tr>
                 <td>@Model.OrderID15</td>
-                <td>@Model.OrderPrice15</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice15</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice16 != null)
         {
             <tr>
                 <td>@Model.OrderID16</td>
-                <td>@Model.OrderPrice16</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice16</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice17 != null)
         {
             <tr>
                 <td>@Model.OrderID17</td>
-                <td>@Model.OrderPrice17</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice17</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice18 != null)
         {
             <tr>
                 <td>@Model.OrderID18</td>
-                <td>@Model.OrderPrice18</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice18</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice19 != null)
         {
             <tr>
                 <td>@Model.OrderID19</td>
-                <td>@Model.OrderPrice19</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice19</td>
+                }
             </tr>
         }
         @if (Model.OrderPrice20 != null)
         {
             <tr>
                 <td>@Model.OrderID20</td>
-                <td>@Model.OrderPrice20</td>
+                @if (Model.AllYouCanEat == false)
+                {
+                    <td>@Model.OrderPrice20</td>
+                }
             </tr>
         }
     </table>

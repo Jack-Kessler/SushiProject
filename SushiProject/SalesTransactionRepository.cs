@@ -421,7 +421,9 @@ namespace SushiProject
             }
             else
             {
-                transaction.SubTotalPreTax = (decimal)(transaction.OrderPrice1 + transaction.OrderPrice2 + transaction.OrderPrice3 + transaction.OrderPrice4 + transaction.OrderPrice5 + transaction.OrderPrice6 + transaction.OrderPrice7 + transaction.OrderPrice8 + transaction.OrderPrice9 + transaction.OrderPrice10 + transaction.OrderPrice11 + transaction.OrderPrice12 + transaction.OrderPrice13 + transaction.OrderPrice14 + transaction.OrderPrice15 + transaction.OrderPrice16 + transaction.OrderPrice17 + transaction.OrderPrice18 + transaction.OrderPrice19 + transaction.OrderPrice20);
+                SalesTransaction tempTransaction = SetNullOrderPriceToZeroSQL(transaction);
+
+                transaction.SubTotalPreTax = (decimal)(tempTransaction.OrderPrice1 + tempTransaction.OrderPrice2 + tempTransaction.OrderPrice3 + tempTransaction.OrderPrice4 + tempTransaction.OrderPrice5 + tempTransaction.OrderPrice6 + tempTransaction.OrderPrice7 + tempTransaction.OrderPrice8 + tempTransaction.OrderPrice9 + tempTransaction.OrderPrice10 + tempTransaction.OrderPrice11 + tempTransaction.OrderPrice12 + tempTransaction.OrderPrice13 + tempTransaction.OrderPrice14 + tempTransaction.OrderPrice15 + tempTransaction.OrderPrice16 + tempTransaction.OrderPrice17 + tempTransaction.OrderPrice18 + tempTransaction.OrderPrice19 + tempTransaction.OrderPrice20);
 
                 transaction.TaxAmount = Math.Round((transaction.SubTotalPreTax * transaction.TaxRateFractionalEquivalent),2);
 
@@ -429,6 +431,54 @@ namespace SushiProject
             }
 
             _conn.Execute("UPDATE SALES_TRANSACTIONS SET SUBTOTALPRETAX = @pre, TAXAMOUNT = @tax, SUBTOTALAFTERTAX = @after WHERE SALESTRANSACTIONID = @ID;", new { ID = transactionID, pre = transaction.SubTotalPreTax, tax = transaction.TaxAmount, after = transaction.SubTotalAfterTax });
+
+            transaction = SetBackToNullSQL(transaction);
+            return transaction;
+        }
+        public SalesTransaction SetNullOrderPriceToZeroSQL(SalesTransaction transaction)
+        {
+            if (transaction.OrderPrice2 == null) { transaction.OrderPrice2 = 0; }
+            if (transaction.OrderPrice3 == null) { transaction.OrderPrice3 = 0; }
+            if (transaction.OrderPrice4 == null) { transaction.OrderPrice4 = 0; }
+            if (transaction.OrderPrice5 == null) { transaction.OrderPrice5 = 0; }
+            if (transaction.OrderPrice6 == null) { transaction.OrderPrice6 = 0; }
+            if (transaction.OrderPrice7 == null) { transaction.OrderPrice7 = 0; }
+            if (transaction.OrderPrice8 == null) { transaction.OrderPrice8 = 0; }
+            if (transaction.OrderPrice9 == null) { transaction.OrderPrice9 = 0; }
+            if (transaction.OrderPrice10 == null) { transaction.OrderPrice10 = 0; }
+            if (transaction.OrderPrice11 == null) { transaction.OrderPrice11 = 0; }
+            if (transaction.OrderPrice12 == null) { transaction.OrderPrice12 = 0; }
+            if (transaction.OrderPrice13 == null) { transaction.OrderPrice13 = 0; }
+            if (transaction.OrderPrice14 == null) { transaction.OrderPrice14 = 0; }
+            if (transaction.OrderPrice15 == null) { transaction.OrderPrice15 = 0; }
+            if (transaction.OrderPrice16 == null) { transaction.OrderPrice16 = 0; }
+            if (transaction.OrderPrice17 == null) { transaction.OrderPrice17 = 0; }
+            if (transaction.OrderPrice18 == null) { transaction.OrderPrice18 = 0; }
+            if (transaction.OrderPrice19 == null) { transaction.OrderPrice19 = 0; }
+            if (transaction.OrderPrice20 == null) { transaction.OrderPrice20 = 0; }
+            return transaction;
+        }
+        public SalesTransaction SetBackToNullSQL(SalesTransaction transaction)
+        {
+            if (transaction.OrderPrice2 == 0) { transaction.OrderPrice2 = null; }
+            if (transaction.OrderPrice3 == 0) { transaction.OrderPrice3 = null; }
+            if (transaction.OrderPrice4 == 0) { transaction.OrderPrice4 = null; }
+            if (transaction.OrderPrice5 == 0) { transaction.OrderPrice5 = null; }
+            if (transaction.OrderPrice6 == 0) { transaction.OrderPrice6 = null; }
+            if (transaction.OrderPrice7 == 0) { transaction.OrderPrice7 = null; }
+            if (transaction.OrderPrice8 == 0) { transaction.OrderPrice8 = null; }
+            if (transaction.OrderPrice9 == 0) { transaction.OrderPrice9 = null; }
+            if (transaction.OrderPrice10 == 0) { transaction.OrderPrice10 = null; }
+            if (transaction.OrderPrice11 == 0) { transaction.OrderPrice11 = null; }
+            if (transaction.OrderPrice12 == 0) { transaction.OrderPrice12 = null; }
+            if (transaction.OrderPrice13 == 0) { transaction.OrderPrice13 = null; }
+            if (transaction.OrderPrice14 == 0) { transaction.OrderPrice14 = null; }
+            if (transaction.OrderPrice15 == 0) { transaction.OrderPrice15 = null; }
+            if (transaction.OrderPrice16 == 0) { transaction.OrderPrice16 = null; }
+            if (transaction.OrderPrice17 == 0) { transaction.OrderPrice17 = null; }
+            if (transaction.OrderPrice18 == 0) { transaction.OrderPrice18 = null; }
+            if (transaction.OrderPrice19 == 0) { transaction.OrderPrice19 = null; }
+            if (transaction.OrderPrice20 == 0) { transaction.OrderPrice20 = null; }
             return transaction;
         }
         public void CalculateFinalTransactionAmountSQL(SalesTransaction transaction)

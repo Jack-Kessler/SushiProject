@@ -2,6 +2,12 @@
 
 <link rel="stylesheet" href="~/css/ValidateInputStyleSheet.css" asp-append-version="true" />
 
+<style>
+    p {
+        color: red;
+    }
+</style>
+
 <h2>Clock-Out</h2>
 <hr />
 @if (User.IsInRole("Server") || User.IsInRole("Chef") || User.IsInRole("Manager"))

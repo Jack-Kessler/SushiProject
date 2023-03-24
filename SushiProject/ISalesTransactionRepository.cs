@@ -1,5 +1,7 @@
 ﻿using SushiProject.Models;
+using System.Data.Common;
 using System.Drawing;
+using System.Transactions;
 
 namespace SushiProject
 {
@@ -26,6 +28,8 @@ namespace SushiProject
         public TaxRate GetTaxRateSQL();
         public decimal GetPerOrderPriceSQL(int orderID);
         public SalesTransaction CalculateSubTotalAmountSQL(int transactionID);
+        public SalesTransaction SetNullOrderPriceToZeroSQL(SalesTransaction transaction);
+        public SalesTransaction SetBackToNullSQL(SalesTransaction transaction);
         public void CalculateFinalTransactionAmountSQL(SalesTransaction transaction);
         public IEnumerable<PaymentMethodCategory> GetPaymentMethodsListSQL();
     }
