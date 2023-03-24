@@ -35,133 +35,133 @@
             <td>@Model.OrderID1</td>
             <td>@Model.OrderPrice1</td>
         </tr>
-        @if (Model.OrderPrice2 != 0)
+        @if (Model.OrderPrice2 != null)
         {
             <tr>
                 <td>@Model.OrderID2</td>
                 <td>@Model.OrderPrice2</td>
             </tr>
         }
-        @if (Model.OrderPrice3 != 0)
+        @if (Model.OrderPrice3 != null)
         {
             <tr>
                 <td>@Model.OrderID3</td>
                 <td>@Model.OrderPrice3</td>
             </tr>
         }
-        @if (Model.OrderPrice4 != 0)
+        @if (Model.OrderPrice4 != null)
         {
             <tr>
                 <td>@Model.OrderID4</td>
                 <td>@Model.OrderPrice4</td>
             </tr>
         }
-        @if (Model.OrderPrice5 != 0)
+        @if (Model.OrderPrice5 != null)
         {
             <tr>
                 <td>@Model.OrderID5</td>
                 <td>@Model.OrderPrice5</td>
             </tr>
         }
-        @if (Model.OrderPrice6 != 0)
+        @if (Model.OrderPrice6 != null)
         {
             <tr>
                 <td>@Model.OrderID6</td>
                 <td>@Model.OrderPrice6</td>
             </tr>
         }
-        @if (Model.OrderPrice7 != 0)
+        @if (Model.OrderPrice7 != null)
         {
             <tr>
                 <td>@Model.OrderID7</td>
                 <td>@Model.OrderPrice7</td>
             </tr>
         }
-        @if (Model.OrderPrice8 != 0)
+        @if (Model.OrderPrice8 != null)
         {
             <tr>
                 <td>@Model.OrderID8</td>
                 <td>@Model.OrderPrice8</td>
             </tr>
         }
-        @if (Model.OrderPrice9 != 0)
+        @if (Model.OrderPrice9 != null)
         {
             <tr>
                 <td>@Model.OrderID9</td>
                 <td>@Model.OrderPrice9</td>
             </tr>
         }
-        @if (Model.OrderPrice10 != 0)
+        @if (Model.OrderPrice10 != null)
         {
             <tr>
                 <td>@Model.OrderID10</td>
                 <td>@Model.OrderPrice10</td>
             </tr>
         }
-        @if (Model.OrderPrice11 != 0)
+        @if (Model.OrderPrice11 != null)
         {
             <tr>
                 <td>@Model.OrderID11</td>
                 <td>@Model.OrderPrice11</td>
             </tr>
         }
-        @if (Model.OrderPrice12 != 0)
+        @if (Model.OrderPrice12 != null)
         {
             <tr>
                 <td>@Model.OrderID12</td>
                 <td>@Model.OrderPrice12</td>
             </tr>
         }
-        @if (Model.OrderPrice13 != 0)
+        @if (Model.OrderPrice13 != null)
         {
             <tr>
                 <td>@Model.OrderID13</td>
                 <td>@Model.OrderPrice13</td>
             </tr>
         }
-        @if (Model.OrderPrice14 != 0)
+        @if (Model.OrderPrice14 != null)
         {
             <tr>
                 <td>@Model.OrderID14</td>
                 <td>@Model.OrderPrice14</td>
             </tr>
         }
-        @if (Model.OrderPrice15 != 0)
+        @if (Model.OrderPrice15 != null)
         {
             <tr>
                 <td>@Model.OrderID15</td>
                 <td>@Model.OrderPrice15</td>
             </tr>
         }
-        @if (Model.OrderPrice16 != 0)
+        @if (Model.OrderPrice16 != null)
         {
             <tr>
                 <td>@Model.OrderID16</td>
                 <td>@Model.OrderPrice16</td>
             </tr>
         }
-        @if (Model.OrderPrice17 != 0)
+        @if (Model.OrderPrice17 != null)
         {
             <tr>
                 <td>@Model.OrderID17</td>
                 <td>@Model.OrderPrice17</td>
             </tr>
         }
-        @if (Model.OrderPrice18 != 0)
+        @if (Model.OrderPrice18 != null)
         {
             <tr>
                 <td>@Model.OrderID18</td>
                 <td>@Model.OrderPrice18</td>
             </tr>
         }
-        @if (Model.OrderPrice19 != 0)
+        @if (Model.OrderPrice19 != null)
         {
             <tr>
                 <td>@Model.OrderID19</td>
                 <td>@Model.OrderPrice19</td>
             </tr>
         }
-        @if (Model.OrderPrice20 != 0)
+        @if (Model.OrderPrice20 != null)
         {
             <tr>
                 <td>@Model.OrderID20</td>
@@ -179,36 +179,31 @@
                 <input asp-for="SalesTransactionID" type="hidden" class="form-control" />
                 <span asp-validation-for="SalesTransactionID" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="NumOfCustomersAdult" type="hidden" class="form-control" />
                 <span asp-validation-for="NumOfCustomersAdult" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="NumOfCustomersChild" type="hidden" class="form-control" />
                 <span asp-validation-for="NumOfCustomersChild" class="text-danger"></span>
             </div>
-            <br />
+
             <div class="form-group">
                 <input asp-for="SubTotalPreTax" type="hidden" class="form-control" />
                 <span asp-validation-for="SubTotalPreTax" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="TaxAmount" type="hidden" class="form-control" />
                 <span asp-validation-for="TaxAmount" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <input asp-for="SubTotalAfterTax" type="hidden" class="form-control" />
                 <span asp-validation-for="SubTotalAfterTax" class="text-danger"></span>
             </div>
-            <br />
 
             <div class="form-group">
                 <label asp-for="TipAmount">Tip</label>
