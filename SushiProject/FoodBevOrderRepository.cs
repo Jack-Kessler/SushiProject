@@ -94,25 +94,25 @@ namespace SushiProject
         {
             var transaction = _conn.QuerySingle<SalesTransaction>("SELECT * FROM SALES_TRANSACTIONS WHERE SALESTRANSACTIONID = @id;", new { id = transactionID });
 
-            if (transaction.OrderID1 == 0) return 1;
-            else if (transaction.OrderID2 == 0) return 2;
-            else if (transaction.OrderID3 == 0) return 3;
-            else if (transaction.OrderID4 == 0) return 4;
-            else if (transaction.OrderID5 == 0) return 5;
-            else if (transaction.OrderID6 == 0) return 6;
-            else if (transaction.OrderID7 == 0) return 7;
-            else if (transaction.OrderID8 == 0) return 8;
-            else if (transaction.OrderID9 == 0) return 9;
-            else if (transaction.OrderID10 == 0) return 10;
-            else if (transaction.OrderID11 == 0) return 11;
-            else if (transaction.OrderID12 == 0) return 12;
-            else if (transaction.OrderID13 == 0) return 13;
-            else if (transaction.OrderID14 == 0) return 14;
-            else if (transaction.OrderID15 == 0) return 15;
-            else if (transaction.OrderID16 == 0) return 16;
-            else if (transaction.OrderID17 == 0) return 17;
-            else if (transaction.OrderID18 == 0) return 18;
-            else if (transaction.OrderID19 == 0) return 19;
+            if (transaction.OrderID1 == null) return 1;
+            else if (transaction.OrderID2 == null) return 2;
+            else if (transaction.OrderID3 == null) return 3;
+            else if (transaction.OrderID4 == null) return 4;
+            else if (transaction.OrderID5 == null) return 5;
+            else if (transaction.OrderID6 == null) return 6;
+            else if (transaction.OrderID7 == null) return 7;
+            else if (transaction.OrderID8 == null) return 8;
+            else if (transaction.OrderID9 == null) return 9;
+            else if (transaction.OrderID10 == null) return 10;
+            else if (transaction.OrderID11 == null) return 11;
+            else if (transaction.OrderID12 == null) return 12;
+            else if (transaction.OrderID13 == null) return 13;
+            else if (transaction.OrderID14 == null) return 14;
+            else if (transaction.OrderID15 == null) return 15;
+            else if (transaction.OrderID16 == null) return 16;
+            else if (transaction.OrderID17 == null) return 17;
+            else if (transaction.OrderID18 == null) return 18;
+            else if (transaction.OrderID19 == null) return 19;
             else return 20;
         }
         public void ApplyOrderToTransactionSQL(FoodBevOrder foodBevOrderToInsert, int nullOrderSlot)
