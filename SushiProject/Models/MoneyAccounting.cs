@@ -8,8 +8,8 @@ namespace SushiProject.Models
         public string DebitOrCredit { get; set; }
         public string DebitCreditType { get; set; }
 
-        [Required(ErrorMessage = "Enter a valid number greater than 0")]
-        [Range(0.01, 100000000, ErrorMessage = "Enter a valid number greater than 0")]
+        [Required(ErrorMessage = "Enter a number greater than 0")]
+        [Range(0.01, 100000000, ErrorMessage = "Enter a number greater than 0")]
         public decimal? DebitCreditAmount { get; set; }
         public int SalesTransactionID { get; set; }
         public  DateTime DateAndTime { get; set; }

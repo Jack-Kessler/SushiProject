@@ -5,12 +5,20 @@
 @if (User.IsInRole("Manager") || User.IsInRole("Owner"))
 {
     <div style="display: block">
-        <a href="/Admin/DepositFunds/">Deposit Funds</a>
+        @using (Html.BeginForm("DepositFunds", "Admin", "Post"))
+        {
+            <input type="hidden" />
+            <input type="submit" class="StandardButtonOutline" value="Deposit Funds" />
+        }
     </div>
     <br />
 
     <div style="display: block">
-        <a href="/Admin/WithdrawFunds/">Withdraw Funds</a>
+        @using (Html.BeginForm("WithdrawFunds", "Admin", "Post"))
+        {
+            <input type="hidden" />
+            <input type="submit" class="StandardButtonOutline" value="Withdraw Funds" />
+        }
     </div>
     <br />
 
