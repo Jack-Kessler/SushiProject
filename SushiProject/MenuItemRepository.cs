@@ -159,7 +159,7 @@ namespace SushiProject
                     });
             var done = ReorderMenuItemIDNumbersSQL();
         }
-        public MenuItem ValidateIngredients(MenuItem item)
+        public MenuItem ValidateIngredientsSQL(MenuItem item)
         {
             if (item.MenuItemIngredientName2 == null || item.MenuItemIngredientQuantity2 == null || item.MenuItemIngredientQuantity2 <= 0)
             { item.MenuItemIngredientName2 = null; item.MenuItemIngredientQuantity2 = null; }

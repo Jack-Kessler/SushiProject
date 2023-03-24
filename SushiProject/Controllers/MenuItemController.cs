@@ -77,6 +77,8 @@ namespace SushiProject.Controllers
             menuItemToUpdate.MenuItemIngredientList = ingredients;
             menuItemToUpdate = repo.IngredientSetNullValues(menuItemToUpdate);
 
+            menuItemToUpdate = repo.ValidateIngredientsSQL(menuItemToUpdate);
+
             if (ModelState.IsValid)
             {
                 repo.UpdateMenuItemSQL(menuItemToUpdate);
@@ -103,7 +105,7 @@ namespace SushiProject.Controllers
             menuItemToInsert.MenuItemIngredientList = ingredients;
             menuItemToInsert = repo.IngredientSetNullValues(menuItemToInsert);
 
-            menuItemToInsert = repo.ValidateIngredients(menuItemToInsert);
+            menuItemToInsert = repo.ValidateIngredientsSQL(menuItemToInsert);
 
             if (ModelState.IsValid)
             {
